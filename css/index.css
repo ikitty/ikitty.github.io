@@ -226,7 +226,7 @@ img {display:block;}
     /* ulike row1 item, 带评论的模块 */
     .ulike_r1 .mod_goods {margin-top:34px;margin-left:4px;padding-right:5px;}
     .ulike_r1 .mod_goods_p1 {font-weight:700;font-size:14px;height:20px;padding-top:0px;}
-    .ulike_r1 .mod_goods_tit {color:#888;}
+    .ulike_r1 .mod_goods_tit {color:#888;width:100%;background-color:#000;}
 
 
 .ulike_r2 {height:180px;zoom:1;overflow:hidden;}
