@@ -404,3 +404,8 @@ img {display:block;}
     .fensure {float:left;}
     .fhelp {float:right;}
 }
+
+/* =====todo set min-width for ios ===== */
+@media only screen and (max-device-width: 768px)  { 
+    body {min-width:800px;}
+}
