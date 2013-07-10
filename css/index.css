@@ -407,5 +407,5 @@ img {display:block;}
 
 /* =====todo set min-width for ios ===== */
 @media only screen and (max-device-width: 768px)  { 
-    body {max-width:800px;}
+    /*body {max-width:800px;}*/
 }
