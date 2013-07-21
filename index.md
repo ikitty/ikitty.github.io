@@ -1,8 +1,8 @@
 ---
 layout: default
-globalTitle: colinvivy
+globalTitle: ikitty
 title: home
-keywords: colinvivy, github, front-end develop
+keywords: ikitty, github, Front-end develop
 pagesName: home
 ---
 <div class="home_cont yyy">
