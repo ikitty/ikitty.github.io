@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="ie ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7]><html class="ie ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8]><html class="ie ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9]><html class="ie ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="zh-cn"><!--<![endif]-->
+<head>
+<meta charset="utf-8" />
+<title>组件说明</title>
+<link rel="stylesheet" type="text/css" href="rainbow.css" media="screen" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+</head>
+<body>
+<div class="ui_m">
+    <h2 class="ui_h2">组件说明</h2>
+
+    <div class="ui_m_item">
+        <h3 class="ui_h3">如何使用</h3>
+        <div class="ui_con">
+            <p>该规范适用于易迅所有平台页面，运营页面不需要按照此规范；</p>
+            <pre class="snippet" data-language="html">
+                <link rel="stylesheet" type="text/css" href="http://static.gtimg.com/icson/css/common/gb.css" media="screen" />
+            </pre>
+            <p >test pure css code</p>
+            <pre class="snippet" data-language="html">
+                <div>
+                    <style scoped>
+                        .pure-button-success,
+                        .pure-button-error,
+                        .pure-button-warning,
+                        .pure-button-secondary {
+                            color: white;
+                            border-radius: 4px;
+                            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                        }
+
+                        .pure-button-success {
+                            background: rgb(28, 184, 65); /* this is a green */
+                        }
+
+                        .pure-button-error {
+                            background: rgb(202, 60, 60); /* this is a maroon */
+                        }
+
+                        .pure-button-warning {
+                            background: rgb(223, 117, 20); /* this is an orange */
+                        }
+
+                        .pure-button-secondary {
+                            background: rgb(66, 184, 221); /* this is a light blue */
+                        }
+                    </style>
+
+                    <button class="pure-button pure-button-success">Success Button</button>
+                    <button class="pure-button pure-button-error">Error Button</button>
+                    <button class="pure-button pure-button-warning">Warning Button</button>
+                    <button class="pure-button pure-button-secondary">secondary button</button>
+                </div>
+            </pre>
+        </div>
+    </div>
+</div>
+
+<script src="rainbow.js"></script>
+<script type="text/javascript">
+    /* =====pretty pre ===== */
+    (function( $ ) {
+        $.fn.prettyPre = function( method ) {
+            var defaults = {
+                ignoreExpression: /\s/ // what should be ignored?
+            };
+
+            var methods = {
+                init: function( options ) {
+                    this.each( function() {
+                        var context = $.extend( {}, defaults, options );
+                        var $obj = $( this );
+                        var text = $obj.get( 0 ).innerHTML;
+
+                        // use the first line as a baseline for how many unwanted leading whitespace characters are present
+                        var superfluousSpaceCount = 0;
+                        var currentChar = text.substring( 0, 1 );
+
+                        while ( context.ignoreExpression.test( currentChar ) ) {
+                            currentChar = text.substring( ++superfluousSpaceCount, superfluousSpaceCount + 1 );
+                        }
+
+                        // split
+                        var parts = text.split( "\n" );
+                        var reformattedText = "";
+
+                        // reconstruct
+                        var length = parts.length;
+                        for ( var i = 0; i < length; i++ ) {
+                            // cleanup, and don't append a trailing newline if we are on the last line
+                            reformattedText += parts[i].substring( superfluousSpaceCount ) + ( i == length - 1 ? "" : "\n" );
+                        }
+
+                        $obj.html( reformattedText );
+                    } );
+                }
+            }
+
+            if ( methods[method] ) {
+                return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ) );
+            }
+            else if ( typeof method === "object" || !method ) {
+                return methods.init.apply( this, arguments );
+            }
+            else {
+                $.error( "Method " + method + " does not exist on jQuery.prettyPre." );
+            }
+        }
+    } )( jQuery );
+
+    // unescape code , highlight code 
+    $(window).load(function () {
+        // auto indent code
+        Rainbow.color(function () {
+            $('pre').prettyPre();
+        });  
+    });
+</script>
+</body>
+</html>
+
