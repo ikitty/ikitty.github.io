@@ -6,4 +6,4 @@ body {background-color:#fff;font:400 14px/20px proxima-nova,tahoma,Arial,"\5FAE\
 
 .ui_m {width:1000px;margin:0 auto;padding-bottom:20px;}
 .ui_h3 {margin:0px;height:40px;font-size:20px;line-height:40px;border-bottom:1px solid #eee;}
-.ui_con pre {padding:10px 10px;font-size:16px;line-height:20px;}
+.ui_con pre {padding:10px 10px;font-size:16px;line-height:20px;opacity:0;}
