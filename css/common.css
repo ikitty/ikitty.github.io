@@ -83,18 +83,21 @@ table th {background-color:#eee;}
 
 @media only screen 
 and (min-device-width : 320px) 
-and (max-device-width : 480px) 
-and (orientation : landscape) { /* 横屏 */
-    .grid_c1 {width:480px;padding:0px 10px;}
+and (max-device-width : 480px) {
+    .grid_c1 {padding:0px 10px;}
     .nav_wrap {margin-top:0px;}
     .nav {float:left;}
-    .h_sub_title {color:#390;}
+    .nav li {padding-left:0px;padding-right:5px;}
+}
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) 
+and (orientation : landscape) { /* 横屏 */
+    .grid_c1 {width:460px;}
 }
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) 
 and (orientation : portrait) {
-    .grid_c1 {width:320px;padding:0px 10px;}
-    .nav_wrap {margin-top:0px;}
-    .nav {float:left;}
+    .grid_c1 {width:300px;}
 }
