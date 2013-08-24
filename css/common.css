@@ -93,11 +93,9 @@ and (max-device-width : 480px) {
 and (min-device-width : 320px) 
 and (max-device-width : 480px) 
 and (orientation : landscape) { /* 横屏 */
-    .grid_c1 {width:460px;}
 }
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) 
 and (orientation : portrait) {
-    .grid_c1 {width:300px;}
 }
