@@ -51,7 +51,7 @@ body {background-color:#fff;}
 
 .nav_wrap {clear:both;height:90px;margin:-90px auto 0;overflow:hidden;}
 .nav {float:right;padding-top:40px;}
-.nav li {float:left;font:300 14px/30px verdana,Arial;_display:inline;padding-left:15px;}
+.nav li {float:left;font:300 14px/30px verdana,Arial;_display:inline;padding-left:10px;}
 .nav li.gap {color:#ccc;}
 
 .cc_title {font:700 20px/25px "\5FAE\8F6F\96C5\9ED1",Arial;margin:15px 0px;padding-bottom:15px;color:#555;border-bottom:1px solid #eee;}
@@ -84,16 +84,17 @@ table th {background-color:#eee;}
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) 
-and (orientation : landscape) {
-    .grid_c1 {width:480px;}
-    .h_sub_title {color:#390;}
+and (orientation : landscape) { /* 横屏 */
+    .grid_c1 {width:480px;padding:0px 10px;}
     .nav_wrap {margin-top:0px;}
+    .nav {float:left;}
+    .h_sub_title {color:#390;}
 }
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) 
 and (orientation : portrait) {
-    .grid_c1 {width:320px;}
-    .h_sub_title {color:#930;}
+    .grid_c1 {width:320px;padding:0px 10px;}
     .nav_wrap {margin-top:0px;}
+    .nav {float:left;}
 }
