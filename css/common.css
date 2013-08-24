@@ -3,14 +3,13 @@
  *
  * @author alextang<colinvivy#gmail.com>
  * @date 2012-02-04
- * @link   http://icolin.org/
  */
 
 html, body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, iframe,
 dl, dt, dd, ul, ol, li, pre, 
 form, fieldset, legend, button, input, textarea, 
 th, td { margin: 0; padding: 0; }
-body, button, input, select, textarea { font: 12px/1.5 Arial, \5b8b\4f53, sans-serif; }
+body, button, input, select, textarea { font: 12px/1.5 tahoma,Arial,sans-serif; }
 h1, h2, h3, h4, h5, h6 { font-size: 100%; }
 ul, ol { list-style: none; }
 img { border: 0;display:block;} 
@@ -27,16 +26,23 @@ a.link_strong:hover {color:#D70000;text-decoration:underline;}
 html { overflow-y:scroll;}
 body {background-color:#fff;}
 
+/* layout */
+.grid_c1 {width:980px;}
+
+@media (max-width:480px) {
+    .grid_c1 {width:480px;}
+}
+
 /* index */
-.header {width:980px;height:90px;margin:0px auto;border-bottom:1px solid #ddd;overflow:hidden;}
-.footer {clear:both;width:980px;padding:10px 0px;margin:10px auto 0;border-top:1px solid #ddd;text-align:center;font:300 12px/25px verdana,Simsun;}
+.header {height:90px;margin:0px auto;border-bottom:1px solid #ddd;overflow:hidden;}
+.footer {clear:both;padding:10px 0px;margin:10px auto 0;border-top:1px solid #ddd;text-align:center;font:300 12px/25px verdana,Simsun;}
 
 .h_title {float:left;font:300 40px/90px "\5FAE\8F6F\96C5\9ED1",Verdana;color:#2d2d2d;margin-right:10px;}
 .h_title a {color:#474747;}
 .h_title a:hover {color:#f60;}
 .h_sub_title {float:left;height:90px;overflow:hidden;font:400 14px/110px "\5FAE\8F6F\96C5\9ED1",Arial;color:#888;}
 
-.main {clear:both;margin:10px auto 0;width:980px;}
+.main {clear:both;margin:10px auto 0;}
 .main a:hover {text-decoration:underline;}
 
 /* home */
@@ -46,7 +52,7 @@ body {background-color:#fff;}
 .excerpt {font-size:12px;}
 .hc_past {clear:both;margin-top:10px;}
 
-.nav_wrap {clear:both;width:980px;height:90px;margin:-90px auto 0;overflow:hidden;}
+.nav_wrap {clear:both;height:90px;margin:-90px auto 0;overflow:hidden;}
 .nav {float:right;padding-top:40px;}
 .nav li {float:left;font:300 14px/30px verdana,Arial;_display:inline;padding-left:15px;}
 .nav li.gap {color:#ccc;}

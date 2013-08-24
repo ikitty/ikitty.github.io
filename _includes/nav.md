@@ -1,4 +1,4 @@
-<div class="nav_wrap">
+<div class="grid_c1 nav_wrap">
     <ul class="nav">
         <li><a href="/mac.html">Mac</a></a>
         <li class="gap">/</a>
