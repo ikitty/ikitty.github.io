@@ -27,10 +27,21 @@ html { overflow-y:scroll;}
 body {background-color:#fff;}
 
 /* layout */
-.grid_c1 {width:980px;}
+.grid_c1 {max-width:980px;min-width:320px;}
 
-@media (max-width:480px) {
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) 
+and (orientation : landscape) {
     .grid_c1 {width:480px;}
+    .nav_wrap {margin-top:0px;}
+}
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) 
+and (orientation : portrait) {
+    .grid_c1 {width:320px;}
+    .nav_wrap {margin-top:0px;}
 }
 
 /* index */
