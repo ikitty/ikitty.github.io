@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Mac category
+title: Front-end category
 
 ---
 
