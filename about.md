@@ -6,5 +6,5 @@ title: About
 
 <div class="cate_cont">
     <h3>About</h3>
-    <p>colinvivy in github</p>
+    <p>iKitty's personal pages in github, include some front-end works</p>
 </div>
