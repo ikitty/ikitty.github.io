@@ -1,0 +1,11 @@
+CACHE MANIFEST
+
+# version - 2013-08-27
+
+CACHE:
+http://ikitty.github.io/img/kitty.jpg
+http://ikitty.github.io/js/jq.js
+http://ikitty.github.io/js/prettify.js
+
+NETWORK:
+*
