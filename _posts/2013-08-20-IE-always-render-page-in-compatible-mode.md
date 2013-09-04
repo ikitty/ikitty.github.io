@@ -24,7 +24,7 @@ excerpt: 在高版本IE中打开我的网站时，浏览器总会自动切换到
 
 IE高版本浏览器的开发者工具也有更智能的提醒（感谢鸽子提示），如图
 
-![ie show page type][img-other-type]
+![ie show page type][img-ie-other-type]
 
 小伙伴们，一定记得让你们的测试修改相关设置，不然永远都是在用IE7测试网页了。当然，更好的方式是我们在网页头部使用X-UA-Compatible申明，指定浏览器使用对应的版本显示网页。
 
