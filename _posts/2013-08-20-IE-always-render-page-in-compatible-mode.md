@@ -18,8 +18,10 @@ excerpt: 在高版本IE中打开我的网站时，浏览器总会自动切换到
 后来咨询了几位同事，很快便得到了答案：
 
 - IE浏览器默认会勾选“使用兼容模式显示Intarnet站点" ，如图
+
 ![ie compatible setting][img-compatible-set]
 - 在公司访问内部的网页会被IE识别为Intranet资源（why？可能是由于我们都是用代理上网吧），如图
+
 ![ie6 show page type][img-ie6-type]
 
 IE高版本浏览器的开发者工具也有更智能的提醒（感谢鸽子提示），如图
