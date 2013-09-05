@@ -1,48 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-us"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Online JavaScript beautifier</title>
-<style>
-
-* {margin: 0;padding: 0;}
-.ie6 div {display: none    }
-.ie6 #ie6-go-away {display: block !important;}
-img {border: 0;display: block;vertical-align: baseline;}
-#blurb {width: 260px;float: right;margin-top: -35px; }
-#beauty {border-top: 1px solid #f6f6f6;margin-left: 5px;margin-right: 270px;}
-body {background: #eee;}
-body, button, select, label {font:13px/1.231 arial, sans-serif;;}
-select, label {font-size: 12px;}
-body, html {height: 100%;color: #333;}
-textarea {color: #444;height: 100%;width: 100%;border: 0;font-family: Monaco, Consolas, monospace;}
-.ie7 fieldset#textarea-wrap {padding: 5px 0;}
-.ie8 fieldset#textarea-wrap {padding: 5px 0 0 5px;}
-fieldset {border: 0;}
-ul, li {list-style: none;}
-a {color: #36d;}
-fieldset#textarea-wrap {height: auto;position: absolute;background: white;left: 0;top: 0px;right: 0;bottom: 0;display: block;margin-left: 5px;margin-bottom: 5px;margin-right: 270px;margin-top: 40px;border: 1px solid #ccc;border-right: 1px solid #666;border-bottom: 1px solid #666;padding: 5px;}
-button#submit {margin-top: 5px;height: 30px;line-height: 28px;width:900px;border: 1px solid #aaa;border-left: 1px solid #666;border-top: 1px solid #666;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;-moz-background-clip: padding;-webkit-background-clip: padding-box;background-clip: padding-box;background: #ccc;background-image: -webkit-gradient(linear, left top, left bottom, from(#EEEEEE), to(#CCCCCC));background-image: -webkit-linear-gradient(top, #EEEEEE, #CCCCCC);background-image:    -moz-linear-gradient(top, #EEEEEE, #CCCCCC);background-image:     -ms-linear-gradient(top, #EEEEEE, #CCCCCC);background-image:      -o-linear-gradient(top, #EEEEEE, #CCCCCC);background-image:         linear-gradient(top, #EEEEEE, #CCCCCC);filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#CCCCCC');cursor: pointer;color: #444;}
-#btnClear {padding:0px 10px;margin-left:20px;}
-
-/* copy  */
-.btn_copy {position:relative;display:inline-block;margin:0px 5px 0px 20px;width:80px;height:23px;font:normal 12px/23px Arial;border-style:solid;border-width:1px;border-color:#fff #aaa #bbb #fff;background-color:#eee;text-align:center;overflow:hidden;vertical-align:middle;}
-.btn_copy embed {position:absolute;top:0px;left:0px;}
-#shadow {position:absolute;top:0px;left:0px;width:100px;height:50px;cursor:wait;}
-/* copy  */
-
-label {cursor: pointer;}
-#options {margin-top: 5px;margin-bottom: 15px;}
-#options li {margin-bottom: 4px;font-size: 90%;}
-#options select {font:13px/1.231 arial, sans-serif;padding: 0 5px;width: 220px;}
-#tabsize {margin-top: 2px;}
-#brace-style {margin-bottom: 6px;}
-#blurb h2 {font-size: 12px;font-weight: bold;color: #555;}
-#blurb p {line-height: 140%;font-size: 11px;margin-right: 16px;margin-bottom: 11px;}
-#blurb p.me-me-me {margin-bottom: 4px;}
-#blurb p.contributors {color: #666;}
-#blurb #uses li {font-size: 11px;margin-bottom: 4px;margin-right: 4px;}
-#blurb #uses li.writeme {font-style: normal;color: #888;margin-bottom: 30px;line-height: 130%;}
-</style>
+<link rel="stylesheet" href="jsb_files/google-buttons.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="jsb_files/jsb.css" type="text/css" media="screen" />
+<title>Online JavaScript beautifier Modify by iKitty</title>
 
 <script src="./jsb_files/ga.js"></script>
 <script src="./jsb_files/jquery.js"></script>
@@ -74,7 +35,6 @@ label {cursor: pointer;}
         String.prototype.charAt = function (n) { return this.old_charAt(n); }
     }
 
-
     function run_tests() {
         var st = new SanityTest();
         run_beautifier_tests(st);
@@ -85,10 +45,7 @@ label {cursor: pointer;}
         $('#testresults').html(st.results()).show();
     }
 
-
-    function any(a, b) {
-        return a || b;
-    }
+    function any(a, b) { return a || b; }
 
     function read_settings_from_cookie() {
         $('#tabsize').val(any($.cookie('tabsize'), '4'));
@@ -151,7 +108,6 @@ label {cursor: pointer;}
         return trailing_comments + source;
     }
 
-
     function beautify() {
         if (the.beautify_in_progress) return;
 
@@ -194,8 +150,7 @@ label {cursor: pointer;}
         the.beautify_in_progress = false;
     }
 
-    function looks_like_html(source)
-    {
+    function looks_like_html(source) {
         // <foo> - looks like html
         // <!--\nalert('foo!');\n--> - doesn't look like html
 
@@ -205,7 +160,6 @@ label {cursor: pointer;}
     }
 
     $(function() {
-
         if ($.browser.msie) {
             $('#source').width( $('#textarea-wrap').width() - 10)
                         .height($('#textarea-wrap').height() - 10);
@@ -235,14 +189,22 @@ label {cursor: pointer;}
 </script>
 </head>
 <body>
-    <div id="beauty">
-        <button id="submit"><strong>Beautify JavaScript or HTML</strong> <em>(ctrl-enter)</em></button>
-        <button id="btnClear"><strong>Clear Content</strong> </button>
+    <div id="beauty" class="beauty_box">
+        <div class="beauty_box_btn_wrap">
+            <button class="action blue btn_clear" id="btnClear">
+                <span class="label">Clear Content</span>
+            </button>
+            <button class="action blue" id="submit">
+                <span class="label">Beautify JavaScript or HTML</span>
+            </button>
 
-        <div class="btn_copy">
-            复制
-            <embed src="cp.swf" name="swf" type="application/x-shockwave-flash" width="100" height="30" quality="high" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
-            <span id="shadow"></span>
+            <div class="button action green btn_copy">
+                <span class="label">复制</span>
+                <embed src="cp.swf" name="swf" type="application/x-shockwave-flash" width="80" height="28" quality="high" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+                <span id="shadow" class="copy_shadow"></span>
+            </div>
+
+            <p class="copy_ret" id="copyRet" style="display:none;"><p>
         </div>
 
         <fieldset id="textarea-wrap">
@@ -293,8 +255,11 @@ label {cursor: pointer;}
 <script type="text/javascript">
     var get = function (e) {return document.getElementById(e);} ;
     function copySuccess (argument) {
-        alert('Copied Successfully');
-        // console.log('cp Done') ;
+        get('copyRet').innerHTML = '复制成功!' ;
+        $('#copyRet').fadeIn();
+        setTimeout(function () {
+            $('#copyRet').fadeOut();
+        }, 1500);
     }
 
     document.body.onclick = function () {
