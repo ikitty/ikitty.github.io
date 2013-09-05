@@ -189,69 +189,76 @@
 </script>
 </head>
 <body>
-    <div id="beauty" class="beauty_box">
-        <div class="beauty_box_btn_wrap">
-            <button class="action blue btn_clear" id="btnClear">
-                <span class="label">Clear Content</span>
-            </button>
-            <button class="action blue" id="submit">
-                <span class="label">Beautify JavaScript or HTML</span>
-            </button>
 
-            <div class="button action green btn_copy">
-                <span class="label">复制</span>
-                <embed src="cp.swf" name="swf" type="application/x-shockwave-flash" width="80" height="28" quality="high" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
-                <span id="shadow" class="copy_shadow"></span>
-            </div>
-
-            <p class="copy_ret" id="copyRet" style="display:none;"><p>
+<div id="beauty" class="beauty_box">
+    <div class="beauty_box_btn_wrap">
+        <button class="action blue btn_clear" id="btnClear">
+            <span class="label">Clear Content</span>
+        </button>
+        <button class="action blue" id="submit">
+            <span class="label">Beautify JavaScript or HTML</span>
+        </button>
+        <div class="button action green btn_copy">
+            <span class="label">复制</span>
+            <embed src="cp.swf" name="swf" type="application/x-shockwave-flash" width="80" height="28" quality="high" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+            <span id="shadow" class="copy_shadow"></span>
         </div>
-
-        <fieldset id="textarea-wrap">
-            <textarea id="source"></textarea>
-        </fieldset>
+        <p class="copy_ret" id="copyRet" style="display:none;"><p>
     </div>
+    <fieldset id="textarea-wrap">
+        <textarea id="source"></textarea>
+    </fieldset>
+</div>
 
-    <div id="blurb">
-      <fieldset id="options">
-          <ul>
-          <li><select name="tabsize" id="tabsize">
-            <option value="1">indent with a tab character</option>
-            <option value="2">indent with 2 spaces</option>
-            <option value="3">indent with 3 spaces</option>
-            <option value="4">indent with 4 spaces</option>
-            <option value="8">indent with 8 spaces</option>
-          </select></li>
-          <li><select id="brace-style">
-            <option value="collapse">Braces with control statement</option>
-            <option value="expand">Braces on own line</option>
-            <option value="end-expand">End braces on own line</option>
-            <!-- option value="expand-strict">Braces always on own line (not recommended)</option -->
-          </select></li>
-          <li style="padding-bottom: 10px">HTML &lt;style&gt;, &lt;script&gt; formatting:<br><select id="indent-scripts">
-            <option value="keep">Keep indent level of the tag</option>
-            <option value="normal">Add one indent level</option>
-            <option value="separate">Separate indentation</option>
-          </select></li>
-          <li><input class="checkbox" type="checkbox" id="preserve-newlines"><label for="preserve-newlines"> Preserve empty lines?</label><br></li>
-          <li><input class="checkbox" type="checkbox" id="detect-packers"><label for="detect-packers"> Detect packers and obfuscators?</label><br></li>
-          <li><input class="checkbox" type="checkbox" id="keep-array-indentation"><label for="keep-array-indentation"> Keep array indentation?</label></li>
-          <li><input class="checkbox" type="checkbox" id="space-before-conditional"><label for="space-before-conditional"> Space before conditional: "if(x)" / "if (x)"</label></li>
-          </ul>
-      </fieldset>
+<div id="blurb">
+    <fieldset id="options">
+        <ul>
+            <li>
+                <select name="tabsize" id="tabsize">
+                    <option value="1">indent with a tab character</option>
+                    <option value="2">indent with 2 spaces</option>
+                    <option value="4">indent with 4 spaces</option>
+                    <option value="8">indent with 8 spaces</option>
+                </select>
+            </li>
+            <li>
+                <select id="brace-style">
+                    <option value="collapse">Braces with control statement</option>
+                    <option value="expand">Braces on own line</option>
+                    <option value="end-expand">End braces on own line</option>
+                    <!-- option value="expand-strict">Braces always on own line (not recommended)</option -->
+                </select>
+            </li>
+            <li style="padding-bottom: 10px">HTML &lt;style&gt;, &lt;script&gt; formatting:
+                <br>
+                <select id="indent-scripts">
+                    <option value="keep">Keep indent level of the tag</option>
+                    <option value="normal">Add one indent level</option>
+                    <option value="separate">Separate indentation</option>
+                </select>
+            </li>
+            <li>
+                <input class="checkbox" type="checkbox" id="preserve-newlines">
+                <label for="preserve-newlines">Preserve empty lines?</label>
+                <br>
+            </li>
+            <li>
+                <input class="checkbox" type="checkbox" id="detect-packers">
+                <label for="detect-packers">Detect packers and obfuscators?</label>
+                <br>
+            </li>
+            <li>
+                <input class="checkbox" type="checkbox" id="keep-array-indentation">
+                <label for="keep-array-indentation">Keep array indentation?</label>
+            </li>
+            <li>
+                <input class="checkbox" type="checkbox" id="space-before-conditional">
+                <label for="space-before-conditional">Space before conditional: "if(x)" / "if (x)"</label>
+            </li>
+        </ul>
+    </fieldset>
+</div>
 
-      <p><strong>Beautify, unpack or deobfuscate JavaScript and HTML, make JSON/JSONP readable, etc.</strong>.</p>
-
-
-      </p><p>JSBeautifier is — and always will be — completely free and open, and your thanks, flattrs and donations are very heartwarming — thank you all so much!
-
-      </p><div style="position: relative; height: 40px">
-      <form style="position: absolute; left: 3px;" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-        <input type="hidden" name="cmd" value="_s-xclick">
-        <input type="hidden" name="hosted_button_id" value="TL28UJK2ARCUJ">
-      </form>
-      </div>
-  </div>
 <script type="text/javascript">
     var get = function (e) {return document.getElementById(e);} ;
     function copySuccess (argument) {
