@@ -8,4 +8,8 @@ title: Front-end category
     {% assign category_posts = site.categories.Front-end %}
 
     {% include category.md %}
+    
+    where is category.md ???
+    
+    {% include nav.md %}
 </div>
