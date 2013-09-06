@@ -1,9 +1,9 @@
 ---
 layout: post
-category : Front-end
+category : Frontend
 tags : [ jekyll, life ]
 ---
 {% include JB/setup %}
 
 
-## Gh pages with jekyllBs, Bravo !
+## Gh pages with jekyllBs, Bravo , hoho!
