@@ -6,9 +6,9 @@ category: Frontend
 description: 在高版本IE中打开我的网站时，浏览器总会自动切换到IE7兼容模式，一直很困扰。。。
 ---
 
-[img-ie6-type]: /img/compatible-1.png
-[img-compatible-set]: /img/compatible-2.png
-[img-ie-other-type]: /img/compatible-3.png
+[img-ie6-type]: /images/compatible-1.png
+[img-compatible-set]: /images/compatible-2.png
+[img-ie-other-type]: /images/compatible-3.png
 
 最近很多同事我们的产品在反馈IE下有些小bug，细问得知，他们的浏览器都是启动了兼容模式来渲染网页。开始以为是同事自己不小心选择了兼容模式，没有多在意，后来又陆续接到了其他同
 事的反馈，都是IE兼容模式下的bug。问题来了：没有人为干预的情况下，为什么IE会用兼容模式来渲染呢？

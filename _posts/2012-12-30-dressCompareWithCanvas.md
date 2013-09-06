@@ -6,8 +6,8 @@ category: Frontend
 description: 目前，用户在网上购买衣服时，很难通过页面中冰冷的尺码数字来判断衣服是否合身。
 ---
 
-[dresscanvas-structure]: /img/dresscanvas-structure.png
-[dresscanvas-crood]: /img/dresscanvas-crood.png
+[dresscanvas-structure]: /images/dresscanvas-structure.png
+[dresscanvas-crood]: /images/dresscanvas-crood.png
 
 ###项目背景
 目前，用户在网上购买衣服时，很难通过页面中冰冷的尺码数字来判断衣服是否合身。
