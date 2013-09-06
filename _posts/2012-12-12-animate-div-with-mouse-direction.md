@@ -26,7 +26,7 @@ description: 鼠标跟随特效
 
     //TODO IMG
 
-计算切入点坐标的反正切值，其值域为[-PI, PI]，并将所得结果转换成角度
+计算切入点坐标的反正切值，其值域为\[-PI, PI\]，并将所得结果转换成角度
 
     var direction ;
     direction = Math.atan2(y, x) * (180 / Math.PI);
