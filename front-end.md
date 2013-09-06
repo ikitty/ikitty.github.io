@@ -4,7 +4,7 @@ title: Front-end category
 ---
 
 <div class="cate_cont">
-    <h3 class="cc_title">Front-end</h3>
+    <h3 class="cc_title">Front-end X</h3>
     {% assign category_posts = site.categories.Front-end %}
 
     {% include category.md %}
