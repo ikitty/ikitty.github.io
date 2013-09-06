@@ -9,7 +9,7 @@ title: Front-end category
 
     {% include category.md %}
     
-    where is category.md ???
-    
-    {% include nav.md %}
 </div>
+where is category
+
+{% include nav.md %}
