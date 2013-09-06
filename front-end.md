@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Front-end category
-
 ---
 
 <div class="cate_cont">
