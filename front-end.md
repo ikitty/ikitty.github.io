@@ -3,7 +3,7 @@ layout: default
 title: Front-end category
 ---
 
-<div class="cate_cont">
+<div class="cate_cont x">
     <h3 class="cc_title">Front-end X</h3>
     {% assign category_posts = site.categories.Front-end %}
 
