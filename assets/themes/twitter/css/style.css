@@ -63,3 +63,17 @@
   background: #57A957;
   border: 1px solid #4c964d;
   color: #FFF; }
+
+/* custom */
+h1 {font:400 28px/35px "lucida glande",tahoma,arial;}
+h2 {font:400 24px/35px "lucida glande",tahoma,arial;}
+h3 {font:400 20px/35px "lucida glande",tahoma,arial;}
+
+.posts {margin:0px;}
+.posts p {margin:10px 0px;}
+.posts li {list-style:none;padding:5px 0px;border-bottom:1px dotted #ddd;}
+.post_tit {padding-left:100px;margin:10px 0;}
+.post_time {float:left;width:90px;margin-left:-100px;}
+.post_desp {padding-left:100px;}
+
+footer {text-align:center;padding-bottom:10px;}
