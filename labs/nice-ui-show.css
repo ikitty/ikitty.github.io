@@ -1,9 +1,0 @@
-* {margin:0;padding:0;list-style:none;}
-body {background-color:#fff;font:400 14px/20px proxima-nova,tahoma,Arial,"\5FAE\8F6F\96C5\9ED1";}
-
-.ui_boss {height:300px;font:400 68px/300px omnes-pro, sans-serif;}
-.ui_boss h1 {font-weight:100;text-align:center;color:#6af;}
-
-.ui_m {width:1000px;margin:0 auto;padding-bottom:20px;}
-.ui_h3 {margin:0px;height:40px;font-size:20px;line-height:40px;border-bottom:1px solid #eee;}
-.ui_con pre {padding:10px 10px;font-size:16px;line-height:20px;opacity:0;}
