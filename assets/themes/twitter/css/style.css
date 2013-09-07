@@ -65,6 +65,8 @@
   color: #FFF; }
 
 /* custom */
+.navbar .brand {font-size:22px;font-family:"lucida glande", "tahoma";letter-spacing:1px;}
+
 h1 {font:400 28px/35px "lucida glande",tahoma,arial;}
 h2 {font:400 24px/35px "lucida glande",tahoma,arial;}
 h3 {font:400 20px/35px "lucida glande",tahoma,arial;}
@@ -77,3 +79,5 @@ h3 {font:400 20px/35px "lucida glande",tahoma,arial;}
 .post_desp {padding-left:100px;}
 
 footer {text-align:center;padding-bottom:10px;}
+
+.navbar .nav>li>a {padding-left:10px;padding-right:10px;}

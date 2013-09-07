@@ -15,10 +15,12 @@
 
 ##opt
 - config
+- exclude pages.html
 - disqus
 - disabled analytics
 - style.css
 
 ##todo
 - 404
+- add about.html
 - move template and static file into myDir
