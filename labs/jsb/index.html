@@ -272,17 +272,10 @@
     document.body.onclick = function () {
         get('shadow').style.display = 'block';
     }
-    function thisMovie(movieName) {
-        if (navigator.appName.indexOf("Microsoft") != -1) {
-             return window[movieName];
-        } else {
-             return document[movieName];
-        }
-    }
 
     get('shadow').onmouseover = function () {
         var str = get('source').value; 
-        thisMovie("swf").sendToActionScript(str);
+        document.swf.sendToActionScript(str);
         this.style.display = 'none';
     }
 
