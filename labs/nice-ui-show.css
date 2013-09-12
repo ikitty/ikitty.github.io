@@ -6,4 +6,23 @@ body {background-color:#fff;font:400 14px/20px proxima-nova,tahoma,Arial,"\5FAE\
 
 .ui_m {width:1000px;margin:0 auto;padding-bottom:20px;}
 .ui_h3 {margin:0px;height:40px;font-size:20px;line-height:40px;border-bottom:1px solid #eee;}
-.ui_con pre {padding:10px 10px;font-size:16px;line-height:20px;opacity:0;}
+.ui_con pre {padding:10px 10px;margin-top:5px;font-size:16px;line-height:20px;opacity:0;}
+
+.ui_code_effect {border:1px solid #ddd;padding:20px;}
+.ui_code_effect:before {content:"Result";float:left;margin-top:-32px;background-color:#fff;padding:2px 5px;color:#666;}
+
+/* =====tab with gap===== */
+.sod_mtab {height:30px;border-bottom:2px solid #f70;}
+.sod_mtab li {float:left;height:30px;padding:0 20px;font:400 14px/30px Arial;}
+.sod_mtab a:hover {text-decoration:none;}
+.sod_mtab .sod_mtab_gap {float:left;width:1px;height:14px;padding:0px;margin:10px 0px 0;overflow:hidden;background-color:#999;}
+.sod_mtab .on {position:relative;margin:0px -1px;padding:0px 21px;background-color:#f60;}
+.sod_mtab .on a,
+.sod_mtab .on a:hover {color:#fff;}
+
+/* =====copy btn===== */
+.copy_btn {position:absolute;display:none;overflow:hidden;}
+.copy_btn embed {position:absolute;top:0px;left:0px;}
+.copy_shadow {position:absolute;top:0px;left:0px;width:100%;height:100%;cursor:wait;}
+
+.copy_ret {display:none;position:absolute;width:200px;height:50px;top:50%;left:50%;margin-left:-100px;margin-top:-25px;font:400 20px/50px "\5FAE\8F6F\96C5\9ED1";border:2px solid rgba(0,0,0,0.2);color:#3A8E00;overflow:hidden;background-color:#fff;text-align:center;}

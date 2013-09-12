@@ -30,9 +30,7 @@
                 <a class="pure-button" href="#">A Pure Button</a>
                 <button class="pure-button">A Pure Button</button>
             </pre>
-            <p >Result</p>
-            <a class="pure-button" href="#">A Pure Button</a>
-            <button class="pure-button">A Pure Button</button>
+            <div class="js_code_effect ui_code_effect"></div>
         </div>
     </div>
     <div class="ui_m_item">
@@ -43,9 +41,7 @@
                 <a class="pure-button pure-button-disabled" href="#">A Disabled Button</a>
                 <button class="pure-button pure-button-disabled">A Disabled Button</button>
             </pre>
-            <p >Result</p>
-            <a class="pure-button pure-button-disabled" href="#">A Disabled Button</a>
-            <button class="pure-button pure-button-disabled">A Disabled Button</button>
+            <div class="js_code_effect ui_code_effect"></div>
         </div>
     </div>
     <div class="ui_m_item">
@@ -56,9 +52,7 @@
                 <a class="pure-button pure-button-primary" href="#">A Primary Button</a>
                 <button class="pure-button pure-button-primary">A Primary Button</button>
             </pre>
-            <p >Result</p>
-            <a class="pure-button pure-button-primary" href="#">A Primary Button</a>
-            <button class="pure-button pure-button-primary">A Primary Button</button>
+            <div class="js_code_effect ui_code_effect"></div>
         </div>
     </div>
     <div class="ui_m_item">
@@ -72,7 +66,7 @@
                     .pure-button-warning,
                     .pure-button-secondary {
                         color: white;
-                        border-radius: 4px;
+                        border-radius: 2px;
                         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
                     }
 
@@ -98,40 +92,39 @@
                 <button class="pure-button pure-button-warning">Warning Button</button>
                 <button class="pure-button pure-button-secondary">Secondary Button</button>
             </pre>
-            <p >Result</p>
-            <style scoped>
-                .pure-button-success,
-                .pure-button-error,
-                .pure-button-warning,
-                .pure-button-secondary {
-                    color: white;
-                    border-radius: 4px;
-                    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-                }
-
-                .pure-button-success {
-                    background: rgb(28, 184, 65); /* this is a green */
-                }
-
-                .pure-button-error {
-                    background: rgb(202, 60, 60); /* this is a maroon */
-                }
-
-                .pure-button-warning {
-                    background: rgb(223, 117, 20); /* this is an orange */
-                }
-
-                .pure-button-secondary {
-                    background: rgb(66, 184, 221); /* this is a light blue */
-                }
-            </style>
-            <button class="pure-button pure-button-success">Success Button</button>
-            <button class="pure-button pure-button-error">Error Button</button>
-            <button class="pure-button pure-button-warning">Warning Button</button>
-            <button class="pure-button pure-button-secondary">Secondary Button</button>
+            <div class="js_code_effect ui_code_effect"></div>
         </div>
     </div>
+
+    <div class="ui_m_item">
+        <h3 class="ui_h3">Tab with Gap</h3>
+        <div class="ui_con">
+            <pre class="snippet" data-language="html">
+                <ul class="sod_mtab">
+                    <li><a target="_blank" href="#">饰品</a></li>
+                    <li class="sod_mtab_gap">|</li>
+                    <li class="on"><a target="_blank" href="#">数码</a></li>
+                    <li class="sod_mtab_gap">|</li>
+                    <li><a target="_blank" href="#">饰品</a></li>
+                    <li class="sod_mtab_gap">|</li>
+                    <li><a target="_blank" href="#">饰品</a></li>
+                </ul>
+            </pre>
+            <div class="js_code_effect ui_code_effect"></div>
+        </div>
+    </div>
+
 </div>
+
+<!--S 复制 -->
+<div id="copyBtn" class="pure-button pure-button-success copy_btn">
+    <span>复制代码</span>
+    <embed src="cp.swf" name="copySwf" type="application/x-shockwave-flash" width="150" height="50" quality="high" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+    <span id="copyShadow" class="copy_shadow"></span>
+</div>
+
+<p id="copyRet" class="copy_ret">复制成功啦 ^-^ </p>
+<!--E 复制 -->
 
 <script src="rainbow.js"></script>
 <script type="text/javascript">
@@ -185,13 +178,67 @@
         }
     } )( jQuery );
 
-    // unescape code , highlight code 
+    function copySuccess (argument) {
+        $('#copyRet').fadeIn();
+        setTimeout(function () {
+            $('#copyRet').fadeOut();
+        }, 1800);
+    }
+
+    $(function () {
+        // run code
+        var tmpPre ,
+            elTextarea ;
+
+        $('pre').each(function (i, el) {
+            tmpPre = $(el);
+            tmpPre.next('div.js_code_effect').html(tmpPre.html());
+            elTextarea = document.createElement('textarea');
+            $(elTextarea).val(tmpPre.html());
+            $(elTextarea).hide();
+            $(elTextarea).insertBefore(tmpPre);
+        });
+        
+    });
+
     $(window).load(function () {
-        // auto indent code
+        // unescape code , highlight code 
         Rainbow.color(function () {
+            // auto indent code
             $('pre').prettyPre();
             $('pre').animate({'opacity':1});
         });  
+
+        // show copy btn
+        var elCopyBtn = $('#copyBtn') ,
+            elPre ;
+        $('pre.snippet').mouseover(function () {
+            elPre = $(this);
+            elCopyBtn.offset({
+                top: elPre.offset().top + 2 ,
+                left: elPre.offset().left  + elPre.innerWidth() - elCopyBtn.innerWidth()
+            });
+            $('#copyShadow').attr('copyMark', $('pre.snippet').index(elPre));
+            $('#copyShadow').show();
+            elCopyBtn.show();
+        });
+
+        // copy code
+        (function () {
+            var elCopyShadow = $('#copyShadow') ;
+
+            $('body').click(function () {
+                elCopyShadow.show();
+            });
+
+            var tmpCodeStr ;
+            elCopyShadow.mouseover(function () {
+                tmpCodeStr = $('pre.snippet').eq($(this).attr('copyMark')).prev('textarea').val();
+                document.copySwf.sendToActionScript(tmpCodeStr);
+                elCopyShadow.hide();
+            });
+
+        })();
     });
 </script>
 </body>
