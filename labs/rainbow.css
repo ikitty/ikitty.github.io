@@ -10,7 +10,7 @@ pre{
 	padding: 6px 10;
 	line-height: 1.3em;
 	margin-bottom: 20;
-	border: 1px solid #eee;
+    background-color:#eee;
 }
 
 code{
@@ -31,7 +31,6 @@ pre code{
 pre, code{
 	font-family: Consolas, 'Liberation Mono', Courier, monospace;
 	color: #333;
-	background: rgb(250, 250, 250);
 }
 
 
