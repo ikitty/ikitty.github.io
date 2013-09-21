@@ -66,12 +66,12 @@
                 <li>2. 直接定义给grid单元，并给其设置<code>box-sizing:border-box</code></li>
             </ul>
             <pre class="snippet" data-language="html">
-                <div class="pure-g">
-                    <div class="pure-u-1-5">
-                        <p>pure-u-1-5 : 20%</p>
+                <div class="nice_g">
+                    <div class="nice_u_1_5">
+                        <p>nice_u_1_5 : 20%</p>
                     </div>
-                    <div class="pure-u-4-5">
-                        <p>pure-u-4-5 : 80%</p>
+                    <div class="nice_u_4_5">
+                        <p>nice_u_4_5 : 80%</p>
                     </div>
                 </div>
             </pre>
@@ -83,15 +83,15 @@
         <div class="nui_con">
             <p>每个grid单元没有任何任何margin/padding，如果你需要，请在grid单元的子元素中定义</p>
             <pre class="snippet" data-language="html">
-                <div class="pure-g">
-                    <div class="pure-u-1-3">
-                        <p>三列布局-第一列</p>
+                <div class="nice_g">
+                    <div class="nice_u_1_3">
+                        <p>三列布局_第一列</p>
                     </div>
-                    <div class="pure-u-1-3">
-                        <p>三列布局-第二列</p>
+                    <div class="nice_u_1_3">
+                        <p>三列布局_第二列</p>
                     </div>
-                    <div class="pure-u-1-3">
-                        <p>三列布局-第三列</p>
+                    <div class="nice_u_1_3">
+                        <p>三列布局_第三列</p>
                     </div>
                 </div>
             </pre>
@@ -106,10 +106,10 @@
         <div class="nui_con">
             <p>Horizontal menu</p>
             <pre class="snippet" data-language="html">
-                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+                <div class="nice_menu nice_menu_open nice_menu_horizontal">
                     <ul>
                         <li><a href="#">Home</a></li>
-                        <li class="pure-menu-selected"><a href="#">Design</a></li>
+                        <li class="nice_menu_selected"><a href="#">Design</a></li>
                         <li><a href="#">Program</a></li>
                         <li><a href="#">About</a></li>
                     </ul>
@@ -123,8 +123,8 @@
         <div class="nui_con">
             <p>Vertical menu</p>
             <pre class="snippet" data-language="html">
-                <div class="pure-menu pure-menu-open">
-                    <a class="pure-menu-heading">Vertical menus</a>
+                <div class="nice_menu nice_menu_open">
+                    <a class="nice_menu_heading">Vertical menus</a>
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Design</a></li>
@@ -144,7 +144,7 @@
         <div class="nui_con">
             <p>General Table</p>
             <pre class="snippet" data-language="html">
-                <table class="pure-table pure-table-bordered">
+                <table class="nice_table nice_table_bordered">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -186,7 +186,7 @@
         <div class="nui_con">
             <p>General Table</p>
             <pre class="snippet" data-language="html">
-                <table class="pure-table">
+                <table class="nice_table">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -197,7 +197,7 @@
                     </thead>
 
                     <tbody>
-                        <tr class="pure-table-odd">
+                        <tr class="nice_table_odd">
                             <td>1</td>
                             <td>Honda</td>
                             <td>Accord</td>
@@ -211,7 +211,7 @@
                             <td>2012</td>
                         </tr>
 
-                        <tr class="pure-table-odd">
+                        <tr class="nice_table_odd">
                             <td>3</td>
                             <td>Hyundai</td>
                             <td>Elantra</td>
@@ -238,7 +238,7 @@
         <div class="nui_con">
             <p>Form items</p>
             <pre class="snippet" data-language="html">
-                <form class="pure-form">
+                <form class="nice_form">
                     <fieldset>
                         <legend>A compact inline form</legend>
 
@@ -261,33 +261,20 @@
         <div class="nui_con">
             <p>Form items</p>
             <pre class="snippet" data-language="html">
-                <form class="pure-form pure-form-aligned">
+                <form class="nice_form nice_form_aligned">
                     <fieldset>
-                        <div class="pure-control-group">
+                        <div class="nice_control_group">
                             <label for="name">Username</label>
                             <input id="name" type="text" placeholder="Username">
                         </div>
-
-                        <div class="pure-control-group">
+                        <div class="nice_control_group">
                             <label for="password">Password</label>
                             <input id="password" type="password" placeholder="Password">
                         </div>
-
-                        <div class="pure-control-group">
-                            <label for="email">Email Address</label>
-                            <input id="email" type="email" placeholder="Email Address">
-                        </div>
-
-                        <div class="pure-control-group">
-                            <label for="foo">Supercalifragilistic Label</label>
-                            <input id="foo" type="text" placeholder="Enter something here...">
-                        </div>
-
-                        <div class="pure-controls">
-                            <label for="cb" class="pure-checkbox">
+                        <div class="nice_controls">
+                            <label for="cb" class="nice_checkbox">
                                 <input id="cb" type="checkbox"> I've read the terms and conditions
                             </label>
-
                             <button type="submit" class="nice_btn nice_btn_primary">Submit</button>
                         </div>
                     </fieldset>
@@ -301,12 +288,10 @@
         <div class="nui_con">
             <p>inputs </p>
             <pre class="snippet" data-language="html">
-                <form class="pure-form">
-                    <input class="pure-input-1" type="text" placeholder=".pure-input-1"><br>
-                    <input class="pure-input-2-3" type="text" placeholder=".pure-input-2-3"><br>
-                    <input class="pure-input-1-2" type="text" placeholder=".pure-input-1-2"><br>
-                    <input class="pure-input-1-3" type="text" placeholder=".pure-input-1-3"><br>
-                    <input class="pure-input-1-4" type="text" placeholder=".pure-input-1-4"><br>
+                <form class="nice_form">
+                    <input class="nice_input_1" type="text" placeholder=".nice_input_1"><br>
+                    <input class="nice_input_2_3" type="text" placeholder=".nice_input_2_3"><br>
+                    <input class="nice_input_1_3" type="text" placeholder=".nice_input_1_3"><br>
                  </form>
             </pre>
             <div class="js_code_effect nui_code_effect"></div>
@@ -317,7 +302,7 @@
         <div class="nui_con">
             <p>Other inputs items</p>
             <pre class="snippet" data-language="html">
-                <form class="pure-form">
+                <form class="nice_form">
                     <input type="email" placeholder="Requires an email" required>
                     <input type="text" placeholder="disabled input" disabled>
                     <input type="text" placeholder="readonly input" readonly>
@@ -330,18 +315,18 @@
         <h3 class="nui_h3">checkbox and radio</h3>
         <div class="nui_con">
             <pre class="snippet" data-language="html">
-                <form class="pure-form">
-                    <label for="option-one" class="pure-checkbox">
+                <form class="nice_form">
+                    <label for="option-one" class="nice_checkbox">
                         <input id="option-one" type="checkbox" value="">
                         Here's option one.
                     </label>
 
-                    <label for="option-two" class="pure-radio">
+                    <label for="option-two" class="nice_radio">
                         <input id="option-two" type="radio" name="optionsRadios" value="option1" checked>
                         Here's a radio button. You can choose this one..
                     </label>
 
-                    <label for="option-three" class="pure-radio">
+                    <label for="option-three" class="nice_radio">
                         <input id="option-three" type="radio" name="optionsRadios" value="option2">
                         ..Or this one!
                     </label>
@@ -375,15 +360,15 @@
 
 <!--S side widget -->
 <div class="nui_widget">
-    <div id="widget" class="pure-menu pure-menu-open">
-        <a class="pure-menu-heading">Site Nav</a>
+    <div id="widget" class="nice_menu nice_menu_open">
+        <a class="nice_menu_heading">Site Nav</a>
         <ul>
             <li><a href="#js_button">Button</a></li>
             <li><a href="#js_grid">Grid</a></li>
             <li><a href="#js_menu">Menu</a></li>
             <li><a href="#js_table">Table</a></li>
             <li><a href="#js_form">Form</a></li>
-            <li class="pure-menu-selected"><a href="#js_other">Other</a></li>
+            <li class="nice_menu_selected"><a href="#js_other">Other</a></li>
         </ul>
     </div>
 </div>
@@ -473,7 +458,7 @@
         });
         // widget
         $('#widget li').click(function () {
-            $(this).siblings().removeClass('pure-menu-selected').end().addClass('pure-menu-selected');
+            $(this).siblings().removeClass('nice_menu_selected').end().addClass('nice_menu_selected');
         });
     });
 
