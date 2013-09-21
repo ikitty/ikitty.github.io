@@ -9,56 +9,352 @@
 <link rel="stylesheet" type="text/css" href="rainbow.css" media="screen" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 </head>
-<div class="ui_m">
-    <div class="ui_boss">
-        <h1>Nice</h1>
-    </div>
-    <div class="ui_m_item">
-        <h3 class="ui_h3">如何使用</h3>
-        <div class="ui_con">
+<div class="nui_m">
+    <h1 class="nui_boss">Nice</h1>
+    <div class="nui_m_item">
+        <h3 class="nui_h3">如何使用</h3>
+        <div class="nui_con">
             <p>只需要引入下面css文件即可</p>
             <pre class="snippet" data-language="html">
-                <link rel="stylesheet" type="text/css" href="http://ikitty.github.io/labs/nice-ui.css" media="screen" />
+                <link rel="stylesheet" type="text/css" href="http://ikitty.github.io/labs/nice-ui.css" />
             </pre>
         </div>
     </div>
 
-    <div class="ui_m_item">
-        <h3 class="ui_h3">General Button</h3>
-        <div class="ui_con">
+    <!--S button -->
+    <div id="js_button" class="nui_m_item">
+        <h3 class="nui_h3">General Button</h3>
+        <div class="nui_con">
             <p>用如下代码创建一个普通button</p>
             <pre class="snippet" data-language="html">
                 <a href="javascript:;" class="nice_btn ">General Button</a>
             </pre>
-            <div class="js_code_effect ui_code_effect"></div>
+            <div class="js_code_effect nui_code_effect"></div>
         </div>
     </div>
-    <div class="ui_m_item">
-        <h3 class="ui_h3">Disabled Button</h3>
-        <div class="ui_con">
+    <div class="nui_m_item">
+        <h3 class="nui_h3">Disabled Button</h3>
+        <div class="nui_con">
             <p>用如下代码创建一个不可点击的button</p>
             <pre class="snippet" data-language="html">
                 <a href="javascript:;" class="nice_btn nice_btn_disabled">Disabled Button</a>
             </pre>
-            <div class="js_code_effect ui_code_effect"></div>
+            <div class="js_code_effect nui_code_effect"></div>
         </div>
     </div>
-    <div class="ui_m_item">
-        <h3 class="ui_h3">Custom Button</h3>
-        <div class="ui_con">
+    <div class="nui_m_item">
+        <h3 class="nui_h3">Custom Button</h3>
+        <div class="nui_con">
             <p>用如下代码各种强调button</p>
             <pre class="snippet" data-language="html">
                 <a href="javascript:;" class="nice_btn nice_btn_primary">Primary Button</a>
                 <a href="javascript:;" class="nice_btn nice_btn_success">Success Button</a>
                 <a href="javascript:;" class="nice_btn nice_btn_warning">Warning Button</a>
             </pre>
-            <div class="js_code_effect ui_code_effect"></div>
+            <div class="js_code_effect nui_code_effect"></div>
         </div>
     </div>
+    <!--E button -->
 
-    <div class="ui_m_item">
-        <h3 class="ui_h3">常规Tab</h3>
-        <div class="ui_con">
+    <!--S grid layout -->
+    <div id="js_grid" class="nui_m_item">
+        <h3 class="nui_h3">Grid layout</h3>
+        <div class="nui_con">
+            <p>每个grid单元没有任何任何margin/padding，如果你需要，有两种方式：</p>
+            <ul>
+                <li>1. 在grid单元的子元素中定义</li>
+                <li>2. 直接定义给grid单元，并给其设置<code>box-sizing:border-box</code></li>
+            </ul>
+            <pre class="snippet" data-language="html">
+                <div class="pure-g">
+                    <div class="pure-u-1-5">
+                        <p>pure-u-1-5 : 20%</p>
+                    </div>
+                    <div class="pure-u-4-5">
+                        <p>pure-u-4-5 : 80%</p>
+                    </div>
+                </div>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <div class="nui_m_item">
+        <h3 class="nui_h3">Grid layout</h3>
+        <div class="nui_con">
+            <p>每个grid单元没有任何任何margin/padding，如果你需要，请在grid单元的子元素中定义</p>
+            <pre class="snippet" data-language="html">
+                <div class="pure-g">
+                    <div class="pure-u-1-3">
+                        <p>三列布局-第一列</p>
+                    </div>
+                    <div class="pure-u-1-3">
+                        <p>三列布局-第二列</p>
+                    </div>
+                    <div class="pure-u-1-3">
+                        <p>三列布局-第三列</p>
+                    </div>
+                </div>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <!--E grid layout -->
+
+    <!--S Menu -->
+    <div id="js_menu" class="nui_m_item">
+        <h3 class="nui_h3">Menu</h3>
+        <div class="nui_con">
+            <p>Horizontal menu</p>
+            <pre class="snippet" data-language="html">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li class="pure-menu-selected"><a href="#">Design</a></li>
+                        <li><a href="#">Program</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <div class="nui_m_item">
+        <h3 class="nui_h3">Menu</h3>
+        <div class="nui_con">
+            <p>Vertical menu</p>
+            <pre class="snippet" data-language="html">
+                <div class="pure-menu pure-menu-open">
+                    <a class="pure-menu-heading">Vertical menus</a>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Program</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <!--E Menu -->
+
+    <!--S table -->
+    <div id="js_table" class="nui_m_item">
+        <h3 class="nui_h3">General Table</h3>
+        <div class="nui_con">
+            <p>General Table</p>
+            <pre class="snippet" data-language="html">
+                <table class="pure-table pure-table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Honda</td>
+                            <td>Accord</td>
+                            <td>2009</td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Toyota</td>
+                            <td>Camry</td>
+                            <td>2012</td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>Hyundai</td>
+                            <td>Elantra</td>
+                            <td>2010</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <div class="nui_m_item">
+        <h3 class="nui_h3">General Table</h3>
+        <div class="nui_con">
+            <p>General Table</p>
+            <pre class="snippet" data-language="html">
+                <table class="pure-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="pure-table-odd">
+                            <td>1</td>
+                            <td>Honda</td>
+                            <td>Accord</td>
+                            <td>2009</td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Toyota</td>
+                            <td>Camry</td>
+                            <td>2012</td>
+                        </tr>
+
+                        <tr class="pure-table-odd">
+                            <td>3</td>
+                            <td>Hyundai</td>
+                            <td>Elantra</td>
+                            <td>2010</td>
+                        </tr>
+
+                        <tr>
+                            <td>4</td>
+                            <td>Ford</td>
+                            <td>Focus</td>
+                            <td>2008</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <!--E table -->
+
+    <!--S Form item -->
+    <div id="js_form" class="nui_m_item">
+        <h3 class="nui_h3">常规的登录区域</h3>
+        <div class="nui_con">
+            <p>Form items</p>
+            <pre class="snippet" data-language="html">
+                <form class="pure-form">
+                    <fieldset>
+                        <legend>A compact inline form</legend>
+
+                        <input type="email" placeholder="Email">
+                        <input type="password" placeholder="Password">
+
+                        <label for="remember">
+                            <input id="remember" type="checkbox"> Remember me
+                        </label>
+
+                        <button type="submit" class="nice_btn nice_btn_primary">Sign in</button>
+                    </fieldset>
+                </form>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <div class="nui_m_item">
+        <h3 class="nui_h3">Form items</h3>
+        <div class="nui_con">
+            <p>Form items</p>
+            <pre class="snippet" data-language="html">
+                <form class="pure-form pure-form-aligned">
+                    <fieldset>
+                        <div class="pure-control-group">
+                            <label for="name">Username</label>
+                            <input id="name" type="text" placeholder="Username">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="password">Password</label>
+                            <input id="password" type="password" placeholder="Password">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="email">Email Address</label>
+                            <input id="email" type="email" placeholder="Email Address">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="foo">Supercalifragilistic Label</label>
+                            <input id="foo" type="text" placeholder="Enter something here...">
+                        </div>
+
+                        <div class="pure-controls">
+                            <label for="cb" class="pure-checkbox">
+                                <input id="cb" type="checkbox"> I've read the terms and conditions
+                            </label>
+
+                            <button type="submit" class="nice_btn nice_btn_primary">Submit</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <div class="nui_m_item">
+        <h3 class="nui_h3">Form items</h3>
+        <div class="nui_con">
+            <p>inputs </p>
+            <pre class="snippet" data-language="html">
+                <form class="pure-form">
+                    <input class="pure-input-1" type="text" placeholder=".pure-input-1"><br>
+                    <input class="pure-input-2-3" type="text" placeholder=".pure-input-2-3"><br>
+                    <input class="pure-input-1-2" type="text" placeholder=".pure-input-1-2"><br>
+                    <input class="pure-input-1-3" type="text" placeholder=".pure-input-1-3"><br>
+                    <input class="pure-input-1-4" type="text" placeholder=".pure-input-1-4"><br>
+                 </form>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <div class="nui_m_item">
+        <h3 class="nui_h3">Form items</h3>
+        <div class="nui_con">
+            <p>Other inputs items</p>
+            <pre class="snippet" data-language="html">
+                <form class="pure-form">
+                    <input type="email" placeholder="Requires an email" required>
+                    <input type="text" placeholder="disabled input" disabled>
+                    <input type="text" placeholder="readonly input" readonly>
+                </form>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <div class="nui_m_item">
+        <h3 class="nui_h3">checkbox and radio</h3>
+        <div class="nui_con">
+            <pre class="snippet" data-language="html">
+                <form class="pure-form">
+                    <label for="option-one" class="pure-checkbox">
+                        <input id="option-one" type="checkbox" value="">
+                        Here's option one.
+                    </label>
+
+                    <label for="option-two" class="pure-radio">
+                        <input id="option-two" type="radio" name="optionsRadios" value="option1" checked>
+                        Here's a radio button. You can choose this one..
+                    </label>
+
+                    <label for="option-three" class="pure-radio">
+                        <input id="option-three" type="radio" name="optionsRadios" value="option2">
+                        ..Or this one!
+                    </label>
+                </form>
+            </pre>
+            <div class="js_code_effect nui_code_effect"></div>
+        </div>
+    </div>
+    <!--E Form item -->
+
+    <div id="js_other" class="nui_m_item">
+        <h3 class="nui_h3">常规Tab</h3>
+        <div class="nui_con">
             <p>业务中常用到tab组件实现</p>
             <pre class="snippet" data-language="html">
                 <ul class="sod_mtab">
@@ -71,11 +367,27 @@
                     <li><a target="_blank" href="#">食品</a></li>
                 </ul>
             </pre>
-            <div class="js_code_effect ui_code_effect"></div>
+            <div class="js_code_effect nui_code_effect"></div>
         </div>
     </div>
 
 </div>
+
+<!--S side widget -->
+<div class="nui_widget">
+    <div id="widget" class="pure-menu pure-menu-open">
+        <a class="pure-menu-heading">Site Nav</a>
+        <ul>
+            <li><a href="#js_button">Button</a></li>
+            <li><a href="#js_grid">Grid</a></li>
+            <li><a href="#js_menu">Menu</a></li>
+            <li><a href="#js_table">Table</a></li>
+            <li><a href="#js_form">Form</a></li>
+            <li class="pure-menu-selected"><a href="#js_other">Other</a></li>
+        </ul>
+    </div>
+</div>
+<!--E side widget -->
 
 <!--S 复制 -->
 <div id="copyBtn" class="nice_btn nice_btn_success copy_btn">
@@ -159,7 +471,10 @@
             $(elTextarea).hide();
             $(elTextarea).insertBefore(tmpPre);
         });
-        
+        // widget
+        $('#widget li').click(function () {
+            $(this).siblings().removeClass('pure-menu-selected').end().addClass('pure-menu-selected');
+        });
     });
 
     $(window).load(function () {
@@ -181,7 +496,7 @@
             });
             $('#copyShadow').attr('copyMark', $('pre.snippet').index(elPre));
             $('#copyShadow').show();
-            elCopyBtn.show();
+            elCopyBtn.show() ;
         });
 
         // copy code
