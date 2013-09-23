@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="description" content="html5 css sprite tool gopng" />
+<title>ASimg</title>
+<link rel="stylesheet" type="text/css" href="http://ikitty.github.io/labs/nice-ui.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+</head> 
+<body>
+
+<div class="main_cont">
+    <div class="nice_g">
+        <!--S main -->
+        <div class="nice_u_3_4">
+            <!--S tab -->
+            <ul id="asimgTab" class="asimg_mtab nav">
+                <li class="active" data-toggle="layout" >
+                    <a href="javascript:;">Canvas</a>
+                </li>
+                <li class="" data-toggle="css_html_template">
+                    <a href="javascript:;">Css Template</a>
+                </li>
+                <li class="" data-toggle="result"><a href="javascript:;">Result</a></li>
+            </ul>
+            <!--E tab -->
+
+            <div id="layout">
+                <canvas id="grid_canvas">
+                    You browser does not support the canvas elements.
+                </canvas>
+                <canvas id="canvas">
+                    You browser does not support the canvas elements.
+                </canvas>
+                <canvas id="zoom_canvas">
+                    You browser does not support the canvas elements.
+                </canvas>
+            </div>
+
+            <!--S css template -->
+            <div id="css_html_template">
+                <form class="nice_form nice_form_aligned">
+                    <fieldset>
+                        <div class="nice_control_group">
+                            <label>Sprite absolute path</label>
+                            <input id="absolute_path" type="text" placeholder="" class="nice_input_1_2">
+                        </div>
+                        <div class="nice_control_group">
+                            <label>Sprite relative path</label>
+                            <input id="relative_path" type="text" placeholder="" class="nice_input_1_2">
+                        </div>
+                        <div class="nice_controls">
+                            <label for="cb" class="nice_checkbox">
+                                <textarea class="nice_input_2_3" id="css_template" rows="25"></textarea>
+                            </label>
+                        </div>
+                        <div class="nice_controls">
+                            <a id="css_template_apply" href="javascript:;" class="nice_btn nice_btn_primary ">Apply</a>&nbsp;&nbsp;
+                            <a id="css_template_reset" href="javascript:;" class="nice_btn ">Reset</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <!--E css template -->
+
+            <!--S result -->
+            <div id="result">
+                <div class="ret_hd">Image:</div>
+                <div class="ret_bd">
+                    <a id="png_link" class="nice_btn nice_btn_success" download="sprite.png" href="javascript:;">Download</a>
+                    <div id="img"></div>
+                </div>
+
+                <div class="ret_hd">Image:</div>
+                <div class="ret_bd">
+                    <a id="css_link" class="nice_btn nice_btn_success" download="style.css" href="javascript:;">Download</a>
+                    <p >css code:</p>
+                    <pre id="target_css">
+                    </pre>
+                </div>
+            </div>
+            <!--E result -->
+        </div>
+        <!--E main -->
+
+        <!--S extra part -->
+        <div class="nice_u_1_4">
+            <div class="asimg_side">
+                <div class="packer_hd"> Packer mode </div>
+                <div class="packer_bd">
+                    <a href="javascript:;" id="bintree" class="js_packer_btn nice_btn nice_btn_primary">Horizontal</a>
+                    <a href="javascript:;" id="vertical" class="js_packer_btn nice_btn nice_btn_primary">Vertical</a>
+                    <a href="javascript:;" id="bintreeGrow" class="js_packer_btn nice_btn nice_btn_primary">BinTree</a>
+                    <a href="javascript:;" id="Minimize" class="js_packer_btn nice_btn nice_btn_primary">Minimize</a>
+                </div>
+
+                <p class="hr"></p>
+
+                <a href="javascript:;" id="make" class="create_btn nice_btn nice_btn_success">Create Img and CSS</a>
+                <a href="javascript:;" id="export_workspace" class="nice_btn nice_btn_primary" download="export.json">Export Config</a>
+
+                <!--S canvas size  -->
+                <fieldset class="hide">
+                    <h6>Canvas sizes</h6>
+                    <div class="control-group">
+                        <label class="control-label">Canvas width</label>
+                        <div class="controls docs-input-sizes">
+                            <input class="input-small" type="text" placeholder='' id="canvas_width" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Canvas Height</label>
+                        <div class="controls docs-input-sizes">
+                            <input class="input-small" type="text" placeholder='' id="canvas_height" />
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="canvas_sizes_apply">Apply changes</button>
+                    </div>
+                </fieldset>
+                <!--E canvas size  -->
+
+                <!--S zoom -->
+                <fieldset class="hide">
+                    <h6>Zoom setting</h6>
+                    <div class="control-group">
+                        <label class="control-label">Zoom mode</label>
+                        <div class="controls">
+                            <div class="btn-group" id="zoom_factors">
+                                <button class="btn btn-primary" id="1x">1X</button>
+                                <button class="btn btn-primary" id="2x">2X</button>
+                                <button class="btn btn-primary" id="4x">4X</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Zoom raduis</label>
+                        <div class="controls docs-input-sizes">
+                            <input class="input-small" type="text" placeholder='' id="zoom_setting_value" />
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="zoom_setting_apply">Apply changes</button>
+                    </div>
+                </fieldset>
+                <!--E zoom -->
+
+                <!--S magnet -->
+                <fieldset class="hide">
+                    <h6>Magnet setting</h6>
+                    <div class="control-group">
+                        <label class="control-label">Magnet</label>
+                        <div class="controls">
+                            <button class="btn btn-primary" id="magnet">Magnet!</button>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Magnet distance</label>
+                        <div class="controls docs-input-sizes">
+                            <input class="input-small" type="text" placeholder='' id="magnet_setting_value"/>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="magnet_setting_apply">Apply changes</button>
+                    </div>
+                </fieldset>
+                <!--E magnet -->
+            </div>
+        </div>
+        <!--E extra part -->
+    </div>
+</div>
+
+<script type="text/javascript" src="asimg.js"></script>
+</body>
+</html>

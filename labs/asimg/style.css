@@ -1,0 +1,35 @@
+html {overflow-y:scroll;}
+body {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
+.hide {display:none;}
+.nice_u_1_4 {width:24%;}
+
+a {color:#444;text-decoration:none;}
+
+.main_cont {width:990px;margin:0 auto;padding-top:25px;}
+.asimg_side {padding:15px;border:1px solid #ddd;margin-left:15px;}
+.packer_hd {height:25px;font:400 14px/25x tahoma;}
+.packer_bd a {padding:.5em 0;width:80px;margin-top:10px;margin-right:7px;text-align:center;}
+.create_btn {margin-bottom:10px;}
+.hr {display:block;clear:both;height:1px;overflow:hidden;background-color:#ccc;margin:20px 0px;}
+
+#canvas { border:1px solid #c3c3c3; }
+#layout { position: relative; overflow: auto; }
+#grid_canvas{ position: absolute; left:0px; top:0px; }
+#zoom_canvas{ position: absolute; left:0px; top:0px; display: none; }
+#png_link,
+#css_link{ display: none; }
+
+#css_html_template,
+#png_out,
+#css_out { display: none; }
+.yellow_inform { background-color: yellow; }
+
+/* =====tab===== */
+.asimg_mtab {height:30px;border-bottom:2px solid #f70;margin-bottom:10px;padding-left:1px;}
+.asimg_mtab li {float:left;height:30px;padding:0 20px;font:400 14px/30px Arial;}
+.asimg_mtab a:hover {text-decoration:none;}
+.asimg_mtab .asimg_mtab_gap {float:left;width:1px;height:14px;padding:0px;margin:10px 0px 0;overflow:hidden;background-color:#999;}
+.asimg_mtab .active {position:relative;margin:0px -1px;padding:0px 21px;background-color:#f60;}
+.asimg_mtab .active a,
+.asimg_mtab .active a:hover {color:#fff;}
+
