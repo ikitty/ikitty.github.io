@@ -20,9 +20,7 @@ a {color:#444;text-decoration:none;}
 #css_link{ display: none; }
 
 #css_html_template,
-#png_out,
-#css_out { display: none; }
-.yellow_inform { background-color: yellow; }
+#result {display:none;}
 
 /* =====tab===== */
 .asimg_mtab {height:30px;border-bottom:2px solid #f70;margin-bottom:10px;padding-left:1px;}
@@ -32,4 +30,3 @@ a {color:#444;text-decoration:none;}
 .asimg_mtab .active {position:relative;margin:0px -1px;padding:0px 21px;background-color:#f60;}
 .asimg_mtab .active a,
 .asimg_mtab .active a:hover {color:#fff;}
-
