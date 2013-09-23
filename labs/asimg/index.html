@@ -6,6 +6,7 @@
 <title>ASimg</title>
 <link rel="stylesheet" type="text/css" href="http://ikitty.github.io/labs/nice-ui.css">
 <link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="http://ikitty.github.io/static/jq.js"></script>
 </head> 
 <body>
 
@@ -51,7 +52,7 @@
                         </div>
                         <div class="nice_controls">
                             <label for="cb" class="nice_checkbox">
-                                <textarea class="nice_input_2_3" id="css_template" rows="25"></textarea>
+                                <textarea class="nice_input_2_3" id="css_template" rows="10"></textarea>
                             </label>
                         </div>
                         <div class="nice_controls">
@@ -65,18 +66,19 @@
 
             <!--S result -->
             <div id="result">
-                <div class="ret_hd">Image:</div>
-                <div class="ret_bd">
+                <div class="ret_hd">
+                    Image:
                     <a id="png_link" class="nice_btn nice_btn_success" download="sprite.png" href="javascript:;">Download</a>
-                    <div id="img"></div>
+                </div>
+                <div class="ret_bd">
+                    <div id="img" class="ret_img"></div>
                 </div>
 
-                <div class="ret_hd">Image:</div>
-                <div class="ret_bd">
+                <div class="ret_hd">CSS:
                     <a id="css_link" class="nice_btn nice_btn_success" download="style.css" href="javascript:;">Download</a>
-                    <p >css code:</p>
-                    <pre id="target_css">
-                    </pre>
+                </div>
+                <div class="ret_bd">
+                    <pre id="target_css" class="ret_css"></pre>
                 </div>
             </div>
             <!--E result -->

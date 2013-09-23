@@ -148,7 +148,6 @@ var __cssTemplate = '\
         var img = new Image();
         img.src = dataURL;
         getEl('png_link').href = dataURL.replace('data:image/','data:image/');
-        getEl('png_link').style.display = 'inline';
         document.getElementById('img').innerHTML = '';
         document.getElementById('img').appendChild(img);
         resetCanvasSize(config.canvas_width, config.canvas_height);
@@ -167,7 +166,6 @@ var __cssTemplate = '\
         asimg_path += ' {background-image:url(' + config.absolute_path + ');background-repeat:no-repeat;}\n';
         getEl('css_link').href = 'data:text/css;base64,' + encodeBase64(css_text);
         getEl('target_css').innerHTML = asimg_path + XssDefender(css_text);
-        getEl('css_link').style.display = 'inline';
     }
     var XssDefender = function(s) {
         s = s.replace(/&/g,"&amp;").replace(/>/g,"&gt;").replace(/</g,"&lt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
@@ -860,6 +858,11 @@ var __cssTemplate = '\
             };
             getEl('make').onclick = function() {
                 makeImgAndCss();
+                // show result
+                $('#asimgTab li').removeClass('active');
+                $('#asimgTab li[data-toggle="result"]').addClass('active');
+                $('#layout').hide();
+                $('#result').show();
             };
             getEl('canvas_sizes_apply').onclick = function(e) {
                 e.preventDefault();

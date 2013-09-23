@@ -16,8 +16,6 @@ a {color:#444;text-decoration:none;}
 #layout { position: relative; overflow: auto; }
 #grid_canvas{ position: absolute; left:0px; top:0px; }
 #zoom_canvas{ position: absolute; left:0px; top:0px; display: none; }
-#png_link,
-#css_link{ display: none; }
 
 #css_html_template,
 #result {display:none;}
@@ -30,3 +28,7 @@ a {color:#444;text-decoration:none;}
 .asimg_mtab .active {position:relative;margin:0px -1px;padding:0px 21px;background-color:#f60;}
 .asimg_mtab .active a,
 .asimg_mtab .active a:hover {color:#fff;}
+
+.ret_hd {padding:10px 0px;height:35px;}
+.ret_img {margin-bottom:20px;border:1px solid #ccc;}
+.ret_css {padding:15px;border:1px solid #ccc;background-color:#eee;font-family:Consolas,courier new;}
