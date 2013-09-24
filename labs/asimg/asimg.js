@@ -7,11 +7,38 @@ var __cssTemplate = '\
 }\n\
 ';
 
+function copySuccess (argument) {
+    $('#copyRet').fadeIn();
+    setTimeout(function () {
+        $('#copyRet').fadeOut();
+        $('#copyShadow').show();
+    }, 1800);
+}
+
+$(function () {
+    // show copy btn
+    var elCopyBtn = $('#copyBtn') ,
+        elCopyShadow = $('#copyShadow'),
+        tmpCodeStr= '';
+        elPre = $('#target_css') ;
+
+    $('body').click(function () {
+        elCopyShadow.show();
+    });
+
+    elCopyShadow.mouseover(function () {
+        tmpCodeStr = elPre.html() ;
+        document.copySwf.sendToActionScript(tmpCodeStr);
+        elCopyShadow.hide();
+    });
+    
+});
+
 (function(namespace) {
     var namespace = window[namespace] = {};
     var config = {
         //layout
-        canvas_width: 600,
+        canvas_width: 860,
         canvas_height: 600,
         //packer
         packer_mode : 'bintree',
@@ -30,12 +57,51 @@ var __cssTemplate = '\
     };
     var picture_height, picture_width;
     var canvas = document.getElementById('canvas');
-    var grid_canvas = document.getElementById('grid_canvas');
-    var grid_context = grid_canvas.getContext("2d");
     var zoom_canvas = document.getElementById("zoom_canvas");
     var zoom_context = zoom_canvas.getContext("2d");
     var context = canvas.getContext("2d");
     var imgObjects = []; //x y w h ix iy iw ih...
+
+    // shadow
+    var showModal = function (el) {
+        if (!document.getElementById('enixShadow')) {
+            var tempShadow = document.createElement('div');
+            tempShadow.setAttribute('id', 'enixShadow') ;
+            document.body.appendChild(tempShadow) ;
+            $('#enixShadow').css({
+                'position': 'fixed',
+                'display': 'none',
+                'top':0,
+                'left':0,
+                'width':'100%',
+                'height':'100%',
+                'background':'rgba(0,0,0,.4)'
+            })
+        }
+        $('#enixShadow').css({'z-index': 10000}).show();
+        $(el).css({'z-index': 10001}).fadeIn();
+    };
+    var hideModal = function (el) {
+        $(el).hide();
+        $('#enixShadow').hide();
+    }
+
+
+    // init func
+    $('#setCssTemplate').click(function () {
+        var el = $('#css_html_template');
+        el.css({ 'margin-top': '-' + el.height()/2 + 'px' });
+        showModal(el);
+    });
+    $('#cssTemplateX').click(function () {
+        hideModal($(this).parent());
+    });
+
+    $('#retCanvas').click(function () {
+        $('#result').fadeOut(function () {
+            $('#canvasArea').show();
+        });
+    });
 
     //Zoomer
     var zoomer = (function() {
@@ -132,7 +198,7 @@ var __cssTemplate = '\
         canvas.height = config.canvas_height;
         canvas.width  = config.canvas_width;
         zoom_canvas.height = config.canvas_height * 2;
-        zoom_canvas.width = config.canvas_width * 2;
+        zoom_canvas.width = config.canvas_width * 1;
         refresh();
     }
 
@@ -623,20 +689,24 @@ var __cssTemplate = '\
         }else {
             var mouseOverTarget = ifhit(movex, movey);
             if(mouseOverTarget) {
-                document.body.style.cursor = 'pointer';
+                // by enix
+                //document.body.style.cursor = 'pointer';
             }else {
                 document.body.style.cursor = '';
             }
         }
     };
     zoom_canvas.onmousedown = canvas.onmousedown = function(e) {
+        // disabled it by enix
+        return false ;
         mousedown = 1;
         lastmovex = e.offsetX || e.layerX;
         lastmovey = e.offsetY || e.layerY;
         target = ifhit(lastmovex, lastmovey);
         zoomer.setXY(lastmovex, lastmovey);
         refresh();
-        document.body.style.cursor = 'pointer';
+        // by enix
+        //document.body.style.cursor = 'pointer';
     };
     zoom_canvas.onmouseup = canvas.onmouseup = function(e) {
         mousedown = 0;
@@ -721,7 +791,6 @@ var __cssTemplate = '\
         }
         getEl('magnet_setting_value').placeholder = config.magnet_distance;
         //template
-        getEl('relative_path').placeholder = config.relative_path;
         getEl('absolute_path').placeholder = config.absolute_path;
         getEl('css_template').value = config.template;
     };
@@ -805,7 +874,6 @@ var __cssTemplate = '\
 
         };
         return function(){
-            bindNav('#asimgTab');
             bindRadio(nodeList2Array(getEl('.js_packer_btn')), function(el){
                 var id = el.id;
                 switch(id) {
@@ -858,11 +926,9 @@ var __cssTemplate = '\
             };
             getEl('make').onclick = function() {
                 makeImgAndCss();
-                // show result
-                $('#asimgTab li').removeClass('active');
-                $('#asimgTab li[data-toggle="result"]').addClass('active');
-                $('#layout').hide();
-                $('#result').show();
+                // show result by enix
+                $('#canvasArea').hide();
+                $('#result').fadeIn(800);
             };
             getEl('canvas_sizes_apply').onclick = function(e) {
                 e.preventDefault();
@@ -874,7 +940,7 @@ var __cssTemplate = '\
                 e.preventDefault();
                 config.template = getEl('css_template').value;
                 config.absolute_path = getEl('absolute_path').value;
-                config.relative_path = getEl('relative_path').value;
+                $('#cssTemplateX').click();
             };
             getEl('css_template_reset').onclick = function(e) {
                 e.preventDefault();
@@ -967,7 +1033,7 @@ var __cssTemplate = '\
     binddingDoms();
     resetCanvas();
     zoomer.init();
-    context.font = '28pt Calibri';
-    context.fillText("drop Images or an export file here...", config.canvas_width/2 - 260, config.canvas_height/2 - 40);
-    context.font = '10pt Calibri';
+    context.font = '20pt Verdana';
+    context.fillText("Drop Images or an export file here.", config.canvas_width/2 - 260, config.canvas_height/2 - 20);
+    context.font = '10pt tahoma';
 })('Asimg');
