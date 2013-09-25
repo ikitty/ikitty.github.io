@@ -19,6 +19,7 @@ Loop
 			Break
 		}
 	Loop,%list_num%
+    ;loop 后面的参数是循环次数
 	{
 		If(list_num < 10)
 		{
