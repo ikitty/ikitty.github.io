@@ -20,7 +20,7 @@ body {background-color:#fff;font:400 14px/20px proxima-nova,tahoma,Arial,"\5FAE\
 .copy_ret {display:none;position:fixed;width:200px;height:50px;top:50%;left:50%;margin-left:-100px;margin-top:-25px;font:400 20px/50px "\5FAE\8F6F\96C5\9ED1";border:2px solid rgba(0,0,0,0.3);color:#3A8E00;overflow:hidden;background-color:#fff;text-align:center;border-radius:5px;}
 
 /* side widget */
-.nui_widget {position:fixed;top:320px;left:50%;margin-left:-570px;width:100px;}
+.nui_widget {position:fixed;top:320px;left:50%;margin-left:-570px;width:100px;-webkit-transform:translateZ(0);}
 
 /* =====tab with gap===== */
 /* todo remove to ui-mod.css */
