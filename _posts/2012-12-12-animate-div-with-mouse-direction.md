@@ -49,9 +49,11 @@ description: 鼠标跟随特效
 ![quadrant][coord]
 
 通过前面的计算已经得到了象限的标识，再通过加3，并对4取余，以将结果修正为我们期待的结果：{Top:0, Right: 1, Bottom: 2, Left: 3}
+
     direction = Math.round(direction + 3) % 4;
 
 后来发现一种更为简单的方法来，如：
+
     var direction =  Math.round( Math.atan2(y, x) / (Math.PI/2) + 5 ) % 4 ; 
     // 拆开说明下
     // 计算输入切入点在平面坐标系中的角度
