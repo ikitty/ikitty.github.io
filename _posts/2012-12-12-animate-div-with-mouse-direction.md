@@ -63,4 +63,4 @@ description: 鼠标跟随特效
 
 以上就是获取鼠标方向的全过程解析。有了该方法，只需要监控鼠标在矩形区域上的mouseenter/mouselveave事件，并实时的把半透明浮层的跟随动画添加上即可，这部分交给css3来搞定即可。
 
-<a target="_blank" href="/labs/mouse-direction.html">查看Demo</a>
+<a target="_blank" href="/labs/mouseDirection.html">查看Demo</a>
