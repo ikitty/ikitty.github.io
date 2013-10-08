@@ -38,6 +38,26 @@
         };
 
         return {
+            // original method
+            'setItem': function (ns, v) {
+                if (Object.prototype.toString.call(v).slice(8, -1) === 'Object') {
+                    LS.setItem(ns, JSON.stringify(v));
+                }else {
+                    LS.setItem(ns, v);
+                }
+            },
+            'getItem': function (ns, parseObj) {
+                var _temp = LS.getItem(ns);
+                if (_temp) {
+                    return parseObj ? JSON.parse(_temp)  : _temp ;
+                }else {
+                    return parseObj ? {} : '' ;
+                }
+            },
+            'clear': function (ns) {
+                LS.removeItem(ns);
+            },
+            // extend method
             'set': function (ns, k, v) {
                 mC(ns, k,v);
             },
@@ -46,9 +66,6 @@
             },
             'delete': function (ns, k) {
                 mD(ns, k);
-            },
-            'clear': function (ns) {
-                LS.removeItem(ns);
             }
         } ;
     })();
