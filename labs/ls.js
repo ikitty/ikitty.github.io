@@ -37,13 +37,10 @@ var Ls = (function () {
     };
 
     return {
-        'create': function (ns, k, v) {
-            mC(ns, k, v);
-        },
-        'update': function (ns, k, v) {
+        'set': function (ns, k, v) {
             mC(ns, k,v);
         },
-        'read': function (ns, k) {
+        'get': function (ns, k) {
             return mR(ns, k);
         },
         'delete': function (ns, k) {

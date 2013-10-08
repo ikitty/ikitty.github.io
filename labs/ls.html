@@ -11,14 +11,14 @@
 <script type="text/javascript">
     Ls.clear('lsTest');
 
-    Ls.update('lsTest', 'date', '2013-10-08')
-    console.log(Ls.read('lsTest', 'date')) ;
+    Ls.set('lsTest', 'date', '2013-10-08')
+    console.log(Ls.get('lsTest', 'date')) ;
 
-    Ls.update('lsTest', 'key', {'name':'alex', 'test': 99})
-    console.log(Ls.read('lsTest', 'key')) ;
+    Ls.set('lsTest', 'key', {'name':'alex', 'nick': 'enix'})
+    console.log(Ls.get('lsTest', 'key')) ;
 
     Ls.delete('lsTest', 'key' )
-    console.log('deleted key', Ls.read('lsTest', 'key')) ;
+    console.log('deleted key , now key is : ', Ls.get('lsTest', 'key')) ;
 
     
 </script>
