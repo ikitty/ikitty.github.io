@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ZH-cn">
+<head>
+<meta charset="utf-8" />
+<title>Demo by Alextang</title>
+</head>
+<body>
+
+
+<script type="text/javascript" src="ls.js"></script>
+<script type="text/javascript">
+    Ls.clear('lsTest');
+
+    Ls.update('lsTest', 'date', '2013-10-08')
+    console.log(Ls.read('lsTest', 'date')) ;
+
+    Ls.update('lsTest', 'key', {'name':'alex', 'test': 99})
+    console.log(Ls.read('lsTest', 'key')) ;
+
+    Ls.delete('lsTest', 'key' )
+    console.log('deleted key', Ls.read('lsTest', 'key')) ;
+
+    
+</script>
+</body>
+</html>
