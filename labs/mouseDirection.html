@@ -4,12 +4,102 @@
 <meta charset="utf-8" />
 <title>Demo by Alextang</title>
 <style type="text/css" media="screen">
-    .box {width:200px;height:200px;border:1px solid #999;position:absolute;top:200px;left:200px;}
+    * {margin:0;padding:0;list-style:none;}
+
+    .xlist {margin:50px 0px 0px 50px;width:500px;}
+    .xlist li {position:relative;float:left;width:100px;height:100px;border:1px solid #ccc;background-color:#eee;margin:10px;overflow:hidden;}
+    .xlist i {position:absolute;width:100%;height:100%;visibility:hidden;background-color:#09f;filter:alpha(opacity=50);opacity:0.5;-webkit-transition: all 0.5s ease;}
+
+    /* =====in===== */
+    .xlist .anim_0 {visibility:visible;left:0px;-webkit-animation:anim_d_0 0.4s ease-out forwards;}
+    .xlist .anim_1 {visibility:visible;top:0px;-webkit-animation:anim_d_1 0.4s ease-out forwards;}
+    .xlist .anim_2 {visibility:visible;left:0px;-webkit-animation:anim_d_2 0.4s ease-out forwards;}
+    .xlist .anim_3 {visibility:visible;top:0px;-webkit-animation:anim_d_3 0.4s ease-out forwards;}
+
+    /* =====out===== */
+    .xlist .anim_out_0 {visibility:visible;left:0px;-webkit-animation:anim_out_d_0 0.4s ease-out forwards;}
+    .xlist .anim_out_1 {visibility:visible;top:0px;-webkit-animation:anim_out_d_1 0.4s ease-out forwards;}
+    .xlist .anim_out_2 {visibility:visible;left:0px;-webkit-animation:anim_out_d_2 0.4s ease-out forwards;}
+    .xlist .anim_out_3 {visibility:visible;top:0px;-webkit-animation:anim_out_d_3 0.4s ease-out forwards;}
+
+    @-webkit-keyframes anim_d_0 {
+        0% {top:-100px;}
+        100% {top:0px;}
+    }
+    @-webkit-keyframes anim_d_1 {
+        0% {left:100px;}
+        100% {left:0px;}
+    }
+    @-webkit-keyframes anim_d_2 {
+        0% {top:100px;}
+        100% {top:0px;}
+    }
+    @-webkit-keyframes anim_d_3 {
+        0% {left:-100px;}
+        100% {left:0px;}
+    }
+
+    @-webkit-keyframes anim_out_d_0 {
+        0% {top:00px;}
+        100% {top:-100px;}
+    }
+    @-webkit-keyframes anim_out_d_1 {
+        0% {left:00px;}
+        100% {left:100px;}
+    }
+    @-webkit-keyframes anim_out_d_2 {
+        0% {top:00px;}
+        100% {top:100px;}
+    }
+    @-webkit-keyframes anim_out_d_3 {
+        0% {left:00px;}
+        100% {left:-100px;}
+    }
 </style>
 </head>
 <body>
-<div class="box"></div>
-<div class="" id="ret"> </div>
+
+<ul class="xlist">
+    <li>
+        <i class="anim_0">&nbsp;</i>
+    </li>
+    <li>
+        <i class="anim_1">&nbsp;</i>
+    </li>
+    <li>
+        <i class="anim_2">&nbsp;</i>
+    </li>
+    <li>
+        <i class="anim_3">&nbsp;</i>
+    </li>
+</ul>
+
+<ul class="xlist" id="xList">
+    <li>
+        <i>&nbsp;</i>
+    </li>
+    <li>
+        <i>&nbsp;</i>
+    </li>
+    <li>
+        <i>&nbsp;</i>
+    </li>
+    <li>
+        <i>&nbsp;</i>
+    </li>
+    <li>
+        <i>&nbsp;</i>
+    </li>
+    <li>
+        <i>&nbsp;</i>
+    </li>
+    <li>
+        <i>&nbsp;</i>
+    </li>
+    <li>
+        <i>&nbsp;</i>
+    </li>
+</ul>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -52,8 +142,13 @@
 					$hoverElem = $el.find( 'div' ),
 					direction = self._getDir( $el, { x : event.pageX, y : event.pageY } ),
 					styleCSS = self._getStyle( direction );
+
+                var elAnim = $el.find('i');
 				
 				if( event.type === 'mouseenter' ) {
+                    // alex
+                    elAnim[0].className = 'anim_' + direction ;
+
 					
 					$hoverElem.hide().css( styleCSS.from );
 					clearTimeout( self.tmhover );
@@ -75,6 +170,7 @@
 					
 				}
 				else {
+                    elAnim[0].className = 'anim_out_' + direction ;
 				
 					if( self.support ) {
 						$hoverElem.css( 'transition', self.transitionProp );
@@ -111,8 +207,10 @@
 				c.c =  c.b + 3 ;
 				c.d =  Math.round(c.c);
 				c.result =  c.d%4;
-                console.log(c) ;
-                $('#ret').html(JSON.stringify(c));
+                // console.log(c) ;
+                // debug
+                // $('#boxTest').html(c.result);
+
                 //var D =  Math.round( Math.atan2(y, x) / (Math.PI/2) + 5 ) % 4
                 //console.log(D) ;
 			
@@ -230,8 +328,9 @@
 	
 } )( jQuery, window );
 
+//invoke
 $(function() {
-    $('div').each( function() { $(this).hoverdir(); } );
+    $('#xList li').each( function() { $(this).hoverdir(); } );
 });
 </script>
 </body>
