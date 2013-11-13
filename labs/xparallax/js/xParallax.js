@@ -133,6 +133,9 @@
         maxStage: 3,
         //xParallax的状态，1表示可用，0表示禁用
         status: 0,
+        //xParallax容器
+        parallaxBox: 'parallaxWrap',
+
         // 状态栏参数
         statusId: 'parallaxStatus',
         statusChildNodeName: 'li'
@@ -141,11 +144,24 @@
 
     // todo
     // 节奏
-    // autoHeight 
-    // 单位问题
+
+    /**
+     * autoHeight
+     *
+     * @params
+     **/
+    function parallaxAutoHeight() {
+        $('#' + config.parallaxBox).css({
+            //todo 
+            // get height of head and foot
+            height: $(window).height() - 67 - 100 + 'px'
+        })
+    }
 
     // init
     xParallax.init = function () {
+        parallaxAutoHeight();
+
         // 初始化默认场景
         // todo 重新动态计算元素位置（基于百分比）
         var elBg = $('div[data-pstage=' + config.curStage + ']');
@@ -303,8 +319,30 @@
         return [_cache[elOut], _cache[elIn]] ;
     }
 
-    function resizeLoad() {
+    var st ;
+    $(window).resize(function () {
+        // todo opt
+        if (st) {
+            clearTimeout(st);
+        }
         
+        st = setTimeout(function () {
+            resizeLoad();
+        }, 100);
+    })
+
+    function resizeLoad() {
+        // console.log('resize invoked');
+
+        parallaxAutoHeight();
+
+        var elBg = $('div[data-pstage=' + config.curStage + ']');
+            
+        elBg.find('img[data-pchild]').each(function (i ,el) {
+            $(el).animate({
+                left: $(window).width()/2 - $(this).data('pos') + 'px'
+            }, 300);
+        });
     }
 
     /**
