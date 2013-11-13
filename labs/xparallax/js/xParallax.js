@@ -150,9 +150,9 @@
         // todo 重新动态计算元素位置（基于百分比）
         var elBg = $('div[data-pstage=' + config.curStage + ']');
 
-        elBg.find('i[data-pchild]').each(function (i ,el) {
+        elBg.find('img[data-pchild]').each(function (i ,el) {
             $(el).css({
-                left: $(this).data('pos') + '%'
+                left: $(window).width()/2 - $(this).data('pos') + 'px'
             })
         }).end().show() ;
 
@@ -160,7 +160,10 @@
 
     // 检查是否有动画在执行
     function checkAnimated() {
-        return $(':animated').length > 0 ? 1 : 0 ;
+        if (!_cache['xParallaxAnimated']) {
+            _cache['xParallaxAnimated'] = $('img[data-pchild]') ;
+        }
+        return _cache['xParallaxAnimated'].filter(':animated').length > 0 ? 1 : 0 ;
     }
 
     $(window).mousewheel(function (evt, delta, deltaX, deltaY) {
@@ -259,9 +262,9 @@
             _cache[elOut] = (function (curStage) {
                 return function () {
                     var elBg = $('div[data-pstage=' + curStage + ']');
-                    var elLength = elBg.find('i[data-pchild]').length ;
+                    var elLength = elBg.find('img[data-pchild]').length ;
 
-                    elBg.find('i[data-pchild]').each(function (i ,el) {
+                    elBg.find('img[data-pchild]').each(function (i ,el) {
                         $(el).animate({
                             left: flagOut + '100%'
                         }, config.speed * $(this).data('deep'), '', function () {
@@ -280,13 +283,13 @@
                 return function () {
                     var elBg = $('div[data-pstage=' + nextStage + ']');
                     // init position and then display them
-                    elBg.find('i[data-pchild]').css({
+                    elBg.find('img[data-pchild]').css({
                         left: flagIn + '100%'
                     }).end().show();
 
-                    elBg.find('i[data-pchild]').each(function (i ,el) {
+                    elBg.find('img[data-pchild]').each(function (i ,el) {
                         $(el).animate({
-                            left: $(this).data('pos') + '%'
+                            left: $(window).width()/2 - $(this).data('pos') + 'px'
                         }, config.speed * $(this).data('deep'));
                     });
                 } ;
