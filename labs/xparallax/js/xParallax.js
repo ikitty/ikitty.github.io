@@ -132,7 +132,7 @@
         nextStage: null ,
         maxStage: 3,
         //xParallax的状态，1表示可用，0表示禁用
-        status: 1,
+        status: 0,
         // 状态栏参数
         statusId: 'parallaxStatus',
         statusChildNodeName: 'li'
@@ -155,6 +155,10 @@
                 left: $(window).width()/2 - $(this).data('pos') + 'px'
             })
         }).end().show() ;
+
+        $(window).load(function () {
+            config.status = 1;
+        });
 
     };
 
