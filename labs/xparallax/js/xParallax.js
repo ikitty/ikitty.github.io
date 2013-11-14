@@ -131,9 +131,10 @@
         curStage: 1 ,
         nextStage: null ,
         maxStage: 3,
+        //页面加载完成后方可激活xParallax
+        loaded: 0,
         //xParallax的状态，1表示可用，0表示禁用
         status: 1,
-        loaded: 0,
         //xParallax容器
         parallaxBox: 'parallaxWrap',
 
