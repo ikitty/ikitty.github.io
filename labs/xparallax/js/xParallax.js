@@ -132,7 +132,8 @@
         nextStage: null ,
         maxStage: 3,
         //xParallax的状态，1表示可用，0表示禁用
-        status: 0,
+        status: 1,
+        loaded: 0,
         //xParallax容器
         parallaxBox: 'parallaxWrap',
 
@@ -172,8 +173,9 @@
             })
         }).end().show() ;
 
+
         $(window).load(function () {
-            config.status = 1;
+            config.loaded = 1;
         });
 
     };
@@ -188,7 +190,7 @@
 
     $(window).mousewheel(function (evt, delta, deltaX, deltaY) {
         // 如果有动画正在进行，则不响应
-        if (checkAnimated()) {
+        if (checkAnimated() || config.loaded == 0) {
             return  ;
         }
 
@@ -203,8 +205,8 @@
      **/
     (function () {
         $(window).keyup(function (e) {
-            if (checkAnimated()) {
-                return  ;
+            if (checkAnimated() || config.loaded == 0) {
+                return ;
             }
 
             var keyCode = e.keyCode ;
