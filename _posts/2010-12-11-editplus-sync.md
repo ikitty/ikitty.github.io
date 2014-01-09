@@ -6,9 +6,6 @@ category: PHP
 description: 在Dreamweaver中，可以将正在编辑的文件一键同步到FTP服务器中，很是便利。如果Editplus也能快捷同步就好了，想到在Editplus可以调用外部程序或者命令，于是用php写了个同步到FTP的脚本文件，并作为工具添加到Editplus中。
 ---
 
-[imgEp1]: /images/editplus-sync1.jpg
-[imgEp2]: /images/editplus-sync2.jpg
-[imgEp3]: /images/editplus-sync3.jpg
 
 在Dreamweaver中，可以将正在编辑的文件一键同步到FTP服务器中，很是便利。如果Editplus也能快捷同步就好了，想到在Editplus可以调用外部程序或者命令，于是用php写了个同步到FTP的脚本文件，并作为工具添加到Editplus中。
 
@@ -30,13 +27,3 @@ description: 在Dreamweaver中，可以将正在编辑的文件一键同步到FT
     // 定义本地上传路径(此路径等价于开发环境路径)
     $local_root_path = 'D:/www/blog' ;
 
-
-如图：
-![Editplus sync][imgEp1]
-
-配置好之后，来测试下，打开“本地上传路径”下的一个文件，随意修改下，然后按下 ctrl + 1 (工具的位置拍在第一个就是ctrl+1)，如图：
-
-![Editplus sync][imgEp2]
-
-此时在Editplus的输出窗口就可以看到结果“uploaded”，如图：
-![Editplus sync][imgEp3]
