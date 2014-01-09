@@ -16,7 +16,6 @@ description: 在Dreamweaver中，可以将正在编辑的文件一键同步到FT
 
 脚本配置很简单（脚本地址在文章底部，当然你可以去googleCode上获取）：
 
-    <?php
     // 定义FTP参数
     $ftp_host = '192.168.0.1';
     $ftp_user = 'username';
