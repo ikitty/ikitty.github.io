@@ -4,7 +4,7 @@ title: iKitty Notes
 ---
 {% include JB/setup %}
 
-<style type="text/css" media="screen">
+<style>
     .page-header {display:none;}
 </style>
 
