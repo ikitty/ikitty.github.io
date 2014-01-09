@@ -16,7 +16,19 @@ description: 在Dreamweaver中，可以将正在编辑的文件一键同步到FT
 
 脚本配置很简单（脚本地址在文章底部，当然你可以去googleCode上获取）：
 
+    <?php
+    // 定义FTP参数
+    $ftp_host = '192.168.0.1';
+    $ftp_user = 'username';
+    $ftp_pass = 'password';
+    $ftp_port = 21;
+    $pasv_mode = true;
 
+    // 定义开发环境路径
+    $remote_root_dir = '/domains/xxx.com/public_html/blog' ;
+
+    // 定义本地上传路径(此路径等价于开发环境路径)
+    $local_root_path = 'D:/www/blog' ;
 
 接下来在Editplus中添加这个脚本，点击菜单栏的“工具”——“参数”，添加一个工具（类型选择“程序”）：
 1. “菜单文本”这栏填写“Ftp”之类皆可；
