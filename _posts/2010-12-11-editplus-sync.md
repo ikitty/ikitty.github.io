@@ -34,3 +34,13 @@ description: 在Dreamweaver中，可以将正在编辑的文件一键同步到FT
 2. “命令”这栏选择php.exe的路径；
 3. “参数”这栏：-f d:/ftpUpload.php -- -f $(FilePath) （其中d:/ftpUpload.php就是php脚本的放置位置，我放在D盘根目录下的。后面的直接Copy过去）
 4. 最后，把下面的“捕获输出”勾上
+
+如图：
+![Editplus sync][imgEp1]
+
+配置好之后，来测试下，打开“本地上传路径”下的一个文件，随意修改下，然后按下 ctrl + 1 (工具的位置拍在第一个就是ctrl+1)，如图：
+
+![Editplus sync][imgEp2]
+
+此时在Editplus的输出窗口就可以看到结果“uploaded”，如图：
+![Editplus sync][imgEp3]
