@@ -69,7 +69,7 @@
 <slide class="big" >
   
     <hgroup>
-      <h2>为什么推荐Markdown</h2>
+      <h2>2. 为什么推荐Markdown</h2>
       <h3></h3>
     </hgroup>
     <article ><ul class="build">
@@ -77,18 +77,9 @@
 <li>易写、易读</li>
 <li>格式转换方便</li>
 <li>让用户更专注于内容，提升效率</li>
-</ul></article>
+</ul>
+<p>todo： 结合自身经验没md的困惑。格式控，浪费时间，效率低。blog迁移等。截图 写文章，记录知识 , 平台、软件兼容性 , 第一次做PPT遇到的尴尬</p></article>
  
-</slide>
-
-<slide class="segue dark" >
-  
-    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
-    <hgroup class="auto-fadein">
-      <h2>2. Markdown的应用场景</h2>
-      <h3>&nbsp;</h3>
-    </hgroup>
-  
 </slide>
 
 <slide class="big" >
@@ -127,7 +118,8 @@
 <li>markdown不是要取代HTML，只对应HTML标记的一部分</li>
 <li>markdown让HTML书写起来更方便</li>
 <li>markdown兼容HTML，但HTML区块内的markdown标记不会被解析</li>
-</ul></article>
+</ul>
+<p>todo: showMOre , 案例</p></article>
  
 </slide>
 
@@ -189,7 +181,7 @@
     </hgroup>
     <article ><ul class="build">
 <li>一个Markdown段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行；</li>
-<li>若要通过 Markdown 来插入 <code>&amp;lt;br/&amp;gt;</code> 标签的话，在插入处先按入两个以上的空格然后回车。</li>
+<li>若要通过 Markdown 来插入 <code>&lt;br/&gt;</code> 标签的话，在插入处先按入两个以上的空格然后回车。</li>
 </ul></article>
  
 </slide>
@@ -200,10 +192,8 @@
       <h2>Markdown语法 - 标题</h2>
       <h3></h3>
     </hgroup>
-    <article ><ul class="build">
-<li>markdown支持两种标题语法，类<code>setext</code>和类<code>atx</code>形式</li>
-<li>类<code>Setext</code>形式是用底线的形式，利用任意数量的= （最高阶标题）和- （第二阶标题），如：</li>
-</ul></article>
+    <article ><p>Markdown支持两种标题语法，类<code>setext</code>和类<code>atx</code>形式:
+- 类<code>Setext</code>形式是用底线的形式，利用任意数量的= （最高阶标题）和- （第二阶标题），如：</p></article>
  
 </slide>
 
@@ -262,10 +252,10 @@
   
     <hgroup>
       <h2>Markdown语法 - 列表</h2>
-      <h3>&nbsp;</h3>
+      <h3></h3>
     </hgroup>
     <article ><ul class="build">
-<li>markdown支持无序列表和有序列表</li>
+<li>Markdown支持无序列表和有序列表</li>
 <li>无序列表的标记为减号(<code>-</code>)、加号(<code>+</code>)或星号(<code>*</code>)</li>
 </ul></article>
  
@@ -347,13 +337,17 @@
       <h3>列表中包含多个段落</h3>
     </hgroup>
     <article ><p>有时候列表项中的内容比较复杂，包含多个段落。我们只需将每个项目下的段落都缩进4个空格或是 1 个制表符：</p>
-<pre><code>1.  刀锋铁骑玩家协议第一部分 todo
+<pre><code>1. 刀锋铁骑账号注册
 
-    不得使用各种外挂等
+    乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效，依据法律规定和必备条款约定对所提供的信息承担相应的法律责任。
 
-2.  刀锋铁骑玩家协议第二部分
+    乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料信息的，甲方应当及时、有效地为其提供该项服务。
 
-    玩家的各种装备。。。
+2. 用户账号使用与保管
+
+    根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实、有效，并应积极地采取技术与管理等合理措施保障用户账号的安全、有效；
+
+    乙方对登录后所持账号产生的行为依法享有权利和承担责任。
 </code></pre></article>
  
 </slide>
@@ -366,12 +360,18 @@
     </hgroup>
     <article ><pre><code>&lt;ol&gt;
     &lt;li&gt;
-        &lt;p&gt;刀锋铁骑玩家协议第一部分 todo &lt;/p&gt;
-        &lt;p&gt;不得使用各种外挂等&lt;/p&gt;
+        &lt;p&gt;刀锋铁骑账号注册 &lt;/p&gt;
+
+        &lt;p&gt;乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效，依据法律规定和必备条款约定对所提供的信息承担相应的法律责任。&lt;/p&gt;
+
+        &lt;p&gt;乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料信息的，甲方应当及时、有效地为其提供该项服务。&lt;/p&gt;
     &lt;/li&gt;
     &lt;li&gt;
-        &lt;p&gt;刀锋铁骑玩家协议第二部分&lt;/p&gt;
-        &lt;p&gt;玩家的各种装备。。。&lt;/p&gt;
+        &lt;p&gt;用户账号使用与保管&lt;/p&gt;
+
+        &lt;p&gt;根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实、有效，并应积极地采取技术与管理等合理措施保障用户账号的安全、有效；&lt;/p&gt;
+
+        &lt;p&gt;乙方对登录后所持账号产生的行为依法享有权利和承担责任。&lt;/p&gt;
     &lt;/li&gt;
 &lt;/ol&gt;
 </code></pre></article>
@@ -384,7 +384,7 @@
       <h2>Markdown语法 - 代码块</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符即可。这个代码区块会持续到没有缩进的那一行</p>
+    <article ><p>Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符即可。这个代码区块会持续到没有缩进的那一行</p>
 <pre class="prettyprint" data-lang="markdown">
 这是普通段落
 
@@ -424,12 +424,12 @@ var getSth = function () {
       <h3></h3>
     </hgroup>
     <article ><p>只需在整个段落的第一行最前面加上 "&gt;" 即可，引用可以嵌套，也可以内嵌其他markdown标记</p>
-<pre><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
-consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+<pre><code>&gt; 长枪依在，即将凯旋
+&gt; 一点寒芒先到，随后抢出如龙
+&gt; ————德邦总管-赵信
 
-&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-id sem consectetuer libero luctus adipiscing.
+&gt; 即使敌众我寡，末将也能万军从中取敌将首级
+  德玛西亚人从不退缩
 </code></pre></article>
  
 </slide>
@@ -468,9 +468,9 @@ id sem consectetuer libero luctus adipiscing.
       <h2>Markdown语法 - 链接</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>Markdown 支持两种形式的链接语法，行内式和参考式两种形式:</p>
+    <article ><p>Markdown 支持两种形式的链接语法，行内式和定义式两种形式:</p>
 <p>行内式：</p>
-<pre><code>点击[刀锋铁骑](http://t7.qq.com/ "前往刀锋铁骑官网")浏览网站
+<pre><code>这个链接指向[刀锋铁骑](http://t7.qq.com/ "前往刀锋铁骑官网")
 </code></pre></article>
  
 </slide>
@@ -481,11 +481,12 @@ id sem consectetuer libero luctus adipiscing.
       <h2>Markdown语法 - 链接</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>参考式：在文件的任意处，你可以把这个标记的链接内容定义出来，然后在使用的时候指定对应的id即可，如：</p>
-<pre><code>[id]: http://t7.qq.com "前往刀锋铁骑官网（可选）"
-点击[刀锋铁骑][id]浏览网站
+    <article ><p>定义式：在文件的任意处，你可以把这个标记的链接内容定义出来，然后在使用的时候指定对应的id即可，如：</p>
+<pre><code>[tiejiWeb]: http://t7.qq.com "前往刀锋铁骑官网（可选）"
+
+点击[刀锋铁骑][tiejiWeb]浏览网站
 </code></pre>
-<p>如果一个页面中多次用到同样的链接，建议使用参考式。</p></article>
+<p>如果一个页面中多次用到同样的链接，建议使用定义式。</p></article>
  
 </slide>
 
@@ -495,9 +496,8 @@ id sem consectetuer libero luctus adipiscing.
       <h2>Markdown语法 - 图片</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>和链接一样，图片也允许行内式和参考式，格式在链接前面多了一个"!"</p>
-<pre><code>![Alt text](path of picture)
-![Alt text](path of picture "Optional title")
+    <article ><p>和链接一样，图片也允许行内式和定义式，格式在链接前面多了一个"!"</p>
+<pre><code>![tiejiLogo](http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo")
 </code></pre></article>
  
 </slide>
@@ -509,8 +509,9 @@ id sem consectetuer libero luctus adipiscing.
       <h3></h3>
     </hgroup>
     <article ><p>其参考式也和链接一样：</p>
-<pre><code>[id]: url/to/image  "Optional title attribute"
-![Alt text][id]
+<pre><code>[tiejiLogo]: http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo"
+
+![刀锋铁骑Logo][tiejiLogo]
 </code></pre></article>
  
 </slide>
@@ -521,13 +522,12 @@ id sem consectetuer libero luctus adipiscing.
       <h2>Markdown语法 - 强调</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>使用星号（*）和底线（_）作为标记强调字词的符号，被 * 或 _ 包围的字词会被转成用 <code>&lt;em&gt;</code> 标签包围，用两个 * 或 _ 包起来的话，则会被转成 <code>&lt;strong&gt;</code>，例如：</p>
-<pre><code>*普通强调*
-_普通强调_
+    <article ><p>使用星号（*）和下划线（_）作为标记强调字词的符号，被 * 或 _ 包围的字词会被转成用 <code>&lt;em&gt;</code> 标签包围，用两个 * 或 _ 包起来的话，则会被转成 <code>&lt;strong&gt;</code>，例如：</p>
+<pre><code>*黑暗之女暴走了*
+_盲僧暴走了_
 
-
-**语气更强的强调**
-__语气更强的强调__
+**寒冰射手已经超神了**
+__沙漠之狼已经超神了__
 </code></pre>
 <p>btw: 但是如果你的 * 和 _ 两边都有空白的话，它们就只会被当成普通的符号。</p></article>
  
@@ -540,10 +540,10 @@ __语气更强的强调__
       <h3></h3>
     </hgroup>
     <article ><p>如果要标记一小段行内代码，你可以用反引号把它包起来（`），例如：</p>
-<pre><code>hey, this is `&lt;div&gt;` tag .
+<pre><code>这是个 `&lt;div&gt;` 标记.
 </code></pre>
 <p>转换成HTML的结果是：</p>
-<pre><code>&lt;p&gt;hey, this is &lt;code&gt;&lt;div&gt;&lt;/code&gt; tag.&lt;/p&gt;
+<pre><code>&lt;p&gt;这是个&lt;code&gt;&lt;div&gt;&lt;/code&gt; 标记.&lt;/p&gt;
 </code></pre></article>
  
 </slide>
