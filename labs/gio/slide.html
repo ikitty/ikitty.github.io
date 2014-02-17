@@ -66,19 +66,73 @@
  
 </slide>
 
+<slide class="segue dark" >
+  
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>2. 为什么推荐Markdown</h2>
+      <h3>&nbsp;</h3>
+    </hgroup>
+  
+</slide>
+
+<slide  style="background-image: url(images/wps.jpg)">
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article ></article>
+ 
+</slide>
+
 <slide class="big" >
   
     <hgroup>
-      <h2>2. 为什么推荐Markdown</h2>
+      <h2>Markdown的优点</h2>
       <h3></h3>
     </hgroup>
-    <article ><ul class="build">
+    <article ><ul>
 <li>纯文本，兼容性强</li>
+</ul></article>
+ 
+</slide>
+
+<slide  style="background-image: url(images/formatC.jpg)">
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article ></article>
+ 
+</slide>
+
+<slide class="big" >
+  
+    <hgroup>
+      <h2>Markdown的优点</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>纯文本，兼容性强</li>
+<li>让用户更专注于内容，提升效率</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="big" >
+  
+    <hgroup>
+      <h2>Markdown的优点</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>纯文本，兼容性强</li>
+<li>让用户更专注于内容，提升效率</li>
 <li>易写、易读</li>
 <li>格式转换方便</li>
-<li>让用户更专注于内容，提升效率</li>
-</ul>
-<p>todo： 结合自身经验没md的困惑。格式控，浪费时间，效率低。blog迁移等。截图 写文章，记录知识 , 平台、软件兼容性 , 第一次做PPT遇到的尴尬</p></article>
+</ul></article>
  
 </slide>
 
@@ -89,8 +143,8 @@
       <h3></h3>
     </hgroup>
     <article ><ul class="build">
-<li>Wordpress 、StackOverflow、cNodeJs</li>
-<li>Gist (Github)</li>
+<li>StackOverflow、cNodeJs</li>
+<li>Github gist</li>
 <li>Blog with jekyll</li>
 <li><a href="http://trunk.yinxiang.com/app/maxiang/web-apps/">Evernote</a></li>
 <li>Slide show</li>
@@ -118,8 +172,7 @@
 <li>markdown不是要取代HTML，只对应HTML标记的一部分</li>
 <li>markdown让HTML书写起来更方便</li>
 <li>markdown兼容HTML，但HTML区块内的markdown标记不会被解析</li>
-</ul>
-<p>todo: showMOre , 案例</p></article>
+</ul></article>
  
 </slide>
 
@@ -183,6 +236,24 @@
 <li>一个Markdown段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行；</li>
 <li>若要通过 Markdown 来插入 <code>&lt;br/&gt;</code> 标签的话，在插入处先按入两个以上的空格然后回车。</li>
 </ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Markdown语法 - 段落和换行</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><pre><code>这是一个段落
+
+这是另一个段落
+</code></pre>
+<p>转换成HTML的结果是：</p>
+<pre><code>&lt;p&gt;这是一个段落&lt;/p&gt;
+
+&lt;p&gt;这是另一个段落&lt;/p&gt;
+</code></pre></article>
  
 </slide>
 
@@ -339,13 +410,13 @@
     <article ><p>有时候列表项中的内容比较复杂，包含多个段落。我们只需将每个项目下的段落都缩进4个空格或是 1 个制表符：</p>
 <pre><code>1. 刀锋铁骑账号注册
 
-    乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效，依据法律规定和必备条款约定对所提供的信息承担相应的法律责任。
+    乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效
 
-    乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料信息的，甲方应当及时、有效地为其提供该项服务。
+    乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料的，甲方应当及时提供该服务。
 
 2. 用户账号使用与保管
 
-    根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实、有效，并应积极地采取技术与管理等合理措施保障用户账号的安全、有效；
+    根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实，并应积极地采取措施保障用户账号安全；
 
     乙方对登录后所持账号产生的行为依法享有权利和承担责任。
 </code></pre></article>
@@ -361,16 +432,12 @@
     <article ><pre><code>&lt;ol&gt;
     &lt;li&gt;
         &lt;p&gt;刀锋铁骑账号注册 &lt;/p&gt;
-
-        &lt;p&gt;乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效，依据法律规定和必备条款约定对所提供的信息承担相应的法律责任。&lt;/p&gt;
-
-        &lt;p&gt;乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料信息的，甲方应当及时、有效地为其提供该项服务。&lt;/p&gt;
+        &lt;p&gt;乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效&lt;/p&gt;
+        &lt;p&gt;乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料的，甲方应当及时提供该服务。&lt;/p&gt;
     &lt;/li&gt;
     &lt;li&gt;
         &lt;p&gt;用户账号使用与保管&lt;/p&gt;
-
-        &lt;p&gt;根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实、有效，并应积极地采取技术与管理等合理措施保障用户账号的安全、有效；&lt;/p&gt;
-
+        &lt;p&gt;根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实，并应积极地采取措施保障用户账号安全；&lt;/p&gt;
         &lt;p&gt;乙方对登录后所持账号产生的行为依法享有权利和承担责任。&lt;/p&gt;
     &lt;/li&gt;
 &lt;/ol&gt;
@@ -622,13 +689,13 @@ _   底线
 <slide  >
   
     <hgroup>
-      <h2>About Markdown</h2>
+      <h2>总结</h2>
       <h3></h3>
     </hgroup>
     <article ><ul class="build">
 <li>markdown简介</li>
-<li>markdown的特点</li>
-<li>markdown的应用场景</li>
+<li>markdown的优点和应用场景</li>
+<li>markdown和HTML的关系</li>
 <li>markdown语法介绍和示例</li>
 <li>markdown辅助工具</li>
 </ul></article>

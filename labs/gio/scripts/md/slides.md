@@ -19,15 +19,41 @@ John Gruber和Aaron Swartz创造了一种轻量级的标记语言。它允许人
 ---
 
 title: 2. 为什么推荐Markdown
+subtitle: &nbsp;
+class: segue dark 
+
+---
+
+image: images/wps.jpg
+
+---
+
+title: Markdown的优点
 class: big
-build_lists: true
 
 - 纯文本，兼容性强
-- 易写、易读
-- 格式转换方便
+
+---
+
+image: images/formatC.jpg
+
+---
+
+title: Markdown的优点
+class: big
+
+- 纯文本，兼容性强
 - 让用户更专注于内容，提升效率
 
-todo： 结合自身经验没md的困惑。格式控，浪费时间，效率低。blog迁移等。截图 写文章，记录知识 , 平台、软件兼容性 , 第一次做PPT遇到的尴尬
+---
+
+title: Markdown的优点
+class: big
+
+- 纯文本，兼容性强
+- 让用户更专注于内容，提升效率
+- 易写、易读
+- 格式转换方便
 
 ---
 
@@ -35,8 +61,8 @@ title: Markdown的应用场景
 class: big
 build_lists: true
 
-- Wordpress 、StackOverflow、cNodeJs
-- Gist (Github)
+- StackOverflow、cNodeJs
+- Github gist
 - Blog with jekyll
 - [Evernote](http://trunk.yinxiang.com/app/maxiang/web-apps/)
 - Slide show
@@ -55,8 +81,6 @@ build_lists: true
 - markdown不是要取代HTML，只对应HTML标记的一部分
 - markdown让HTML书写起来更方便
 - markdown兼容HTML，但HTML区块内的markdown标记不会被解析
-
-todo: showMOre , 案例
 
 ---
 
@@ -104,6 +128,20 @@ build_lists: true
 - 一个Markdown段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行；
 - 若要通过 Markdown 来插入 `<br/>` 标签的话，在插入处先按入两个以上的空格然后回车。
 
+---
+
+title: Markdown语法 - 段落和换行
+
+    这是一个段落
+
+    这是另一个段落
+    
+转换成HTML的结果是：
+
+    <p>这是一个段落</p>
+
+    <p>这是另一个段落</p>
+    
 ---
 
 title: Markdown语法 - 标题
@@ -230,13 +268,13 @@ subtitle: 列表中包含多个段落
 
     1. 刀锋铁骑账号注册 
 
-        乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效，依据法律规定和必备条款约定对所提供的信息承担相应的法律责任。
+        乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效
 
-        乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料信息的，甲方应当及时、有效地为其提供该项服务。
+        乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料的，甲方应当及时提供该服务。
 
     2. 用户账号使用与保管
 
-        根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实、有效，并应积极地采取技术与管理等合理措施保障用户账号的安全、有效；
+        根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实，并应积极地采取措施保障用户账号安全；
 
         乙方对登录后所持账号产生的行为依法享有权利和承担责任。
 
@@ -248,16 +286,12 @@ subtitle: 列表中包含多个段落
     <ol>
         <li>
             <p>刀锋铁骑账号注册 </p>
-
-            <p>乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效，依据法律规定和必备条款约定对所提供的信息承担相应的法律责任。</p>
-
-            <p>乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料信息的，甲方应当及时、有效地为其提供该项服务。</p>
+            <p>乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效</p>
+            <p>乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料的，甲方应当及时提供该服务。</p>
         </li>
         <li>
             <p>用户账号使用与保管</p>
-
-            <p>根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实、有效，并应积极地采取技术与管理等合理措施保障用户账号的安全、有效；</p>
-
+            <p>根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实，并应积极地采取措施保障用户账号安全；</p>
             <p>乙方对登录后所持账号产生的行为依法享有权利和承担责任。</p>
         </li>
     </ol>
@@ -446,12 +480,12 @@ build_lists: true
 
 ---
 
-title: About Markdown
+title: 总结
 build_lists: true
 
 - markdown简介
-- markdown的特点
-- markdown的应用场景
+- markdown的优点和应用场景
+- markdown和HTML的关系
 - markdown语法介绍和示例
 - markdown辅助工具
 
