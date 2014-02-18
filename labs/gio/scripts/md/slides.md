@@ -365,10 +365,10 @@ class: segue dark
 title: Markdown语法 - 链接
 build_lists: true
 
-Markdown 支持两种形式的链接语法，行内式和定义式两种形式:
+Markdown 支持行内式和定义式两种链接语法，行内式格式：
+    [链接文本](链接地址 "可选的title")
 
-行内式：
-
+实例：
     这个链接指向[刀锋铁骑](http://t7.qq.com/ "前往刀锋铁骑官网")
     
 ---
@@ -376,11 +376,15 @@ Markdown 支持两种形式的链接语法，行内式和定义式两种形式:
 title: Markdown语法 - 链接
 build_lists: true
 
-定义式：在文件的任意处，你可以把这个标记的链接内容定义出来，然后在使用的时候指定对应的id即可，如：
-  
-    [tiejiWeb]: http://t7.qq.com "前往刀锋铁骑官网（可选）"
+定义式即在文件的任意处该链接，然后在使用的时候指定对应的id即可，格式：
+
+    [id]: 链接地址 "可选的title"
+    [链接文本][id]
     
-    点击[刀锋铁骑][tiejiWeb]浏览网站
+实例：
+    [id]: http://t7.qq.com "前往刀锋铁骑官网"
+    
+    点击[刀锋铁骑][id]浏览网站
 
 如果一个页面中多次用到同样的链接，建议使用定义式。
 
@@ -390,7 +394,7 @@ title: Markdown语法 - 图片
 
 和链接一样，图片也允许行内式和定义式，格式在链接前面多了一个"!"
 
-    ![tiejiLogo](http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo")
+    ![id](http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo")
 
 ---
 
@@ -398,9 +402,9 @@ title: Markdown语法 - 图片
 
 其参考式也和链接一样：
 
-    [tiejiLogo]: http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo"
+    [id]: http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo"
     
-    ![刀锋铁骑Logo][tiejiLogo]
+    ![刀锋铁骑Logo][id]
     
 ---
 
@@ -408,13 +412,13 @@ title: Markdown语法 - 强调
 
 使用星号（\*）和下划线（\_）作为标记强调字词的符号，被 \* 或 \_ 包围的字词会被转成用 `<em>` 标签包围，用两个 * 或 _ 包起来的话，则会被转成 `<strong>`，例如：
 
-    *黑暗之女暴走了*
     _盲僧暴走了_
+    *黑暗之女暴走了*
     
     **寒冰射手已经超神了**
-    __沙漠之狼已经超神了__
+    __嗜血猎手已经超神了__
     
-btw: 但是如果你的 * 和 _ 两边都有空白的话，它们就只会被当成普通的符号。
+btw: 但是如果你的 \* 和 \_ 两边都有空白的话，它们就只会被当成普通的符号。
 
 ---
 
