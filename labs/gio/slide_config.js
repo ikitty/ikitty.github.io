@@ -22,7 +22,7 @@ var SLIDE_CONFIG = {
 
   // Author information
   presenters: [{
-    name: 'Alex tang',
+    name: 'Alextang',
     company: 'Frontend Engineer<br>Tencent',
     //twitter: '@colinvivy',
     www: 'http://ikitty.github.io',

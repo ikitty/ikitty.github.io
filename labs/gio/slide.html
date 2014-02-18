@@ -62,7 +62,11 @@
       <h2>Markdown简介</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>John Gruber和Aaron Swartz创造了一种轻量级的标记语言。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。</p></article>
+    <article ><ul class="build">
+<li>Markdown是由John Gruber和Aaron Swartz创造的一种轻量级的<strong>标记语言</strong> ;</li>
+<li>它允许用户使用<strong>易读易写</strong>的纯文本编写文档；</li>
+<li>也可以<strong>方便转换</strong>成HTML、PDF或其他格式的文档</li>
+</ul></article>
  
 </slide>
 
@@ -82,7 +86,7 @@
       <h2></h2>
       <h3></h3>
     </hgroup>
-    <article ></article>
+    <article ><p>todo: pic opt  mandan no compatible</p></article>
  
 </slide>
 
@@ -99,6 +103,16 @@
 </slide>
 
 <slide  style="background-image: url(images/formatC.jpg)">
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article ></article>
+ 
+</slide>
+
+<slide  style="background-image: url(images/tj.jpg)">
   
     <hgroup>
       <h2></h2>
@@ -143,8 +157,8 @@
       <h3></h3>
     </hgroup>
     <article ><ul class="build">
-<li>StackOverflow、cNodeJs</li>
 <li>Github gist</li>
+<li>StackOverflow、cNodeJs</li>
 <li>Blog with jekyll</li>
 <li><a href="http://trunk.yinxiang.com/app/maxiang/web-apps/">Evernote</a></li>
 <li>Slide show</li>
@@ -171,7 +185,7 @@
     <article ><ul class="build">
 <li>markdown不是要取代HTML，只对应HTML标记的一部分</li>
 <li>markdown让HTML书写起来更方便</li>
-<li>markdown兼容HTML，但HTML区块内的markdown标记不会被解析</li>
+<li>markdown<strong>兼容HTML</strong>，但HTML区块内的markdown标记不会被解析</li>
 </ul></article>
  
 </slide>
@@ -182,7 +196,7 @@
       <h2>Markdown VS HTML</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>下面这样的代码也是符合规范的：</p>
+    <article ><p>markdown标记和HTML混搭书写：</p>
 <pre><code>##刀锋铁骑2014即将开战
 
 &lt;table &gt;
@@ -220,7 +234,6 @@
     <article ><p>markdown的宗旨是为了让文档易读易写，所以其语法标记符号都是经过精心挑选，其作用一目了然：</p>
 <ul class="build">
 <li>比如用一对*包含起来的内容，看起来就像是要强调某个事物；</li>
-<li>他的列表看起来就像是列表；</li>
 <li>尖括号后面跟随的内容就是引用的内容。</li>
 </ul></article>
  
@@ -364,7 +377,7 @@
       <h2>Markdown语法 - 列表</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>有序列表则使用数字接着一个点号(这里的数字不会影响实际的输出)，如：</p>
+    <article ><p>有序列表则使用数字接着一个点号(<strong>这里的数字不会影响实际的输出</strong>)，如：</p>
 <pre class="prettyprint" data-lang="markdown">
 1. 英雄联盟
 2. 刀锋铁骑
@@ -408,13 +421,13 @@
       <h3>列表中包含多个段落</h3>
     </hgroup>
     <article ><p>有时候列表项中的内容比较复杂，包含多个段落。我们只需将每个项目下的段落都缩进4个空格或是 1 个制表符：</p>
-<pre><code>1. 刀锋铁骑账号注册
+<pre><code>1.  刀锋铁骑账号注册
 
     乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效
 
     乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料的，甲方应当及时提供该服务。
 
-2. 用户账号使用与保管
+2.  用户账号使用与保管
 
     根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实，并应积极地采取措施保障用户账号安全；
 
@@ -492,8 +505,8 @@ var getSth = function () {
     </hgroup>
     <article ><p>只需在整个段落的第一行最前面加上 "&gt;" 即可，引用可以嵌套，也可以内嵌其他markdown标记</p>
 <pre><code>&gt; 长枪依在，即将凯旋
-&gt; 一点寒芒先到，随后抢出如龙
-&gt; ————德邦总管-赵信
+&gt; 一点寒芒先到，随后枪出如龙
+&gt; **德邦总管-赵信**
 
 &gt; 即使敌众我寡，末将也能万军从中取敌将首级
   德玛西亚人从不退缩
@@ -507,12 +520,12 @@ var getSth = function () {
       <h2>Markdown语法 - 分割线</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。下面每种写法都可以建立分隔线：</p>
+    <article ><p>在一行中用三个以上的星号、减号、下划线来建立一个分隔线，行内不能有其他东西。下面每种写法都可以建立分隔线：</p>
 <pre><code>***
 
 *****
 
----
+___
 
 --------
 </code></pre></article>
@@ -535,8 +548,10 @@ var getSth = function () {
       <h2>Markdown语法 - 链接</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>Markdown 支持两种形式的链接语法，行内式和定义式两种形式:</p>
-<p>行内式：</p>
+    <article ><p>Markdown 支持<strong>行内式</strong>和<strong>定义式</strong>两种链接语法，行内式格式：</p>
+<pre><code>[链接文本](链接地址 "可选的title")
+</code></pre>
+<p>实例：</p>
 <pre><code>这个链接指向[刀锋铁骑](http://t7.qq.com/ "前往刀锋铁骑官网")
 </code></pre></article>
  
@@ -548,12 +563,16 @@ var getSth = function () {
       <h2>Markdown语法 - 链接</h2>
       <h3></h3>
     </hgroup>
-    <article ><p>定义式：在文件的任意处，你可以把这个标记的链接内容定义出来，然后在使用的时候指定对应的id即可，如：</p>
-<pre><code>[tiejiWeb]: http://t7.qq.com "前往刀锋铁骑官网（可选）"
-
-点击[刀锋铁骑][tiejiWeb]浏览网站
+    <article ><p>定义式即在文件的任意处定义链接，然后在使用的时候指定对应的id即可，格式：</p>
+<pre><code>[id]: 链接地址 "可选的title"
+[链接文本][id]
 </code></pre>
-<p>如果一个页面中多次用到同样的链接，建议使用定义式。</p></article>
+<p>实例：</p>
+<pre><code>[id]: http://t7.qq.com "前往刀锋铁骑官网"
+
+点击[刀锋铁骑][id]浏览网站
+</code></pre>
+<p><strong>tips</strong>: 如果一个页面中多次用到同样的链接，建议使用定义式。</p></article>
  
 </slide>
 
@@ -564,7 +583,7 @@ var getSth = function () {
       <h3></h3>
     </hgroup>
     <article ><p>和链接一样，图片也允许行内式和定义式，格式在链接前面多了一个"!"</p>
-<pre><code>![tiejiLogo](http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo")
+<pre><code>![logo](http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo")
 </code></pre></article>
  
 </slide>
@@ -576,9 +595,9 @@ var getSth = function () {
       <h3></h3>
     </hgroup>
     <article ><p>其参考式也和链接一样：</p>
-<pre><code>[tiejiLogo]: http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo"
+<pre><code>[id]: http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo"
 
-![刀锋铁骑Logo][tiejiLogo]
+![刀锋铁骑Logo][id]
 </code></pre></article>
  
 </slide>
@@ -590,13 +609,13 @@ var getSth = function () {
       <h3></h3>
     </hgroup>
     <article ><p>使用星号（*）和下划线（_）作为标记强调字词的符号，被 * 或 _ 包围的字词会被转成用 <code>&lt;em&gt;</code> 标签包围，用两个 * 或 _ 包起来的话，则会被转成 <code>&lt;strong&gt;</code>，例如：</p>
-<pre><code>*黑暗之女暴走了*
-_盲僧暴走了_
+<pre><code>*小哥哥强暴走了*
+_让老夫玩玩也暴走了_
 
 **寒冰射手已经超神了**
-__沙漠之狼已经超神了__
+__Yikuzuo已经主宰比赛了__
 </code></pre>
-<p>btw: 但是如果你的 * 和 _ 两边都有空白的话，它们就只会被当成普通的符号。</p></article>
+<p><strong>tips</strong>: 但是如果你的 * 和 _ 两边都有空白的话，它们就只会被当成普通的符号。</p></article>
  
 </slide>
 
@@ -668,14 +687,14 @@ _   底线
     </hgroup>
     <article ><ul class="build">
 <li>编辑器类<ul class="build">
-<li>Mou for mac</li>
+<li><a href="http://mouapp.com/">Mou for mac</a></li>
 <li>MarkdownPad for windows</li>
 <li>MarkPad for windows</li>
 <li>ReText for Linux</li>
 </ul>
 </li>
 <li>工具类<ul class="build">
-<li>Pandoc</li>
+<li><a href="http://johnmacfarlane.net/pandoc/">Pandoc</a></li>
 <li><a href="http://softwaremaniacs.org/playground/showdown-highlight/">Showdown</a></li>
 <li>Markable.in online</li>
 <li>Dillinger.io online</li>

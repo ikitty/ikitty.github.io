@@ -30,6 +30,7 @@ p {line-height:1.5;}
 slide {background-repeat:no-repeat;background-position:center center;background-size:contain;}
 code {color:#09f !important;}
 pre code {color:#333 !important;}
+slide strong  {color:#f60;}
 
 
 /* line 24, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */

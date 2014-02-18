@@ -13,8 +13,12 @@ class: segue dark
 
 title: Markdown简介
 class: big
+build_lists:true
 
-John Gruber和Aaron Swartz创造了一种轻量级的标记语言。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。
+- Markdown是由John Gruber和Aaron Swartz创造的一种轻量级的**标记语言** ;
+- 它允许用户使用**易读易写**的纯文本编写文档；
+- 也可以**方便转换**成HTML、PDF或其他格式的文档
+
 
 ---
 
@@ -26,6 +30,8 @@ class: segue dark
 
 image: images/wps.jpg
 
+todo: pic opt  mandan no compatible
+
 ---
 
 title: Markdown的优点
@@ -36,6 +42,10 @@ class: big
 ---
 
 image: images/formatC.jpg
+
+---
+
+image: images/tj.jpg
 
 ---
 
@@ -61,8 +71,8 @@ title: Markdown的应用场景
 class: big
 build_lists: true
 
-- StackOverflow、cNodeJs
 - Github gist
+- StackOverflow、cNodeJs
 - Blog with jekyll
 - [Evernote](http://trunk.yinxiang.com/app/maxiang/web-apps/)
 - Slide show
@@ -80,13 +90,13 @@ build_lists: true
 
 - markdown不是要取代HTML，只对应HTML标记的一部分
 - markdown让HTML书写起来更方便
-- markdown兼容HTML，但HTML区块内的markdown标记不会被解析
+- markdown**兼容HTML**，但HTML区块内的markdown标记不会被解析
 
 ---
 
 title: Markdown VS HTML
 
-下面这样的代码也是符合规范的：
+markdown标记和HTML混搭书写：
 
     ##刀锋铁骑2014即将开战
 
@@ -117,7 +127,6 @@ build_lists: true
 markdown的宗旨是为了让文档易读易写，所以其语法标记符号都是经过精心挑选，其作用一目了然：
 
 - 比如用一对*包含起来的内容，看起来就像是要强调某个事物；
-- 他的列表看起来就像是列表；
 - 尖括号后面跟随的内容就是引用的内容。
 
 ---
@@ -226,7 +235,7 @@ build_lists: true
 
 title: Markdown语法 - 列表
 
-有序列表则使用数字接着一个点号(这里的数字不会影响实际的输出)，如：
+有序列表则使用数字接着一个点号(**这里的数字不会影响实际的输出**)，如：
 
 <pre class="prettyprint" data-lang="markdown">
 1. 英雄联盟
@@ -266,13 +275,13 @@ subtitle: 列表中包含多个段落
 
 有时候列表项中的内容比较复杂，包含多个段落。我们只需将每个项目下的段落都缩进4个空格或是 1 个制表符：
 
-    1. 刀锋铁骑账号注册 
+    1.  刀锋铁骑账号注册 
 
         乙方承诺以其真实身份注册成为甲方的用户，并保证所提供的个人身份资料信息真实、完整、有效
 
         乙方以其真实身份注册成为甲方用户后，需要修改所提供的个人身份资料的，甲方应当及时提供该服务。
 
-    2. 用户账号使用与保管
+    2.  用户账号使用与保管
 
         根据必备条款的约定，甲方有权审查乙方注册所提供的身份信息是否真实，并应积极地采取措施保障用户账号安全；
 
@@ -334,8 +343,8 @@ title: Markdown语法 - 引用
 只需在整个段落的第一行最前面加上 ">" 即可，引用可以嵌套，也可以内嵌其他markdown标记
     
     > 长枪依在，即将凯旋
-    > 一点寒芒先到，随后抢出如龙
-    > ————德邦总管-赵信
+    > 一点寒芒先到，随后枪出如龙
+    > **德邦总管-赵信**
     
     > 即使敌众我寡，末将也能万军从中取敌将首级
       德玛西亚人从不退缩
@@ -344,13 +353,13 @@ title: Markdown语法 - 引用
 
 title: Markdown语法 - 分割线
 
-在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。下面每种写法都可以建立分隔线：
+在一行中用三个以上的星号、减号、下划线来建立一个分隔线，行内不能有其他东西。下面每种写法都可以建立分隔线：
 
     ***
 
     *****
 
-    ---
+    ___
 
     --------
 
@@ -365,10 +374,12 @@ class: segue dark
 title: Markdown语法 - 链接
 build_lists: true
 
-Markdown 支持行内式和定义式两种链接语法，行内式格式：
+Markdown 支持**行内式**和**定义式**两种链接语法，行内式格式：
+    
     [链接文本](链接地址 "可选的title")
 
 实例：
+
     这个链接指向[刀锋铁骑](http://t7.qq.com/ "前往刀锋铁骑官网")
     
 ---
@@ -376,17 +387,18 @@ Markdown 支持行内式和定义式两种链接语法，行内式格式：
 title: Markdown语法 - 链接
 build_lists: true
 
-定义式即在文件的任意处该链接，然后在使用的时候指定对应的id即可，格式：
+定义式即在文件的任意处定义链接，然后在使用的时候指定对应的id即可，格式：
 
     [id]: 链接地址 "可选的title"
     [链接文本][id]
     
 实例：
+
     [id]: http://t7.qq.com "前往刀锋铁骑官网"
     
     点击[刀锋铁骑][id]浏览网站
 
-如果一个页面中多次用到同样的链接，建议使用定义式。
+**tips**: 如果一个页面中多次用到同样的链接，建议使用定义式。
 
 ---
 
@@ -394,7 +406,7 @@ title: Markdown语法 - 图片
 
 和链接一样，图片也允许行内式和定义式，格式在链接前面多了一个"!"
 
-    ![id](http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo")
+    ![logo](http://ossweb-img.qq.com/images/t7/act/a20131120exp/s1_logo.jpg "这是刀锋铁骑Logo")
 
 ---
 
@@ -412,13 +424,13 @@ title: Markdown语法 - 强调
 
 使用星号（\*）和下划线（\_）作为标记强调字词的符号，被 \* 或 \_ 包围的字词会被转成用 `<em>` 标签包围，用两个 * 或 _ 包起来的话，则会被转成 `<strong>`，例如：
 
-    _盲僧暴走了_
-    *黑暗之女暴走了*
+    *小哥哥强暴走了*
+    _让老夫玩玩也暴走了_
     
     **寒冰射手已经超神了**
-    __嗜血猎手已经超神了__
+    __Yikuzuo已经主宰比赛了__
     
-btw: 但是如果你的 \* 和 \_ 两边都有空白的话，它们就只会被当成普通的符号。
+**tips**: 但是如果你的 \* 和 \_ 两边都有空白的话，它们就只会被当成普通的符号。
 
 ---
 
@@ -471,12 +483,12 @@ title: Markdown辅助工具
 build_lists: true
 
 - 编辑器类
-    - Mou for mac
+    - [Mou for mac](http://mouapp.com/)
     - MarkdownPad for windows
     - MarkPad for windows
     - ReText for Linux
 - 工具类
-    - Pandoc
+    - [Pandoc](http://johnmacfarlane.net/pandoc/)
     - [Showdown](http://softwaremaniacs.org/playground/showdown-highlight/)
     - Markable.in online
     - Dillinger.io online
