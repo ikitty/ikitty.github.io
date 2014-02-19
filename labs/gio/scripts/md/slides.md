@@ -43,10 +43,6 @@ image: images/formatC.jpg
 
 ---
 
-image: images/tj.jpg
-
----
-
 title: Markdown的优点
 class: big
 
