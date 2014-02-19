@@ -534,7 +534,7 @@ ul ul {
 
 /* line 337, ../scss/default.scss */
 pre {
-  font-family: 'Source Code Pro', 'Courier New', monospace;
+  font-family: 'Source Code Pro', "\5FAE\8F6F\96C5\9ED1" , 'Courier New', monospace;
   font-size: 20px;
   line-height: 28px;
   padding: 10px 0 10px 60px;
