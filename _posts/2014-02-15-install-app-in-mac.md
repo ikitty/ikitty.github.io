@@ -18,19 +18,19 @@ tags: []
 
 ###Homebrew 常用命令
 
-    man brew           #完整命令帮助
-    brew --help        #帮助
-    brew search wget    #搜索软件包
-    brew install wget   #安装软件包
-    brew uninstall wget #卸载软件包
-    brew list          #显示已经安装的所有软件包
-    brew update        #同步远程最新更新情况，对本机已经安装并有更新的软件用*标明
-    brew outdated      #查看已安装的哪些软件包需要更新
-    brew upgrade wget   #更新单个软件包
-    brew info wget      #查看软件包信息
-    brew home wget      #访问软件包官方站
-    brew cleanup       #清理所有已安装软件包的历史老版本
-    brew cleanup wget   #清理单个已安装软件包的历史版本
+    man brew            # 完整命令帮助
+    brew --help         # 帮助
+    brew search wget    # 搜索软件包
+    brew install wget   # 安装软件包
+    brew uninstall wget # 卸载软件包
+    brew list           # 显示已经安装的所有软件包
+    brew update         # 同步远程最新更新情况，对本机已经安装并有更新的软件用*标明
+    brew outdated       # 查看已安装的哪些软件包需要更新
+    brew upgrade wget   # 更新单个软件包
+    brew info wget      # 查看软件包信息
+    brew home wget      # 访问软件包官方站
+    brew cleanup        # 清理所有已安装软件包的历史老版本
+    brew cleanup wget   # 清理单个已安装软件包的历史版本
 
 ###程序安装路径及文件夹
 
