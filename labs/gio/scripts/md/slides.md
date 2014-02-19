@@ -30,8 +30,6 @@ class: segue dark
 
 image: images/wps.jpg
 
-todo: pic opt  mandan no compatible
-
 ---
 
 title: Markdown的优点
