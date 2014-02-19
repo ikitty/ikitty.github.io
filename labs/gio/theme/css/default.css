@@ -570,7 +570,7 @@ pre[data-lang="go"] {
 /* line 368, ../scss/default.scss */
 code {
   font-size: 95%;
-  font-family: 'Source Code Pro', 'Courier New', monospace;
+  font-family: 'Source Code Pro', "\5FAE\8F6F\96C5\9ED1" , 'Courier New', monospace;
   color: black;
 }
 
