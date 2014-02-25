@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h3 id="oc-overview">oc overview</h3>
+<h4 id="calling-method">calling method</h4>
+<pre><code>[object method];
+[object methodWithInput:input];
+output = [object method];</code></pre>
+<h4 id="define-var">define var</h4>
+<pre><code>id myObj = [NSString string];
+// pointer type var
+NSString* myStr = [NSString string]; </code></pre>
+<h4 id="nested-msg">Nested Msg</h4>
+<pre><code>[NSString Func1: [Func2]]</code></pre>
+<h4 id="multiple-method">multiple method</h4>
+<pre><code>- (BOOL) writeFile:(NSString*)path atomically:(BOOL)useXFile;
+BOOL ret = [myData writeFile:@&quot;path&quot; atomically:@&quot;file&quot;];</code></pre>
+<h4 id="accessors-gettersetter">accessors (getter/setter)</h4>
+<pre><code>[Phone setCaption:@&quot;pNmae&quot;];
+output = [Phone caption]; // leave out get prefix
+
+// we can use dot syntax since oc 2.0
+Phone.caption = @&quot;pName&quot;;
+output = Phone.caption</code></pre>
+<h4 id="create-obj">create obj</h4>
+<pre><code>NSString* myStr = [NSString string];
+NSString* myStr = [[NSString alloc] init];
+NSNumber* myNum = [[NSNumber alloc] initWithFloat:1.0];</code></pre>
+<h4 id="memory-management">memory management</h4>
+<pre><code>NSString* str1 = [NSString string];
+NSString* str2 = [[NSString alloc] init];
+[str2 release];</code></pre>
+<h4 id="class-interfacephone.h">Class Interface(Phone.h)</h4>
+<pre><code>#import Cocoa
+@interface Phone : NSObjet {
+    NSString* str1
+    NSString* str2
+}
+// getter
+- (NSString*) str1
+- (NSString*) str2
+
+// settter
+- (void) setStr1: (NSString*)input;
+- (void) setStr2: (NSString*)input;
+
+@end</code></pre>
+<h4 id="class-implementphone.m">Class Implement(Phone.m)</h4>
+<pre><code>#import &quot;Phone.h&quot;
+
+@implementation Phone 
+
+// getter
+- NSString* str1 {
+    return str1 ;
+}
+- NSString* str2 {
+    return str2 ;
+}
+
+//setter
+- (void) setStr1: (NSString*)input {
+    [str1 autorelease] ;
+    str1 = [input retain];
+}
+- (void) setStr2: (NSString*)input {
+    [str2 autorelease] ;
+    str2 = [input retain];
+    // in garbage collection environment we can set value directly
+    // str2 = input ;
+}
+
+@end</code></pre>
+<h4 id="init">init</h4>
+<pre><code>- (id) init {
+    if (self = [super init]){
+        [self setStr1:@&quot;string 1&quot;];
+        [self setStr2:@&quot;string 2&quot;];
+    }
+    return self;
+}</code></pre>
+<h4 id="dealloc">dealloc</h4>
+<pre><code>- (void) dealloc {
+    [str1 release]  ;
+    [str2 release]  ;
+    [super dealloc]  ;
+}</code></pre>
+<h4 id="more-memory-management">more memory management</h4>
+<h4 id="log">log</h4>
+<h4 id="properties">properties</h4>
+<h4 id="categories">categories</h4>
+<h4 id="nil">Nil</h4>
+</body>
+</html>
