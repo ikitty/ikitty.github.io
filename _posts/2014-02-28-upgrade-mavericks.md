@@ -15,3 +15,5 @@ tags: []
 由于主要是为了更新xCode而升级，所以其他细节也没多体验。大概就是：Dock栏变成一块灰萌萌的，Icon清晰度更高了。至于所说的Safari的提速之类的，完全不Care，一直用Chrome。上图：
 
 ![mavericks_cap1](/images/mavericks1.jpg)
+
+![mavericks_cap2](/images/mavericks2.jpg)
