@@ -2,10 +2,9 @@
 layout: post
 title: "Upgraded to Mavericks"
 description: "对于工具，越来越觉得是"懒得折腾，够用就行"。所以我的Air还是10.7的Lion系统，最近打算将xCode升级下，appStore提示需要更新的系统。从来没装过Mac的系统，虽然听说apple的体验如何如何优质、贴心。更新系统之前还是将重要文件备份了下，有备无患。"
-category: Other
+category: other
 tags: []
 ---
-
 {% include JB/setup %}
 
 对于工具，越来越觉得是"懒得折腾，够用就行"。所以我的Air还是10.7的Lion系统，最近打算将xCode升级下，appStore提示需
@@ -17,7 +16,7 @@ tags: []
 
 由于主要是为了更新xCode而升级，所以其他细节也没多体验。大概就是：Dock栏变成一块灰萌萌的，Icon清晰度更高了。至于所说的Safari的提速之类的，完全不Care，一直用Chrome。上图：
 
-![mavericks_cap1](/images/maverick1.jpg)
+![mavericks_cap1](/images/mavericks1.jpg)
 
 
 
