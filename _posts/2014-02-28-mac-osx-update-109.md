@@ -2,7 +2,7 @@
 layout: post
 title: "Upgraded to Mavericks"
 description: "对于工具，越来越觉得是"懒得折腾，够用就行"。所以我的Air还是10.7的Lion系统，最近打算将xCode升级下，appStore提示需要更新的系统。从来没装过Mac的系统，虽然听说apple的体验如何如何优质、贴心。更新系统之前还是将重要文件备份了下，有备无患。"
-category: 
+category: Other
 tags: []
 ---
 
