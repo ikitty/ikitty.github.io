@@ -117,9 +117,46 @@ So: `0.1+0.2!==0.3`
 
 ###解决
 
-简而言之，由于浮点数在计算机中以二进制形式存储运算、舍入差异导致精度丢失,从而导致了这种情况。前端侧的解决方案大多是: 先放大适当倍数计算，再缩小同样的倍数。
+简而言之，由于浮点数在计算机中以二进制形式存储运算、舍入差异导致精度丢失,从而导致了这种情况。前端侧的解决方案大多是: 先放大适当倍数计算，再缩小同样的倍数。稍微封装了下：
 
-###Reference
+    /**
+     * FPOperation: 浮点数操作
+     *
+     * @param {Number} x 
+     * @param {Number} y 
+     * @param {String} operator  
+     **/
+    function FPOperation(x, y , operator) {
+        if (!operator) {
+            return  ;
+        }
+
+        var _m = 0 ,
+            xDigit = 0,
+            yDigit = 0;
+
+        try { xDigit = (x+'').split('.')[1].length; }catch (e){}
+        try { yDigit = (y+'').split('.')[1].length; }catch (e){}
+        _m = Math.pow(10, Math.max(xDigit, yDigit));
+
+        var _x = x * _m,
+            _y = y * _m ;
+
+        var ret ;
+        if (operator === '+') {
+            ret = _x + _y ;
+        }else if (operator === '-'){
+            ret = _x - _y ;
+        }else if (operator === '*'){
+            ret = _x * _y ;
+        }else if (operator ==='/'){
+            ret = _x / _y ;
+        }
+
+        return ret/_m;
+    }
+
+###References
 
 - [http://teach.jwc.bupt.cn:4213/jsjzcyl/pan1/Chap02/2.6.1.htm](http://teach.jwc.bupt.cn:4213/jsjzcyl/pan1/Chap02/2.6.1.htm)
 - [binaryConvert](http://www.binaryconvert.com/convert_double.html)
