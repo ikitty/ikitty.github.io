@@ -35,20 +35,18 @@ function Move(){
         // final position
         c=500,
         duration=2000,
-        stMove,
-
         fps = 60,
         spf = Math.floor(1000/fps),
         frames = duration/spf;
 
     oM.left="0px";
-    stMove && clearTimeout(stMove);
+    Move.st && clearTimeout(Move.st);
 
 	function _run(){
 		if(t< frames){
 			t++;
 			oM.left = Math.ceil(Tween.Elastic(t,0,c, frames)) + "px";
-            stMove = setTimeout(_run, spf);
+            Move.st = setTimeout(_run, spf);
 		}else{
 			oM.left = c + "px";
 		}
