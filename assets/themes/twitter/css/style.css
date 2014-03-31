@@ -71,7 +71,9 @@
 
 h1 {font:400 28px/35px "lucida glande",tahoma,arial;}
 h2 {font:400 24px/35px "lucida glande",tahoma,arial;}
-h3 {font:400 20px/35px "lucida glande",tahoma,arial;}
+
+.post-full h3 { font:400 20px/35px "lucida glande",tahoma,arial;margin:25px 0px;padding-left:10px;border-left:3px solid #555;background-color:#eee;}
+.post-full h4 { font:400 18px/35px "lucida glande",tahoma,arial;margin:20px 0px;}
 
 .posts {margin:0px;}
 .posts p {margin:10px 0px;}
