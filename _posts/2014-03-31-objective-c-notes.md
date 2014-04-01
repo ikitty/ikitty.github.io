@@ -57,7 +57,29 @@ category: Other
     NSString* str2 = [[NSString alloc] init];
     [str2 release];
 
-    //todo add more 
+#### (1) setter
+In most cases, the **setter** for an instance variable should just **autorelease** the old object, and **retain** the new one. You then just **make sure to release it in dealloc** as well:
+
+    - (void) setTotalAmount: (NSNumber*)input
+    {
+        [totalAmount autorelease];
+        totalAmount = [input retain];
+    }
+
+    - (void) dealloc
+    {
+        [totalAmount release];
+        [super dealloc];
+    }
+
+#### (2) alloc
+the only real work is managing local references inside a function. And there's only one rule: if you create an object with **alloc** or **copy**, send it a **release or autorelease** message at the end of the function. If you create an object any other way, do nothing. 
+
+    NSNumber* value1 = [[NSNumber alloc] initWithFloat:8.75];
+    NSNumber* value2 = [NSNumber numberWithFloat:14.78];
+
+    // only release value1, not value2
+    [value1 release];
 
 ### Design Class
 #### (1) Class Interface
