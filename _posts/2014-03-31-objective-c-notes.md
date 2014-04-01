@@ -132,5 +132,107 @@ category: Other
     NSLog ( @"The current date and time is: %@", [NSDate date] );
 
 ### properties
-### categories
+
+Properties are a feature in Objective-C that allow us to automatically generate accessors.
+
+`old code` code:
+
+    #import <Cocoa/Cocoa.h>
+
+    @interface Photo : NSObject {
+        NSString* caption;
+        NSString* photographer;
+    }
+    - (NSString*) caption;
+    - (NSString*) photographer;
+
+    - (void) setCaption: (NSString*)input;
+    - (void) setPhotographer: (NSString*)input;
+    @end
+
+`new code` code:
+
+    #import <Cocoa/Cocoa.h>
+
+    @interface Photo : NSObject {
+        NSString* caption;
+        NSString* photographer;
+    }
+    // the setter shoudld retain the input value
+    @property (retain) NSString* caption;
+    @property (retain) NSString* photographer;
+
+    @end
+
+and then, the implementation code:
+
+    #import "Photo.h"
+            
+    @implementation Photo
+
+    // pay attention AutoGenerate setter and getter
+    @synthesize caption;
+    @synthesize photographer;
+
+    - (void) dealloc
+    {
+        [caption release];
+        [photographer release];
+        [super dealloc];
+    }
+
+    @end
+
 ### Nil
+
+You can call methods on nil without crashing or throwing an exception. you usually don't need to check for nil before calling a method on an object.If you call a method on nil that returns an object, you will get nil as a return value. 
+
+Use Nil to improve our dealloc method slightly:
+
+    - (void) dealloc
+    {
+        // setter just retain nil (which does nothing) and release old value 
+        self.caption = nil;
+        self.photographer = nil;
+        [super dealloc];
+    }
+
+### categories
+
+a category allows you to add methods to an existing class without subclassing it or needing to know any of the details of how it's implemented. (like prototype extension in JS?)
+
+code like this:
+
+    #import <Cocoa/Cocoa.h>
+                
+    @interface NSString (Utilities)
+    - (BOOL) isURL;
+    @end
+    
+            
+implement code:
+
+    #import "NSString-Utilities.h"
+    
+    @implementation NSString (Utilities)
+
+    - (BOOL) isURL
+    {
+        if ( [self hasPrefix:@"http://"] )
+            return YES;
+        else
+            return NO;
+    }
+
+    @end
+    
+use it:
+
+    NSString* string1 = @"http://pixar.com/";
+    NSString* string2 = @"Pixar";
+
+    if ( [string1 isURL] )
+        NSLog (@"string1 is a URL");
+
+    if ( [string2 isURL] )
+        NSLog (@"string2 is a URL"); 
