@@ -33,30 +33,44 @@ category: Other
     [Phone setCaption:@"pNmae"];
     output = [Phone caption]; // leave out get prefix
 
-    // we can use dot syntax since oc 2.0
+    // we can use dot syntax since oc 2.0 (only for setter and getter)
     Phone.caption = @"pName";
     output = Phone.caption
 
 ### create obj
 
+    // automatic style, created an AutoReleased object
     NSString* myStr = [NSString string];
+
+    // munual style , should release it later
     NSString* myStr = [[NSString alloc] init];
+
+    // use another init which takes input
     NSNumber* myNum = [[NSNumber alloc] initWithFloat:1.0];
     
-#### memory management
+### memory management
 
+    //str1 should be released automatically
     NSString* str1 = [NSString string];
+
+    // must release str2 when done
     NSString* str2 = [[NSString alloc] init];
     [str2 release];
 
-#### Class Interface(Phone.h)
+    //todo add more 
 
-    #import Cocoa
+### Design Class
+#### (1) Class Interface
+
+`phone.h` code :
+
+    #import <Cocoa/Cocoa.h>
     @interface Phone : NSObjet {
         NSString* str1
         NSString* str2
     }
     // getter
+    // single dash means that it's a instance method , plus means class method
     - (NSString*) str1
     - (NSString*) str2
 
@@ -66,16 +80,18 @@ category: Other
 
     @end
 
-#### Class Implement(Phone.m)
+#### (2) Class Implement
+
+`phone.m` code:
 
     #import "Phone.h"
     @implementation Phone 
 
     // getter
-    - NSString* str1 {
+    - (NSString*) str1 {
         return str1 ;
     }
-    - NSString* str2 {
+    - (NSString*) str2 {
         return str2 ;
     }
 
@@ -111,8 +127,10 @@ category: Other
         [super dealloc]  ;
     }
 
-### more memory management
 ### log
+
+    NSLog ( @"The current date and time is: %@", [NSDate date] );
+
 ### properties
 ### categories
 ### Nil
