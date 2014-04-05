@@ -23,7 +23,7 @@
 - disabled analytics
 - style.css
 - load `pretty.js` onDOMReady
+- Add pagination (config.yml , index.html)
 
 ##todo
-- 首页翻页
 - opt style.css (bootstrap.css too Havy)
