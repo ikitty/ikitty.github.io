@@ -25,4 +25,5 @@
 - load `pretty.js` onDOMReady
 
 ##todo
+- 首页翻页
 - opt style.css (bootstrap.css too Havy)
