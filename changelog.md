@@ -5,6 +5,7 @@
 - sitemap.txt
 - history.md
 - pages page
+- remove BootStrap theme(Simple is well),merge all CSS file into one file
 
 ##Add self 
 - labs
@@ -12,6 +13,8 @@
 - prettify.js/css/invoke
 - about page
 - index.md reset style
+- 404.html
+- about.html
 
 ##opt
 - config
@@ -19,8 +22,7 @@
 - disqus
 - disabled analytics
 - style.css
+- load `pretty.js` onDOMReady
 
 ##todo
-- 404
-- add about.html
-- move template and static file into myDir
+- opt style.css (bootstrap.css too Havy)
