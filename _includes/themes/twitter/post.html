@@ -51,10 +51,14 @@
 <script type="text/javascript" src="/static/jq.js"></script>
 <script type="text/javascript">
     $(function () {
-        $.getScript('/static/prettify.js', function () {
+        $.ajax({
+            dataType:'script',
+            cache: true,
+            url: '/static/prettify.js'
+        }).done(function () {
             $('p>img').parent().css('overflowX', 'auto');
             $('pre').addClass("prettyprint");
             prettyPrint();
-        });
+        })
     });
 </script>
