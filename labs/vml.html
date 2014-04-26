@@ -1,84 +1,271 @@
 <!DOCTYPE html>
 <html lang="ZH-cn">
 <head>
-<title>d</title>
+<title>DrawSth use Canvas or VML</title>
 <meta charset="gbk"/>
 <style type="text/css" media="screen">
-    #box {position:relative;width:140px;height:140px;border:10px solid #fff;background:url(vml.png) left top repeat;overflow:hidden;}
-    .box_wrap {top:100px;left:500px;border:1px solid #000;width:160px;height:160px;}
+    * {margin:0;padding:0;list-style:none;}
+    .ability_box_wrap {border:1px solid #999;width:140px;height:140px;padding:10px;margin:20px;}
+    .ability_box {position:relative;width:140px;height:140px;background:url(vml.png) left top no-repeat;overflow:hidden;}
+    ul {zoom:1;overflow:hidden;padding:10px; }
+    li {float:left;padding:10px;margin:10px;border:1px solid #999;cursor:pointer;}
 </style>
 </head>
 <body>
 
+    <ul id="hero">
+        <li>赵云</li>
+        <li>马超</li>
+        <li>姜维</li>
+    </ul>
 
-    <div class="box_wrap">
-        <div id="box" class="">
-            
-        </div>
-    </div>
+<div class="ability_box_wrap">
+    <div id="ability" class="ability_box"></div>
+</div>
 
 <script type="text/javascript">
-(function () {
-    if (!window.vml) {
-        window.vml = {};
-        document.createStyleSheet().addRule(".vml", "behavior:url(#default#VML);display:inline-block;");
-        if (!document.namespaces.vml && !+"\v1") {
-            document.namespaces.add("vml", "urn:schemas-microsoft-com:vml");
-        }
+var canvasSupported = !!document.createElement("canvas").getContext ;
+
+//todo opt
+function $extend(){
+    // copy reference to target object
+    var target = arguments[0] || {},
+        i = 1,
+        length = arguments.length,
+        options;
+    if ( typeof target != "object" && typeof target != "function" ) {
+        target = {};
     }
-    var vml = window.vml = function (name) {
-            return vml.fn.create(name || "rect");
-        }
-    vml.fn = vml.prototype = {
-        create: function (name) {
-            this.node = document.createElement('<vml:' + name + ' class="vml">');
-            return this;
-        },
-        appendTo: function (parent) {
-            if (typeof this.node !== "undefined" && parent.nodeType == 1) {
-                parent.appendChild(this.node);
-            }
-            return this;
-        },
-        attr: function (bag) {
-            for (var i in bag) {
-                if (bag.hasOwnProperty(i)) {
-                    this.node.setAttribute(i, bag[i])
+    for ( ; i < length; i++ ) {
+        if ( (options = arguments[ i ]) != null ) {
+            for ( var name in options ) {
+                var copy = options[ name ];
+                if ( target === copy ) {
+                    continue;
+                }
+                if ( copy !== undefined ) {
+                    target[ name ] = copy;
                 }
             }
-            return this;
-        },
-        css: function (bag) {
-            var str = ";"
-            for (var i in bag) {
-                if (bag.hasOwnProperty(i)) str += i == "opacity" ? ("filter:alpha(opacity=" + bag[i] * 100 + ");") : (i + ":" + bag[i] + ";")
-            }
-            this.node.style.cssText = str;
-            return this;
         }
     }
-})();
-
-window.onload = function () {
-
-    vml("shape").css({
-        width: "140px",
-        height: '140px',
-        opacity: 0.3,
-        position: 'absolute',
-        top: '0px',
-        left: '0px'
-        // background: 'url(vml.png)'
-    }).attr({
-        fillcolor: "red",
-        strokecolor: "red",
-        coordorigin: "0  0",
-        coordSize: "140 140",
-        path: "m 70,10 l 135,70, 70,100, 30,70 x e"
-        // path: "m 30,0 l 100,0, 100,100, 30,100 x e"
-
-    }).appendTo(document.getElementById('box'));
+    return target;
 }
+
+// canvas lib by alex
+var Dv = {
+    el: null ,
+    c: null , 
+
+    setCanvas: function () {
+        this.el.setAttribute('width', this.config.width) ;
+        this.el.setAttribute('height', this.config.height) ;
+    },
+
+    config:  {
+        width: 200,
+        height: 200,
+        cap: 'round',
+        join: 'round',
+        lineWidth: 2,
+        fillStyle: 'rgba(190, 5, 0, 0.5)',
+        fromPath: [70,0 , 140,70, 70,140, 0,70 ]
+    },
+    st:null,
+
+    renderTransition: function (toPath) {
+        clearTimeout(this.st);
+        var me =this,
+            fromPath = this.config.fromPath;
+
+        var aCompare = [
+            toPath[1] - fromPath[1], 
+            toPath[2] - fromPath[2], 
+            toPath[5] - fromPath[5], 
+            toPath[6] - fromPath[6] 
+        ];
+        var maxAbs = 0;
+        for (var i = 0, l = aCompare.length ; i< l  ; i++ ) {
+            if (Math.abs(aCompare[i]) > maxAbs) {
+                maxAbs = Math.abs(aCompare[i]);
+            }
+        }
+        if (maxAbs == 0) {
+            return  ;
+        }
+
+        var aTrans = [] ;
+        for (i = 0, l = aCompare.length ; i< l  ; i++ ) {
+            aTrans.push(aCompare[i]/maxAbs);
+        }
+
+        var t = 0;
+        var _run = function () {
+            var aPath = [];
+            if (t++ <= maxAbs) {
+                aPath.push({type: 'moveTo', v: [toPath[0], fromPath[1]*1 + aTrans[0]*t]}) ;
+                aPath.push({type: 'lineTo', v: [fromPath[2]*1 + aTrans[1]*t, toPath[3] ]}) ;
+                aPath.push({type: 'lineTo', v: [toPath[4], fromPath[5]*1 + aTrans[2]*t]}) ;
+                aPath.push({type: 'lineTo', v: [fromPath[6]*1 + aTrans[3]*t, toPath[7] ]}) ;
+
+                me.render(aPath);
+                this.st = setTimeout(_run, 10);
+            }else {
+                me.config.fromPath = toPath;
+            }
+        };
+        _run();
+        
+    },
+
+    render: function (aPath) {
+        var c = this.c ,
+            me = this ;
+
+        me.clear();
+        c.save();
+        c.beginPath();  
+
+        for (var i = 0, k = null; k = aPath[i] ; i++ ) {
+            c[k.type] && (c[k.type].apply(c, k.v || []));
+        }
+        c.closePath();
+        c.fill();         
+        
+        c.restore();
+    },
+
+    clear: function () {
+        this.c.clearRect(0,0, this.config.width, this.config.height);
+    },
+
+    initDraw: function (style) {
+        var c = this.c ,
+            config = this.config ;
+
+        c.lineCap = config.cap;
+        c.lineJoin = config.join;
+        c.lineWidth = config.lineWidth;
+        c.fillStyle = config.fillStyle ;
+    },
+
+    init: function (v) {
+        $extend(this.config, v) ;
+
+        if (!document.getElementById('alexCanvas')) {
+            this.el = document.createElement('canvas');
+            this.el.setAttribute('id', 'alexCanvas') ;
+            document.getElementById(this.config.wrapId).appendChild(this.el) ;
+
+            this.c = this.el.getContext('2d');
+            this.setCanvas();
+            this.initDraw();
+        }
+    }
+}; 
+
+var setVml = {
+    init: function () {
+        if (!window.vml) {
+            document.createStyleSheet().addRule(".vml", "behavior:url(#default#VML);display:inline-block;");
+            if (!document.namespaces.vml && !+"\v1") {
+                document.namespaces.add("vml", "urn:schemas-microsoft-com:vml");
+            }
+
+            var vml = window.vml = function (name) { return vml.fn.create(name || "rect"); };
+            vml.fn = vml.prototype = {
+                create: function (name) {
+                    this.node = document.createElement('<vml:' + name + ' class="vml">');
+                    return this;
+                },
+                appendTo: function (parent) {
+                    if (typeof this.node !== "undefined" && parent.nodeType == 1) {
+                        parent.appendChild(this.node);
+                    }
+                    return this;
+                },
+                attr: function (bag) {
+                    for (var i in bag) {
+                        if (bag.hasOwnProperty(i)) {
+                            this.node.setAttribute(i, bag[i])
+                        }
+                    }
+                    return this;
+                },
+                css: function (bag) {
+                    var str = ";"
+                    for (var i in bag) {
+                        if (bag.hasOwnProperty(i)) str += i == "opacity" ? ("filter:alpha(opacity=" + bag[i] * 100 + ");") : (i + ":" + bag[i] + ";")
+                    }
+                    this.node.style.cssText = str;
+                    return this;
+                }
+            };
+        }
+    }
+};
+
+// start 
+var drawAbility = {
+    init: function (path) {
+        canvasSupported ? this.useCanvas(path) : this.useVml(path);
+    },
+
+    useCanvas: function (path) {
+        Dv.init({
+            wrapId: 'ability',
+            width:140,
+            height:140
+        });
+
+        Dv.renderTransition(path.replace(';',',').split(','));
+    },
+
+    useVml: function (sPath) {
+        setVml.init();
+
+        function transferPath (sPath) {
+            return  'm ' + sPath.replace(';', ' l ') + ' x e';
+        }
+        var _path = transferPath(sPath);
+
+        if (!document.getElementById('alexVml')) {
+            vml("shape").css({
+                width: "140px",
+                height: '140px',
+                opacity: 0.35,
+                position: 'absolute',
+                top: '0px',
+                left: '0px'
+                // background: 'url(vml.png)'
+            }).attr({
+                id: 'alexVml',
+                fillcolor: "red",
+                strokecolor: "red",
+                coordorigin: "0  0",
+                coordSize: "140 140",
+                path: _path
+            }).appendTo(document.getElementById('ability'));
+        }else {
+            document.getElementById('alexVml').path = _path ;
+        }
+    }
+};
+
+var allPath = [
+    "70,10 ; 115,70, 70,130, 10,70 ",
+    "70,20 ; 135,70, 70,90, 10,70 ",
+    "70,5 ; 115,70, 70,100, 40,70 ",
+];
+
+var els = document.getElementById('hero').getElementsByTagName('li');
+for (var i = 0, k ; k = els[i] ; i++ ) {
+    k.index = i ;
+    k.onclick = function () {
+        drawAbility.init(allPath[this.index]);
+    }
+}
+
 </script>
 
 </body>
