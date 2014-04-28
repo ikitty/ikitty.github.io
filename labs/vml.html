@@ -2,7 +2,7 @@
 <html lang="ZH-cn">
 <head>
 <title>DrawSth use Canvas or VML</title>
-<meta charset="gbk"/>
+<meta charset="utf-8"/>
 <style type="text/css" media="screen">
     * {margin:0;padding:0;list-style:none;}
     .ability_box_wrap {border:1px solid #999;width:140px;height:140px;padding:10px;margin:20px;}
@@ -13,11 +13,11 @@
 </head>
 <body>
 
-    <ul id="hero">
-        <li>����</li>
-        <li>����</li>
-        <li>��ά</li>
-    </ul>
+<ul id="hero">
+    <li>赵云</li>
+    <li>马超</li>
+    <li>姜维</li>
+</ul>
 
 <div class="ability_box_wrap">
     <div id="ability" class="ability_box"></div>
@@ -264,6 +264,70 @@ for (var i = 0, k ; k = els[i] ; i++ ) {
     k.onclick = function () {
         drawAbility.init(allPath[this.index]);
     }
+}
+
+// 角色相关数据和更新方法
+var hero = {} ;
+hero.dom = {
+    banner: Tj.gid('banner'),
+    roleDesp: Tj.gid('roleDesp'),
+    roleName: Tj.gid('roleName'),
+    roleType: Tj.gid('roleType'),
+    roleRank: Tj.gid('roleRank'),
+    roleCd: Tj.gid('roleCd'),
+    roleSkill: Tj.gid('roleSkill'),
+    roleAbout: Tj.gid('roleAbout'),
+    roleAbilities: Tj.gid('roleAbilities')
+};
+hero.data = [
+    {
+        banner: 'posX',
+        role: [10,10, 20, -300, 20, -400, '30px', 30],
+        text: ['desp1', 'desp2'],
+        ability: [1, 6, 1, 2]
+    },
+    {
+        banner: 'posX',
+        role: [10,10, 20, -300, 20, -400, '30px', '30'],
+        text: ['desp1', 'desp2'],
+        ability: [1, 6, 1, 2]
+    }
+];
+hero.transAbility = function (d) {
+    var dic = [
+        [0, 0] //此数据不会用到,只是为了保证下标和能力等级对应
+        ,[x, y]
+        ,[x, y]
+        ,[x, y]
+        ,[x, y]
+        ,[x, y]
+        ,[x, y]
+    ];
+    var coordStep = 10,
+        coordMax = coordStep*6;
+    //根据角色能力等级转换为能力描述坐标
+    //根据角色能力等级转换为能力图坐标
+    for (var i = 0, k ; k = this.data[i] ; i++ ) {
+        k.abilityText = [dic[k.ability[0]],dic[k.ability[1]],dic[k.ability[2]],dic[k.ability[3]] ];
+        k.abilityCoord = '70,' + (coordMax-k.ability[0]*coordStep) + ';' + (70 + 70- coordMax+k.ability[1]*coordStep) + ',70,70,' + (70+70-coordMax + k.ability[2]*coordStep) + ',' + (coordMax-k.ability[0]*coordStep) + ',70' ;
+    }
+};
+hero.update = function (n) {
+    var d = this.data[n],
+        dom = this.dom;
+    dom.banner.style.background = 'url(img/h'+n+'.jpg) '+d.banner[0]+' 0 no-repeat';
+    d.role[0] && (dom.roleDesp.style.backgroundPosition =  d.role[0] + ' ' + d.role[1] + 'px');
+    dom.roleName.style.backgroundPosition =  d.role[2] + ' ' + d.role[3] + 'px';
+    dom.roleType.style.backgroundPosition =  d.role[4] + ' ' + d.role[5] + 'px';
+    dom.roleRank.style.width =  d.role[6];
+    dom.roleCd.innerHTML = d.role[7] ;
+    dom.roleSkill.innerHTML = d.text[0];
+    dom.roleAbout.innerHTML = d.text[1];
+    //draw ability
+
+};
+hero.init = function () {
+    hero.transAbility();
 }
 
 </script>
