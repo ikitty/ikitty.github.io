@@ -11,6 +11,8 @@ category: Frontend
 
 ###Bug表现 
 
+先看一段代码：
+
     <!DOCTYPE html>
     <html lang="ZH-cn">
     <head>
@@ -53,6 +55,7 @@ JavaScript中void是一个操作符，该操作符指定要计算一个表达式
 - 在`<a>`onclick绑定函数的尾部加入`return false;`来阻止浏览器的默认行为
 - 使用`<span>`等其他标签来代替`<a>`标签，从根本上绕开`javascript:void(0)`，对应的，IE6中按钮的hover效果就优雅降级，或者你可以使用javascript动态加上hover态的class
 
+方案代码如下：
 
     <!DOCTYPE html>
     <html lang="ZH-cn">
