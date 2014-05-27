@@ -53,6 +53,7 @@ JavaScript中void是一个操作符，该操作符指定要计算一个表达式
 - 在`<a>`onclick绑定函数的尾部加入`return false;`来阻止浏览器的默认行为
 - 使用`<span>`等其他标签来代替`<a>`标签，从根本上绕开`javascript:void(0)`，对应的，IE6中按钮的hover效果就优雅降级，或者你可以使用javascript动态加上hover态的class
 
+
     <a href="javascript:void();" id="link">Click Me to load Img </a>
     <div class="" id="ret"></div>
 
@@ -66,3 +67,4 @@ JavaScript中void是一个操作符，该操作符指定要计算一个表达式
             return false ;
         }
     </script>
+
