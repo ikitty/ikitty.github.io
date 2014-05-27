@@ -275,20 +275,20 @@ hero.dom = {
     roleType: Tj.gid('roleType'),
     roleRank: Tj.gid('roleRank'),
     roleCd: Tj.gid('roleCd'),
-    roleSkill: Tj.gid('roleSkill'),
+    roleFeature: Tj.gid('roleFeature'),
     roleAbout: Tj.gid('roleAbout'),
     roleAbilities: Tj.gid('roleAbilities')
 };
 hero.data = [
     {
         banner: 'posX',
-        role: [10,10, 20, -300, 20, -400, '30px', 30],
+        role: [[10,10], [20, -300], [20, -400], '30px', 30],
         text: ['desp1', 'desp2'],
         ability: [1, 6, 1, 2]
     },
     {
         banner: 'posX',
-        role: [10,10, 20, -300, 20, -400, '30px', '30'],
+        role: [[10,10], [20, -300], [20, -400], '30px', 30],
         text: ['desp1', 'desp2'],
         ability: [1, 6, 1, 2]
     }
@@ -321,7 +321,7 @@ hero.update = function (n) {
     dom.roleType.style.backgroundPosition =  d.role[4] + ' ' + d.role[5] + 'px';
     dom.roleRank.style.width =  d.role[6];
     dom.roleCd.innerHTML = d.role[7] ;
-    dom.roleSkill.innerHTML = d.text[0];
+    dom.roleFeature.innerHTML = d.text[0];
     dom.roleAbout.innerHTML = d.text[1];
     //draw ability
 
