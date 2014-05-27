@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "javascript:void(0) causing connection aborted in IE6"
-description: "微软已经放弃了WinXp，放弃了IE6，但国内还是有一部分用户依旧使用着IE6，虽然对于部分IE6中几px的差异表现已不再care，但我们还是得保证页面在IE6中的可用性。此文专门记录了在IE6中使用href='javascript:void(0)'带来的一些bug"
+description: "微软已经放弃了WinXp，放弃了IE6，但国内还是有一部分用户依旧使用着IE6，虽然对于部分IE6中几px的差异表现已不再care，但我们还是得保证页面在IE6中的可用性。此文专门记录了在IE6中使用href='javascript:void(0)'带来的一些bug以及对应的解决方案"
 tags: [ javascript, ie6 ]
 category: Frontend
 ---
 {% include JB/setup %}
 
-微软已经放弃了WinXp，放弃了IE6，但国内还是有一部分用户依旧使用着IE6，虽然对于部分IE6中几px的差异表现已不再care，但我们还是得保证页面在IE6中的可用性。此文专门记录了在IE6中使用href='javascript:void(0)'带来的一些bug
+微软已经放弃了WinXp，放弃了IE6，但国内还是有一部分用户依旧使用着IE6，虽然对于部分IE6中几px的差异表现已不再care，但我们还是得保证页面在IE6中的可用性。此文专门记录了在IE6中使用href='javascript:void(0)'带来的一些bug以及对应的解决方案
 
 ###Bug表现 
 
@@ -54,7 +54,18 @@ JavaScript中void是一个操作符，该操作符指定要计算一个表达式
 - 使用`<span>`等其他标签来代替`<a>`标签，从根本上绕开`javascript:void(0)`，对应的，IE6中按钮的hover效果就优雅降级，或者你可以使用javascript动态加上hover态的class
 
 
-    <a href="javascript:void();" id="link">Click Me to load Img </a>
+    <!DOCTYPE html>
+    <html lang="ZH-cn">
+    <head>
+    <meta charset="utf-8" />
+    <style type="text/css" media="screen">
+        #ret {width:300px;height:300px;}
+    </style>
+    </head>
+    <body>
+
+    <a href="javascript:void();" id="link">Click Me to load Img </a> 或者：
+    <span onclick="loadImg()"">Click me </span>
     <div class="" id="ret"></div>
 
     <script type="text/javascript">
@@ -63,8 +74,9 @@ JavaScript中void是一个操作符，该操作符指定要计算一个表达式
             el.src = 'http://im-img.qq.com/home/img/q2013/qlogo.png';
             document.getElementById('ret').appendChild(el);
 
-            //阻止浏览器默认行为
-            return false ;
+            //important
+            return false;
         }
     </script>
-
+    </body>
+    </html>
