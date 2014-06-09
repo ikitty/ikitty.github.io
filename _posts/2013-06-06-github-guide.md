@@ -11,7 +11,7 @@ category: Frontend
 
 ###下载安装
 
-- 安装，不推荐win的gui客户端，建议使用mingw32客户端
+- 安装，不推荐win的gui客户端，建议使用[msysgit] (http://msysgit.github.io/) 客户端
 
 ###配置config
 
@@ -55,6 +55,10 @@ category: Frontend
     alias ls='ls --show-control-chars --color=auto'
     alias ll='ls -l'
     alias gb='cd /d/github/'
+
+###保持登录凭据（for https in win）
+
+如果使用https clone了仓库，你可以使用[git-credential-winstore](https://gitcredentialstore.codeplex.com/ 'view it') 来保存登录凭据，免去每次和github通信时都要输入用户名密码的麻烦。
 
 ###配置SSH(for Mac OS)
 
