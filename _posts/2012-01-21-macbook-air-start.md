@@ -63,30 +63,34 @@ description: 入手MBA也有一段时间了，从一个初级小白进阶成为�
 ####日常类：
 
 - chrome
-- qq
-- fit输入法
-- 迅雷
+- Opera
 - MplayerX （SPlayerX有个自动搜索字幕的优势）
 - iWork
-- DropBox
 - CleanApp （有洁癖的同学可以用这个更彻底的删除应用）
-- betterZip
 - Evernote
 - Omni Graffle （思维导图工具）
-- 豆瓣FM
+- iterm2
 
 ####开发类：
 
-- vim
+- macvim
 - xampp
 - Fireworks
 - VMWare fusion
 
 ####双系统
 
-准备好一个U盘，一个windows操作系统的镜像文件，使用bootCamp很Easy的完成安装。需要注意的是，如果你安装的是win7系统，请使用windows loader激活。如果你使用其他工具激活，启动系 统时黑屏等待时间变为30～40s。对这种情况也可以windows loader再次激活即可解决。当然如果你时正版用户，就无需担忧。
+准备好一个空的U盘，一个windows操作系统的镜像文件，使用bootCamp引导很Easy的完成安装。需要注意的是，如果你安装的是win7系统，请使用windows loader激活。如果你使用其他工具激活，启动系 统时黑屏等待时间变为30～40s。对这种情况也可以windows loader再次激活即可解决。当然如果你时正版用户，就无需担忧。
 
-另一点，按照双系统后，默认启动的是后面按照的那个系统，可以进入系统偏好设置-启动磁盘，来选择默认启动的系统。
+另一点，安照双系统后，默认启动的是后面按照的那个系统，可以进入系统偏好设置-启动磁盘，来选择默认启动的系统。
+
+###使用vmwareFusion载入已经安装的win系统
+
+在vmware官方下载一个免费使用版本（后面自己去找序列号或者购买正版都随你）,安装完毕之后，添加 - 新建bootcamp卷 - 创建bootcamp卷虚拟机 - 继续即可。然后按照引导安卓vmwareTool即可。
+
+###iterm2
+
+建议使用zsh和source code pro字体（自己搜索）,iterm2设置：profile - text ，去掉粗体和高亮显示 ； key - 设置^n 为 nextTab
 
 ###规划个人文件存储
 
