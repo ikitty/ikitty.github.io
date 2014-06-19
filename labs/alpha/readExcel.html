@@ -1,10 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="author" content="colinivy" />
-<title> Colinivy's Test Page</title>
-<script type="text/javascript" src="file:///d:/tool/develop/editplus/colinivy/debug.js"></script>
+<meta charset="utf-8" />
+<title>Demo by Alextang</title>
 <style type="text/css">
     * {margin:0; padding:0; list-style:none; }
     body {font:normal 12px/30px Verdana;padding: 20px;background-color: #FFF;tac }
@@ -24,7 +22,15 @@
 </div>
 
 <script type="text/javascript">
-//<![CDATA[
+    var read = new readExcel() ;
+
+    var oXL = new ActiveXObject("Excel.application"); //创建Excel.Application对象
+    var bk = oXL.Workbooks ;
+    var oWB = oXL.Workbooks.open('D:\test.xls');
+    // it doesnot work in win8 
+    //bye
+    // alert(oWB);
+
     var CLASS = {
         create: function () {
             return function () {
@@ -38,10 +44,11 @@
         init: function () {
             this.obj = false ;
         },
-        open: function () {
+        open: function (filepath) {
             this.obj = new ActiveXObject("Excel.Application");
             try{
                 this.obj.wb = this.obj.Workbooks.open(filepath);
+                alert(this.obj.wb);
                 this.obj.sheet = this.obj.wb.Worksheets;
                 this.obj.cell = this.obj.sheet(1).Cells;
                 //ActiveSheet == Worksheets(1)
@@ -58,21 +65,27 @@
         }
     } ;
 
-    var read = new readExcel() ;
+    
 
     // expand method
     read.getData = function () {
         this.obj.result = '' ;
-        for (var i = 2, le = 12; i < le; i++ ) {
-            this.obj.result += this.format(this.obj.cell(i,1).value, this.obj.cell(i,2).value);
+        var c = this.obj.cell;
+        for (var i = 2, le = 5; i < le; i++ ) {
+            alert(c(i,1).value);
+            this.obj.result += this.formatData(this.obj.cell(i,1).value, this.obj.cell(i,2).value);
         }
         get('result').value = this.obj.result ;
+        alert(1);
     } ;
-    read.formatDate = function (title, href) {
+    read.formatData = function (title, href) {
         return '<li><a href="http://'+ href +'">' + title + '</a></li>\n\r' ;
     } ;
+    window.onload = function () {
+        read.open('D:/test.xls');
+        read.getData();
+    }
 
-//]]>
 </script>
 </body>
 </html>
