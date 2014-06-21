@@ -66,6 +66,7 @@ description: 入手MBA也有一段时间了，从一个初级小白进阶成为�
 - Opera
 - MplayerX （SPlayerX有个自动搜索字幕的优势）
 - iWork
+- alfred
 - CleanApp （有洁癖的同学可以用这个更彻底的删除应用）
 - Evernote
 - Omni Graffle （思维导图工具）
