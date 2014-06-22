@@ -1,0 +1,782 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML xmlns:MSHelp="http://msdn.microsoft.com/mshelp" DIR="LTR">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<style type="text/css">
+/* VERSION 9345
+Designed for IE5.x. Optimal in IE 6.x
+CSS for use with Developer Tools DocumentationLocalizable definitions:
+font families
+font sizes
+*//* --------------------------------------------------
+                  MAIN TOPIC STYLES
+-------------------------------------------------- */div.saveHistory
+	{
+behavior:url(#default#savehistory);
+text-decoration: underline
+}
+body /* This body tag requires the use of one of the sets of banner and/or text div ids */
+	{
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	background: #ffffff; 
+	color: #000000;
+	font-family: 瀹嬩綋, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 75%;
+	width: 100%;
+	}
+div#scrollyes /* Allows topic to scroll with correct margins. Cannot be used with running head banner */
+	{     /* Must immediately follow <body>. */
+	padding: 2px 15px 2px 22px;
+	width: 100%;
+	}
+div#nsbanner /* Creates Nonscrolling banner region */
+	{
+	position: relative;
+	left: 0px;
+	padding: 0px 0px 0px 0px;
+	border-bottom: 1px solid #999999;
+	}
+div#nstext /* Creates the scrolling text area for Nonscrolling region topic */
+	{
+	padding: 5px 10px 0px 22px; 
+	}
+div#scrbanner /* Creates the running head bar in a full-scroll topic */
+	{     /* Allows topic to scroll. */
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	border-bottom: 1px solid #999999;
+	}
+div#scrtext /* Creates the text area in a full-scroll topic */
+	{   /* Allows topic to scroll. */
+/*	width: 100%; /* Forces tables to have correct right margin */*/
+	padding: 0px 10px 0px 22px; 
+	}
+div#bannerrow1 /* provides full-width color to top row in running head (requires script) */
+	{
+	background-color: #99ccff;
+	}
+div#titlerow /* provides non-scroll topic title area (requires script) */
+	{
+	width: 100%; /* Forces tables to have correct right margin */
+	padding: 0px 10px 0px 22px; 
+	background-color: #99ccff;        
+	}/* --------------------------------------------------
+                    HEADING STYLES
+-------------------------------------------------- */h1, h2, h3, h4
+	{
+	font-family: 瀹嬩綋, Verdana, Arial, Helvetica, sans-serif;
+	margin-bottom: .4em; 
+	margin-top: 1em;
+	font-weight: bold;
+	}
+h1
+	{
+	font-size: 120%;
+	margin-top: 0em;
+	}
+div#scrollyes h1 /* Changes font size for full-scrolling topic */
+	{
+	font-size: 150%;
+	}
+h2
+	{
+	font-size: 120%;
+	}
+h3
+	{
+	font-size: 115%;
+	}
+h4
+	{
+	font-size: 100%;
+	}
+.dtH1, .dtH2, .dtH3, .dtH4
+	{
+	margin-left: -18px;
+	}
+div#titlerow h1
+	{
+	margin-bottom: .2em
+	}/* --------------------------------------------------
+                     TEXT STYLES
+-------------------------------------------------- */p
+	{
+	margin: .5em 0em .5em 0em;
+	}
+blockquote.dtBlock
+	{
+	margin: .5em 1.5em .5em 1.5em;
+	}
+div#dtHoverText
+	{
+	color: #000066;
+	}
+.normal
+	{
+	margin: .5em 0em .5em 0em;
+	}
+.fineprint
+	{
+	font-size: 110%; /* 90% of 70% */
+	}
+.indent
+	{
+	margin: .5em 1.5em .5em 1.5em;
+	}
+.topicstatus /* Topic Status Boilerplate class */
+	{
+	display: block;
+	color: red;
+	}/* --------------------------------------------------
+                     LABEL STYLES
+-------------------------------------------------- */p.label
+	{
+	margin-top: 1em;
+	}
+p.labelproc
+	{
+	margin-top: 1em;
+	color: #000066;
+	}/* --------------------------------------------------
+                    GRAPHIC STYLES
+-------------------------------------------------- */img
+	{
+	border: none; 
+	}/* --------------------------------------------------
+                     LIST STYLES
+-------------------------------------------------- */ol, ul
+	{
+	margin: .5em 0em 0em 2em; 
+	}
+li
+	{
+	margin-bottom: .5em;
+	}
+ul p, ol p, dl p
+	{
+	margin-left: 0em;
+	}
+ul p.label, ol p.label
+	{
+	margin-top: .5em;
+	}/* --------------------------------------------------
+               DEFINITION LIST STYLES
+-------------------------------------------------- */dl
+	{
+	margin-top: 0em; 
+	padding-left: 1px; /* Prevents italic-letter descenders from being cut off */
+	}
+dd
+	{
+	margin-bottom: 0em;  
+	margin-left: 1.5em; 
+	}
+dt
+	{
+	margin-top: .5em; 
+	}/* --------------------------------------------------
+           CODE, SYNTAX, and REFTIP STYLES
+-------------------------------------------------- */pre
+	{
+	margin-top: .5em;
+	margin-bottom: .5em; 
+	}
+pre, code, .code
+	{
+	font: 100% 瀹嬩綋, Courier New, Monospace, Courier;/* This is 100% of 70% */
+	color: #000066;
+	}
+pre b, code b
+	{
+	letter-spacing: .1em; /* opens kerning on bold in Syntax/Code */
+	}
+pre.syntax
+	{
+	font: 100% Courier New, 瀹嬩綋, Monospace, Courier;/* This is 100% of 70% */
+	background: #cccccc;
+	padding: 4px 8px;
+	cursor: text;
+	margin-top: 1em;
+	margin-bottom: 1em; 
+	color: #000000;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	}/* --------------------------------------------------
+                      LINK STYLES
+-------------------------------------------------- */a:link
+	{
+	color: #0000ff;
+	}
+a:visited
+	{
+	color: #0000ff;
+	}
+a:hover
+	{
+	color: #3366ff;
+	}/* ---------------------------
+MSHelp\:link - Help HxLinks
+--------------------------- */
+MSHelp\:link
+	{
+	text-decoration: underline; 
+	color: #0000ff; 
+	hoverColor: #3366ff;
+	filterString: ;
+	}	
+A.HxLinkTable /* MSHelp\:link - Table disambiguation elements */
+	{
+	}
+/* ---------------------------
+MSHelp\:ktable - Help links
+--------------------------- */
+MSHelp\:ktable
+	{
+	disambiguator: span;
+	separator: &nbsp|&#32;
+	prefix: |&#32;
+	postfix: &nbsp;
+	filterString: ;
+	}
+div.HxLinkTable
+	{
+	width: auto; /* Forces tables to have correct right margins and top spacing */
+	margin-top: -.4em;
+	visibility: visible;
+	}
+ol div.HxLinkTable, ul div.HxLinkTable
+	{
+	margin-top: 0em; /* Forces tables to have correct right margins and top spacing */
+	}
+table.HxLinkTable /* Keep in sync with general table settings below */
+	{
+	width: auto;
+	margin-top: 1.5em;
+	margin-bottom: .3em;
+	margin-left: -1em;
+	border-width: 1px 1px 0px 0px;
+	border-style: solid;
+	border-color: #999999;
+	background-color: #999999; 
+	font-size: 100%; /* Text in Table is same size as text outside table */
+	behavior:url(hxlinktable.htc); /* Attach the behavior to link elements. */
+	}
+table.HxLinkTable th, table.HxLinkTable td /* Keep in sync with general table settings below */
+	{ 
+	border-style: solid; /* Creates the cell border and color */
+	border-width: 0px 0px 1px 1px;
+	border-style: solid;
+	border-color: #999999;
+	padding: 4px 6px;
+	text-align: left;
+	}
+table.HxLinkTable th /* Keep in sync with general table settings below */
+	{ 
+	background: #cccccc; /* Creates the shaded table header row */
+	vertical-align: bottom;
+	}
+table.HxLinkTable td /* Keep in sync with general table settings below */
+	{
+	background: #ffffff;
+	vertical-align: top;
+	}/* --------------------------------------------------
+                    TABLE STYLES
+-------------------------------------------------- */div.tablediv
+	{
+	width: 100%; /* Forces tables to have correct right margins and top spacing */
+	margin-top: -.4em;
+	}
+ol div.tablediv, ul div.tablediv, ol div.HxLinkTable, ul div.HxLinkTable
+	{
+	margin-top: 0em; /* Forces tables to have correct right margins and top spacing */
+	}
+table.dtTABLE
+	{
+	width: 100%; /* Forces tables to have correct right margin */
+	margin-top: .6em;
+	margin-bottom: .3em;
+	border-width: 1px 1px 0px 0px;
+	border-style: solid;
+	border-color: #999999;
+	background-color: #999999; 
+	font-size: 100%; /* Text in Table is same size as text outside table */
+	}
+table.dtTABLE th, table.dtTABLE td
+	{ 
+	border-style: solid; /* Creates the cell border and color */
+	border-width: 0px 0px 1px 1px;
+	border-style: solid;
+	border-color: #999999;
+	padding: 4px 6px;
+	text-align: left;
+	}
+table.dtTABLE th	
+	{ 
+	background: #cccccc; /* Creates the shaded table header row */
+	vertical-align: bottom;
+	}
+table.dtTABLE td	
+	{
+	background: #ffffff;
+	vertical-align: top;
+	}/* --------------------------------------------------
+ISSUE REPORTING AND MISC LINKS TOPIC FOOTER
+-------------------------------------------------- */div.footer
+	{
+	
+	}
+div.footer hr
+	{
+	color: #999999;
+	height: 1px;
+	}/* --------------------------------------------------
+             STYLES FOR RUNNING HEADS
+-------------------------------------------------- */table.bannerparthead, table.bannertitle /* General values for the Running Head tables */
+	{
+	position: relative;
+	left: 0px;
+	top: 0px;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	width: 100%;
+	height: 21px; 
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: 0px;
+	background-color: #99ccff; 
+	font-size: 100%;
+	}
+table.bannerparthead td /* General Values for cells in the top row of running head */
+	{
+	margin: 0px 0px 0px 0px;
+	padding: 2px 0px 0px 4px;
+	vertical-align: middle;
+	/*border-width: 0px 0px 1px 0px; */
+	border-width: 0px
+	border-style: solid;
+	border-color: #999999;
+	background: transparent; 
+	/* font-style: normal; */
+	font-weight: normal;
+	}
+table.bannerparthead td.product /* Values for top right cell in running head */
+	{                       /* Allows for a second text block in the running head */
+	text-align: right;
+	padding: 2px 5px 0px 5px;
+	}
+table.bannertitle td /* General Values for cells in the bottom row of running head */
+	{
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 3px;
+	vertical-align: middle;
+	border-width: 0px 0px 1px 0px;
+	border-style: solid;
+	border-color: #999999;
+	background: transparent;
+	font-weight: bold;
+	}
+td.button1 /* Values for button cells */
+	{
+	width: 14px;
+	cursor: hand;
+	}/* =================================================
+            STYLES REQUIRED BY THE SCRIPT *//* --------------------------------------------------
+                  SAMPLE VIEWER
+-------------------------------------------------- */div#smpMgrCell
+	{
+	display:none;
+	}
+table.SampMgr
+	{
+	margin: 0px 0px 0px -22px;
+	}
+table.SampMgr td
+	{
+	padding-left: 22px;
+	}/* --------------------------------------------------
+RUNNING HEAD BAR POPUP STYLES: See Also, Requirements, MultiLang Filtering
+-------------------------------------------------- */div.sapop, div.langMenu /* See Also & Requirements popups */
+	{
+	position: absolute;
+	left: 0px;
+	z-index: 1;
+	width: 50%;
+	padding: 0px 8px 5px 26px;
+	visibility: hidden;
+	border: 1px solid #999999; /* Same as all other border colors */
+	background: #ffffcc;
+	}
+div.langMenu /* MultiLang Filter popup */
+	{
+	padding: 10px 10px 10px 10px;
+	}
+div.langMenu ul
+	{
+	list-style-type: none;
+	padding-left: 5px;
+	margin-left: 0px;
+	}
+.lang, .ilang /* controls the multilang tag styles */
+	{
+	color: #333333;
+	font-family: Verdana, Arial, 瀹嬩綋, Helvetica, sans-serif;
+	font-size: 80%;
+	font-weight: normal;
+	font-style: normal;
+	}
+h1 .lang, h1 .ilang 
+	{
+	font-size: 80%;
+	}
+div.filtered
+	{
+	margin-top: .6em;
+	margin-bottom: .6em;
+	margin-left: -7px;
+	padding: 0px 0px 0px 6px;
+	border-left: 1px solid #999999;
+	background: #ffffff;
+	}
+div.filtered h1, div.filtered h2, div.filtered h3, div.filtered h4
+	{
+	margin-left: -22px;
+	}
+div.filtered span.lang
+	{
+	position: relative;
+	left: 0px;
+	}/* --------------------------------------------------
+              PARAMETER POPUP STYLES
+-------------------------------------------------- */div.reftip /* Defines the RefTip popup in Syntax */
+	{
+	position: absolute;
+	z-index: 1;
+	visibility: hidden;
+	border: 1px solid #999999;
+	background: #ffffcc;
+/*	padding: 0px 0px 0px 0px; */	
+	}
+div.reftip dl /* Sets margin around the text within the popup */
+	{
+	margin: 3px 8px 8px 8px;
+	}
+a.synParam /* parameter popup links */
+	{
+	color: #0000ff; /* Must match the a:link style color */
+	text-decoration: underline;
+	}
+a.synParam:visited /* ensures parameter popup links are always the unvisited color */
+	{
+	color: #0000ff; /* Must match the a:link style color */
+	text-decoration: underline;
+	}
+a.synParam:hover /* parameter popup links */
+	{
+	color: #3366ff; /* Must match the a:hover style color */
+	text-decoration: underline;
+	font-style: italic;
+	}/* --------------------------------------------------
+              EXPAND-COLLAPSE STYLES
+-------------------------------------------------- */div.expandBody
+	{
+	margin: .5em 0em 0em 1.4em;
+	display:none;
+	}
+a.expandLink1
+	{
+	font-size: 115%; 
+	}
+a#ExPand
+	{
+	color: #3366ff; 
+	font-weight: bold; 
+	text-decoration: none; 
+	}
+a#ExPandAll
+	{
+	color: #3366ff; 
+	font-weight: bold; 
+	text-decoration: none; 
+	}/* --------------------------------------------------
+              GLOSSARY POPUP STYLES 
+          Not used by Visual Studio .NET 
+-------------------------------------------------- *//* COMMENT OUT GLOSSARY SECTION
+/*div#popUpWindow
+	{ Controlled by the script in the variable L_PopUpBoxStyle_Style
+	}*/
+a.glosslink:link
+	{
+	color: #000000;
+	}
+a.glosslink:visited
+	{
+	color: #000000; 
+	}
+a.glosslink:hover
+	{
+	color: #000000;
+	font-style: italic;
+	}
+div#popUpWindow h5 /* Controls the style of the Term in Glossary Popups */
+	{
+	margin: 5px 5px 5px 5px;
+	color: #000000;
+	}
+div#popUpWindow p /* Controls the style of the Text in Glossary Popups */
+	{
+	margin: 5px 5px 5px 5px;
+	color: #000000;
+	}
+p.GLOSSARY_TEXT
+	{
+	}
+div#popUpWindow a /* Controls the style of the Links in Glossary Popups */
+	{
+	}*/ /* END COMMENT OUT OF GLOSSARY SECTION *//* END STYLES REQUIRED BY THE SCRIPT 
+================================================== */
+</style>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=gb2312">
+<TITLE>正则表达式语法</TITLE>
+<xml>
+<MSHelp:TOCTitle Title="正则表达式语法"/>
+<MSHelp:RLTitle Title="正则表达式语法 (JScript .NET)"/>
+<MSHelp:Keyword Index="A" Term="jsjsgrpRegExpSyntax"/>
+<MSHelp:Keyword Index="A" Term="jsjsgrpRegExpSyntax"/>
+<MSHelp:Keyword Index="K" Term="正则表达式, 语法"/>
+<MSHelp:Attr Name="DevLang" Value="JScript"/>
+<MSHelp:Attr Name="DevLangVers" Value="kbJScript"/>
+<MSHelp:Attr Name="DocSet" Value="JScript"/>
+
+<MSHelp:Attr Name="DocSet" Value="Visual Studio"/>
+<MSHelp:Attr Name="Product" Value="VS"/>
+<MSHelp:Attr Name="ProductVers" Value="kbVS700"/>
+<MSHelp:Attr Name="Technology" Value="ManagedCode"/>
+<MSHelp:Attr Name="TechnologyVers" Value="kbManagedCode"/>
+<MSHelp:Attr Name="TopicType" Value="kbRef"/>
+<MSHelp:Attr Name="TargetOS" Value="Windows"/>
+<MSHelp:Attr Name="Locale" Value="kbChineseSimp"/>
+</xml>
+<META name="rtfFileName" content="js7reregexp.rtf">
+<META NAME="save" CONTENT="history">
+<META NAME="msdnID" CONTENT="_731801">
+</HEAD>
+<body topmargin=0 id="bodyID" class = "dtBODY"><!--NONSCROLLING BANNER START-->
+
+<DIV id="nstext" valign="bottom">
+<P>正则表达式从左到右进行计算，并遵循优先级顺序，这与算术表达式非常类似。</P><P>下表从最高到最低说明了各种正则表达式运算符的优先级顺序：</P>
+<div class="tablediv">
+    
+    <table cellspacing="0" class="dtTABLE"><TR VALIGN="top">
+            <TH width=40%>运算符</TH>
+            <TH width=60%>说明</TH>
+            </TR><TR VALIGN="top">
+            <TD width=40%>\</TD>
+            <TD width=60%>转义符</TD>
+            </TR><TR VALIGN="top">
+            <TD width=40%>(), (?:), (?=), []</TD>
+
+            <TD width=60%>括号和中括号</TD>
+            </TR><TR VALIGN="top">
+            <TD width=40%>*, +, ?, {n}, {n,}, {n,m}</TD>
+            <TD width=60%>限定符</TD>
+            </TR><TR VALIGN="top">
+            <TD width=40%>^, $, \<I>anymetacharacter, anycharacter</I></TD>
+            <TD width=60%>定位点和序列</TD>
+            </TR><TR VALIGN="top">
+            <TD width=40%>|</TD>
+            <TD width=60%>替换</TD>
+
+        </TR>
+</table>
+
+</div>
+<P>字符比替换运算符具有更高的优先级，这样使得“m|food”匹配“m”或者“food”。若要匹配“mood”或“food”，请使用括号创建子表达式，从而产生“(m|f)ood”。</P><H4 class="dtH4">请参见</H4><P><A HREF="jsreconintroductiontoregularexpressions.htm">正则表达式介绍</A></P>
+<div id="nsbanner">
+<div id="bannerrow1">
+<TABLE CLASS="bannerparthead" CELLSPACING=0>
+
+<TR ID="hdr">
+<TD CLASS="runninghead" nowrap>JScript .NET</TD>
+<TD CLASS="product" nowrap>&nbsp;</TD>
+</TR>
+</TABLE>
+</div>
+<div id="TitleRow">
+<H1 class="dtH1"><A NAME="jsjsgrpregexpsyntax"></A>正则表达式语法</H1>
+</div></div>
+<!--NONSCROLLING BANNER END-->
+<DIV id="nstext" valign="bottom">
+<P>正则表达式是一种文本模式，包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为“元字符”）。模式描述在搜索文本时要匹配的一个或多个字符串。</P><P>下面是正则表达式的一些示例：</P>
+<div class="tablediv"><table cellspacing="0" class="dtTABLE"><TR VALIGN="top">
+
+<TH width=50%>表达式</TH>
+<TH width=50%>匹配</TH>
+</TR><TR VALIGN="top">
+<TD width=50%>/^\s*$/</TD>
+<TD width=50%>匹配空行。</TD>
+</TR><TR VALIGN="top">
+<TD width=50%>/\d{2}-\d{5}/</TD>
+<TD width=50%>验证由两位数字、一个连字符再加 5 位数字组成的 ID 号。</TD>
+</TR><TR VALIGN="top">
+<TD width=50%>/&lt;\s*(\S+)(\s[^&gt;]*)?&gt;[\s\S]*&lt;\s*\/\1\s*&gt;/</TD>
+
+<TD width=50%>匹配 HTML 标记。</TD>
+</TR>
+</table></div><P>下表包含了元字符的完整列表以及它们在正则表达式上下文中的行为：</P>
+<div class="tablediv"><table cellspacing="0" class="dtTABLE"><TR VALIGN="top">
+<TH width=16%>字符</TH>
+<TH width=84%>说明</TH>
+</TR><TR VALIGN="top">
+<TD width=16%>\</TD>
+<TD width=84%>将下一字符标记为特殊字符、文本、反向引用或八进制转义符。例如，“n”匹配字符“n”。“\n”匹配换行符。序列“\\”匹配“\”，“\(”匹配“(”。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>^</TD>
+
+<TD width=84%>匹配输入字符串开始的位置。如果设置了 <B>RegExp</B> 对象的 <B>Multiline</B> 属性，^ 还会与“\n”或“\r”之后的位置匹配。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>$</TD>
+<TD width=84%>匹配输入字符串结尾的位置。如果设置了 <B>RegExp</B> 对象的 <B>Multiline</B> 属性，$ 还会与“\n”或“\r”之前的位置匹配。</TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>*</TD>
+<TD width=84%>零次或多次匹配前面的字符或子表达式。例如，zo* 匹配“z”和“zoo”。* 等效于 {0,}。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>+</TD>
+<TD width=84%>一次或多次匹配前面的字符或子表达式。例如，“zo+”与“zo”和“zoo”匹配，但与“z”不匹配。+ 等效于 {1,}。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>?</TD>
+<TD width=84%>零次或一次匹配前面的字符或子表达式。例如，“do(es)?”匹配“do”或“does”中的“do”。? 等效于 {0,1}</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>{<I>n</I>}</TD>
+
+<TD width=84%><I>n </I>是非负整数。正好匹配 <I>n</I> 次。例如，“o{2}”与“Bob”中的“o”不匹配，但与“food”中的两个“o”匹配。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>{<I>n</I>,}</TD>
+<TD width=84%><I>n </I>是非负整数。至少匹配 <I>n </I>次。例如，“o{2,}”不匹配“Bob”中的“o”，而匹配“foooood”中的所有 o。'o{1,}' 等效于 'o+'。'o{0,}' 等效于 'o*'。</TD>
+</TR><TR VALIGN="top">
+
+<TD width=16%>{<I>n</I>,<I>m</I>}</TD>
+<TD width=84%><I>m</I> 和 <I>n</I> 是非负整数，其中 <I>n</I> &lt;= <I>m</I>。至少匹配 <I>n</I> 次，至多匹配 <I>m</I> 次。例如，“o{1,3}”匹配“fooooood”中的头三个 o。'o{0,1}' 等效于 'o?'。注意：您不能将空格插入逗号和数字之间。</TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>?</TD>
+<TD width=84%>当此字符紧随任何其他限定符（*、+、?、{<I>n</I>}、{<I>n</I>,}、{<I>n</I>,<I>m</I>}）之后时，匹配模式是“非贪心的”。“非贪心的”模式匹配搜索到的、尽可能短的字符串，而默认的“贪心的”模式匹配搜索到的、尽可能长的字符串。例如，在字符串“oooo”中，“o+?”只匹配单个“o”，而“o+”匹配所有“o”。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>.</TD>
+<TD width=84%>匹配除“\n”之外的任何单个字符。若要匹配包括“\n”在内的任意字符，请使用诸如“[\s\S]”之类的模式。</TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>(<I>pattern</I>)</TD>
+<TD width=84%>匹配 <I>pattern</I> 并捕获该匹配的子表达式。可以使用 <B>$0</B>...<B>$9</B> 属性从结果 Matches 集合中检索捕获的匹配。若要匹配括号字符 ( )，请使用“\(”或者“\)”。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>(?:<I>pattern</I>)</TD>
+
+<TD width=84%>匹配 <I>pattern</I> 但不捕获该匹配的子表达式，即它是一个非捕获匹配，不存储供以后使用的匹配。这对于用“或”字符 (|) 组合模式部件的情况很有用。例如，“industr(?:y|ies)”这一表达式比“industry|industries”更经济。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>(?=<I>pattern</I>)</TD>
+<TD width=84%>执行正向预测先行搜索的子表达式，该表达式匹配处于匹配 <I>pattern</I> 的字符串的起始点的字符串。它是一个非捕获匹配，即不能捕获供以后使用的匹配。例如“Windows (?=95|98|NT|2000)”匹配“Windows 2000”中的“Windows”，而不匹配“Windows 3.1”中的“Windows”。预测先行不占用字符，即发生匹配后，下一匹配的搜索紧随上一匹配之后，而不是在组成预测先行的字符后。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>(?!<I>pattern</I>)</TD>
+
+<TD width=84%>执行反向预测先行搜索的子表达式，该表达式匹配不处于匹配 <I>pattern</I> 的字符串的起始点的搜索字符串。它是一个非捕获匹配，即不能捕获供以后使用的匹配。例如“Windows (?!95|98|NT|2000)”匹配“Windows 3.1”中的“Windows”，而不匹配“Windows 2000”中的“Windows”。预测先行不占用字符，即发生匹配后，下一匹配的搜索紧随上一匹配之后，而不是在组成预测先行的字符后。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%><I>x</I>|<I>y</I></TD>
+<TD width=84%>匹配 <I>x</I> 或 <I>y</I>。例如，“z|food”匹配“z”或“food”。“(z|f)ood”匹配“zood”或“food”。 </TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>[<I>xyz</I>]</TD>
+<TD width=84%>字符集。匹配包含的任一字符。例如，“[abc]”匹配“plain”中的“a”。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>[^<I>xyz</I>]</TD>
+<TD width=84%>反向字符集。匹配未包含的任何字符。例如，“[^abc]”匹配“plain”中的“p”。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>[<I>a-z</I>]</TD>
+
+<TD width=84%>字符范围。匹配指定范围内的任何字符。例如，“[a-z]”匹配“a”到“z”范围内的任何小写字母。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>[^<I>a-z</I>]</TD>
+<TD width=84%>反向范围字符。匹配不在指定的范围内的任何字符。例如，“[^a-z]”匹配任何不在“a”到“z”范围内的任何字符。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\b</TD>
+<TD width=84%>匹配一个字边界，即字与空格间的位置。例如，“er\b”匹配“never”中的“er”，但不匹配“verb”中的“er”。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\B</TD>
+
+<TD width=84%>非字边界匹配。“er\B”匹配“verb”中的“er”，但不匹配“never”中的“er”。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\c<I>x</I></TD>
+<TD width=84%>匹配由 <I>x</I> 指示的控制字符。例如，\cM 匹配一个 Control-M 或回车符。<I>x</I> 的值必须在 A-Z 或 a-z 之间。如果不是这样，则假定 c 就是“c”字符本身。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\d</TD>
+
+<TD width=84%>数字字符匹配。等效于 [0-9]。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\D</TD>
+<TD width=84%>非数字字符匹配。等效于 [^0-9]。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\f</TD>
+<TD width=84%>换页符匹配。等效于 \x0c 和 \cL。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\n</TD>
+<TD width=84%>换行符匹配。等效于 \x0a 和 \cJ。</TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>\r</TD>
+<TD width=84%>匹配一个回车符。等效于 \x0d 和 \cM。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\s</TD>
+<TD width=84%>匹配任何空白字符，包括空格、制表符、换页符等。与 [ \f\n\r\t\v] 等效。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\S</TD>
+<TD width=84%>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\t</TD>
+
+<TD width=84%>制表符匹配。与 \x09 和 \cI 等效。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\v</TD>
+<TD width=84%>垂直制表符匹配。与 \x0b 和 \cK 等效。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\w</TD>
+<TD width=84%>匹配任何字类字符，包括下划线。与“[A-Za-z0-9_]”等效。 </TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\W</TD>
+<TD width=84%>任何非字字符匹配。与“[^A-Za-z0-9_]”等效。 </TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>\x<I>n</I></TD>
+<TD width=84%>匹配 <I>n</I>，此处的 <I>n</I> 是一个十六进制转义码。十六进制转义码必须正好是两位数长。例如，“\x41”匹配“A”。“\x041”与“\x04”&amp;“1”等效。允许在正则表达式中使用 ASCII 代码。</TD>
+</TR><TR VALIGN="top">
+<TD width=16%>\<I>num</I></TD>
+<TD width=84%>匹配 <I>num</I>，此处的 <I>num</I> 是一个正整数。到捕获匹配的反向引用。例如，“(.)\1”匹配两个连续的相同字符。 </TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>\n</TD>
+<TD width=84%>标识一个八进制转义码或反向引用。如果 \<I>n</I> 前面至少有 <I>n</I> 个捕获子表达式，那么 <I>n</I> 是反向引用。否则，如果 <I>n</I> 是八进制数 (0-7)，那么 <I>n</I> 是八进制转义码。</TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>\<I>nm</I></TD>
+<TD width=84%>标识一个八进制转义码或反向引用。如果 \<I>nm</I> 前面至少有 <I>nm</I> 个捕获子表达式，那么 <I>nm</I> 是反向引用。如果 \<I>nm</I> 前面至少有 <I>n</I> 个捕获，那么 <I>n</I> 是反向引用，后面跟 <I>m</I>。如果前面的条件均不存在，那么当 <I>n </I>和 <I>m</I> 是八进制数 (0-7) 时，\<I>nm</I> 匹配八进制转义码 <I>nm</I>。</TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>\<I>nml</I></TD>
+<TD width=84%>当 <I>n</I> 是八进制数 (0-3)，<I>m</I> 和 <I>l</I> 是八进制数 (0-7) 时，匹配八进制转义码 <I>nml</I>。</TD>
+
+</TR><TR VALIGN="top">
+<TD width=16%>\u<I>n</I></TD>
+<TD width=84%>匹配 <I>n</I>，其中 <I>n</I> 是以四位十六进制数表示的 Unicode 字符。例如，\u00A9 匹配版权符号 (&copy;)。</TD>
+</TR>
+</table></div><H4 class="dtH4">请参见</H4><P><A HREF="jsreconintroductiontoregularexpressions.htm">正则表达式介绍</A></P>
+<!--Footer Start-->
+
+<DIV CLASS="footer">
+<br>
+<HR><!--Feedback Link-->
+<p><A HREF="JavaScript:sendfeedback('CHS _731801', 'VSDOCS@MICROSOFT.COM')">将文档反馈发送给 Microsoft</A></p><!--Copyright-->
+<p><MSHelp:link keywords="vxmscCopyright" TABINDEX="0">&copy; 2002 Microsoft Corporation。保留所有权利。</MSHelp:link></p></div> <!--Closes the footer div-->
+</div> <!--closes the topic content div-->
+<!--FOOTER_END-->
+</BODY>
+</HTML>
