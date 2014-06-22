@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ZH-cn">
 <head>
-<title>DrawSth use Canvas or VML</title>
+<title>DrawSth use Canvas or VML by ikitty</title>
 <meta charset="utf-8"/>
 <style type="text/css" media="screen">
     * {margin:0;padding:0;list-style:none;}
@@ -16,7 +16,7 @@
 <ul id="hero">
     <li>赵云</li>
     <li>马超</li>
-    <li>姜维</li>
+    <li>张辽</li>
 </ul>
 
 <div class="ability_box_wrap">
@@ -26,7 +26,6 @@
 <script type="text/javascript">
 var canvasSupported = !!document.createElement("canvas").getContext ;
 
-//todo opt
 function $extend(){
     // copy reference to target object
     var target = arguments[0] || {},
@@ -115,7 +114,6 @@ var Dv = {
             }
         };
         _run();
-        
     },
 
     render: function (aPath) {
