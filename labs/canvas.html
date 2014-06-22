@@ -24,7 +24,6 @@
 </div>
 
 <script type="text/javascript">
-var canvasSupported = !!document.createElement("canvas").getContext ;
 
 function $extend(){
     // copy reference to target object
@@ -50,6 +49,8 @@ function $extend(){
     }
     return target;
 }
+
+var canvasSupported = !!document.createElement("canvas").getContext ;
 
 // canvas lib by alex
 var Dv = {
@@ -162,6 +163,7 @@ var Dv = {
     }
 }; 
 
+// VML lib by alex
 var setVml = {
     init: function () {
         if (!window.vml) {
@@ -203,7 +205,7 @@ var setVml = {
     }
 };
 
-// start 
+// draw
 var drawAbility = {
     init: function (path) {
         canvasSupported ? this.useCanvas(path) : this.useVml(path);
