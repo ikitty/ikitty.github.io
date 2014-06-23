@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XLSX parse by JS</title>
+<style>
+* {margin:0;padding:0;list-style:none;}
+body {font:400 14px/22px Arial;}
+.wrap {width:900px;margin:0 auto;padding-top:20px;}
+#drop{border:2px dashed #F6BF33;background-color:rgba(255,200,5,0.2);height:80px;text-align:center;font-size:20px;line-height:80px;font-family: "Microsoft YaHei";color:#C04719;border-radius:3px;}
+.txts {margin-top:20px;width:886px;height:500px;padding:5px;border:2px solid green;background-color:#F2F5F2;border-radius:3px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+    <div id="drop">拖入xlsx文件</div>
+    <textarea class="txts" id="ret"></textarea>
+</div>
+
+
+<script src="shim.js"></script>
+<script src="jszip.js"></script>
+<script src="xlsx.js"></script>
+<script>
+(function () {
+    function setH (argument) {
+        document.getElementById('ret').style.height = (document.documentElement.clientHeight - 150) + 'px';
+    }
+    window.onload = window.onresize = function () {
+        setH();
+    }
+})();
+
+var rABS = typeof FileReader !== "undefined" && typeof FileReader.prototype !== "undefined" && typeof FileReader.prototype.readAsBinaryString !== "undefined";
+function fixdata(data) {
+	var o = "", l = 0, w = 10240;
+	for(; l<data.byteLength/w; ++l)
+		o+=String.fromCharCode.apply(null,new Uint8Array(data.slice(l*w,l*w+w)));
+	o+=String.fromCharCode.apply(null, new Uint8Array(data.slice(o.length)));
+	return o;
+}
+
+function xlsxworker(data, cb) {
+	var worker = new Worker('./xlsxworker.js');
+	worker.onmessage = function(e) {
+		switch(e.data.t) {
+			case 'ready': break;
+			case 'e': console.error(e.data.d); break;
+			case 'xlsx': cb(JSON.parse(e.data.d)); break;
+		}
+	};
+	var arr = rABS ? data : btoa(fixdata(data));
+	worker.postMessage({d:arr,b:rABS});
+}
+
+function to_json(workbook) {
+	var result = {};
+	workbook.SheetNames.forEach(function(sheetName) {
+		var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+		if(roa.length > 0){
+			result[sheetName] = roa;
+		}
+	});
+	return result;
+}
+
+function to_csv(workbook) {
+	var result = [];
+	workbook.SheetNames.forEach(function(sheetName) {
+		var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+		if(csv.length > 0){
+			result.push("SHEET: " + sheetName);
+			result.push("");
+			result.push(csv);
+		}
+	});
+	return result.join("\n");
+}
+
+function to_formulae(workbook) {
+	var result = [];
+	workbook.SheetNames.forEach(function(sheetName) {
+		var formulae = XLSX.utils.get_formulae(workbook.Sheets[sheetName]);
+		if(formulae.length > 0){
+			result.push("SHEET: " + sheetName);
+			result.push("");
+			result.push(formulae.join("\n"));
+		}
+	});
+	return result.join("\n");
+}
+
+function process_wb(wb) {
+	var output = JSON.stringify(to_json(wb), 2, 2);
+    document.getElementById('ret').innerHTML = output;
+}
+
+var drop = document.getElementById('drop');
+function handleDrop(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	var files = e.dataTransfer.files;
+	var i,f;
+	for (i = 0, f = files[i]; i != files.length; ++i) {
+		var reader = new FileReader();
+		var name = f.name;
+		reader.onload = function(e) {
+			if(typeof console !== 'undefined') console.log("onload", new Date());
+			var data = e.target.result;
+			if(typeof Worker !== 'undefined') {
+				xlsxworker(data, process_wb);
+			} else {
+				var wb;
+				if(rABS) {
+					wb = XLSX.read(data, {type: 'binary'});
+				} else {
+				var arr = fixdata(data);
+					wb = XLSX.read(btoa(arr), {type: 'base64'});
+				}
+				process_wb(wb);
+			}
+		};
+		if(rABS) reader.readAsBinaryString(f);
+		else reader.readAsArrayBuffer(f);
+	}
+}
+
+function handleDragover(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	e.dataTransfer.dropEffect = 'copy';
+}
+
+if(drop.addEventListener) {
+	drop.addEventListener('dragenter', handleDragover, false);
+	drop.addEventListener('dragover', handleDragover, false);
+	drop.addEventListener('drop', handleDrop, false);
+}
+</script>
+</body>
+</html>
+

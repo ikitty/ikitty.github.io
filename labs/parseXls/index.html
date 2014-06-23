@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XLS parse by JS</title>
+<style>
+* {margin:0;padding:0;list-style:none;}
+body {font:400 14px/22px Arial;}
+.wrap {width:900px;margin:0 auto;padding-top:20px;}
+#drop{border:2px dashed #F6BF33;background-color:rgba(255,200,5,0.2);height:80px;text-align:center;font-size:20px;line-height:80px;font-family: "Microsoft YaHei";color:#C04719;border-radius:3px;}
+.txts {margin-top:20px;width:886px;height:500px;padding:5px;border:2px solid green;background-color:#F2F5F2;border-radius:3px;}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+    <div id="drop">拖入xls文件</div>
+    <textarea class="txts" id="ret"></textarea>
+</div>
+
+<script src="shim.js"></script>
+<script src="xls.js"></script>
+<script>
+(function () {
+    function setH (argument) {
+        document.getElementById('ret').style.height = (document.documentElement.clientHeight - 150) + 'px';
+    }
+    window.onload = window.onresize = function () {
+        setH();
+    }
+})();
+var use_worker = true;
+function xlsworker(data, cb) {
+	var worker = new Worker('./xlsworker.js');
+	worker.onmessage = function(e) {
+		switch(e.data.t) {
+			case 'ready': break;
+			case 'e': console.error(e.data); break;
+			case 'xls': cb(e.data.d); break;
+		}
+	};
+	worker.postMessage(data);
+}
+
+function get_radio_value( radioName ) {
+	var radios = document.getElementsByName( radioName );
+	for( var i = 0; i < radios.length; i++ ) {
+		if( radios[i].checked ) {
+			return radios[i].value;
+		}
+	}
+}
+
+function to_json(workbook) {
+	var result = {};
+	workbook.SheetNames.forEach(function(sheetName) {
+		var roa = XLS.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+		if(roa.length > 0){
+            for (var i = 0, k ; k = roa[i] ; i++ ) {
+                var _a = [];
+                for (var j in k) {
+                    if (!/^__.*__$/gi.test(j)) {
+                        _a.push(k[j]);
+                    }
+                }
+                roa[i] = _a;
+            }
+			result[sheetName] = roa;
+		}
+	});
+	return result;
+}
+
+function to_csv(workbook) {
+	var result = [];
+	workbook.SheetNames.forEach(function(sheetName) {
+		var csv = XLS.utils.make_csv(workbook.Sheets[sheetName]);
+		if(csv.length > 0){
+			result.push("SHEET: " + sheetName);
+			result.push("");
+			result.push(csv);
+		}
+	});
+	return result.join("\n");
+}
+
+function to_formulae(workbook) {
+	var result = [];
+	workbook.SheetNames.forEach(function(sheetName) {
+		var formulae = XLS.utils.get_formulae(workbook.Sheets[sheetName]);
+		if(formulae.length > 0){
+			result.push("SHEET: " + sheetName);
+			result.push("");
+			result.push(formulae.join("\n"));
+		}
+	});
+	return result.join("\n");
+}
+
+var tarea = document.getElementById('b64data');
+function b64it() {
+/*
+	var cfb = XLS.CFB.read(tarea.value, {type: 'base64'});
+	var wb = XLS.parse_xlscfb(cfb);
+*/
+	var wb = XLS.read(tarea.value, {type:'base64'});
+	process_wb(wb);
+}
+
+function process_wb(wb) {
+	if(typeof Worker !== 'undefined') XLS.SSF.load_table(wb.SSF);
+	var output = JSON.stringify(to_json(wb), 2, 2);
+    document.getElementById('ret').innerHTML = output;
+}
+
+var drop = document.getElementById('drop');
+function handleDrop(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	var files = e.dataTransfer.files;
+	var i,f;
+	for (i = 0, f = files[i]; i != files.length; ++i) {
+		var reader = new FileReader();
+		var name = f.name;
+		reader.onload = function(e) {
+			var data = e.target.result;
+			if(use_worker && typeof Worker !== 'undefined') {
+				xlsworker(data, process_wb);
+			} else {
+				/*var cfb = XLS.CFB.read(data, {type: 'binary'});
+			//var arr = String.fromCharCode.apply(null, new Uint8Array(data));
+			//var cfb = XLS.CFB.read(btoa(arr), {type: 'base64'});
+				var wb = XLS.parse_xlscfb(cfb);*/
+				var wb = XLS.read(data, {type:'binary'});
+			process_wb(wb);
+			}
+		};
+		reader.readAsBinaryString(f);
+		//reader.readAsArrayBuffer(f);
+	}
+}
+
+function handleDragover(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	e.dataTransfer.dropEffect = 'copy';
+}
+
+if(drop.addEventListener) {
+	drop.addEventListener('dragenter', handleDragover, false);
+	drop.addEventListener('dragover', handleDragover, false);
+	drop.addEventListener('drop', handleDrop, false);
+}
+</script>
+</body>
+</html>
