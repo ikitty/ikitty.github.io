@@ -46,7 +46,7 @@ p{margin:0 0 10px;}
 small{font-size:85%;}
 strong{font-weight:bold;}
 cite{font-style:normal;}
-h1,h2,h3,h4{margin:10px 0;font-family:inherit;font-weight:bold;line-height:20px;color:inherit;text-rendering:optimizelegibility;}h1 small,h2 small,h3 small,h4 small,h5 small,h6 small{font-weight:normal;line-height:1;color:#999999;}
+h1,h2,h3,h4{margin:10px 0;font-weight:bold;line-height:20px;color:inherit;text-rendering:optimizelegibility;}h1 small,h2 small,h3 small,h4 small,h5 small,h6 small{font-weight:normal;line-height:1;color:#999999;}
 h1,h2,h3{line-height:40px;}
 h1{font-size:38.5px;}
 h2{font-size:31.5px;}
@@ -185,15 +185,16 @@ li.L9 { background: #eee }
 .tag_box a.active { background: #57A957; border: 1px solid #4c964d; color: #FFF; }
 
 /* custom */
-.navbar .brand {font-size:22px;font-family:"lucida glande", "tahoma";letter-spacing:1px;}
+.navbar .brand {font-size:22px;font-weight:400;}
 
-h1 {font:400 28px/35px "lucida glande",tahoma,arial;}
-h2 {font:400 24px/35px "lucida glande",tahoma,arial;}
-.content {font:400 16px/28px tahoma;}
+h1,
+h2 {font-weight:400;font-size:28px;line-height:35px;}
+h2 {font-size:24px;}
+.content {font-size:16px;line-height:29px;font-weight:400;}
 .content li {line-height:30px;}
 
-.post-full h3 { font:400 20px/35px "lucida glande",tahoma,arial;margin:25px 0px;padding-left:10px;border-left:3px solid #555;background-color:#eee;}
-.post-full h4 { font:400 18px/35px "lucida glande",tahoma,arial;margin:20px 0px;}
+.post-full h3 { font-weight:400;font-size:20px;line-height:35px;margin:25px 0px;padding-left:10px;border-left:3px solid #555;background-color:#eee;}
+.post-full h4 { font-weight:400;font-size:18px;line-height:35px;margin:20px 0px;}
 
 .posts {margin:0px;}
 .posts p {margin:10px 0px;}
