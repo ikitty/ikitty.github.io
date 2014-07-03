@@ -82,3 +82,41 @@ JS和OC都支持嵌套调用，在JS中，我们可以将一个函数的结果�
     obj.name = @"iPhone";
     output = obj.name ;
 
+###Extend
+
+OC中的categories允许你动态去扩展一个类的方法（不需要成为他的子类就可用用新方法）. 这个特性让我想起JS中的prototype。
+比如我们经常对低版本浏览器扩展String的trim方法。
+
+    //JS
+    String.prototype.trim = function () {
+        return this.replace(/^\s+|\s+$/g, '');
+    }
+    var myStr = ' iPhone';
+    myStr.trim();
+
+下面的代码展示了给NSString对象扩展一个isURL方法
+
+    //OC code:
+    //.h
+    #import <Cocoa/Cocoa.h>
+    @interface NSString (Utilities)
+    - (BOOL) isURL;
+    @end
+
+    //.m
+    #import "NSString-Utilities.h"
+    @implementation NSString (Utilities)
+    - (BOOL) isURL {
+        if ( [self hasPrefix:@"http://"] )
+            return YES;
+        else
+            return NO;
+    }
+    @end
+
+    //use
+    NSString* string1 = @"http://ikitty.github.io/";
+
+    if ( [string1 isURL] )
+        NSLog (@"string1 is a URL");
+        
