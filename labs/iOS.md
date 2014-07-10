@@ -57,3 +57,16 @@ drag a webview to view ,create a class for webView.
 ###search bar
 
 darg , 
+
+###js
+
+imgRoll 的状态和方法映射到外部
+    
+    bns.imgRollIndex
+   Bns.imgRollPrev()
+
+onscroll
+    根据imgroll的index判断当前状态
+        如果index++ == 9 then do slidescene(2)
+        如果index-- == 8 then do slideScene(1)
+
