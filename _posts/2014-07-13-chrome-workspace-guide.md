@@ -15,6 +15,8 @@ tags: [chrome, webkit, debug]
 
 在chrome按F12打开developer tools，点击右侧“齿轮”图标进入设置界面。切换到workspace选项卡，点击“Add folder...”,选择你期待加入workspace的项目文件夹。此时浏览器顶部会出现一个警告提示，点击"允许"(这样chrome才拥有对文件的写权限)。
 
+![map](/images/workspace-allow-edit.jpg)
+
 ###设置映射规则
 
 之前看到的一些指引都是让你选中刚添加的workspace，点击“edit”手动编辑映射规则。但是对于还处于开发阶段的本地项目，完全没必要去手动写规则（一开始我也坑在这里，后来发现是规则写的不正确）
