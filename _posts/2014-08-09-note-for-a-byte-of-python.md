@@ -278,13 +278,51 @@ Class var are shared -- they can be accessed by all instances of Class, if one i
     toy1.gone()
     Toy.howmany()
 
-
 ####Inheritance
+
+the purpose of inheritance is reuse of code. It's not easy to create a well superclass.
+
+    class Girl:
+        def __init__(self,name):
+            self.name = name
+            print name, 'inited'
+        def show(self):
+            print 'name is: %s ' % self.name
+    #notice ,remember pass base class as a arg
+    class Beautygirl(Girl):
+        def __init__(self,name, leg):
+            #first init base class
+            Girl.__init__(self, name)
+            #self point to ?
+            self.leg = leg
+            print 'beautygirl inited named:', self.name
+        def show(self):
+            Girl.show(self)
+            print 'my leg is: %s ' % self.leg
+
+    bg1 = Beautygirl('michelle', 'white, long')
+    bg1.show()
 
 ###九.More
 
-coming soon.
+####IO
+
+use `raw_input` to interactive with user
+
+    inputs = raw_input('what do you want?\n')
+    if  inputs in ['money', 'girl', 'happy']:
+        print 'good idea'
+    else:
+        print 'you wanna :', inputs
+
+write file
+
+    text = 'hi guys'
+    f = open(file, 'w')
+    f.write(text)
+    f.close()
+
+####Unicode
 
 ####Exception
-####IO
 
