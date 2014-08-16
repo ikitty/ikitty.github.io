@@ -235,6 +235,7 @@ Self -- a variable refers to itself in class
 ####Classes
 
     class Person:
+        #class inited, __init__ runned
         def __init__(self, name):
             print name, 'has beed inited'
             self.name = name
@@ -244,8 +245,41 @@ Self -- a variable refers to itself in class
     p = Person('jack')
     p.say()
     
+####Data: Class var and Object var
 
-####Method
+Class var are shared -- they can be accessed by all instances of Class, if one instance changed a Class var, other instance of Class will seen this change. Object var owned by each instance of Class. Each object has one copy.
+
+**one exception, adding double underscore prefix to class var, this var will be private.**
+
+    class Toy:
+        #class var
+        count = 0
+        #if you want to have a private var ,you cau add special prefix: __private
+
+        def __init__(self, name):
+            #name is object var
+            self.name = name 
+            # here use className as prefix
+            # also, we can use : self.__class__.count +=1
+            Toy.count +=1
+
+        def gone(self):
+            print self.name, 'gone'
+            # here use className as prefix
+            Toy.count -=1
+
+        @classmethod
+        def howmany(cls):
+            print 'class count is: ', cls.count
+
+    toy1 = Toy('aa')
+    toy2 = Toy('bb')
+    Toy.howmany()
+    toy1.gone()
+    Toy.howmany()
+
+
+####Inheritance
 
 ###九.More
 
