@@ -183,6 +183,8 @@ like Json, couples of key and value
 - values
 - del
 
+show case:
+
     #get value by key
     D = {'age': 25, 'name': 'darven'}
     for key,value in D.items():
