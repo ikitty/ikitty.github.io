@@ -33,6 +33,12 @@ in fact , format is powerful and useful:
     print '{0:.3f}'.format(1.0/3) # 0.333
     #expand string
     print '{0:_^11}'.format('hello') # ___hello___
+
+####string method
+
+- `in`, substring in string
+- `find`, str.find(sub)
+- `join`, ''.join(list)
     
 ###二.Format
 
@@ -136,27 +142,106 @@ If our function arguments is dynamic, we can use stars:
 
 ###六.Modules
 
-coming soon.
+Module is good for code reuse.
 
-####dir
+####__name__
+
+`__name__` can be used for figuring out whether the module runned standalone or being imported. and we can use it to test single module:
+
+    if __name__ == '__main__':
+        testA()
+    else:
+        print 'the module runned by imported'
+
 ####package
 
+Want to organize modules? A package has coming. It's just a folders of modules with a `__init__.py` file that tells python the folder is special for modules. Package could be nested.
 
 ###七.Data structure
 
-- list, like Array in JavaScript
-- tuple, like list but immutable
-- dict, like Json
+####list [1,2]
 
-####Attr and method
+Just like Array in JavaScript, list items has an order, and can be mutable. supproted method:
+
+- append
+- len
+- sort, but we'd better use `sorted` instead
+- `del list[index]`
+- use `[index]` access specify item
+
+####tuple (1,2)
+
+Like list but immutable, use parenthese instead of square brackets. Although parenthese is optional, we always using it.
+
+####dict {key: value}
+
+like Json, couples of key and value
+
+- items, a list with tuples which include key and value. be useful in `for in` statement
+- iteritems,a itemiterator object memory address, but taken similar effect in `for in`.. to be confirm.
+- keys
+- values
+- del
+
+    #get value by key
+    D = {'age': 25, 'name': 'darven'}
+    for key,value in D.items():
+        if  value == 25:
+            print key
 
 ####Sequence
 
+String, list, tuple mentioned sequence and can slice specify part of them. items and their indexs:
+    
+      l=['a', 'b', 'c']
+          1    2    3
+          -3   -2   -1
+
+    l[startPos: endPos] #notice endPos not including item in end postion
+
+slice operation provice another arguments -- step:
+
+    L = [1,2,3,4]
+    print L[::2] # [1,3]
+    print L[::3] # [1,4]
+    print L[::-1] # [4,3,2,1], similar with inverse
+
+####References
+
+the variable for object only points to memory which object is stored.
+
+    l = [1,3,5]
+    ll = l 
+    print ll
+    del[0]
+    # ll has been affected
+    print ll
+
+to avoid that, we can make a copy :
+
+    l = [1,3,5]
+    ll = l[:]
+    print ll
+    del[0]
+    # ll remains init values
+    print ll
+
 ###八.OOP
 
-coming soon.
+Self -- a variable refers to itself in class
 
 ####Classes
+
+    class Person:
+        def __init__(self, name):
+            print name, 'has beed inited'
+            self.name = name
+        def say(self):
+            print 'hi', self.name
+
+    p = Person('jack')
+    p.say()
+    
 
 ####Method
 
