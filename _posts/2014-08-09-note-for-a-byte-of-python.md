@@ -64,7 +64,7 @@ Indentation is very important, Python parser check code block by indentation (we
 
 ###四.Control Flow
 
-- if, elif, else
+- if, elif, else. you can write them in one line `value_when_true if condition else value_when_false`
 - while, break, continue
 - for, for i in data. data could be range(1,10), string, list, dict.
 
