@@ -288,15 +288,18 @@ the purpose of inheritance is reuse of code. It's not easy to create a well supe
             print name, 'inited'
         def show(self):
             print 'name is: %s ' % self.name
-    #notice ,remember pass base class as a arg
+
+    #notice ,specify base class in a tuple following the subclass name
+    #python support multiple inheritance
     class Beautygirl(Girl):
         def __init__(self,name, leg):
-            #first init base class
+            #notice: using self to call init of base class
+            #python doesnot call consturctor of base class
             Girl.__init__(self, name)
-            #self point to ?
             self.leg = leg
             print 'beautygirl inited named:', self.name
         def show(self):
+            #python look for method by chain
             Girl.show(self)
             print 'my leg is: %s ' % self.leg
 
@@ -322,7 +325,44 @@ write file
     f.write(text)
     f.close()
 
-####Unicode
+file operation mode can be read(`r`), write(`w`) and append(`a`)
+
+Also, we can use `pickle` module to store/load plain Python object. It's handy for saving user data.
+
+    import pickle
+
+    #in write and binary mode
+    f = open('./temp.data', 'wb' )
+    pickle.dump(mymod.D, f)
+    f.close()
+
+    f = open('./temp.data', 'rb' )
+    getData = pickle.load(f)
+    print getData
+
+`unicode` type can solve multiple characters problem. and we need to convert unicdoe string into a format that can be sent or received. the format calls `UTF-8`.
+
+    import io
+    f = io.open('./text_cn.txt', 'at', encoding = 'utf-8')
+    f.write(u'origin ascii code, \u8000\u8001')
+    f.close()
+    print  io.open('./text_cn.txt',  encoding = 'utf-8').read()
 
 ####Exception
 
+    try:
+        inputs = raw_input('what do you want?\n')
+    except (KeyboardInterrupt, EOFError):
+        print 'keyboardInterrupt or eofError'
+    else:
+        print inputs
+    finally:
+        print 'finally print, you will see it whatever'
+
+####with
+
+similar with `try finally`
+
+    with open('./test.txt') as f:
+        for line in f:
+            print line
