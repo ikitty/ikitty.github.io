@@ -143,15 +143,21 @@ Javascript是动态型语言，所以可知你不能指定变量的类型，也�
 
 有同学undefined和null傻傻分不清楚，可能是由于`undefined == null`返回true了导致，其实JS的`==`运算符是会自动转换类型的。undefined不是js的关键字，但是全局变量。通常在以下几种情况会出现undefined：
 
+- 访问未被修改的全局变量undefined
 - 对未定义的变量进行typeof操作，`typeof x`  (这是typeof为数不多的技能)
 - 引用了已经定义但没有赋值的变量
 - 使用了一个对象的属性，但是该属性不存在或者未赋值
-- 函数默认的返回值
+- 没有return表达式的函数隐式返回
 - 函数返回值为`return ;`
 
-Null可以看做Object类型的一个特殊值，如果一个对象的值为null，其表示该对象不是一个有效对象。对于null是如何工作也是有误解的，将一个对象引用设置为null，并没有使对象变“空”，只是将它的引用设置为空而已。
+Null是返回的数据不是一个合法的对象、数字、字符串、布尔。如`Object.prototype.__proto__的值为null`. 对于null是如何工作也是有误解的，将一个对象引用设置为null，并没有使对象变“空”，只是将它的引用设置为空而已。
 
-NaN(Not a Number)表示非数字,但是是Number类型. 为什么要提到这个，是因为许多开发者容易看到这东西第一反应和null扯在一起，以为是空对象了。还有在表示一个非数字值时（此处不考虑类型）可以调用方法isNaN().
+NaN(Not a Number)表示非数字,但是是Number类型. 为什么要提到这个，是因为许多开发者容易看到这东西第一反应和null扯在一起，以为是空对象了。还有在表示一个非数字值时（此处不考虑类型）可以调用方法isNaN().他会删除NaN和Infinity，会试图将其运算数转换成数字。
+
+    var isNumber  = function (v) {
+       return Object.prototype.toString.call(v)  === '[object Number]' && isFinite(v) ;
+    } ;
+
 
 ####array-like对象
 
@@ -185,6 +191,10 @@ NaN(Not a Number)表示非数字,但是是Number类型. 为什么要提到这个
 
 ####数据删除delete
 
+- 局部变量无法删除 //fn变量
+- var定义的无法删除
+- Array的length属性可读可写, 不可删除
+
 最新的chrome的测试结果:
 
     var o_local = new Object();
@@ -201,7 +211,7 @@ NaN(Not a Number)表示非数字,但是是Number类型. 为什么要提到这个
     delete str_global;
     console.log(str_global); //str_global is undefined
 
-不难看出，只能删除全局变量，通过var定义的变量是无法被delete的。另外不建议直接删除对象的属性，如果不再使用某个属性，可以将其设置为Null。
+另外不建议直接删除对象的属性，如果不再使用某个属性，可以将其设置为Null。
 
 ###运算符
 
@@ -307,8 +317,185 @@ callee指向当前执行的函数，在匿名函数中递归调用自身的时�
 
 JSer必须了解的两条链：prototype chain , scope chain .先说prototype
 
-coming soon...
+__proto__指向用于创建对象的类或者构造函数的prototype ，如foo.constructor.prototype
+
+    var foo = function (){}
+    //function Empty(){}
+    foo.constructor.prototype
+    //等价于__proto__
+    Object.getPrototypeOf(foo)
+
+
+字面量的类型是Object，而Object本身的类型确实Function
+
+    // [object Object]
+    console.log(Object.prototype.toString.call({}) ) ;
+    // [object Function]
+    console.log(Object.prototype.toString.call(Object) ) ;
+
+    // 上面的结果让人有点晕，我们可以看其构造函数的原型
+    // function Empty(){}
+    console.log(Object.getPrototypeOf(Object) ) ;
+
+
+    function Foo(){}
+    var foo = new Foo();
+    var obj = new Object();
+
+    //Foo.prototype 
+    foo.__proto__ 
+    // Object.prototype
+    Foo.prototype.__proto__
+    // Function.prototype
+    Foo.__proto__
+
+    //nullj
+    Object.prototype.__proto__ 
+
+    // Object.prototype
+    obj.__proto__
+    //Function.prototype
+    Object.__proto__
+    //Function.prototype
+    Funtion.__proto__
+
+
+实例化之前修改构造函数的原型，使得
+
+    // 实例化前修改
+    function Foo () { }
+    Foo.prototype = {};
+    var foo = new Foo();
+
+    //false 原型的构造函数不能指回构造函数
+    foo.constructor == Foo 
+    //true
+    foo instanceof Foo
+
+实例化后修改
+
+    function Foo () { }
+    var foo = new Foo();
+    Foo.prototype = {};
+
+    //true
+    foo.constructor == Foo
+    //false,构造函数的prototype被修改之后，和实例的原型不指向同一对象了
+    foo instanceof Foo
+
+###prototype
+
+JS中所有的模拟OOP的继承方法都是围绕prototype属性在进行
+
+    //extend(girl, human)
+    function extend(sub, sup) { 
+        // 使用一个空函数f, 降低实例化的消耗的内存
+        var f = function () {} ;
+        f.prototype = sup.prototype ;
+        sub.prototype = new f() ;
+        sub.prototype.constructor = sub ;
+    }   
+
+###实例化
+
+- 创建一个对象
+- 将此对象的__proto__指向(不是赋值，实例化之后修改prototype的属性后，实例通过原原型引用的属性也会变更)构造函数的prototype，如果她为非object，则指向Object.prototype
+- 将创建的对象作为this调用构造函数
+
+如何测试一个对象是否是另外一个对象的实例呢？可以用instanceOf.如：foo instanceOf Foo. 
+
+- 检测foo.__proto__是不是Foo的prototype，
+- 如果不是,就继续向上查找foo.__proto__.__proto__
+- 直到__proto__不是对象
+
+
 
 ###scope chain
 
+####function invocation pattern 
+
+this 指向global对象，在浏览器环境中，即指window对象,共有这几种情况：
+
+- 函数中嵌套的函数，匿名函数，callback等
+- 直接在DOM中内联调用fn()，<div onclick="fn()">
+
+    (function () {
+        //window
+        console.log(this) ;
+
+        var fnInner = function () {
+            //window
+            console.log('inner fn this, ', this) ;
+        }
+        fnInner()
+    })()
+
+
+####method invocation pattern
+
+    var foo = {
+        bar: function () {
+            //refer to foo
+            console.log(this) ;
+        }
+    }
+    foo.bar()
+
+当把function赋值给其他句柄时，this会改变，比如:
+
+    //函数bar中的this会执行elTest这个DOM对象
+    //还是那个foo，还是那个bar，里面的this早已偷梁换柱
+    document.getElementById('elTest').onclick = foo.bar;
+
+    someone.bar = foo.bar;
+
+所以直接在DOM中绑定事件和通过JS获取DOM对象再绑定事件不完全是一回事。
+
+####Constructor pattern
+
+实例化生成的对象里面的this只是指向新产生的实例（这点在实例化的过程中就讲的很清楚了）
+
+    var fnCons = function () {
+    }
+    fnCons.prototype = {
+        showName: function () {
+            console.log(this.name) ;
+        }
+    }
+    var aFn = new fnCons();
+    aFn.name = 123;
+    aFn.showName()
+
+
+####call/apply pattern
+
+    //bar中的this指向foo，
+    bar.call(foo) 
+    //上面在讲arguments.callee的时候还用过这个方法来重设this的
+    bar.apply(foo) 
+
+
+###Closure
+
+当函数实例执行时会创建或关联一个闭包closure，scriptObject用来保存静态的与函数相关的变量表等，closure则在执行期间动态保存这些变量及运行值，其生命周期可能比函数实例长，函数实例在活动引用为空之后自动销毁，closure则要等数据引用为空后，由js回收，否则内存泄漏。
+
+缺点：内部函数保持对外部函数作用域内变量访问的权限，给GC带来困难
+
+---------------------分割线------------------
+
+###其他细节
+
+不建议使用setInterval，由于js单线程的本质，当setInterval调用的函数被阻塞，setInterval在此时还在持续发起调用指令，形成一个指令堆。
+
+
+####Get方法和post方法的差异
+
+在B/S应用程序中，前台与后台的数据交互，都是通过HTML中Form表单完成的。Form提供了两种数据传输的方式——get和post。虽然它们都是数据的提交方式，但是在实际传输时确有很大的不同，并且可能会对数据产生严重的影响。虽然为了方便的得到变量值，Web容器已经屏蔽了二者的一些差异，但是了解二者的差异在以后的编程也会很有帮助的。Form中的get和post方法，在数据传输过程中分别对应了HTTP协议中的GET和POST方法。二者主要区别如下：
+
+- Get是用来从服务器上获得数据，而Post是用来向服务器上传递数据。
+- Get将表单中数据的按照variable=value的形式，添加到action所指向的URL后面，并且两者使用“?”连接，而各个变量之间使用 “&”连接；Post是将表单中的数据放在form的数据体中，按照变量和值相对应的方式，传递到action所指向URL。
+- Get是不安全的，因为在传输过程，数据被放在请求的URL中，而如今现有的很多服务器、代理服务器或者用户代理都会将请求URL记录到日志文件中，然后放在某个地方，这样就可能会有一些隐私的信息被第三方看到。另外，用户也可以在浏览器上直接看到提交的数据，一些系统内部消息将会一同显示在用户面前。Post的所有操作对用户来说都是不可见的。
+- Get传输的数据量小，这主要是因为受URL长度限制；而Post可以传输大量的数据，所以在上传文件只能使用Post（当然还有一个原因，将在后面的提到）。
+- Get限制Form表单的数据集的值必须为ASCII字符；而Post支持整个ISO10646字符集。
+- Get是Form的默认方法。
 

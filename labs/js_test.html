@@ -11,54 +11,49 @@
 </head>
 <body>
 
+    <div id="elTest" class="">
+        test test
+    </div>
 <script type="text/javascript">
 
-    var fn = function (a,b, c) {
-        console.log(arguments.length) ;
-        console.log(arguments.callee.caller) ;
+var arr = [1,3,4,5];
+
+
+//===this
+(function () {
+    //window
+    console.log(this) ;
+
+    var fnInner = function () {
+        //window
+        console.log('inner fn this, ', this) ;
     }
-    ~function () {
-        console.log('11') ;
-    }()
+    fnInner()
+})()
 
-    var arr = [1,3,4,5]
-
-    //基础版
-    //每次循环都要计算一次arr的length
-    for (var i = 0; i < arr.length; i++) {
-        console.log(arr[i]) ;
-    };
-
-    //进阶1
-    //只需要计算一次length
-    for (var i = 0, le = arr.length ; i < le; i++ ) {
-        console.log(arr[i]) ;
+var foo = {
+    bar: function () {
+        //refer to foo
+        console.log(this) ;
     }
+}
+// foo.bar()
 
-    //进阶1.1
-    //who care length!
-    //但是这种方式有局限性，如果要遍历的对象中有元素是0或者''可以被判定为false的值，就悲剧了
-    //所以这种方式慎用,尤其是团队协作的时候
-    for (var i = 0, k ; k = arr[i] ; i++ ) {
-        console.log(k) ;
-    }
+var someone = {x:1}
+someone.bar = foo.bar;
+someone.bar()
+
+var foo = function () {
     
-    //进阶2-倒序
-    for (var i = arr.length ; i--; ) {
-        console.log(arr[i]) ;
-    }
-
-    // console.log(fn.length) ;
-var global = this;
-
-var sillyFunction = function (recursed) {
-    // alert("This is: " + this);
-    // if (!recursed) { return arguments.callee( true); }
-    if (!recursed) { return arguments.callee.call(this, true); }
 }
 
-sillyFunction();
-    
+console.log(Object.prototype.toString.call(Object) ) ;
+console.log(Object.getPrototypeOf(Object) ) ;
+
+console.log(Object.prototype.toString.call({}) ) ;
+console.log(Object.getPrototypeOf({}) ) ;
+
+document.getElementById('elTest').onclick = foo.bar;
     
 </script>
 </body>
