@@ -330,6 +330,7 @@ __proto__指向用于创建对象的类或者构造函数的prototype ，如foo.
 
     // [object Object]
     console.log(Object.prototype.toString.call({}) ) ;
+    // Object 类型是Function
     // [object Function]
     console.log(Object.prototype.toString.call(Object) ) ;
 
