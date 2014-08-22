@@ -23,7 +23,9 @@
 - disabled analytics
 - style.css
 - load `pretty.js` onDOMReady
-- Add pagination (config.yml , index.html)
+- Add pagination (_config.yml , index.html)
+- fix page num bug (_config.yml)
+
 
 ##todo
 - opt style.css (bootstrap.css too Havy)
