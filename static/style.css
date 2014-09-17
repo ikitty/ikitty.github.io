@@ -14,7 +14,7 @@ a:hover,a:active{outline:0;}
 sub,sup{position:relative;font-size:75%;line-height:0;vertical-align:baseline;}
 sup{top:-0.5em;}
 sub{bottom:-0.25em;}
-img{max-width:95%;width:auto\9;height:auto;vertical-align:middle;border:0;-ms-interpolation-mode:bicubic;}
+img{max-width:98%;width:auto\9;height:auto;vertical-align:middle;border:0;-ms-interpolation-mode:bicubic;}
 #map_canvas img,.google-maps img{max-width:none;}
 button,input,select,textarea{margin:0;font-size:100%;vertical-align:middle;}
 button,input{*overflow:visible;line-height:normal;}
@@ -197,7 +197,7 @@ h2 {font-size:24px;}
 .post-full h4 { font-weight:400;font-size:18px;line-height:35px;margin:20px 0px;}
 
 .posts {margin:0px;}
-.posts p {margin:10px 0px;}
+.posts p {margin:10px 0px;overflow-y:hidden;}
 .posts li {list-style:none;padding:5px 0px;border-bottom:1px dotted #ddd;}
 .post_tit {padding-left:100px;margin:10px 0;}
 .post_time {float:left;width:90px;margin-left:-100px;}
