@@ -96,7 +96,7 @@ tags: [css, 命名]
 
 1.减少DOM层级和元素: 按照现有结构，为提高渲染效率，建议基于ic_content之后，层级最多不能超过8层
 	
-2.减少ClassName层级: 建议不要超过4级，如：vip_mod_banner_lists, 如果层级确实较多，命名可能会较长，可以采用如下方式进行简化： `vip_mod_banner_lists_name -> vip_mod_banner_lname`
+2.减少ClassName层级: 建议不要超过4级，如：`vip_mod_banner_lists`, 如果层级确实较多，命名可能会较长，可以采用如下方式进行简化： `vip_mod_banner_lists_name -> vip_mod_banner_lname`
 
 3.减少直接定义标签样式: 因浏览器从右向左遍历解析，为提高渲染效率，建议减少定义标签，通过添加class来定义样式，如：`vip_mod_banner_lists_li`
 	
