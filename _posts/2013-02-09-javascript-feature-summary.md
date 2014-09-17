@@ -216,7 +216,8 @@ NaN(Not a Number)表示非数字,但是是Number类型. 为什么要提到这个
 ###运算符
 
 ####一元运算符
-    
+
+
     //translate Date type to Number
     var cur_time = +new Date()
 
@@ -247,7 +248,7 @@ NaN(Not a Number)表示非数字,但是是Number类型. 为什么要提到这个
     flag ? foo() : ''
 
 然而你可以写得更轻巧飘逸(python都没法这么洒脱)：
-    
+
     flag && foo()
     //你还可以这样
     //如果parentNodeId存在则返回根据这个id查询的到的DOM对象，否则返回body对象
@@ -288,7 +289,7 @@ callee指向当前执行的函数，在匿名函数中递归调用自身的时�
 ####function调用的方式
 
 首先看三种调用函数的方式：
-    
+
     //方式1
     (function(){
         //code
@@ -315,29 +316,23 @@ callee指向当前执行的函数，在匿名函数中递归调用自身的时�
 
 ###prototype chain
 
-JSer必须了解的两条链：prototype chain , scope chain .先说prototype
+先来看一张原型链的经典图，此图片详细的描述了 JavaScript 各种对象的显示和隐式原型链结构。
 
-__proto__指向用于创建对象的类或者构造函数的prototype ，如foo.constructor.prototype
+![prototype_chain](/images/prototype_chain.jpg)
 
-    var foo = function (){}
-    //function Empty(){}
-    foo.constructor.prototype
-    //等价于__proto__
-    Object.getPrototypeOf(foo)
+在JavaScript原型继承结构里面，规范中用[[Prototype]]表示对象隐式的原型(对象构造函数的prototype)，在JavaScript中用__proto__表示(也可通过Object.getPrototypeOf()方法来获取)，所有JavaScript对象都有__proto__属性，但Object.prototype.__proto__为null，前提是没有在Firefox或者Chrome下修改过这个属性。这个属性指向它的原型对象。至于显示的原型，在JavaScript里用prototype属性表示。图中开得到的结论：
+
+- constructor和prototype是互逆关系（这是在构造函数创建时便绑定好的）
+- 实例的__proto__是构造函数的prototype
+- 构造函数的prototype的__proto__是Object.prototype
+- Object实例是Object.prototype
+- Object实例的构造函数是function Object(){}, function Object(){}又是由function Function构造的，故其__proto__应该是指向Function.prototype
+- 比较特殊的，function Function(){}的prototype和__proto__都是指向同一个对象，这是因为Function是由它自己创建的。
+- Foo(){}, Object(){}和Function(){}的__proto__都是指向Function.prototype(或许这是爱民为什么说Function是一种数据类型的缘故)
+- 最后Function.prototype的__proto__指向Object.prototype。而Object.prototype.__proto__为null，这是原型连的终点
 
 
-字面量的类型是Object，而Object本身的类型确实Function
-
-    // [object Object]
-    console.log(Object.prototype.toString.call({}) ) ;
-    // Object 类型是Function
-    // [object Function]
-    console.log(Object.prototype.toString.call(Object) ) ;
-
-    // 上面的结果让人有点晕，我们可以看其构造函数的原型
-    // function Empty(){}
-    console.log(Object.getPrototypeOf(Object) ) ;
-
+一些测试：
 
     function Foo(){}
     var foo = new Foo();
@@ -360,11 +355,12 @@ __proto__指向用于创建对象的类或者构造函数的prototype ，如foo.
     //Function.prototype
     Funtion.__proto__
 
+####实例化的影响
 
 实例化之前修改构造函数的原型，使得
 
-    // 实例化前修改
     function Foo () { }
+    // 实例化前修改
     Foo.prototype = {};
     var foo = new Foo();
 
@@ -384,7 +380,7 @@ __proto__指向用于创建对象的类或者构造函数的prototype ，如foo.
     //false,构造函数的prototype被修改之后，和实例的原型不指向同一对象了
     foo instanceof Foo
 
-###prototype
+###基于prototype的继承
 
 JS中所有的模拟OOP的继承方法都是围绕prototype属性在进行
 
