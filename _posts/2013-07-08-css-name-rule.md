@@ -2,8 +2,8 @@
 layout: post
 title: "CSS命名规则"
 description: "由于历史原因及个人习惯引起的DOM结构、命名规则不统一，导致不同成员在维护同一页面时，无从下手，效率低下，迭代、维护成本极高。经过一段时间的摸索和反复修改，和小组成员统一定下了如下规则，提升团队整体效率。"
-category: Python
-tags: [python]
+category: Frontend
+tags: [css, 命名]
 ---
 {% include JB/setup %}
 
