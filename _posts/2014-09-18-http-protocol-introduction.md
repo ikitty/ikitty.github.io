@@ -57,7 +57,7 @@ HTTP/1.1中定义了5类状态码，状态码由三位数字组成，第一个�
 - 404 资源不存在
 - 500 服务端error
 
-[查看全部状态码介绍]('http://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81#1xx.E6.B6.88.E6.81.AF')
+[查看全部状态码介绍](http://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81#1xx.E6.B6.88.E6.81.AF)
 
 
 接下来会详细介绍一些http header里面的字段内容(结合Fiddler实际操作会有更深的印象)。
