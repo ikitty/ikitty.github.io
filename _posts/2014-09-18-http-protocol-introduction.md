@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "http protocol detail"
+title: "Http Protocol Detail"
 description: "协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种基于TCP/IP的通信协议，它允许将各种资源从Web服务器传送到客户端的浏览器."
 category: Frontend
 tags: [http, http_status]
