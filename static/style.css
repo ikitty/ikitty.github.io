@@ -193,8 +193,8 @@ h2 {font-size:24px;}
 .content {font-size:16px;line-height:29px;font-weight:400;}
 .content li {line-height:30px;}
 
-.post-full h3 { font-weight:400;font-size:20px;line-height:35px;margin:25px 0px;padding-left:10px;border-left:3px solid #555;background-color:#eee;}
-.post-full h4 { font-weight:400;font-size:18px;line-height:35px;margin:20px 0px;}
+.post-full h3 { font-weight:600;font-size:26px;line-height:55px;margin:22px 0px;padding-left:10px;border-left:4px solid #555;background-color:#e9e9e9;}
+.post-full h4 { font-weight:600;font-size:22px;border-bottom:1px solid #ddd;line-height:35px;margin:20px 0px;}
 
 .posts {margin:0px;}
 .posts p {margin:10px 0px;overflow-y:hidden;}
