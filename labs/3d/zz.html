@@ -72,8 +72,20 @@ var el = document.getElementById('cubicZone');
 function scrollCont (n) {
     el.style.transform = 'translateZ(' + (1000*n) + 'px)' ;
     console.log(n) ;
-
 }
+
+function keyInit () {
+    window.onkeyup = function (e) {
+        var kc = (window.event || e).keyCode ;
+        if (kc === 37) {
+            current -= 1;
+        }else if (kc === 39){
+            current += 1;
+        }
+        scrollCont(current);
+    }
+}
+keyInit();
 handleWheel(scrollUp, scrollDown);
 </script>
 
