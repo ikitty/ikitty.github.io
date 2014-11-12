@@ -8,10 +8,25 @@
 
 <div class="cubic_zone_wrap">
     <div id="cubicZone" class="cubic_zone">
-        <div class="core">
+        <div class="core hide">
             <div class="core1"> first </div>
             <div class="core2"> second </div>
             <div class="core3"> third </div>
+        </div>
+
+        <div class="stage1">
+            <div class="s11">新</div>
+            <div class="s12">章</div>
+            <div class="s13">
+                敬请期待
+            </div>
+        </div>
+        <div class="stage2">
+            <div class="s21">进</div>
+            <div class="s22">化</div>
+            <div class="s23">
+                新的篇章
+            </div>
         </div>
     </div>
 </div>
@@ -69,8 +84,9 @@ function scrollDown () {
     scrollCont(current);
 }
 var el = document.getElementById('cubicZone');
+var pers = 200 ;
 function scrollCont (n) {
-    el.style.transform = 'translateZ(' + (1000*n) + 'px)' ;
+    el.style.transform = 'translateZ(' + (pers*n) + 'px)' ;
     console.log(n) ;
 }
 
