@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html class="">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="zz.css" type="text/css" media="screen" />
+</head>
+<body>
+
+<div class="cubic_zone_wrap">
+    <div id="cubicZone" class="cubic_zone">
+        <div class="core">
+            <div class="core1"> first </div>
+            <div class="core2"> second </div>
+            <div class="core3"> third </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function (w, modName) {
+    var st
+        ,modName = modName || 'handleWheel'
+        ;
+    function getWheelDir(e) {
+        var delta = 0;
+        e =window.event || e;
+
+        if (e.wheelDelta) {
+            delta = e.wheelDelta/120; 
+        } else if (e.detail) {
+            delta = -e.detail/3;
+        }
+        return delta ;
+    }
+
+    w[modName] = function (doUp, doDown) {
+        function _handleWheel(e) {
+            st && clearTimeout(st);
+            var dir = getWheelDir(e);
+
+            st = setTimeout(function () {
+                if (dir >0) {
+                    (typeof doUp == 'function') && doUp()
+                }else {
+                    (typeof doDown == 'function') && doDown()
+                }
+            }, 80);
+        }
+        window.onmousewheel = document.onmousewheel = _handleWheel;
+        if (window.addEventListener) {
+            window.addEventListener('DOMMouseScroll', _handleWheel, false);
+        }
+    }
+})(window);
+
+var current = 1;
+function scrollUp () {
+    current -= 1 ;
+    if (current < -10) {
+        current = 0;
+    }
+    scrollCont(current);
+}
+function scrollDown () {
+    current += 1 ;
+    if (current > 50) {
+        current = 3;
+    }
+    scrollCont(current);
+}
+var el = document.getElementById('cubicZone');
+function scrollCont (n) {
+    el.style.transform = 'translateZ(' + (1000*n) + 'px)' ;
+    console.log(n) ;
+
+}
+handleWheel(scrollUp, scrollDown);
+</script>
+
+</body>
+</html>
