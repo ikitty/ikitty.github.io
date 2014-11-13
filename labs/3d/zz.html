@@ -14,20 +14,19 @@
             <div class="core3"> third </div>
         </div>
 
-        <div class="stage1">
+        <div id="stage1" class="stage1">
             <div class="s11">新</div>
             <div class="s12">章</div>
-            <div class="s13">
-                敬请期待
-            </div>
+            <div class="s13">敬请期待</div>
         </div>
-        <div class="stage2">
+        <div id="stage2" class="stage2">
             <div class="s21">进</div>
             <div class="s22">化</div>
-            <div class="s23">
-                新的篇章
-            </div>
+            <div class="s23">新的篇章</div>
         </div>
+        <div id="stage3" class="stage3">3</div>
+        <div id="stage4" class="stage4">4</div>
+        <div id="stage5" class="stage5">5</div>
     </div>
 </div>
 
@@ -85,24 +84,34 @@ function scrollDown () {
 }
 var el = document.getElementById('cubicZone');
 var pers = 200 ;
-function scrollCont (n) {
-    el.style.transform = 'translateZ(' + (pers*n) + 'px)' ;
-    console.log(n) ;
+function scrollCont (n, dir) {
+    // el.style.transform = 'translateZ(' + (pers*n) + 'px)' ;
+    console.log(n, dir) ;
+    document.getElementById('stage' + (n+dir)).className = 'current';
+    if (dir < 0) {
+        document.getElementById('stage' + n).className = 'future';
+    }else {
+        document.getElementById('stage' + n).className = 'past';
+    }
 }
+// handleWheel(scrollUp, scrollDown);
 
 function keyInit () {
     window.onkeyup = function (e) {
         var kc = (window.event || e).keyCode ;
+        var c ;
         if (kc === 37) {
+            c = current ;
+            scrollCont(c,-1);
             current -= 1;
         }else if (kc === 39){
+            c = current ;
+            scrollCont(c,1);
             current += 1;
         }
-        scrollCont(current);
     }
 }
 keyInit();
-handleWheel(scrollUp, scrollDown);
 </script>
 
 </body>
