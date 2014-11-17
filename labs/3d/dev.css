@@ -9,7 +9,7 @@ i,em {font-style:normal;}
 a,
 a:hover {text-decoration:none;background-color:transparent;}
 a:focus {outline:none;}
-body {min-width:1000px;padding-top:42px;}
+body {min-width:900px;padding-top:42px;}
 .hide {display:none;}
 .ishow {display:block !important;}
 .ht {text-indent:-9999px;overflow:hidden;}
@@ -29,7 +29,7 @@ h1 {background-image:url(images/logo_8.png);background-repeat:no-repeat;}
 
 /* =====top===== */
 .top_cont {position:relative;height:35px;background-color:#101010;}
-.top_cont_inner {width:990px;height:35px;margin:0 auto;}
+.top_cont_inner {width:900px;height:35px;margin:0 auto;}
 .core_link {float:right;height:100%;}
 .core_link a {float:left;#display:inline;margin:0px 15px;height:100%;font:400 12px/35px tahoma;color:#777;}
 .core_link a.hl {color:#B39646;}
@@ -90,14 +90,7 @@ body {overflow:hidden;}
 
 
 /* =====cubic===== */
-.cubic_zone_wrap {width:100%;height:600px;overflow:hidden;
-}
-.cubic_zone {position:relative;height:100%;
-}
-
-/* other status */
-/*div.past {opacity:0}*/
-.cubic_zone > div {transition:all 0.5s linear;}
+.cubic_zone {position:relative;width:100%;height:600px;overflow:hidden; }
 
 /* common stage */
 .stage_wrap_scale {transform:scale(0.75);}
@@ -107,13 +100,13 @@ body {overflow:hidden;}
 }
 .stage_wrap div,
 .stage_wrap p {position:absolute;left:50%;text-indent:-9999px;overflow:hidden;
-transition: all 1.0s ease-out;
+transition: all 1.2s ease-out;
 }
 
 /* =====stage1===== */
 .stage1 {z-index:10;position:absolute;width:100%;height:100%; opacity:1; }
 .s1_bg1,
-.s1_bg2 {position:absolute;width:50%;height:100%;-webkit-transition: all 1.3s ease-out; transition: all 1.3s ease-out;}
+.s1_bg2 {position:absolute;width:50%;height:100%;}
 .s1_bg1 {left:0px;}
 .s1_bg2 {left:50%;}
 
@@ -122,25 +115,28 @@ transition: all 1.0s ease-out;
 .s13 {margin-left: -250px;top: 440px;width:538px;height:155px;background-position:0px -300px;}
 .s14 {position:absolute;left:50%;margin-left:200px;top:340px;width:200px;height:75px;}
 
-.stage1.past .s1_bg1 {-webkit-animation:s1bgAnim 0.5s 0.5s ease-out forwards;}
-.s1bg_anim {animation:s1bgAnim 0.3s 0s ease-out infinite forwards;}
-@-webkit-keyframes s1bgAnim {
-    0% {left:0;}
+/* anims */
+.stage1.back .s1_bg1 {-webkit-animation:s1bg1back 0.3s 0s ease-out forwards;}
+@-webkit-keyframes s1bg1back {
+    0% {left:-50%;}
+    100% {left:0%;}
+}
+.stage1.back .s1_bg2 {-webkit-animation:s1bg2back 0.3s 0s ease-out forwards;}
+@-webkit-keyframes s1bg2back {
+    0% {left:100%;}
+    100% {left:50%;}
+}
+
+.s1_bg1 {transform-origin:0 0;}
+.stage1.past .s1_bg1 {-webkit-animation:s1bg1past 1.2s 0.3s ease-out forwards;}
+@-webkit-keyframes s1bg1past {
+    0% {left:0;;}
     100% {left:-50%;}
 }
-@keyframes s1bgAnim {
-    0% {}
-    100% {}
-}
-.stage1.past .s1_bg2 {-webkit-animation:s1bg2Anim 0.5s 0.5s ease-out forwards;}
-.s1bg2_anim {animation:s1bg2Anim 0.3s 0s ease-out infinite forwards;}
-@-webkit-keyframes s1bg2Anim {
+.stage1.past .s1_bg2 {-webkit-animation:s1bg2past 1.2s 0.3s ease-out forwards;}
+@-webkit-keyframes s1bg2past {
     0% {left:50%;}
     100% {left:100%;}
-}
-@keyframes s1bg2Anim {
-    0% {}
-    100% {}
 }
 .stage1.past .s11 {transform:translate3d(-100px,-50px,900px) ;}
 .stage1.past .s12 {transform:translate3d(100px,-50px,900px) ;}
@@ -150,15 +146,36 @@ transition: all 1.0s ease-out;
 .stage2 {z-index:9;position:absolute;width:100%;height:100%;opacity:1;
 }
 .stage2 p {position:absolute;left:50%;text-indent:-9999px;overflow:hidden;}
-.s2_bg1 {height:50%;background-position:50% 100%;}
-.s2_bg2 {height:50%;background-position:50% 0%;}
+.s2_bg1,
+.s2_bg2 {position:absolute;width:100%;height:50%;left:0px;}
+.s2_bg1 {top:0;background-position:50% 100%;}
+.s2_bg2 {top:50%;background-position:50% 0px;}
 
-/* =====trans===== */
-.stage2.past .s21 {transform:translate3d(-50px,50px,400px) rotateX(40deg);}
-.stage2.past .s24 {transform:translate3d(80px,0px,350px) rotateX(40deg);}
-.stage2.past .s25 {transform:translate3d(20px,20px,850px)}
-.stage2.past .s2_bg1 {transform:translate3d(0px,-400px,0px)}
-.stage2.past .s2_bg2 {transform:translate3d(0px,400px,0px)}
+/* anims */
+.stage2.back .s2_bg1 {-webkit-animation:s2bg1back 0.3s 0s ease-out forwards;}
+@-webkit-keyframes s2bg1back {
+    0% {top:-50%;}
+    100% {top:0%;}
+}
+.stage2.back .s2_bg2 {-webkit-animation:s2bg2back 0.3s 0s ease-out forwards;}
+@-webkit-keyframes s2bg2back {
+    0% {top:100%;}
+    100% {top:50%;}
+}
+.stage2.past .s2_bg1 {-webkit-animation:s2bg1past 0.4s 0.5s ease-out forwards;}
+@-webkit-keyframes s2bg1past {
+    0% {top:0%;}
+    100% {top:-50%;}
+}
+.stage2.past .s2_bg2 {-webkit-animation:s2bg2past 0.4s 0.5s ease-out forwards;}
+@-webkit-keyframes s2bg2past {
+    0% {top:50%;}
+    100% {top:100%;}
+}
+
+.stage2.past .s21 {transform:translate3d(-100px,1000px,50px) rotateX(0deg);}
+.stage2.past .s24 {transform:translate3d(100px,-1500px,50px) rotateX(0deg);}
+.stage2.past .s25 {transform:translate3d(0px,0px,850px)}
 
 
 .s21 {margin-left: -400px;top: 260px;width:362px;height:341px;background-position:0px 0px;transform-origin:0 0;}
@@ -200,4 +217,15 @@ transition: all 1.0s ease-out;
 .s33 {margin-left: -40px;top: 70px;width:525px;height:800px;}
 
 
-.mouse_hint {display:none;position:absolute;z-index:10;left:50%;margin-left:-50px;top:50%;margin-top:-50px;width:100px;height:100px;background-color:#900;color:#fff;text-align:center;}
+.mouse_hint {position:absolute;z-index:102;left:50%;margin-left:-50px;top:50%;margin-top:-50px;width:100px;height:100px;transform:rotate(45deg);background-color:#900;color:#fff;text-align:center;}
+.enter_layer {position:absolute;z-index:101;left:50%;top:50%;transform:translate3d(-50%,-50%,0) rotate(45deg);width:100px;height:100px;background-color:#f22;}
+.enter_layer_anim {-webkit-animation:enterLayer 1.3s 0s ease-out forwards;}
+@-webkit-keyframes enterLayer {
+    0% {transform:translate3d(-50%,-50%,0) rotate(45deg) scale(1);opacity:1;}
+    100% {transform:translate3d(-50%,-50%,0) rotate(45deg) scale(12);opacity:0;}
+}
+
+/* nav */
+.nav {position:absolute;z-index:103;right:100px;top:50%;width:10px;height:90px;margin-top:-45px;}
+.nav p {width:8px;height:8px;border-radius:50%;margin-bottom:20px;background-color:#fff;}
+.nav .on {background-color:#900;}

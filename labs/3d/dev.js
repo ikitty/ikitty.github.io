@@ -1,6 +1,6 @@
 //auto height
 (function () {
-    var el = document.getElementById('cubicWrap');
+    var el = document.getElementById('cubicZone');
     var _setH = function () {
         var otherH = 177 
             ,bodyH = document.documentElement.clientHeight 
@@ -50,7 +50,7 @@
                 }else {
                     (typeof doDown == 'function') && doDown()
                 }
-            }, 80);
+            }, 50);
         }
         window.onmousewheel = document.onmousewheel = _handleWheel;
         if (window.addEventListener) {
@@ -69,22 +69,23 @@ var Te = {
         this.bindKey();
     }
     ,bindKey: function () {
-        var el = document.getElementById('cubicZone')
-            ,self = this 
+        var self = this 
             ;
         function scrollUp () {
             Current -= 1 ;
             if (Current < 1) {
                 Current = 1;
             }
-            TJ('#stage' + Current ).removeClass('past');
+            TJ('#stage' + Current ).removeClass('past').addClass('back');
+            self.syncNav();
         }
         function scrollDown () {
-            TJ('#stage' + Current).addClass('past');
+            TJ('#stage' + Current).removeClass('back').addClass('past');
             Current += 1 ;
             if (Current > self.cfg.maxPage) {
                 Current = self.cfg.maxPage;
             }
+            self.syncNav();
         }
         handleWheel(scrollUp, scrollDown);
         window.onkeyup = function (e) {
@@ -94,11 +95,19 @@ var Te = {
             }else if (kc === 39 || kc === 40){
                 scrollDown();
             }
-            console.log(Current ) ;
         }
+    }
+    ,syncNav: function () {
+        var els = TJ('#nav p');
+        els.removeClass('on');
+        TJ(els[Current-1]).addClass('on');
     }
 };
 
 TJ(function () {
     Te.init();
+    TJ('#enterLayer').addClass('enter_layer_anim');
 });
+
+//todo preload
+//js wheel
