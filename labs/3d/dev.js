@@ -1,4 +1,55 @@
 //auto height
+var ua = navigator.userAgent.toLowerCase();
+var isMobile = (/android|webos|iphone|ipod|blackberry|ieiMobile|opera mini/i.test(this.ua)) ;
+
+if (isMobile) {
+    
+}else {
+    //preload
+    var imgPrefix = 'http://ossweb-img.qq.com/images/t7/act/a20141117suspense/'
+        ,preloadStatus = document.getElementById('preloadCover')
+        ,preloadHint = document.getElementById('preloadHint')
+        ,preloadNum = document.getElementById('preloadNum')
+        ;
+    //todo remove test
+    imgPrefix = 'images/';
+
+    var imgs = [
+        's5.png'
+        ,'s4.png'
+        ,'s3.png'
+        ,'s1.png'
+        ,'s2_t.png'
+        ,'s2_role2.png'
+        ,'s2_role1.png'
+        ,'s2_flower.png'
+        ,'logo.png'
+        ,'s5_bg.jpg'
+        ,'s4_bg2.jpg'
+        ,'s4_bg1.jpg'
+        ,'s2_bg2.jpg'
+        ,'s2_bg1.jpg'
+        ,'s1_bg2.jpg'
+        ,'s1_bg1.jpg'
+    ];
+    for (var i = 0, k = null; k = imgs[i] ; i++ ) {
+        imgs[i] = imgPrefix + k;
+    }
+    var imgLoadPc = new imgLoad({
+        resource: imgs
+        ,loading: function (n) {
+            preloadNum.innerHTML = n ;
+            preloadStatus.style.height = n + '%';
+        }
+        ,done: function () {
+            setTimeout(function () { preloadNum.style.visibility = 'hidden'; }, 100);
+            preloadHint.innerHTML = 'Çë¹ö¶¯Êó±ê' ;
+            TJ('body').removeClass('client_mobile');
+            TJ('#enterLayer').addClass('enter_layer_anim');
+        }
+    })
+}
+
 (function () {
     var el = document.getElementById('cubicZone');
     var _setH = function () {
@@ -6,7 +57,6 @@
             ,bodyH = document.documentElement.clientHeight 
             ,h
             ;
-
         h = bodyH - otherH ;
         h = h > 1000 ? 1000 : h ;
         el.style.height = h + 'px';
@@ -16,7 +66,6 @@
             TJ('div.stage_wrap').removeClass('stage_wrap_scale');
         }
     }
-
     _setH();
     window.onresize = function () {
         _setH();
@@ -50,7 +99,7 @@
                 }else {
                     (typeof doDown == 'function') && doDown()
                 }
-            }, 50);
+            }, 20);
         }
         window.onmousewheel = document.onmousewheel = _handleWheel;
         if (window.addEventListener) {
@@ -60,10 +109,13 @@
 })(window);
 
 
+//core
 var Current = 1;
 var Te = {
     cfg: {
-        maxPage:3
+        maxPage:5
+        ,timeSep: 1000
+        ,animPlay: 0
     }
     ,init: function () {
         this.bindKey();
@@ -72,20 +124,40 @@ var Te = {
         var self = this 
             ;
         function scrollUp () {
-            Current -= 1 ;
-            if (Current < 1) {
-                Current = 1;
+            if (self.cfg.animPlay === 0) {
+                Current -= 1 ;
+                if (Current < 1) {
+                    Current = 1;
+                }else {
+                    TJ('#stage' + Current ).removeClass('past').addClass('back');
+                }
+                self.syncNav();
+                document.getElementById('preloadWrap').style.visibility = 'visible';
+                
+                self.cfg.animPlay = 1;
+                setTimeout(function () { self.cfg.animPlay = 0; }, self.cfg.timeSep);
             }
-            TJ('#stage' + Current ).removeClass('past').addClass('back');
-            self.syncNav();
         }
         function scrollDown () {
-            TJ('#stage' + Current).removeClass('back').addClass('past');
-            Current += 1 ;
-            if (Current > self.cfg.maxPage) {
-                Current = self.cfg.maxPage;
+            if (self.cfg.animPlay === 0) {
+                Current += 1 ;
+                if (Current > self.cfg.maxPage) {
+                    Current = self.cfg.maxPage;
+                }else {
+                    TJ('#stage' + (Current - 1)).removeClass('back').addClass('past');
+                }
+                if (Current == self.cfg.maxPage) {
+                    document.getElementById('preloadWrap').style.visibility = 'hidden';
+                }
+                self.syncNav();
+                TJ('#preloadWrap').addClass('preload_wrap_past');
+                setTimeout(function () {
+                    TJ('#preloadWrap').removeClass('preload_wrap_past');
+                }, 450);
+
+                self.cfg.animPlay = 1;
+                setTimeout(function () { self.cfg.animPlay = 0; }, self.cfg.timeSep);
             }
-            self.syncNav();
         }
         handleWheel(scrollUp, scrollDown);
         window.onkeyup = function (e) {
@@ -106,8 +178,4 @@ var Te = {
 
 TJ(function () {
     Te.init();
-    TJ('#enterLayer').addClass('enter_layer_anim');
 });
-
-//todo preload
-//js wheel
