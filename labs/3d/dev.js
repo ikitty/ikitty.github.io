@@ -43,6 +43,7 @@ var loadImgCustom = function (imgs, prefix, cb, cbAll, debug) {
     });
 };
 
+//todo body本身没有cls hook，根据情况动态添加cls
 if (isMobile) {
     //set size
     (function () {
@@ -62,6 +63,7 @@ if (isMobile) {
         document.getElementById('preloadStatus').style.height = n + '%';
     }, function () {
         TJ('#cover').addClass('cover_fadeout');
+        TJ('body').addClass('client_mobile');
         setTimeout(function () {
             TJ('#cover').hide();
         }, 1000);
@@ -212,14 +214,6 @@ if (isMobile) {
         })(window);
 
         //preload
-        var imgPrefix = 'http://ossweb-img.qq.com/images/t7/act/a20141117suspense/'
-            ,preloadStatus = document.getElementById('preloadCover')
-            ,preloadHint = document.getElementById('preloadHint')
-            ,preloadNum = document.getElementById('preloadNum')
-            ;
-        //todo remove test
-        imgPrefix = 'images/';
-
         var imgs = [
             's5.png' ,'s4.png' ,'s3.png' ,'s1.png'
             ,'s2_t.png' ,'s2_role2.png' ,'s2_role1.png' ,'s2_flower.png'
@@ -227,23 +221,16 @@ if (isMobile) {
             ,'s5_bg.jpg' ,'s4_bg2.jpg' ,'s4_bg1.jpg' ,'s2_bg2.jpg' ,'s2_bg1.jpg'
             ,'s1_bg2.jpg' ,'s1_bg1.jpg'
         ];
-        for (var i = 0, k = null; k = imgs[i] ; i++ ) {
-            imgs[i] = imgPrefix + k;
-        }
-        var imgLoadPc = new imgLoad({
-            resource: imgs
-            ,loading: function (n) {
-                preloadNum.innerHTML = n ;
-                preloadStatus.style.height = n + '%';
-            }
-            ,done: function () {
-                setTimeout(function () { preloadNum.style.visibility = 'hidden'; }, 100);
-                preloadHint.innerHTML = '请滚动鼠标' ;
-                TJ('body').removeClass('client_mobile');
-                TJ('#enterLayer').addClass('enter_layer_anim');
-            }
-        })
-        //TE.init
+        loadImgCustom(imgs, 'http://ossweb-img.qq.com/images/t7/act/a20141117suspense/', function (n) {
+            //todo rename id
+            document.getElementById('preloadNum').innerHTML = n ;
+            document.getElementById('preloadStatus').style.height = n + '%';
+        }, function () {
+            document.getElementById('preloadHint').innerHTML = '请滚动鼠标' ;
+            TJ('#enterLayer').addClass('enter_layer_anim');
+            TJ('body').addClass('client_pc');
+        }, 1)
+
         //core
         var Current = 1;
         var Te = {
@@ -315,6 +302,6 @@ if (isMobile) {
             Te.init();
         });
     }else {
-        TJ('body').removeClass('client_mobile').addClass('client_low');
+        TJ('body').addClass('client_pc');
     }
 }
