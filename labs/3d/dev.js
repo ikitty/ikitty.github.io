@@ -2,10 +2,23 @@
 var ua = navigator.userAgent.toLowerCase();
 var isMobile = (/android|webos|iphone|ipod|blackberry|ieiMobile|opera mini/i.test(this.ua)) ;
 
+// require TJ
+// require common loadImg
 if (isMobile) {
-    
+    //set size
+    //loadImg
+    //TE.init
+    //require wxshare
 }else {
-    //preload
+    if (isMordenBrowser) {
+        //set size
+        //preload
+        //require wheel
+        //TE.init
+    }else {
+        
+    }
+
     var imgPrefix = 'http://ossweb-img.qq.com/images/t7/act/a20141117suspense/'
         ,preloadStatus = document.getElementById('preloadCover')
         ,preloadHint = document.getElementById('preloadHint')
