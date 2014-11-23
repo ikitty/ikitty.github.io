@@ -164,21 +164,19 @@ if (isMobile) {
             var ieV = ua.match(/msie ([\d.]+)/)[1];
             return ieV > 9 ? 1 : 0 ;
         }
-        
 
-        var props = 'transform perspective transition'.split(' ');
+        var props = 'transform perspective transition animation'.split(' ');
         var _style = document.createElement('p').style ;
-        var _k ;
+        var prefixProps = [];
         for (var i = 0, k ; k = props[i] ; i++ ) {
-            _k = 'webkit' + k.replace(/^[a-z]/, function (v) {
-                return v.toUpperCase() ;
-            });
+            prefixProps[0] = 'webkit' + k.replace(/^[a-z]/, function (v) { return v.toUpperCase() ; });
+            prefixProps[1] = 'moz' + k.replace(/^[a-z]/, function (v) { return v.toUpperCase() ; });
 
-            if (!(k in _style) && !(_k in _style)) {
+            if (!(k in _style) && !(prefixProps[0] in _style) && !(prefixProps[1] in _style)) {
                 return 0 ;
             }
-            return 1 ;
         }
+        return 1 ;
     })();
 
     if (isMordenBrowser) {
