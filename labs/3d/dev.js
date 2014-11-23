@@ -43,8 +43,11 @@ var loadImgCustom = function (imgs, prefix, cb, cbAll, debug) {
     });
 };
 
+//todo mobileBox , pcBox hide
 //todo body本身没有cls hook，根据情况动态添加cls
 if (isMobile) {
+    TJ('#mobileBox').show();
+
     //set size
     (function () {
         var h = window.innerHeight ;
@@ -153,6 +156,31 @@ if (isMobile) {
         ,img: 'http://ossweb-img.qq.com/images/t7/web201404/super_share.png'
     });
 }else {
+    TJ('#pcBox').show();
+    //todo isMordenBrowser
+    var isMordenBrowser = (function () {
+        var ua = navigator.userAgent;
+        if (/msie/i.test(ua)) {
+            var ieV = ua.match(/msie ([\d.]+)/)[1];
+            return ieV > 9 ? 1 : 0 ;
+        }
+        
+
+        var props = 'transform perspective transition'.split(' ');
+        var _style = document.createElement('p').style ;
+        var _k ;
+        for (var i = 0, k ; k = props[i] ; i++ ) {
+            _k = 'webkit' + k.replace(/^[a-z]/, function (v) {
+                return v.toUpperCase() ;
+            });
+
+            if (!(k in _style) && !(_k in _style)) {
+                return 0 ;
+            }
+            return 1 ;
+        }
+    })();
+
     if (isMordenBrowser) {
         //set size
         (function () {
