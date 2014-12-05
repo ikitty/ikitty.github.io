@@ -100,7 +100,7 @@ UITableView中cell的选中态在调用ReloadData以后无法保持，为了做�
 
 即在每次reload以后都通做一次selectRowAtIndexPath的操作来恢复选中。问题虽然解决了但是这种方法也有潜在风险，比如reload的过程中数据源发生变化，可能之前选中的cell的indexPath已经改变，轻则选中不正确的cell，严重的话如果刷新以后cell个数减少，传入一个过大的indexPath就会造成崩溃。terrbile.
 
-###UITextField当实现了textFieldDidBeginEditing方法以后， Clearbtn不响应
+###Clearbtn不响应
 
 UITextField当实现了textFieldDidBeginEditing方法以后， Clearbtn不响应，原因是最简单的view覆盖导致事件被拦截了.如果必须实现delegate，则可以使用设置rightView的方式，这个问题我最后解决了，说来都不好意思，被别的View盖住了。悲催
 
