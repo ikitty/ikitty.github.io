@@ -24,28 +24,27 @@ URL encoding是采用包含百分号的编码形式，也叫做Percent-encoding�
 
 ###JavaScript中如何URL encode
 
-* escape()
-  * 从ECMAScript3开始已被废弃，别用
-* encodeURI()
-  * 当你想得到一个有效的URL时，使用它
-  * 它会将一些无效字符转化为Percent-encoding。比如
-```
-// return `http://www.google.com/a%20file%20with%20spaces.html`
-encodeURI("http://www.google.com/a file with spaces.html")
-```
-  * 别对一个URL字符串使用`encodeURIComponent()`，因为它是暴力转换
-```
-// return `http%3A%2F%2Fwww.google.com%2Fa%20file%20with%20spaces.html`
-encodeURI("http://www.google.com/a file with spaces.html")
-```
-* encodeURIComponent()
-  * 仅适用于对URL的参数部分进行转换
-```
-param1 = encodeURIComponent("http://xyz.com/?a=12&b=55");
-url = "http://domain.com/?param1=" + param1 + "&param2=99";
-http://www.domain.com/?param1=http%3A%2F%2Fxyz.com%2F%Ffa%3D12%26b%3D55&param2=99;
-```
+- escape()
+  - 从ECMAScript3开始已被废弃，别用
+- encodeURI()
+  - 当你想得到一个有效的URL时，使用它
+  - 它会将一些无效字符转化为Percent-encoding。比如
 
-  * 不转换单引号字符'，存在起代码注入漏洞，比如href='my_url'尤其在使用字符串构建HTML的情况下。因此，对于HTML属性值最好用双引号或者先HTML encoded一遍
+    // return `http://www.google.com/a%20file%20with%20spaces.html`
+    encodeURI("http://www.google.com/a file with spaces.html")
+
+  - 别对一个URL字符串使用`encodeURIComponent()`，因为它是暴力转换
+
+    // return `http%3A%2F%2Fwww.google.com%2Fa%20file%20with%20spaces.html`
+    encodeURI("http://www.google.com/a file with spaces.html")
+
+- encodeURIComponent()
+  - 仅适用于对URL的参数部分进行转换
+
+    param1 = encodeURIComponent("http://xyz.com/?a=12&b=55");
+    url = "http://domain.com/?param1=" + param1 + "&param2=99";
+    http://www.domain.com/?param1=http%3A%2F%2Fxyz.com%2F%Ffa%3D12%26b%3D55&param2=99;
+
+- 不转换单引号字符'，存在起代码注入漏洞，比如href='my_url'尤其在使用字符串构建HTML的情况下。因此，对于HTML属性值最好用双引号或者先HTML encoded一遍
 
 
