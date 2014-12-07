@@ -1,7 +1,7 @@
 ---
 layout: post
-title:"JavaScript中的小技巧"
-description: "每种编程语言里都有一些小伎俩，有些确实能带来方便，有些则只是纯蛋疼。这里收集一些常见的JavaScript伎俩，按需自取。"
+title: "JavaScript中的小技巧"
+description: "一波JavaScript技巧来袭"
 tags: [ javascript ]
 category: frontend
 ---
