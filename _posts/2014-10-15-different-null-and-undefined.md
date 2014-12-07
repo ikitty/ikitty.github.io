@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "JavaScript中的falsy value"
-description: "在彻底弄清`null`与`undefined`的区别时。延伸学习了JavaScript中的**falsy value**。"
+description: "在彻底弄清`null`与`undefined`的区别时。延伸学习了JavaScript中的falsy value。"
 tags: [ javascript ]
 category: frontend
 ---
