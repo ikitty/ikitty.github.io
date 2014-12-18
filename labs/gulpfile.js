@@ -6,7 +6,7 @@
  * LastModify: 2014-12-09
  */
 
-var act_name = 'adate';
+var act_name = 'a20141212tmz';
 
 // src dir , build dir
 var path_src = 'act_dev/' + act_name + '/'
@@ -27,14 +27,14 @@ var gulp = require('gulp')
 
 var path_dev = {
     js: path_src + 'js/*'
-    ,css: path_src + 'css/*'
+    ,css: path_src + '*.css'
     ,img: path_src + 'images/*'
     ,html: [path_src + '*.htm', path_src + '*.shtml']
 };
 
 var path_build = {
     js: path_target + 'js/'
-    ,css: path_target + 'css/'
+    ,css: path_target 
     ,img: path_target + 'images/'
     ,html: path_target
 };
@@ -42,13 +42,14 @@ var path_build = {
 
 // init project
 gulp.task('init',function(){
-	gulp.src(path_template + 'pc/*')
+    // ** means copy folder and files in folder
+	gulp.src(path_template + 'pc/**')
 		.pipe(gulp.dest(path_src))
 });
 
 // todo init pc or mobile
 gulp.task('initMobile',function(){
-	gulp.src(path_template + 'mobile/*')
+	gulp.src(path_template + 'mobile/**')
 		.pipe(gulp.dest(path_src))
 });
 
@@ -59,7 +60,7 @@ gulp.task('css', function() {
     gulp.src(path_dev.css)
         .pipe(concat('style.css'))
         .pipe(replace('(images/', '(' + img_prefix ))
-        .pipe(cssmin({keepBreaks:true}))
+        .pipe(cssmin({keepBreaks:true, noAdvanced: true, compatibility:'ie6'}))
         .pipe(gulp.dest(path_build.css))
 });
 
@@ -77,7 +78,7 @@ gulp.task('js', function() {
         //order by fileName first character
         .pipe(concat('ui.js'))
         .pipe(uglify())
-        //根据情况决定是否要转码
+        .pipe(encode({ to: 'gbk'}))
         .pipe(gulp.dest(path_build.js))
 });
 
@@ -89,15 +90,23 @@ gulp.task('html',function(){
             //.pipe(encode({ from: 'gbk', to: 'utf-8'}))
             .pipe(replace('charset="utf-8"', 'charset="gbk"')) 
             .pipe(replace('src="images/', 'src="' + img_prefix ))
+            .pipe(replace('<script src="js/common.js"></script>', ''))
             .pipe(encode({ to: 'gbk'}))
             .pipe(gulp.dest(path_build.html))
 
-            console.log('Build build HTML file. OK!')
+            console.log('Build all file. OK!')
   	});
 });
 
 
 gulp.task('build', ['css', 'js', 'img', 'html'])
+
+gulp.task('watch', function() {
+    gulp.watch(path_dev.js, ['js']);
+    gulp.watch(path_dev.css, ['css']);
+    gulp.watch(path_dev.img, ['img']);
+    gulp.watch(path_dev.html, ['html']);
+});
 
 //common test
 var rename = require('gulp-rename');
