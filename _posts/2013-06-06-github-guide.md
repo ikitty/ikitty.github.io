@@ -58,11 +58,11 @@ category: Frontend
 
 ###保持登录凭据（for https in win）
 
-如果使用https clone了仓库，你可以使用[git-credential-winstore](https://gitcredentialstore.codeplex.com/ 'view it') 来保存登录凭据，免去每次和github通信时都要输入用户名密码的麻烦。
+如果使用https clone了仓库，你可以使用[git-credential-winstore](https://gitcredentialstore.codeplex.com/ 'view it') 来保存登录凭据，免去每次和github通信时都要输入用户名密码的麻烦。(基于https连接的密码就是GH的登录密码哈)
 
 ###配置SSH(for Mac OS)
 
-`cd ~/.ssh`进入ssh目录。如果有ssh key，先备份`mkdir key_bak; mv id_rsa* key_bak`，如果没有key，创建一个key: `ssh-keygen -t rsa -C "email@email.com"`，连续两次输入密码。然后在github网站上添加ssh-key（rsa.pub内容）即可。
+`cd ~/.ssh`进入ssh目录。如果有ssh key，先备份`mkdir key_bak; mv id_rsa* key_bak`，如果没有key，创建一个key: `ssh-keygen -t rsa -C "email@email.com"`，连续两次输入**密码**(后续每次连接时都要输入这个密码的)。然后在github网站上添加ssh-key（rsa.pub内容）即可。
 
 测试ssh配置是否正常：`ssh -T git@github.com`
 
