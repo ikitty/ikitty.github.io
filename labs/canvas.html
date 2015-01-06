@@ -1,280 +1,328 @@
 <!DOCTYPE html>
-<html lang="ZH-cn">
+<html lang="zh-CN">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<title>DrawSth use Canvas or VML by ikitty</title>
-<meta charset="utf-8"/>
+<meta charset="gb2312" />
+<title>canvas draw</title>
 <style type="text/css" media="screen">
-    * {margin:0;padding:0;list-style:none;}
-    .hero {zoom:1;overflow:hidden;padding:10px ; }
-    .hero li {float:left;padding:10px;margin:10px;border:1px solid #999;cursor:pointer;}
-    .ability_box_wrap {border:1px solid #999;width:140px;height:140px;padding:10px;margin:0 20px ;}
-    .ability_box {position:relative;width:140px;height:140px;background:url(canvas_bg.png) left top no-repeat;overflow:hidden;}
-    h1 {padding:20px 0 0px 20px;font:400 20px/20px "Microsoft YaHei";color:#666;}
+html,body,h1,h2,h3,h4,p,iframe,ul,ol,li,th,td {margin:0;padding:0;}
+li {list-style:none;}
+body {font:12px/1.5 tahoma,arial;color:#666;}
+table {border-collapse:collapse; border-spacing:0;}
+img {border:0;display:block;}
+i,em {font-style:normal;}
+
+a,
+a:hover {text-decoration:none;background-color:transparent;}
+a:focus {outline:none;}
+body {min-width:1000px;padding-top:20px;}
+
+/* =====style===== */
+.hero_list {width:1000px;margin:0px auto;zoom:1;overflow:hidden;text-align:center;height:54px;line-height:50px;}
+.hero_list a {display:inline-block;zoom:1;#display:inline;margin-left:10px;width:50px;border:2px solid #999;background-color:#eee;color:#333; }
+
+.hero_list a.on,
+.hero_list a:hover {border-color:#9E7E28;background-color:#AB8C31;color:#FFF; }
+
+.ability {margin:20px auto ;position:relative;width:118px;height:118px;overflow:hidden;background-color:#000;}
 </style>
 </head>
 <body>
-<h1 class="">鐐瑰嚮姝﹀皢鍚嶇О鏌ョ湅鑳藉姏妯″瀷</h1>
 
-<ul class="hero" id="hero">
-    <li>璧典簯</li>
-    <li>椹秴</li>
-    <li>寮犺窘</li>
-</ul>
-<div class="ability_box_wrap">
-    <div id="ability" class="ability_box"></div>
+<div id="heroList" class="hero_list">
+    <a href="javascript:void(0);">张苞</a>
+    <a href="javascript:void(0);">韩当</a>
+    <a href="javascript:void(0);">曹洪</a>
+    <a href="javascript:void(0);">张辽</a>
+    <a href="javascript:void(0);">姜维</a>
+    <a href="javascript:void(0);">周泰</a>
+    <a href="javascript:void(0);">乐进</a>
+    <a href="javascript:void(0);">徐盛</a>
+    <a href="javascript:void(0);">李典</a>
 </div>
 
-<script type="text/javascript">
-    function $extend(){
-        // copy reference to target object
-        var target = arguments[0] || {},
-            i = 1,
-            length = arguments.length,
-            options;
-        if ( typeof target != "object" && typeof target != "function" ) {
-            target = {};
-        }
-        for ( ; i < length; i++ ) {
-            if ( (options = arguments[ i ]) != null ) {
-                for ( var name in options ) {
-                    var copy = options[ name ];
-                    if ( target === copy ) {
-                        continue;
-                    }
-                    if ( copy !== undefined ) {
-                        target[ name ] = copy;
-                    }
-                }
+<div id="abilityBox" class="ability"></div>
+
+<script>
+// set canvas lib
+var AlexCanvas = {
+    el: null ,
+    c: null , 
+
+    config:  {
+        width: 200,
+        height: 200,
+        cap: 'round',
+        join: 'round',
+        lineWidth: 2,
+        fillStyle: 'rgba(230, 185, 90, 0.8)',
+        wrapId: 'canvasBox'
+    },
+    st:null,
+
+    renderTransition: function (toPath) {
+        clearTimeout(this.st);
+        var me =this,
+            fromPath = this.config.fromPath;
+
+        var aCompare = [
+            toPath[1] - fromPath[1], 
+            toPath[2] - fromPath[2], 
+            toPath[5] - fromPath[5], 
+            toPath[6] - fromPath[6] 
+        ];
+        var maxAbs = 0;
+        for (var i = 0, l = aCompare.length ; i< l  ; i++ ) {
+            if (Math.abs(aCompare[i]) > maxAbs) {
+                maxAbs = Math.abs(aCompare[i]);
             }
         }
-        return target;
-    }
+        if (maxAbs == 0) {
+            return  ;
+        }
 
-    var canvasSupported = !!document.createElement("canvas").getContext ;
+        var aTrans = [] ;
+        for (i = 0, l = aCompare.length ; i< l  ; i++ ) {
+            aTrans.push(aCompare[i]/maxAbs);
+        }
 
-    // canvas lib by alex
-    var Dv = {
-        el: null ,
-        c: null , 
+        var t = 0;
+        var _run = function () {
+            var aPath = [];
+            if (t++ <= maxAbs) {
+                aPath.push({type: 'moveTo', v: [toPath[0], fromPath[1]*1 + aTrans[0]*t]}) ;
+                aPath.push({type: 'lineTo', v: [fromPath[2]*1 + aTrans[1]*t, toPath[3] ]}) ;
+                aPath.push({type: 'lineTo', v: [toPath[4], fromPath[5]*1 + aTrans[2]*t]}) ;
+                aPath.push({type: 'lineTo', v: [fromPath[6]*1 + aTrans[3]*t, toPath[7] ]}) ;
 
-        setCanvas: function () {
+                me.render(aPath);
+                this.st = setTimeout(_run, 10);
+            }else {
+                me.config.fromPath = toPath;
+            }
+        };
+        _run();
+        
+    },
+
+    render: function (aPath) {
+        var c = this.c ,
+            me = this ;
+
+        me.clear();
+        c.save();
+        c.beginPath();  
+
+        for (var i = 0, k = null; k = aPath[i] ; i++ ) {
+            c[k.type] && (c[k.type].apply(c, k.v || []));
+        }
+        c.closePath();
+        c.fill();         
+        
+        c.restore();
+    },
+
+    clear: function () {
+        this.c.clearRect(0,0, this.config.width, this.config.height);
+    },
+
+    initCanvas: function (style) {
+        var c = this.c ,
+            config = this.config ;
+
+        c.lineCap = config.cap;
+        c.lineJoin = config.join;
+        c.lineWidth = config.lineWidth;
+        c.fillStyle = config.fillStyle ;
+    },
+
+    init: function (v) {
+        for (var i in v) {
+            v[i] && (this.config[i] = v[i]);
+        }
+
+        if (!document.getElementById('alexCanvas')) {
+            this.el = document.createElement('canvas');
+            this.el.setAttribute('id', 'alexCanvas') ;
             this.el.setAttribute('width', this.config.width) ;
             this.el.setAttribute('height', this.config.height) ;
-        },
 
-        config:  {
-            width: 200,
-            height: 200,
-            cap: 'round',
-            join: 'round',
-            lineWidth: 2,
-            fillStyle: 'rgba(190, 5, 0, 0.5)',
-            fromPath: [70,0 , 140,70, 70,140, 0,70 ]
-        },
-        st:null,
+            document.getElementById(this.config.wrapId).appendChild(this.el) ;
 
-        renderTransition: function (toPath) {
-            clearTimeout(this.st);
-            var me =this,
-                fromPath = this.config.fromPath;
+            this.c = this.el.getContext('2d');
+            this.initCanvas();
+        }
+    }
+}; 
 
-            var aCompare = [
-                toPath[1] - fromPath[1], 
-                toPath[2] - fromPath[2], 
-                toPath[5] - fromPath[5], 
-                toPath[6] - fromPath[6] 
-            ];
-            var maxAbs = 0;
-            for (var i = 0, l = aCompare.length ; i< l  ; i++ ) {
-                if (Math.abs(aCompare[i]) > maxAbs) {
-                    maxAbs = Math.abs(aCompare[i]);
-                }
-            }
-            if (maxAbs == 0) {
-                return  ;
+// set vml lib
+var AlexVml = {
+    init: function () {
+        if (!window.vml) {
+            document.createStyleSheet().addRule(".vml", "behavior:url(#default#VML);display:inline-block;");
+            if (!document.namespaces.vml && !+"\v1") {
+                document.namespaces.add("vml", "urn:schemas-microsoft-com:vml");
             }
 
-            var aTrans = [] ;
-            for (i = 0, l = aCompare.length ; i< l  ; i++ ) {
-                aTrans.push(aCompare[i]/maxAbs);
-            }
-
-            var t = 0;
-            var _run = function () {
-                var aPath = [];
-                if (t++ <= maxAbs) {
-                    aPath.push({type: 'moveTo', v: [toPath[0], fromPath[1]*1 + aTrans[0]*t]}) ;
-                    aPath.push({type: 'lineTo', v: [fromPath[2]*1 + aTrans[1]*t, toPath[3] ]}) ;
-                    aPath.push({type: 'lineTo', v: [toPath[4], fromPath[5]*1 + aTrans[2]*t]}) ;
-                    aPath.push({type: 'lineTo', v: [fromPath[6]*1 + aTrans[3]*t, toPath[7] ]}) ;
-
-                    me.render(aPath);
-                    this.st = setTimeout(_run, 10);
-                }else {
-                    me.config.fromPath = toPath;
+            var vml = window.vml = function (name) { return vml.fn.create(name || "rect"); };
+            vml.fn = vml.prototype = {
+                create: function (name) {
+                    this.node = document.createElement('<vml:' + name + ' class="vml">');
+                    return this;
+                },
+                appendTo: function (parent) {
+                    if (typeof this.node !== "undefined" && parent.nodeType == 1) {
+                        parent.appendChild(this.node);
+                    }
+                    return this;
+                },
+                attr: function (bag) {
+                    for (var i in bag) {
+                        if (bag.hasOwnProperty(i)) {
+                            this.node.setAttribute(i, bag[i])
+                        }
+                    }
+                    return this;
+                },
+                css: function (bag) {
+                    var str = ";"
+                    for (var i in bag) {
+                        if (bag.hasOwnProperty(i)) str += i == "opacity" ? ("filter:alpha(opacity=" + bag[i] * 100 + ");") : (i + ":" + bag[i] + ";")
+                    }
+                    this.node.style.cssText = str;
+                    return this;
                 }
             };
-            _run();
-        },
-
-        render: function (aPath) {
-            var c = this.c ,
-                me = this ;
-
-            me.clear();
-            c.save();
-            c.beginPath();  
-
-            for (var i = 0, k = null; k = aPath[i] ; i++ ) {
-                c[k.type] && (c[k.type].apply(c, k.v || []));
-            }
-            c.closePath();
-            c.fill();         
-            
-            c.restore();
-        },
-
-        clear: function () {
-            this.c.clearRect(0,0, this.config.width, this.config.height);
-        },
-
-        initDraw: function (style) {
-            var c = this.c ,
-                config = this.config ;
-
-            c.lineCap = config.cap;
-            c.lineJoin = config.join;
-            c.lineWidth = config.lineWidth;
-            c.fillStyle = config.fillStyle ;
-        },
-
-        init: function (v) {
-            $extend(this.config, v) ;
-
-            if (!document.getElementById('alexCanvas')) {
-                this.el = document.createElement('canvas');
-                this.el.setAttribute('id', 'alexCanvas') ;
-                document.getElementById(this.config.wrapId).appendChild(this.el) ;
-
-                this.c = this.el.getContext('2d');
-                this.setCanvas();
-                this.initDraw();
-            }
         }
-    }; 
+    }
+};
 
-    // VML lib by alex
-    var setVml = {
-        init: function () {
-            if (!window.vml) {
-                document.createStyleSheet().addRule(".vml", "behavior:url(#default#VML);display:inline-block;");
-                if (!document.namespaces.vml && !+"\v1") {
-                    document.namespaces.add("vml", "urn:schemas-microsoft-com:vml");
-                }
+// todo: opt config object
+// 设定画布尺寸[需要配置]
+var abilitySize = 118
+    ,abilitySizeHalf = abilitySize/2
+    ;
 
-                var vml = window.vml = function (name) { return vml.fn.create(name || "rect"); };
-                vml.fn = vml.prototype = {
-                    create: function (name) {
-                        this.node = document.createElement('<vml:' + name + ' class="vml">');
-                        return this;
-                    },
-                    appendTo: function (parent) {
-                        if (typeof this.node !== "undefined" && parent.nodeType == 1) {
-                            parent.appendChild(this.node);
-                        }
-                        return this;
-                    },
-                    attr: function (bag) {
-                        for (var i in bag) {
-                            if (bag.hasOwnProperty(i)) {
-                                this.node.setAttribute(i, bag[i])
-                            }
-                        }
-                        return this;
-                    },
-                    css: function (bag) {
-                        var str = ";"
-                        for (var i in bag) {
-                            if (bag.hasOwnProperty(i)) str += i == "opacity" ? ("filter:alpha(opacity=" + bag[i] * 100 + ");") : (i + ":" + bag[i] + ";")
-                        }
-                        this.node.style.cssText = str;
-                        return this;
-                    }
-                };
-            }
-        }
+// 初始化 [需要配置]
+// 对外接口 alexDraw()
+var canvasSupported = !!document.createElement("canvas").getContext 
+    ,alexDraw 
+    ;
+if (canvasSupported) {
+    AlexCanvas.init({
+        wrapId: 'abilityBox'
+        ,width: abilitySize
+        ,height: abilitySize
+        ,fromPath: [abilitySizeHalf,0 , abilitySize, abilitySizeHalf, abilitySizeHalf,abilitySize, 0,abilitySizeHalf ]
+    });
+    // init interface
+    alexDraw = function (path) {
+        AlexCanvas.renderTransition(path.replace(';',',').split(','));
     };
+}else {
+    AlexVml.init();
+    vml("shape").css({
+        width: "118px",
+        height: '118px',
+        opacity: 0.8,
+        position: 'absolute',
+        top: '0px',
+        left: '0px'
+    }).attr({
+        id: 'alexVml',
+        fillcolor: "#EBC77B",
+        strokecolor: "#EBC77B",
+        coordorigin: "0  0",
+        coordSize: "118 118"
+    }).appendTo(document.getElementById('abilityBox'));
 
-    // draw
-    var drawAbility = {
-        init: function (path) {
-            canvasSupported ? this.useCanvas(path) : this.useVml(path);
-        },
-
-        useCanvas: function (path) {
-            Dv.init({
-                wrapId: 'ability',
-                width:140,
-                height:140
-            });
-
-            Dv.renderTransition(path.replace(';',',').split(','));
-        },
-
-        useVml: function (sPath) {
-            setVml.init();
-
-            function transferPath (sPath) {
-                return  'm ' + sPath.replace(';', ' l ') + ' x e';
-            }
-            var _path = transferPath(sPath);
-
-            if (!document.getElementById('alexVml')) {
-                vml("shape").css({
-                    width: "140px",
-                    height: '140px',
-                    opacity: 0.35,
-                    position: 'absolute',
-                    top: '0px',
-                    left: '0px'
-                    // background: 'url(vml.png)'
-                }).attr({
-                    id: 'alexVml',
-                    fillcolor: "red",
-                    strokecolor: "red",
-                    coordorigin: "0  0",
-                    coordSize: "140 140",
-                    path: _path
-                }).appendTo(document.getElementById('ability'));
-            }else {
-                document.getElementById('alexVml').path = _path ;
-            }
-        }
+    // init interface
+    alexDraw = function (path) {
+        var _path =  'm ' + path.replace(';', ' l ') + ' x e';
+        document.getElementById('alexVml').path = _path ;
     };
+}
 
-    var allPath = [
-        "70,10 ; 115,70, 70,130, 10,70 ",
-        "70,20 ; 135,70, 70,90, 10,70 ",
-        "70,5 ; 115,70, 70,100, 40,70 ",
-        "70,45 ; 90,70, 70,90, 50,70 "
-    ];
 
-    var els = document.getElementById('hero').getElementsByTagName('li');
+// 角色数据
+var customData = [
+    //赵云
+    {
+        ability: [5, 4, 4, 3]
+    }
+    //夏侯霸
+    ,{
+        ability: [3, 6, 2, 4]
+    }
+    //曹洪
+    ,{
+        ability: [5, 6, 5, 4]
+    }
+    //乐进
+    ,{
+        ability: [6, 4, 3, 3]
+    }
+    //李典
+    ,{
+        ability: [4, 4, 3, 3]
+    }
+    //凌统
+    ,{
+        ability: [4, 4, 4, 2]
+    }
+    //姜维
+    ,{
+        ability: [6, 4, 5, 3]
+    }
+    //曹仁
+    ,{
+        ability: [4, 6, 2, 4]
+    }
+    //夏侯渊
+    ,{
+        ability: [4, 2, 6, 1]
+    }
+];
+
+// hero相关数据和数据转换
+var hero = {
+    data: customData
+    
+    ,init: function () {
+        //fix data
+        var coordStep = 10
+            ,half = abilitySizeHalf
+            ,coordMax = coordStep*6
+            ;
+        for (var i = 0, k ; k = this.data[i] ; i++ ) {
+            k.abilityCoord  = half + ',' + (coordMax-k.ability[0]*coordStep) + ';' ;
+            k.abilityCoord += (half + half- coordMax+k.ability[1]*coordStep) + ',' + half + ',' ;
+            k.abilityCoord += half + ',' + (half+ half -coordMax + k.ability[2]*coordStep) + ',' ;
+            k.abilityCoord += (coordMax-k.ability[3]*coordStep) + ',' + half ;
+        }
+    }
+
+    ,update: function (n) {
+        alexDraw(this.data[n].abilityCoord);
+    }
+};
+
+//run
+(function () {
+    var defaultHero = 0;
+    hero.init();
+    hero.update(defaultHero);
+
+    var els = document.getElementById('heroList').getElementsByTagName('a');
+
     for (var i = 0, k ; k = els[i] ; i++ ) {
         k.index = i ;
         k.onclick = function () {
-            drawAbility.init(allPath[this.index]);
+            hero.update(this.index);
+            defaultHero = this.index; 
         }
     }
-    window.onload = function () {
-        //init default status
-        setTimeout(function () {
-            drawAbility.init(allPath[3]);
-        }, 200);
-    }
+})();
 </script>
+
 </body>
 </html>
