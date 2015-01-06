@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="gb2312" />
+<meta charset="utf-8" />
 <title>canvas draw</title>
 <style type="text/css" media="screen">
 html,body,h1,h2,h3,h4,p,iframe,ul,ol,li,th,td {margin:0;padding:0;}
@@ -29,15 +29,15 @@ body {min-width:1000px;padding-top:20px;}
 <body>
 
 <div id="heroList" class="hero_list">
-    <a href="javascript:void(0);">’≈∞˙</a>
-    <a href="javascript:void(0);">∫´µ±</a>
-    <a href="javascript:void(0);">≤‹∫È</a>
-    <a href="javascript:void(0);">’≈¡…</a>
-    <a href="javascript:void(0);">Ω™Œ¨</a>
-    <a href="javascript:void(0);">÷‹Ã©</a>
-    <a href="javascript:void(0);">¿÷Ω¯</a>
-    <a href="javascript:void(0);">–Ï ¢</a>
-    <a href="javascript:void(0);">¿Óµ‰</a>
+    <a href="javascript:void(0);">A1</a>
+    <a href="javascript:void(0);">A2</a>
+    <a href="javascript:void(0);">A3</a>
+    <a href="javascript:void(0);">A4</a>
+    <a href="javascript:void(0);">A5</a>
+    <a href="javascript:void(0);">A6</a>
+    <a href="javascript:void(0);">A7</a>
+    <a href="javascript:void(0);">A8</a>
+    <a href="javascript:void(0);">A9</a>
 </div>
 
 <div id="abilityBox" class="ability"></div>
@@ -56,11 +56,12 @@ var AlexCanvas = {
         lineWidth: 2,
         fillStyle: 'rgba(230, 185, 90, 0.8)',
         wrapId: 'canvasBox'
-    },
-    st:null,
+    }
+    ,st:null
 
-    renderTransition: function (toPath) {
-        clearTimeout(this.st);
+    ,renderTransition: function (toPath) {
+        this.st && clearInterval(this.st);
+
         var me =this,
             fromPath = this.config.fromPath;
 
@@ -86,7 +87,7 @@ var AlexCanvas = {
         }
 
         var t = 0;
-        var _run = function () {
+        this.st = setInterval(function () {
             var aPath = [];
             if (t++ <= maxAbs) {
                 aPath.push({type: 'moveTo', v: [toPath[0], fromPath[1]*1 + aTrans[0]*t]}) ;
@@ -95,13 +96,11 @@ var AlexCanvas = {
                 aPath.push({type: 'lineTo', v: [fromPath[6]*1 + aTrans[3]*t, toPath[7] ]}) ;
 
                 me.render(aPath);
-                this.st = setTimeout(_run, 10);
             }else {
+                clearInterval(me.st);
                 me.config.fromPath = toPath;
             }
-        };
-        _run();
-        
+        }, 20);
     },
 
     render: function (aPath) {
@@ -197,13 +196,13 @@ var AlexVml = {
 };
 
 // todo: opt config object
-// …Ë∂®ª≠≤º≥ﬂ¥Á[–Ë“™≈‰÷√]
+// ËÆæÂÆöÁîªÂ∏ÉÂ∞∫ÂØ∏[ÈúÄË¶ÅÈÖçÁΩÆ]
 var abilitySize = 118
     ,abilitySizeHalf = abilitySize/2
     ;
 
-// ≥ı ºªØ [–Ë“™≈‰÷√]
-// ∂‘Õ‚Ω”ø⁄ alexDraw()
+// ÂàùÂßãÂåñ [ÈúÄË¶ÅÈÖçÁΩÆ]
+// ÂØπÂ§ñÊé•Âè£ alexDraw()
 var canvasSupported = !!document.createElement("canvas").getContext 
     ,alexDraw 
     ;
@@ -243,47 +242,47 @@ if (canvasSupported) {
 }
 
 
-// Ω«…´ ˝æ›
+// ËßíËâ≤Êï∞ÊçÆ
 var customData = [
-    //’‘‘∆
+    //Ëµµ‰∫ë
     {
         ability: [5, 4, 4, 3]
     }
-    //œƒ∫Ó∞‘
+    //Â§è‰æØÈú∏
     ,{
         ability: [3, 6, 2, 4]
     }
-    //≤‹∫È
+    //ÊõπÊ¥™
     ,{
         ability: [5, 6, 5, 4]
     }
-    //¿÷Ω¯
+    //‰πêËøõ
     ,{
         ability: [6, 4, 3, 3]
     }
-    //¿Óµ‰
+    //ÊùéÂÖ∏
     ,{
         ability: [4, 4, 3, 3]
     }
-    //¡ËÕ≥
+    //ÂáåÁªü
     ,{
         ability: [4, 4, 4, 2]
     }
-    //Ω™Œ¨
+    //ÂßúÁª¥
     ,{
         ability: [6, 4, 5, 3]
     }
-    //≤‹» 
+    //Êõπ‰ªÅ
     ,{
         ability: [4, 6, 2, 4]
     }
-    //œƒ∫Ó‘®
+    //Â§è‰æØÊ∏ä
     ,{
         ability: [4, 2, 6, 1]
     }
 ];
 
-// heroœ‡πÿ ˝æ›∫Õ ˝æ›◊™ªª
+// heroÁõ∏ÂÖ≥Êï∞ÊçÆÂíåÊï∞ÊçÆËΩ¨Êç¢
 var hero = {
     data: customData
     
@@ -316,7 +315,7 @@ var hero = {
 
     for (var i = 0, k ; k = els[i] ; i++ ) {
         k.index = i ;
-        k.onclick = function () {
+        k.onmouseover = function () {
             hero.update(this.index);
             defaultHero = this.index; 
         }
