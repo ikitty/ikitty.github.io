@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Backbone.js学习记录-View"
-description:
+description: "Backbone的View层负责将数据渲染到界面，并管理view层的交互事件和逻辑。View提供了一组处理DOM事件、和渲染模型（或集合）数据的方法。下面结合代码来更好的理解。"
 category: other
 tags: []
 ---
