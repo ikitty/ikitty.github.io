@@ -2,8 +2,8 @@
 layout: post
 title: "iOS练习小结-简单的Table"
 description: "最近基本都是在跟着教程去做些联系，顺便也小结下做过的练习。给自己长点记性。"
-category: other
-tags: []
+tags: [ Objective-c ]
+category: iOS
 ---
 {% include JB/setup %}
 
