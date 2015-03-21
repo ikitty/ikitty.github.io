@@ -10,12 +10,12 @@ h1,h2,h3,h4 {font-weight:400;}
 
 /* header */
 .header{border-bottom:20px solid #F1E6D5;background-color:#3f4955;}
-.header_inner{width:850px;height:50px;margin:0 auto;line-height:50px;border-bottom:1px solid #111;}
-.header .brand{float:left;height:100%;font:400 18px/50px "courier new","\5FAE\8F6F\96C5\9ED1";color:#ddd;}
+.header_inner{width:850px;margin:0 auto;border-bottom:1px solid #111;zoom:1;overflow:hidden;}
+.header .brand{float:left;height:50px;padding-left:20px;font:400 18px/50px "courier new","\5FAE\8F6F\96C5\9ED1";color:#ddd;}
 .header .brand:hover{color:#fff;}
-.header .nav{float:right;height:100%;}
-.header .nav li{float:left;height:100%;line-height:50px;}
-.header .nav a {padding-left:20px;color:#ccc;}
+.header .nav{float:right;height:50px;line-height:50px;padding-left:10px;padding-right:10px;}
+.header .nav li{float:left;height:100%;}
+.header .nav a {padding:8px 10px;color:#ccc;}
 .header .nav a:focus,
 .header .nav a:hover {color:#fff;}
 
@@ -23,7 +23,7 @@ h1,h2,h3,h4 {font-weight:400;}
 .content {width:850px;margin:0 auto;background-color:#fff;border-radius:3px;}
 .content_inner {padding:20px 20px 40px;}
 
-.page_topic {height:50px;line-height:50px;padding-bottom:10px;margin-bottom:20px;border-bottom:3px double #eee;}
+.page_topic {line-height:50px;padding-bottom:10px;margin-bottom:20px;border-bottom:3px double #eee;}
 
 .post_list li {padding:15px 0px 20px;line-height:25px;border-bottom:1px solid #e5e5e5;}
 .post_list .tit {display:block;font-size:18px;line-height:30px;color:#435B81;}
@@ -90,8 +90,8 @@ caption {border-bottom:0;background-color:#eee;}
 .tags_list li {margin:10px 0px;}
 
 /* Pretty printing styles. Used with prettify.js. */
-.pln { color: #000 }  /* plain text */
-.str { color: #f09 }  /* string content */
+.pln { color: #333 }  /* plain text */
+.str { color: #d09 }  /* string content */
 .kwd { color: #06f }  /* a keyword */
 .com { color: #090 }  /* a comment */
 .typ { color: #606 }  /* a type name */
@@ -101,4 +101,11 @@ caption {border-bottom:0;background-color:#eee;}
 .atn { color: #606 }  /* a markup attribute name */
 .atv { color: #080 }  /* a markup attribute value */
 .dec, .var { color: #606 }  /* a declaration; a variable name */
-.fun { color: red }  /* a function name */
+.fun { color: #c00 }  /* a function name */
+
+/* compatible for mobile*/
+@media(max-width:640px){
+    .content,
+    .header_inner {width:100%;}
+    .header .nav {float:left;}
+}
