@@ -38,15 +38,17 @@ h1,h2,h3,h4 {font-weight:400;}
 .post_cate,
 .post_tag {padding-left:15px;}
 
-.post_cont {font-size:16px;line-height:22px;overflow:hidden;color:#333;}
+.post_cont {font-size:16px;line-height:22px;overflow:hidden;color:#333;padding-bottom:20px;}
 .post_cont h3 {height:50px;line-height:50px;font-size:26px;margin:20px 0px;}
 .post_cont h4 {height:40px;line-height:40px;font-size:22px;margin:10px 0px;}
 .post_cont p {margin:25px 0px;}
+.post_cont ul {margin:25px 0px;}
+.post_cont li {list-style-type:disc;margin:5px 0px 5px 25px;}
 /* inline code  */
 code {font-family:Consolas,Menlo,"Courier New";color:#c7254e;background-color:#f9f2f4;padding:3px 5px 0;border-radius:3px;margin:0px 3px;}
 
 /* code block */
-pre {padding:10px 0px 10px 10px;margin:10px 0px;background-color:rgba(102,128,153,0.05);border-left:8px solid rgba(102,128,153,0.075);}
+pre {padding:10px 0px 10px 10px;margin:20px 0px;background-color:rgba(102,128,153,0.05);border-left:8px solid rgba(102,128,153,0.075);}
 pre code {display:block;padding:0px;margin:0px;font-size:14px;background:none;color:#333333;}
 
 /* footer */
