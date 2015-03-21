@@ -30,7 +30,7 @@ h1,h2,h3,h4 {font-weight:400;}
 .post_list .tit:hover {color:#000;}
 .post_list .time {font-size:12px;color:#bbb;}
 .post_list .time span {padding-right:10px;}
-.post_list .desp {color:#888;}
+.post_list .desp {color:#474747;padding-top:5px;font-size:16px;}
 
 /* post page */
 .post_date {height:30px;line-height:30px;color:#aaa;zoom:1;overflow:hidden;}
