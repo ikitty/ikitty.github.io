@@ -5,19 +5,17 @@ title: iKitty Notes
 {% include JB/setup %}
 
 <style>
-    .page-header {display:none;}
+.page_topic {display:none;}
 </style>
 
-<ul class="posts">
-  {% for post in paginator.posts %}
+<ul class="post_list">
+    {% for post in paginator.posts %}
     <li>
-        <div class="post_tit">
-            <span class="post_time">{{ post.date | date: "%Y-%m-%d" }} </span>
-            <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
-        </div>
-        <p class="post_desp">{{post.description}}</p>
+        <a class="tit" href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
+        <p class="time"><span>Time：{{ post.date | date: "%Y-%m-%d" }} </span><span> Category：{{post.category}}</span></p>
+        <p class="desp">{{post.description}}</p>
     </li>
-  {% endfor %}
+    {% endfor %}
 </ul>
 
 <div class="pager">
