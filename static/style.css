@@ -1,6 +1,6 @@
 /* reset */
 * {margin:0;padding:0;list-style:none;}
-body{font-family:"Avenir Next","Helvetica Neue",Helvetica,Arial;font-size:14px;line-height:20px;color:#474747;background-color:#F1E6D5;}
+body{font-family:"Avenir Next","Helvetica Neue","\5FAE\8F6F\96C5\9ED1",Arial;font-size:14px;line-height:20px;color:#474747;background-color:#F1E6D5;}
 a {color:#435B81;text-decoration:none;}
 a:hover {color:#111;text-decoration:none;}
 a:focus {outline:none;}
@@ -38,7 +38,7 @@ h1,h2,h3,h4 {font-weight:400;}
 .post_cate,
 .post_tag {padding-left:15px;}
 
-.post_cont {font-size:16px;line-height:22px;overflow:hidden;color:#333;padding-bottom:20px;}
+.post_cont {font-size:16px;line-height:25px;overflow:hidden;color:#333;padding-bottom:20px;}
 .post_cont h3 {height:50px;line-height:50px;font-size:26px;margin:20px 0px;}
 .post_cont h4 {height:40px;line-height:40px;font-size:22px;margin:10px 0px;}
 .post_cont p {margin:25px 0px;}
@@ -48,8 +48,8 @@ h1,h2,h3,h4 {font-weight:400;}
 code {font-family:Consolas,Menlo,"Courier New";color:#c7254e;background-color:#f9f2f4;padding:3px 5px 0;border-radius:3px;margin:0px 3px;}
 
 /* code block */
-pre {padding:10px 0px 10px 10px;margin:20px 0px;background-color:rgba(102,128,153,0.05);border-left:8px solid rgba(102,128,153,0.075);}
-pre code {display:block;padding:0px;margin:0px;font-size:14px;background:none;color:#333333;}
+pre {padding:10px 0px 10px 10px;margin:20px 0px;line-height:22px;background-color:rgba(102,128,153,0.05);border-left:8px solid rgba(102,128,153,0.075);}
+pre code {display:block;padding:0px;margin:0px;font-size:14px;background:none;color:#333333;word-break:break-word;}
 
 /* footer */
 .footer {text-align:center;padding:20px 0px;}
