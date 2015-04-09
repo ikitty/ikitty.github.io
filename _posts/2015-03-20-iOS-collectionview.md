@@ -92,3 +92,41 @@ UICollectionView和UITableView类似，也是管理着一个数据集合，并�
     }
 
 CMD+R就能看到新增的header和footer了。
+
+
+说完基本的东西，再来实践和CollectionView的交互
+
+###实现图片详情
+
+设计一个ViewController来展示图片详情，添加一个ViewController，一个imgview，一个带有close按钮的nav bar，然后将collection view cell和ViewController连接起来。segue类型选择modal，并设置好segue的id。
+
+创建一个uiviewcontroller的子类，指派给刚建立的ViewController。
+
+创建一个imageView和button的连接。
+
+    @interface RecipeViewController : UIViewController
+
+    @property (weak, nonatomic) IBOutlet UIImageView *recipeImageView;
+    @property (weak, nonatomic) NSString *recipeImageName;
+    - (IBAction)close:(id)sender;
+    @end
+    
+当加载的时候要载入指定的图片。
+
+    - (void)viewDidLoad
+    {
+        [super viewDidLoad];
+        self.recipeImageView.image = [UIImage imageNamed:self.recipeImageName];
+    }
+    
+我们如何选择图片，并且将其传递给detail呢？
+
+    - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+        if ([segue.identifier isEqualToString:@"showRecipePhoto"]) {
+            NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
+            RecipeViewController *destViewController = segue.destinationViewController;
+            NSIndexPath *indexPath = [indexPaths objectAtIndex:0];
+            destViewController.recipeImageName = [recipeImages[indexPath.section] objectAtIndex:indexPath.row];
+            [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+        }
+    }
