@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "iOS练习-获取并解析JSON"
-description: 上周的工作杂事比较多，加之还有其他的事情处理。所以有点点落下进度了。周末继续补上。前面介绍过XML的解析，较之于XML，JSON更方便编辑和阅读。自从iOS5以后，iOS SDK获取和解析JSON变得非常方便。那么今天就练习用内置API获取和解析JSON。"
+description: "上周的工作杂事比较多，加之还有其他的事情处理。所以有点点落下进度了。周末继续补上。前面介绍过XML的解析，较之于XML，JSON更方便编辑和阅读。自从iOS5以后，iOS SDK获取和解析JSON变得非常方便。那么今天就练习用内置API获取和解析JSON。"
 tags: [ Objective-c ]
 category: iOS
 ---
