@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "iOS练习-使用storyboard创建UIPageViewController"
-description: "通用App是指能同时兼容iPhone, iTouch 和iPad设备的App（类似网页自动适配pc端和移动端），为了达到完美的用户体验，用户只需要下载一个版本的App，就能在多个设备上使用。"
+description: "之前学习了用InterfaceBuilder来创建UIPageViewController，今天我们尝试用storyboard来创建UIPageViewController。UIPageViewController的基本概念和可配置的选项我就不说了，上次的文章已经讲过了。我会侧重说一些使用storyboard和InterfaceBuilder创建UI的差异和要注意的点。"
 tags: [ Objective-c ]
 category: iOS
 ---
