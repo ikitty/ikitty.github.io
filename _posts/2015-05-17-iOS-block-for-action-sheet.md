@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "iOS-Block在actionSheet中的实践"
-description:
-"前段时间为Block折腾了一些时间，了解概念后就立马结合实例来加深理解了。如果你使用过action sheet，你肯定知道，我们需要遵循UIActionSheetDelegate 协议，还必须实现委托的方法，比如actionSheet:clickedButtonAtIndex:。我们要的是自定义一个类，结合回调函数来实现UIActionSheet 。如果你想知道用户点击了哪个按钮，常规的方法是在每个地方都写一次代码来处理。但这样并不优雅，我们可以使用Block作为Completion Handler更好的处理。"
+description: "前段时间为Block折腾了一些时间，了解概念后就立马结合实例来加深理解了。如果你使用过action sheet，你肯定知道，我们需要遵循UIActionSheetDelegate 协议，还必须实现委托的方法，比如actionSheet:clickedButtonAtIndex:。我们要的是自定义一个类，结合回调函数来实现UIActionSheet 。如果你想知道用户点击了哪个按钮，常规的方法是在每个地方都写一次代码来处理。但这样并不优雅，我们可以使用Block作为Completion Handler更好的处理。"
 tags: [ Objective-c ]
 category: iOS
 ---
