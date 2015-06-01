@@ -88,6 +88,8 @@ github让我们在这里输入提交的备注，我们在第一行后面附加�
     
 然后保存退出。这样就完成了merge过程。
 
+update：我在上一步ci的时候秀逗了，在ci的时候附加上msg就可以免去进入文件编辑ci信息的过程了。`git commit -m 'mergeMsg'`。
+
 现在，切换到自己的分支:
 
     git checkout master
