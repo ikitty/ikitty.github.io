@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ZH-cn">
+<head>
+<meta charset="utf-8" />
+<title>Detect Browser Scale by Alextang</title>
+<style type="text/css" media="screen">
+    * {margin:0;padding:0;list-style:none;}
+    h1 {text-align:center;padding-top:20px;height:50px;font:400 20px/50px "Microsoft YaHei";}
+    .ret {color:#090;text-align:center;font-size:16px;}
+</style>
+</head>
+<body>
+
+<h1 class="">Detect Browser Scale : <span id="ret" class="ret">一切正常，ohYeah</span></h1>
+
+<div id="ret" class="ret"> </div>
+
+<script>
+
+function detectBrowserScale(){ 
+    var ratio = 1,
+        screen = window.screen,
+        ua = navigator.userAgent.toLowerCase();
+
+    if (window.devicePixelRatio !== undefined) {
+        ratio = window.devicePixelRatio;
+    } else if ( (ua.indexOf('msie') + 1) && screen.deviceXDPI && screen.logicalXDPI) {    
+        ratio = screen.deviceXDPI / screen.logicalXDPI;
+    } else if (window.outerWidth !== undefined && window.innerWidth !== undefined) {
+        ratio = window.outerWidth / window.innerWidth;
+    }
+
+    return ratio;
+};
+
+window.onresize = function () {
+    var r = detectBrowserScale();
+    var elRet = document.getElementById('ret');
+    var strRet = '请按下 Ctrl 和 0 来重置浏览器缩放'
+    if (r > 1) {
+        strRet = '页面被放大了，' + strRet ;
+    }else if (r < 1){
+        strRet = '页面被缩小了，' + strRet ;
+    }else {
+        strRet = '一切正常，ohYeah' ;
+    }
+    elRet.innerHTML = strRet;
+}
+</script>
+</body>
+</html>
