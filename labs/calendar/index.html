@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>DEMO</title>
+</head>
+<body>
+
+<div class="col_main">
+    <!--S 头部 -->
+    <div class="main_hd">
+        <strong class="title">售后单查询</strong>
+    </div>
+    <!--E 头部 -->
+
+    <!--S 规则列表 -->
+    <div class="main_bd">
+        <table class="table_common table_query_filter">
+            <tr>
+                <td class="col_1">售后状态</td>
+                <td class="col_2">
+                    <select >
+                        <option value="" selected="selected">退货</option>
+                        <option value="" ></option>
+                    </select>
+                    <select >
+                        <option value="" selected="selected">等待受理</option>
+                        <option value="" ></option>
+                    </select>
+                </td>
+                <td class="col_3">合作伙伴</td>
+                <td class="col_4">
+                    <select >
+                        <option value="" selected="selected">易迅</option>
+                        <option value="" ></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="col_1">订单号</td>
+                <td class="col_2"><input type="text" value="" class="txt_medium_gt" autocomplete="off"/><span class="error_tips">出错提示文字</span></td>
+                <td class="col_3">售后单号</td>
+                <td class="col_4"><input type="text" value="" class="txt_medium_gt" autocomplete="off"/><span class="error_tips">出错提示文字</span></td>
+            </tr>
+            <tr>
+                <td class="col_1">商品ID</td>
+                <td class="col_2"><input type="text" value="" class="txt_medium_gt" autocomplete="off"/><span class="error_tips">出错提示文字</span></td>
+                <td class="col_3">商品类目</td>
+                <td class="col_4">
+                    <select >
+                        <option value="" selected="selected">手机</option>
+                        <option value="" ></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="col_1">退换货原因</td>
+                <td class="col_2">
+                    <select >
+                        <option value="" selected="selected">商品质量问题</option>
+                        <option value="" ></option>
+                    </select>
+                </td>
+                <td class="col_3">客户操作员</td>
+                <td class="col_4">
+                    <select >
+                        <option value="" selected="selected">商品质量问题</option>
+                        <option value="" ></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                 <td class="col_1">用户QQ</td>
+                 <td class="col_2" colspan="3"><input type="text" value="" class="txt_medium_gt" autocomplete="off"/><span class="error_tips">出错提示文字</span></td>
+            </tr>
+            <tr>
+                <td class="col_1">售后单生成时间</td>
+                <td class="col_2" colspan="3">
+                    <input type="text"  id="txtStartTime" value="2011-10-19 12:33:45" class="txt_medium_gt" autocomplete="off"/>&nbsp;&nbsp; 到 &nbsp;&nbsp;<input
+                    type="text" id="txtEndTime" value="2011-10-20 12:13" class="txt_medium_gt" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
+                 <td class="col_1">&nbsp;</td>
+                 <td class="col_2" colspan="3"><input type="button" class="btn_common" value="查 询"/></td>
+            </tr>
+        </table>
+        <span class="line_br"></span>
+
+    </div>
+    <!--E 规则列表 -->
+</div>
+<script type="text/javascript" src="calendar.js"></script>
+<script type="text/javascript">
+window.onload = function  () {
+    // 输入日期时调用日历控件
+// 调用方法：
+ get('txtStartTime').onclick = function (e) {
+     var _self = this;
+     var config = {
+         e: e || window.event,
+         el: this,
+         callback: function (v) { _self.value = v; },
+         format: 'Y-m-d H:m:s', //optional
+         pos: [0, 2] // optional
+     }
+     userCalendar(config);
+ } ;
+ get('txtEndTime').onclick = function (e) {
+     var _self = this;
+     var config = {
+         e: e || window.event,
+         el: this,
+         callback: function (v) { _self.value = v; },
+         format: 'Y-m-d H:m', //optional
+         pos: [0, 2] // optional
+     }
+     userCalendar(config);
+ } ;
+
+}
+</script>
+</body>
+</html>

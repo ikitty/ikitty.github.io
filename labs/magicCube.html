@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ZH-cn">
+<head>
+<meta charset="utf-8" />
+<title>Crazy cube</title>
+<style>
+/* =====new box===== */
+.alex_cube_wrap {
+    margin:100px auto;width:200px;height:200px;border:1px solid #ddd;
+    -webkit-perspective:800px;
+    -moz-perspective:800px;
+}
+.alex_cube { position:relative; width:200px;height:200px; 
+    -webkit-transform-style:preserve-3d;
+    -moz-transform-style:preserve-3d;
+    -webkit-transition: -webkit-transform 0.9s linear;
+}
+.alex_cube li {position:absolute;top:0px;left:0px;list-style:none;width:200px;height:200px;font-size:30px;line-height:198px;text-align:center;border:0px solid #333;}
+
+.alex_cube_1 { background:rgba(0,255,0,0.3);
+    -webkit-transform:translateZ(100px);
+}
+.alex_cube_2 { background:rgba(0,0,255,0.3);
+    -webkit-transform:rotateY(180deg) translateZ(100px);
+}
+.alex_cube_3 { background:rgba(255,255,0,0.3);
+    -webkit-transform:rotateY(-90deg) translateZ(100px);
+}
+.alex_cube_4 { background:rgba(255,0,255,0.3);
+    -webkit-transform:rotateY(90deg) translateZ(100px);
+}
+.alex_cube_5 { background:rgba(0,255,255,0.3);
+    -webkit-transform:rotateX(90deg) translateZ(100px);
+}
+.alex_cube_6 { background:rgba(255,0,0,0.3);
+    -webkit-transform:rotateX(-90deg) translateZ(100px);
+}
+.code_symbol {position:absolute;}
+.code_symbol i {position:absolute;width:10px;height:10px;border-style:solid;border-width:10px;overflow:hidden;
+    -webkit-transition:all .3s ease-out;
+}
+.code_symbol_1 {top:0px;left:0px;border-color:transparent transparent  #f30 #03f ;-webkit-transform:rotateZ(45deg);}
+.code_symbol_2 {top:0px;left:50px;border-color:transparent transparent  #0f0 #ff0 ;-webkit-transform:rotateZ(-135deg) translateY(100px);}
+</style>
+</head>
+<body>
+<!--S MagicCube -->
+<div class="alex_cube_wrap">
+    <ul class="alex_cube" id="alexCube">
+        <li class="alex_cube_1">Front</li>
+        <li class="alex_cube_2">Back</li>
+        <li class="alex_cube_3">Left</li>
+        <li class="alex_cube_4">Right</li>
+        <li class="alex_cube_5">Top</li>
+        <li class="alex_cube_6">Bottom</li>
+    </ul>
+</div>
+<!--E MagicCube -->
+<!--S symbol -->
+<div class="code_symbol">
+    <i class="code_symbol_1">&nbsp;</i>
+    <i class="code_symbol_2">&nbsp;</i>
+</div>
+<!--E symbol -->
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+    function rdm(s, e, n) {
+        if (typeof n == undefined) {
+            n = 3;
+        }
+        var ret = Number((Math.random()*(e-s) + s ).toFixed(n)) ;
+        // return ret == 0 ? arguments.callee.apply(this, arguments) : ret ;
+        return ret ;
+    }
+    var xAngle = 0, yAngle = 0;
+    $(function () {
+        var xx = 0,
+            yy = 0 ,
+            n = 0 ;
+        var si = setInterval(function () {
+            if (n++ > 10) {
+                clearInterval(si);
+                setTimeout(function () {
+                    xx = Math.ceil(xx/360) * 360 + 90;
+                    yy = Math.ceil(yy/360) * 360 + 45;
+                    $('#alexCube')[0].style.webkitTransform = "rotateX("+xx+"deg) rotateY("+yy+"deg)";
+                }, 100);
+            }
+            xx += rdm(10, 50, 0);
+            yy += rdm(10, 80, 0);
+            $('#alexCube')[0].style.webkitTransform = "rotateX("+xx+"deg) rotateY("+yy+"deg)";
+        }, 100);
+    });
+
+    document.addEventListener('keydown', function(e) {
+        switch(e.keyCode) {
+            case 37: // left
+            yAngle -= 15;
+            break;
+
+            case 38: // up
+            xAngle += 15;
+            break;
+
+            case 39: // right
+            yAngle += 15;
+            break;
+
+            case 40: // down
+            xAngle -= 15;
+            break;
+        };
+        $('#alexCube')[0].style.webkitTransform = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
+    }, false);
+
+</script>
+</body>
+</html>
