@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Anim</title>
+</head>
+<body>
+
+<h3 >四种场景下的this的取值:</h3>
+
+<p >1. 作为对象属性来调用</p>
+<p >如果一个 function 是一个对象的属性，该 funtion 被调用的时候，this 的值是这个对象</p>
+<pre>
+    var mac = {'version': 10.5, 'fn': function(){alert(this.name)}};
+    mac.fn(); // 10.5
+</pre>
+
+<p >2. 全局调用</p>
+如果一个 function 不是作为一个对象的属性，那么该 function 被调用的时候，this 的值是全局对象。特别是当一个 function 中包含内部 function 的时候，内部 function 的 this 值与它外部的 function 的 this 值是不一样的。
+
+<pre>
+function fn() {
+    alert(this.version);
+}
+fn();
+
+var linus = {'version': 1,
+    'fn': function () {
+        return function () {
+            alert(this.version);
+        } ;
+    },
+    'fn2': function () {
+        var inner = function () {
+            alert(this.version);
+        }
+        inner();
+    }
+};
+//window.version
+linus.fn()();
+linus.fn2();
+
+如果要将this指向linus,则要通过临时变量来保存this指向。
+</pre>
+
+<p >3. 实例化的对象</p>
+
+<pre>
+var obj = function (name) {
+    this.name = name ;
+};
+obj.prototype.fn = function () {
+    alert(this.name);
+}
+var obj2 = new obj('alex');
+</pre>
+
+<p >4. call and applay</p>
+这个就不说了，第一个参数就是this指向的对象
+    
+
+<script>
+window.version = '8';
+
+var mac = {'version': 10.5};
+mac.fn = fn ;
+// mac.fn();
+
+function fn() {
+    alert(this.version);
+}
+//直接调用函数，this指向全局对象(window)
+// fn();
+
+var linus = {'version': 1,
+    'fn': function () {
+        return function () {
+            alert(this.version);
+        } ;
+    },
+    'fn2': function () {
+        var inner = function () {
+            alert(this.version);
+        }
+        inner();
+    }
+};
+// linus.fn()();
+// linus.fn2();
+
+var obj = function (name) {
+    this.name = name ;
+};
+obj.prototype.fn = function () {
+    alert(this.name);
+}
+var obj2 = new obj('alex');
+// obj2.fn();
+
+
+
+
+// mac.fn.call();
+
+
+
+</script>
+</body>
+</html>
