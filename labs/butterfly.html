@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>DEMO</title>
+<style type="text/css" media="screen">
+* {margin:0;padding:0;list-style:none;}
+    
+.notice {position:relative;width:500px;height:30px;border:1px solid #ccc;overflow:hidden;margin:50px auto;}
+.notice a {position:absolute;top:0px;left:0px;opacity:0;height:100%;line-height:30px;text-decoration:none;color:#39f;transition:all .3s ease-in; }
+.notice .hide {opacity:0;}
+.notice .ishow {opacity:1;}
+.ret {position:absolute;left:0px;top:0px;background-color:#f90;width:20px;height:20px;  overflow:hidden;}
+</style>
+</head>
+<body>
+
+<div id="notice" class="notice">
+    <a href="#" target="_blank">1111111111</a>
+    <a href="#" target="_blank">22222</a>
+    <a href="#" target="_blank">333333</a>
+</div>
+
+<div id="butterfly" class="ret"> </div>
+<input type="button" id="btn" value="fly～butterfly"/>
+
+<script type="text/javascript">
+    var Class = {
+        create: function () {
+            return function () {
+                this.init.apply(this, arguments);
+            } ;
+        }
+    } ;
+
+    var xButterfly = Class.create();
+    xButterfly.prototype = {
+        init: function (arg) {
+            this.cfg = {
+                id: 'butterfly'
+                ,flag: 1
+                ,spacing: 100
+                ,centerX: window.innerWidth/2
+                ,centerY: window.innerHeight/2
+                ,stepsPerRotation: 60
+                ,radius: 8
+                ,radiusMultiple: 5
+            };
+            for (var i in arg) {
+                if (arg.hasOwnProperty(i)) {
+                    this.cfg[i] = arg[i];
+                }
+            }
+
+            //shortcut for config
+            var D = this.cfg;
+
+            D.elBf = document.getElementById(D.id);
+            D.increment = 2*Math.PI/D.stepsPerRotation ;
+            D.theta = D.increment;
+        }
+        ,play: function () {
+            var D = this.cfg;
+            var self = this;
+
+            if (!(D.theta < 10*Math.PI && this.detectBoundary(newX, newY) && D.flag)) {
+                D.flag = 1;
+                return ;
+            }
+
+            D.elBf.style.display = 'block';
+
+            var newX = D.centerX + D.radiusMultiple * D.radius * Math.cos(D.theta); 
+            var newY = D.centerY + D.radiusMultiple * D.radius * Math.sin(D.theta); 
+            D.elBf.style.left = newX + 'px';
+            D.elBf.style.top = newY + 'px';
+
+            D.theta += D.increment;
+            D.radius += D.increment;
+
+            setTimeout(function () {
+                self.play();
+            }, 100);
+        }
+        ,stop: function () {
+            var D =this.cfg;
+            D.flag = 0 ;
+            D.elBf.style.display = 'none';
+        }
+        ,detectBoundary: function (x, y) {
+            var D =this.cfg;
+            var maxX = 2*D.centerX - D.spacing
+                ,maxY = 2*D.centerY - D.spacing
+                ;
+
+            if (x > maxX || x < D.spacing || y > maxY || y < D.spacing) {
+                return 0 ;
+            }
+            return 1 ;
+        }
+    };
+    function butterfly () {
+        var bf = new xButterfly({id: 'butterfly'});
+
+        document.getElementById('btn').onclick = function () {
+            bf.play();
+        };
+
+        document.getElementById('butterfly').onclick = function () {
+            bf.stop();
+        };
+
+    };
+
+    butterfly();
+
+
+
+    //notice
+    (function () {
+        var index = 0 ;
+        var el = document.getElementById('notice')
+            ,elA = el.getElementsByTagName('a')
+            ,len = elA.length 
+            ;
+        var _run = function () {
+            if (elA[index-1]) {
+                elA[index-1].className = 'hide';
+            }
+            if (index >= len) {
+                index = 0;
+            }
+            elA[index].className = 'ishow';
+            index++;
+            setTimeout(function () {
+                _run();
+            }, 1000);
+        };
+
+        _run();
+    })();
+</script>
+</body>
+</html>
