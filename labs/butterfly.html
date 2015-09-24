@@ -10,7 +10,7 @@
 .notice a {position:absolute;top:0px;left:0px;opacity:0;height:100%;line-height:30px;text-decoration:none;color:#39f;transition:all .3s ease-in; }
 .notice .hide {opacity:0;}
 .notice .ishow {opacity:1;}
-.ret {position:absolute;left:0px;top:0px;background-color:#f90;width:20px;height:20px;  overflow:hidden;}
+.ret {position:absolute;left:0px;top:0px;background-color:#f90;width:30px;height:30px;  overflow:hidden;}
 </style>
 </head>
 <body>
@@ -40,8 +40,8 @@
                 id: 'butterfly'
                 ,flag: 1
                 ,spacing: 100
-                ,centerX: window.innerWidth/2
-                ,centerY: window.innerHeight/2
+                ,centerX: document.documentElement.clientWidth/2
+                ,centerY: document.documentElement.clientHeight/2
                 ,stepsPerRotation: 60
                 ,radius: 8
                 ,radiusMultiple: 5
@@ -67,6 +67,7 @@
                 D.flag = 1;
                 return ;
             }
+            
 
             D.elBf.style.display = 'block';
 
