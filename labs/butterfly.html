@@ -6,11 +6,15 @@
 <style type="text/css" media="screen">
 * {margin:0;padding:0;list-style:none;}
     
-.notice {position:relative;width:500px;height:30px;border:1px solid #ccc;overflow:hidden;margin:50px auto;}
+.notice {position:relative;width:500px;height:30px;border:1px solid #ccc;overflow:hidden;margin:20px auto;}
 .notice a {position:absolute;top:0px;left:0px;opacity:0;height:100%;line-height:30px;text-decoration:none;color:#39f;transition:all .3s ease-in; }
 .notice .hide {opacity:0;}
 .notice .ishow {opacity:1;}
-.ret {position:absolute;left:0px;top:0px;background-color:#f90;width:30px;height:30px;  overflow:hidden;}
+
+.butterfly {position:absolute;display:none;left:0px;top:0px;background-color:#f60;width:20px;height:20px;  overflow:hidden;border-radius:50%;}
+
+.btns {text-align:center;}
+.btns p {display:inline-block;margin:0px 10px;height:30px;line-height:30px;padding:0px 12px;border:1px solid #ccc;background-color:#eee;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -21,10 +25,24 @@
     <a href="#" target="_blank">333333</a>
 </div>
 
-<div id="butterfly" class="ret"> </div>
-<input type="button" id="btn" value="fly～butterfly"/>
+<div class="btns">
+    <p id="btn">Fly~~</p>
+    <p id="btnContinue">Fly~~Continued</p>
+</div>
+
+<div id="butterfly" class="butterfly"> </div>
 
 <script type="text/javascript">
+(function () {
+    window.RAF= window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function (cb) {
+                    window.setTimeout(cb, 1000/60);
+                };
+})();
+
+
     var Class = {
         create: function () {
             return function () {
@@ -63,6 +81,8 @@
             var D = this.cfg;
             var self = this;
 
+            var newX = D.centerX + D.radiusMultiple * D.radius * Math.cos(D.theta); 
+            var newY = D.centerY + D.radiusMultiple * D.radius * Math.sin(D.theta); 
             if (!(D.theta < 10*Math.PI && this.detectBoundary(newX, newY) && D.flag)) {
                 D.flag = 1;
                 return ;
@@ -71,17 +91,18 @@
 
             D.elBf.style.display = 'block';
 
-            var newX = D.centerX + D.radiusMultiple * D.radius * Math.cos(D.theta); 
-            var newY = D.centerY + D.radiusMultiple * D.radius * Math.sin(D.theta); 
             D.elBf.style.left = newX + 'px';
             D.elBf.style.top = newY + 'px';
 
             D.theta += D.increment;
             D.radius += D.increment;
 
-            setTimeout(function () {
+            RAF(function () {
                 self.play();
-            }, 100);
+            });
+            // setTimeout(function () {
+                // self.play();
+            // }, 1);
         }
         ,stop: function () {
             var D =this.cfg;
@@ -115,6 +136,45 @@
 
     butterfly();
 
+
+    //another bf
+    (function () {
+        var bf = new xButterfly({id: 'x', radiusMultiple: 15}); 
+        bf.play = function () {
+            var D = this.cfg;
+            var self = this;
+
+            var newX = D.centerX + D.radiusMultiple * D.radius * Math.cos(D.theta); 
+            var newY = D.centerY + D.radiusMultiple * D.radius * Math.sin(D.theta); 
+
+            if (!(D.theta < 10*Math.PI && this.detectBoundary(newX, newY) && D.flag)) {
+                D.flag = 1;
+                return ;
+            }
+            
+
+
+            var el = document.createElement('div');
+            el.className = 'butterfly';
+            el.style.left = newX + 'px';
+            el.style.top = newY + 'px';
+            el.style.display = 'block';
+            document.body.appendChild(el) ;
+
+            D.theta += D.increment;
+            D.radius += D.increment;
+
+            RAF(function () {
+                self.play();
+            })
+            // setTimeout(function () {
+                // self.play();
+            // }, 100);
+        };
+        document.getElementById('btnContinue').onclick = function () {
+            bf.play();
+        };
+    })();
 
 
     //notice
