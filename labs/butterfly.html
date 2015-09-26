@@ -33,15 +33,14 @@
 <div id="butterfly" class="butterfly"> </div>
 
 <script type="text/javascript">
-(function () {
-    window.RAF= window.requestAnimationFrame ||
-                window.webkitRequestAnimationFrame ||
-                window.mozRequestAnimationFrame ||
-                function (cb) {
-                    window.setTimeout(cb, 1000/60);
-                };
-})();
-
+    (function () {
+        window.RAF= window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    function (cb) {
+                        window.setTimeout(cb, 1000/60);
+                    };
+    })();
 
     var Class = {
         create: function () {
@@ -131,11 +130,8 @@
         document.getElementById('butterfly').onclick = function () {
             bf.stop();
         };
-
     };
-
     butterfly();
-
 
     //another bf
     (function () {
@@ -151,8 +147,6 @@
                 D.flag = 1;
                 return ;
             }
-            
-
 
             var el = document.createElement('div');
             el.className = 'butterfly';
@@ -167,9 +161,6 @@
             RAF(function () {
                 self.play();
             })
-            // setTimeout(function () {
-                // self.play();
-            // }, 100);
         };
         document.getElementById('btnContinue').onclick = function () {
             bf.play();
@@ -195,9 +186,8 @@
             index++;
             setTimeout(function () {
                 _run();
-            }, 1000);
+            }, 2000);
         };
-
         _run();
     })();
 </script>
