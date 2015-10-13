@@ -1,0 +1,67 @@
+body,li, dl, dd, ul, ol, h1, h2, h3, h4, h5, h6, p, form {margin: 0;padding:0 }
+body,  textarea {font: 14px/20px "\5FAE\8F6F\96C5\9ED1",sans-serif;background: #f8f8f8;}
+h1, h2, h3, h4{font-size: 100%}
+em, b {font-style: normal}
+a {text-decoration: none}
+a:hover {text-decoration: none}
+img {border: 0;display:block;}
+li, ol, ul {list-style: none}
+.hide {display:none;}
+
+
+* {-webkit-box-sizing: border-box;box-sizing: border-box;}
+
+
+/* =====mplayer===== */
+#mPlayer {position: fixed;width: 100%;height: 100%;overflow: hidden;left: 0;top: 0;background:#000;}
+#mPlayer .bg {position: absolute;width: 150%;height: 150%;overflow: hidden;left:-25%;top:-25%;-webkit-filter: blur(10px);filter: blur(10px);background-size:cover;background-repeat:no-repeat;background-position:50% 50%;}
+
+#mTitle {color:#fff;position: absolute;top:10%;left:0;width: 100%;text-align: center;font-size: 30px;line-height: 1.4;text-shadow: 1px 1px 5px #000;z-index: 5;}
+#mTitle span {display: block;font-size: 16px;}
+
+#mCover {width: 300px;height: 300px;position: absolute;top: 50%;left:50%;margin-top: -180px;margin-left: -150px;}
+.mCoverBack {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/cb.png) no-repeat 0 0;width: 300px;height: 300px;background-size:300px;text-align: center;padding-top:42px;}
+
+.aniRotate {-webkit-animation-name: rotate;animation-name: rotate;-webkit-animation-iteration-count: infinite;animation-iteration-count: infinite;-webkit-animation-duration: 10s;animation-duration: 10s;-webkit-animation-fill-mode: both;animation-fill-mode: both;-webkit-animation-timing-function: linear;animation-timing-function: linear;}
+.aniPause {-webkit-animation-play-state: paused;animation-play-state: paused;}
+
+#mCoverImg {width: 215px;height: 215px;overflow:hidden;-webkit-border-radius: 50%;border-radius: 50%;border:3px solid #000;margin:0 auto;background-position:50% 50%;background-size:100%;}
+
+@keyframes rotate {from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+@-webkit-keyframes rotate {from {-webkit-transform:rotate(0deg);}
+    to {-webkit-transform:rotate(360deg);}
+}
+
+#mCtrl {position: absolute;bottom:5%;width: 100%;text-align: center;}
+#mCtrl div {display: inline-block;}
+#mPrev ,
+#mNext {opacity: .7;width: 80px;height: 80px;text-indent: -999em;position: relative;top:20px;}
+
+#mPrev {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/skipbackward_w.png) no-repeat 50% 50%;background-size:100%;}
+#mNext {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/skipforward_w.png) no-repeat 50% 50%;background-size:100%;}
+
+#mPlayPause {opacity: .7;width: 120px;height: 120px;text-indent: -999em;}
+.mPlay {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/play_w.png) no-repeat 50% 50%;background-size:100%;}
+.mPause {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/pause_w.png) no-repeat 50% 50%;background-size:100%;}
+
+#mState {position: absolute;bottom:0;width: 100%;}
+#mState .mBar {height: 5px;overflow: hidden;background:rgba(0,0,0,.2);}
+#mDownload {height: 5px;background:rgba(0,0,0,.5);width: 30%;}
+#mPlayed {position: absolute;top: 0;left:0;width: 3px;height: 5px;background:#feac00    }
+#mCur ,
+#mTol {color:rgba(255,255,255,.4);font-size: 14px;position: absolute;text-shadow: 1px 1px 5px #000;}
+
+#mCur {bottom:5px;left:5px;}
+#mTol {position: absolute;bottom:5px;right:5px;}
+
+/* playlist */
+.playlist {display:none;position: fixed;width: 100%;height: 100%;top:0px;left:0;background-color:rgba(0,0,0,0.9);overflow-y: scroll;}
+.playlist_hd {height:50px;line-height:50px;font-size:18px;text-indent:10px;color:#fff;}
+.playlist_x {position:absolute;top:15px;right:12px;color:#fff;font:700 22px/22px "\5FAE\8F6F\96C5\9ED1",Simsun;}
+.playlist li {height: 44px;line-height: 44px;color:#fff;padding: 0 10px;border-bottom:1px solid rgba(255,255,255,.05);}
+.playlist li.nowPlaying {background:rgba(103,100,73,.2);}
+
+
+.btnList {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/navicon.png) no-repeat 0 0;width: 50px;height: 50px;background-size:100% auto;position: absolute;text-indent: -999em;top:0px;right:0px;z-index: 10;}

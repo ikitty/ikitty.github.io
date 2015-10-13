@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="gbk"/>
+<meta name="author" content="Tencent-TGideas"/>
+<meta name="robots" content="all"/>
+<meta name="Copyright" content="Tencent"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<title>Mobile Audio Player Demo</title>
+<link rel="stylesheet" href="mobile_player.css"/>
+</head>
+<body>
+
+<div id="mPlayer">
+    <div class="bg" id="mbg">
+        <!--<img src="img/cover/bg02.jpg" alt=""/>-->
+    </div>
+    <div class="btnList" id="btnList">list</div>
+
+    <div id="mTitle"> </div>
+
+    <div id="mCover">
+        <div class="mCoverBack">
+            <div id="mCoverImg" class="mCover01"></div>
+        </div>
+    </div>
+    <div id="mCtrl">
+        <div id="mPrev">上一曲</div>
+        <div id="mPlayPause" class="mPause">播放/暂停</div>
+        <div id="mNext">下一曲</div>
+    </div>
+
+    <div id="mState">
+        <div class="mBar">
+            <div id="mDownload"></div>
+            <div id="mPlayed"></div>
+        </div>
+        <div id="mCur">00:00</div>
+        <div id="mTol">00:00</div>
+    </div>
+</div>
+
+<div id="plistWrap" class="playlist">
+    <div class="playlist_hd">所有歌曲</div>
+    <i id="plistClose" class="playlist_x">&#215;</i>
+    <ul id="mpList"></ul>
+</div>
+
+<script src="http://ossweb-img.qq.com/images/js/zepto/zepto.min.js"></script>
+<script src="qplayer.min.js"></script>
+<script src="mobile_player.js"></script>
+<script>
+    var Song = [
+        {
+            songurl: "http://down.qq.com/mhfc/video/Music/mp3_01.mp3",
+            n: "猎人的羁绊",
+            d: '在狩猎之时，可以放心的将后背托付给彼此，这便是猎人之间最难以割舍的羁绊。',
+            t:180,
+            a:'Vanguard Sound_noVation',
+            id:1
+        }
+        ,{
+            songurl: "http://down.qq.com/mhfc/video/Music/mp3_14.mp3",
+            n: "碧波驰骋",
+            d: '大石城湖的水面上飞驰着用来狩猎水龙的猎龙艇，万顷碧波任君驰骋！',
+            t: 173,
+            a: 'Vanguard Sound_桂子油',
+            id:14
+        }
+        ,
+        {
+            songurl: "http://down.qq.com/mhfc/video/Music/mp3_15.mp3",
+            n: "纠缠NO天空",
+            d: '如今猎人们的狩猎场已经不仅局限在地面之上，凭借飞艇，猎人们在天空之中也能够与怪物展开一场缠斗。',
+            t: 215,
+            a: 'Vanguard Sound_noVation',
+            id:15
+        }
+    ];
+    var demoPlayer = new MobilePlayer({
+        'songlist': Song
+    });
+</script>
+</body>
+</html>
