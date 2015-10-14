@@ -47,16 +47,18 @@ MobilePlayer.prototype = {
             $('#mpList').append('<li>' + k.n + '<span>'+ k.a + '</span></li>');
         });
         $('#mpList li').tap(function () {
-            $.qPlayer.playAnyPos($(this).index());
-            self.resetSongUI();
+            $('#plistWrap').fadeOut(100);
 
-            $('#plistWrap').fadeOut();
+            setTimeout(function () {
+                $.qPlayer.playAnyPos($(this).index());
+                self.resetSongUI();
+            }, 0);
         });
         $('#showList').tap(function () {
-            $('#plistWrap').fadeIn(300);
+            $('#plistWrap').fadeIn(100);
         });
         $('#plistClose').tap(function () {
-            $('#plistWrap').fadeOut(200);
+            $('#plistWrap').fadeOut(100);
         });
     }
     ,initUI: function () {
