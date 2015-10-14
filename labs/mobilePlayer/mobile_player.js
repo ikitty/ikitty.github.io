@@ -83,6 +83,10 @@ MobilePlayer.prototype = {
             return m+":"+s;
         }
 
+        var self = this;
+        $.qPlayer.on("playbegin", function (s) {
+            self.resetSongUI();
+        });
         $.qPlayer.on("timeupdate", function (timeinfo) {
             $('#songTimeCur').html(parseTime(timeinfo.currentTime));
             $('#songTimeTotal').html(parseTime(timeinfo.totalTime));
