@@ -14,32 +14,32 @@
 </head>
 <body>
 
-<div id="mPlayer">
-    <div class="bg" id="mbg">
-        <!--<img src="img/cover/bg02.jpg" alt=""/>-->
-    </div>
-    <div class="btnList" id="btnList">list</div>
+<!-- notice:测试demo需要放在qqDomain下才能正常播放 -->
 
-    <div id="mTitle"> </div>
+<div id="mPlayer" class="mobile_player">
+    <div class="bg" id="mBg"> </div>
+    <div class="btn_showlist" id="showList">showList</div>
 
-    <div id="mCover">
-        <div class="mCoverBack">
-            <div id="mCoverImg" class="mCover01"></div>
+    <div id="mTitle" class="song_title"> </div>
+
+    <div class="cd_wrap">
+        <div id="cdEdge" class="cd_edge">
+            <div id="cdImg" class="cd"></div>
         </div>
     </div>
-    <div id="mCtrl">
-        <div id="mPrev">上一曲</div>
-        <div id="mPlayPause" class="mPause">播放/暂停</div>
-        <div id="mNext">下一曲</div>
+    <div id="mCtrl" class="song_ctrl">
+        <div id="mPrev" class="song_prev">上一曲</div>
+        <div id="mPlayPause" class="song_play_pause mPause">播放/暂停</div>
+        <div id="mNext" class="song_next">下一曲</div>
     </div>
 
-    <div id="mState">
-        <div class="mBar">
-            <div id="mDownload"></div>
-            <div id="mPlayed"></div>
+    <div id="mState" class="song_state">
+        <div class="song_bar">
+            <div id="songDown" class="song_down"></div>
+            <div id="songPlayed" class="song_played"></div>
         </div>
-        <div id="mCur">00:00</div>
-        <div id="mTol">00:00</div>
+        <div id="songTimeCur" class="song_time_cur">00:00</div>
+        <div id="songTimeTotal" class="song_time_total">00:00</div>
     </div>
 </div>
 

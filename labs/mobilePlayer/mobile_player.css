@@ -9,23 +9,21 @@ li, ol, ul {list-style: none}
 .hide {display:none;}
 
 
-* {-webkit-box-sizing: border-box;box-sizing: border-box;}
-
-
 /* =====mplayer===== */
-#mPlayer {position: fixed;width: 100%;height: 100%;overflow: hidden;left: 0;top: 0;background:#000;}
-#mPlayer .bg {position: absolute;width: 150%;height: 150%;overflow: hidden;left:-25%;top:-25%;-webkit-filter: blur(10px);filter: blur(10px);background-size:cover;background-repeat:no-repeat;background-position:50% 50%;}
+.mobile_player {position: fixed;width: 100%;height: 100%;overflow: hidden;left: 0;top: 0;background:#000;}
+.mobile_player .bg {position: absolute;width: 150%;height: 150%;overflow: hidden;left:-25%;top:-25%;-webkit-filter: blur(10px);filter: blur(10px);background-size:cover;background-repeat:no-repeat;background-position:50% 50%;}
+.btn_showlist {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/navicon.png) no-repeat 0 0;width: 50px;height: 50px;background-size:100% auto;position: absolute;text-indent: -999em;top:0px;right:0px;z-index: 10;}
 
-#mTitle {color:#fff;position: absolute;top:10%;left:0;width: 100%;text-align: center;font-size: 30px;line-height: 1.4;text-shadow: 1px 1px 5px #000;z-index: 5;}
-#mTitle span {display: block;font-size: 16px;}
+.song_title {color:#fff;position: absolute;top:10%;left:0;width: 100%;text-align: center;font-size: 30px;line-height: 1.4;text-shadow: 1px 1px 5px #000;z-index: 5;}
+.song_title span {display: block;font-size: 16px;}
 
-#mCover {width: 300px;height: 300px;position: absolute;top: 50%;left:50%;margin-top: -180px;margin-left: -150px;}
-.mCoverBack {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/cb.png) no-repeat 0 0;width: 300px;height: 300px;background-size:300px;text-align: center;padding-top:42px;}
+.cd_wrap {width: 300px;height: 300px;position: absolute;top: 50%;left:50%;margin-top: -180px;margin-left: -150px;}
+.cd_edge {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/cb.png) no-repeat 0 0;width: 300px;height: 300px;background-size:300px;overflow:hidden;}
+.cd {width: 214px;height: 214px;overflow:hidden;-webkit-border-radius: 50%;border-radius: 50%;border:3px solid #000;margin:40px auto 0;background-position:50% 50%;background-size:100%;}
 
 .aniRotate {-webkit-animation-name: rotate;animation-name: rotate;-webkit-animation-iteration-count: infinite;animation-iteration-count: infinite;-webkit-animation-duration: 10s;animation-duration: 10s;-webkit-animation-fill-mode: both;animation-fill-mode: both;-webkit-animation-timing-function: linear;animation-timing-function: linear;}
 .aniPause {-webkit-animation-play-state: paused;animation-play-state: paused;}
 
-#mCoverImg {width: 215px;height: 215px;overflow:hidden;-webkit-border-radius: 50%;border-radius: 50%;border:3px solid #000;margin:0 auto;background-position:50% 50%;background-size:100%;}
 
 @keyframes rotate {from {transform:rotate(0deg);}
     to {transform:rotate(360deg);}
@@ -34,34 +32,36 @@ li, ol, ul {list-style: none}
     to {-webkit-transform:rotate(360deg);}
 }
 
-#mCtrl {position: absolute;bottom:5%;width: 100%;text-align: center;}
-#mCtrl div {display: inline-block;}
-#mPrev ,
-#mNext {opacity: .7;width: 80px;height: 80px;text-indent: -999em;position: relative;top:20px;}
+.song_ctrl {position: absolute;bottom:5%;width: 100%;text-align: center;}
+.song_ctrl div {display: inline-block;}
 
-#mPrev {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/skipbackward_w.png) no-repeat 50% 50%;background-size:100%;}
-#mNext {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/skipforward_w.png) no-repeat 50% 50%;background-size:100%;}
+.song_prev ,
+.song_next {opacity: .7;width: 80px;height: 80px;text-indent: -999em;position: relative;top:20px;}
 
-#mPlayPause {opacity: .7;width: 120px;height: 120px;text-indent: -999em;}
-.mPlay {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/play_w.png) no-repeat 50% 50%;background-size:100%;}
-.mPause {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/pause_w.png) no-repeat 50% 50%;background-size:100%;}
+.song_prev {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/skipbackward_w.png) no-repeat 50% 50%;background-size:100%;}
+.song_next {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/skipforward_w.png) no-repeat 50% 50%;background-size:100%;}
 
-#mState {position: absolute;bottom:0;width: 100%;}
-#mState .mBar {height: 5px;overflow: hidden;background:rgba(0,0,0,.2);}
-#mDownload {height: 5px;background:rgba(0,0,0,.5);width: 30%;}
-#mPlayed {position: absolute;top: 0;left:0;width: 3px;height: 5px;background:#feac00    }
-#mCur ,
-#mTol {color:rgba(255,255,255,.4);font-size: 14px;position: absolute;text-shadow: 1px 1px 5px #000;}
+.song_play_pause {opacity: .7;width: 120px;height: 120px;text-indent: -999em;}
+.song_play {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/play_w.png) no-repeat 50% 50%;background-size:100%;}
+.song_pause {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/pause_w.png) no-repeat 50% 50%;background-size:100%;}
 
-#mCur {bottom:5px;left:5px;}
-#mTol {position: absolute;bottom:5px;right:5px;}
+.song_state {position: absolute;bottom:0;width: 100%;}
+.song_state .song_bar {height: 5px;overflow: hidden;background:rgba(0,0,0,.2);}
+.song_down {height: 5px;background:rgba(0,0,0,.5);width: 10%;}
+.song_played {position: absolute;top: 0;left:0;width: 3px;height: 5px;background:#feac00    }
+
+.song_time_cur ,
+.song_time_total {color:rgba(255,255,255,.4);font-size: 14px;position: absolute;text-shadow: 1px 1px 5px #000;}
+
+.song_time_cur {bottom:5px;left:5px;}
+.song_time_total {position: absolute;bottom:5px;right:5px;}
 
 /* playlist */
 .playlist {display:none;position: fixed;width: 100%;height: 100%;top:0px;left:0;background-color:rgba(0,0,0,0.9);overflow-y: scroll;}
-.playlist_hd {height:50px;line-height:50px;font-size:18px;text-indent:10px;color:#fff;}
-.playlist_x {position:absolute;top:15px;right:12px;color:#fff;font:700 22px/22px "\5FAE\8F6F\96C5\9ED1",Simsun;}
-.playlist li {height: 44px;line-height: 44px;color:#fff;padding: 0 10px;border-bottom:1px solid rgba(255,255,255,.05);}
+.playlist_hd {height:50px;line-height:50px;font-size:18px;text-indent:15px;color:#fff;}
+.playlist_x {position:absolute;top:10px;right:12px;color:#fff;font:400 30px/30px "\5FAE\8F6F\96C5\9ED1",Simsun;}
+.playlist li {height: 44px;line-height: 44px;color:#eee;padding: 0 15px;border-bottom:1px solid rgba(255,255,255,.05);}
+.playlist li span {color:#999;padding-left:10px;}
 .playlist li.nowPlaying {background:rgba(103,100,73,.2);}
 
 
-.btnList {background:url(http://game.gtimg.cn/images/mho/act/a20150716music/navicon.png) no-repeat 0 0;width: 50px;height: 50px;background-size:100% auto;position: absolute;text-indent: -999em;top:0px;right:0px;z-index: 10;}
