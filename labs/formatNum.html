@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ZH-cn">
+<head>
+<meta charset="gbk" />
+<title>Demo by Alextang</title>
+<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+</head>
+<body>
+
+
+<script type="text/javascript">
+    var arr = [123456.1, 1234567.18, 12345678.123];
+    var arrLarge = [];
+    var x = 0, longNum = '1228912731299123012390123';
+    for (var i = 0, k ; i < 1000000; i++ ) {
+        x = longNum.slice(0, Math.ceil(Math.random()* 20));
+        arrLarge.push(x);
+    }
+
+    //最原始的方法：用补零的形式将数据的长度调整为3的倍数，然后每三位分割一次，最后舍去前面的补零，操作繁琐.补零的过程中可以使用array join来生成，如果是固定的位数，直接使用预设数组更省时间
+
+
+    var formatNum =function (v) {
+        vArr = ('' + v).split('.');
+        v = vArr[0];
+        v_digit = vArr.length > 1 ? vArr[1] : '' ;
+
+        var b = v.length%3
+            ,ret = ''
+            ;
+
+        ret = v.slice(0, b) ;
+        for (var i = b, le = v.length ; i < le; i+=3 ) {
+            ret += (',' + v.slice(i, i+3) );
+        }
+        return (b == 0 ? ret.slice(1) : ret) + '.'  + v_digit ;
+    }
+
+    var formatNumByReg =function (v) {
+        vArr = ('' + v).split('.');
+        v = vArr[0];
+        v_digit = vArr.length > 1 ? vArr[1] : '' ;
+
+        var a = Math.floor(v/3)
+            ,ret = ''
+            ;
+        var re = /^(\d{0,2}?)((?:\d{3})*)$/;
+        ret = v.replace(re, function (a,b,c) {
+            var _ret = '';
+            c = c.split('');
+            for (var i = 0, le = c.length ; i < le; i++ ) {
+                (i%3==0) && (_ret += ',');
+                _ret += c[i];
+            }
+            return b && (b + _ret) || (_ret.slice(1)) ;
+        }) ;
+        return ret + '.' + v_digit ;
+    }
+
+    console.time('common')
+    for (var i = 0, k ; k = arrLarge[i] ; i++ ) {
+        var x = formatNum(k) ;
+        // console.log(x) ;
+    }
+    console.timeEnd('common')
+
+    console.time('by reg')
+    for (var i = 0, k ; k = arrLarge[i] ; i++ ) {
+        var x= formatNumByReg(k) ;
+        // console.log(x) ;
+    }
+    console.timeEnd('by reg')
+
+
+    //数据上w后，效率竟然有10倍之差
+</script>
+</body>
+</html>
