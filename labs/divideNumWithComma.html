@@ -17,7 +17,7 @@
 <script type="text/javascript">
     var arrLarge = [];
     var x = 0, longNum = '1228912731299123012390123';
-    for (var i = 0, k ; i < 10000; i++ ) {
+    for (var i = 0, k ; i < 100000; i++ ) {
         x = longNum.slice(0, Math.ceil(Math.random()* 20));
         arrLarge.push(x);
     }
@@ -45,6 +45,11 @@
     }
 
     var formatNumByReg =function (v) {
+        var parts = (v+'').split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        // parts[0] = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+        return parts.join('.') ;
+
         vArr = ('' + v).split('.');
         v = vArr[0];
         v_digit = vArr.length > 1 ? vArr[1] : '' ;
