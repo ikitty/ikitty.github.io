@@ -194,9 +194,11 @@ var x2 = new Xman({'name': 'x2'});
 // x1.say();
 
 //handle mousewheel
-(function (w, modName) {
+//debounce 只处理一段时间内的最后一个事件
+(function (w, modName,time) {
     var st
         ,modName = modName || 'handleWheel'
+        ,time = time || 100
         ;
     function getWheelDir(e) {
         var delta = 0;
@@ -221,16 +223,17 @@ var x2 = new Xman({'name': 'x2'});
                 }else {
                     (typeof doDown == 'function') && doDown()
                 }
-            }, 80);
+            }, time);
         }
         window.onmousewheel = document.onmousewheel = _handleWheel;
         if (window.addEventListener) {
             window.addEventListener('DOMMouseScroll', _handleWheel, false);
         }
     }
-})(window);
+})(window, 'handleWheel', 100);
 
-//better version
+//another version
+//throttle，一定时间内只执行一次
 (function (w, modName, time) {
     var st
         ,modName = modName || 'handleWheel'
@@ -271,7 +274,7 @@ var x2 = new Xman({'name': 'x2'});
             window.addEventListener('DOMMouseScroll', _alexHandleWheel, false);
         }
     }
-})(window, 'handleWheel', 100);
+})(window, 'handleWheelAnother', 100);
 /**
  * @param {Object} arg1 指定注入的对象，可以填window或者其他
  * @param {String} arg2 组件名称，你写成啥，后面就调用啥，默认是handleWheel
