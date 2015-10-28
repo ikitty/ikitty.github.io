@@ -229,6 +229,55 @@ var x2 = new Xman({'name': 'x2'});
         }
     }
 })(window);
+
+//better version
+(function (w, modName, time) {
+    var st
+        ,modName = modName || 'handleWheel'
+        ,_run  = 1
+        ,time = time || 100
+        ;
+    function getWheelDir(e) {
+        var delta = 0;
+        e =window.event || e;
+ 
+        if (e.wheelDelta) {
+            delta = e.wheelDelta/120; 
+        } else if (e.detail) {
+            delta = -e.detail/3;
+        }
+        return delta ;
+    }
+ 
+    w[modName] = function (doUp, doDown) {
+        function _alexHandleWheel(e) {
+            if (_run) {
+                _run = 0;
+                setTimeout(function () {
+                    _run = 1;
+                }, time);
+
+                var dir = getWheelDir(e);
+ 
+                if (dir >0) {
+                    (typeof doUp == 'function') && doUp()
+                }else {
+                    (typeof doDown == 'function') && doDown()
+                }
+            }
+        }
+        window.onmousewheel = document.onmousewheel = _alexHandleWheel;
+        if (window.addEventListener) {
+            window.addEventListener('DOMMouseScroll', _alexHandleWheel, false);
+        }
+    }
+})(window, 'handleWheel', 100);
+/**
+ * @param {Object} arg1 指定注入的对象，可以填window或者其他
+ * @param {String} arg2 组件名称，你写成啥，后面就调用啥，默认是handleWheel
+ * @param {Number} arg3 时间系统，组件中模拟了underscore的throttle特性，以避免事件的频繁触发,据统计，100ms是很合适的
+ **/
+
 //test
 handleWheel(function () {
     console.log('up') ;
