@@ -72,26 +72,29 @@
 
     //final solution
     var divideNumberWithComma = function (v) {
-        v = (0+v).toLocaleString();
-        if (v.indexOf(',') > -1) {
-            return v ;
-        }
+        var parts = (''+v).split('.');
+        parts[0] = Number(parts[0]).toLocaleString();
 
-        var parts = ('' + v).split('.');
-        var b = parts[0].length%3
-            ,ret = ''
-            ;
-
-        ret = parts[0].slice(0, b) ;
-        for (var i = b, le = parts[0].length ; i < le; i+=3 ) {
-            ret += (',' + parts[0].slice(i, i+3) );
+        if (parts[0].indexOf(',') == -1) {
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
-        parts[0] = (b == 0 ? ret.slice(1) : ret) ;
-        return parts.join('.');
+        return parts.join('.') ;
+
+        // var parts = ('' + v).split('.');
+        // var b = parts[0].length%3
+            // ,ret = ''
+            // ;
+// 
+        // ret = parts[0].slice(0, b) ;
+        // for (var i = b, le = parts[0].length ; i < le; i+=3 ) {
+            // ret += (',' + parts[0].slice(i, i+3) );
+        // }
+        // parts[0] = (b == 0 ? ret.slice(1) : ret) ;
+        // return parts.join('.');
     };
 
     // test
-    var arr = [123456.1, 1234567.18, 12345678.123];
+    var arr = [123456.13579, '1234567.13579', 12345678.1234579];
     var sRet = '';
     for (var i = 0, k ; k = arr[i] ; i++ ) {
         sRet += divideNumberWithComma(k) + '<br>';
