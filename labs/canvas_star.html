@@ -67,6 +67,13 @@
         context.strokeStyle = 'rgb(255,100,0)';
     }
 
+    var R = 200 
+        ,theta = 0 
+        ,thetaStep = 2
+        ,xx=0
+        ,yy=0
+        ;
+
     function anim() {
         src_x = target_x - x;
         src_y = target_y - y;
@@ -111,6 +118,19 @@
                 context.beginPath();
                 context.moveTo(star_x_save, star_y_save);
                 context.lineTo(star[i][3], star[i][4]);
+                context.strokeStyle = 'rgb(255,100,0)';
+                context.stroke();
+                context.closePath();
+                //test
+                context.beginPath();
+                xx = R*Math.cos(theta)+R;
+                yy = R*Math.sin(theta)+R;
+
+                theta += 0.2 ;
+                context.moveTo(xx, yy);
+                context.lineTo(xx+20, yy+10);
+
+                context.strokeStyle = 'rgb(0,0,255)';
                 context.stroke();
                 context.closePath();
             }
