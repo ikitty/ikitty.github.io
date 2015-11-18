@@ -6,26 +6,12 @@
 <style type="text/css" media="screen">
 * {margin:0;padding:0;list-style:none;}
     
-.notice {position:relative;width:500px;height:30px;border:1px solid #ccc;overflow:hidden;margin:20px auto;}
-.notice a {position:absolute;top:0px;left:0px;opacity:0;height:100%;line-height:30px;text-decoration:none;color:#39f;transition:all .3s ease-in; }
-.notice .hide {opacity:0;}
-.notice .ishow {opacity:1;}
-
-.butterfly {position:absolute;display:none;left:0px;top:0px;background-color:#f60;width:20px;height:20px;  overflow:hidden;border-radius:50%;}
-
-.btns {text-align:center;}
-.btns p {display:inline-block;margin:0px 10px;height:30px;line-height:30px;padding:0px 12px;border:1px solid #ccc;background-color:#eee;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;cursor:pointer;}
-
-.alex_line {display:block;margin:20px auto 0;width:414px;height:667px;background-color:#555;border:1px solid #000;}
+body {background-color:#000;}
+.alex_line {display:block;margin:20px auto 0;width:414px;height:600px;background-image:url(http://ossweb-img.qq.com/images/n/act/a20151116show/mobile_bg.jpg);background-size:cover;border:1px solid #000;}
 </style>
 </head>
 <body>
 
-
-<div class="btns">
-    <p id="btn">Fly~~</p>
-    <p id="btnContinue">Fly~~Continued</p>
-</div>
 
 <canvas id="alexLine" class="alex_line"></canvas>
 
@@ -68,6 +54,78 @@
         }
     };
 
+    //Canvas Base Class
+    var alexCanvas = function () { this.init.apply(this, arguments); };  
+    alexCanvas.prototype = {
+        init: function (arg) {
+            this.c = null;
+
+            //custom config
+            this.cfg = {
+                id: 'alexCanvas'
+                ,width:200
+                ,height:200
+                ,cap: 'round'
+                ,join: 'round'
+                ,lineWidth: 3
+                ,fillStyle: 'rgba(50, 160, 255, 0.8)'
+                ,strokeStyle: 'rgba(180,180,180, 0.6)'
+            };
+            for (var i in arg) {
+                if (arg.hasOwnProperty(i)) {
+                    this.cfg[i] = arg[i] ;
+                }
+            }
+
+            var D = this.cfg ;
+            var el = document.getElementById(D.id);
+            el.setAttribute('width', D.width) ;
+            el.setAttribute('height', D.height) ;
+
+            this.c = el.getContext('2d');
+            this.setDrawStyle();
+        }
+        ,render: function (aPath) {
+            var c = this.c ,
+                me = this ;
+
+            me.clear();
+            c.save();
+            c.beginPath();  
+
+            for (var i = 0, k = null; k = aPath[i] ; i++ ) {
+                c[k.type] && (c[k.type].apply(c, k.v || []));
+            }
+            c.closePath();
+            c.fill();         
+            c.stroke();
+            
+            c.restore();
+        }
+
+        ,clear: function () {
+            this.c.clearRect(0,0, this.cfg.width, this.cfg.height);
+        }
+
+        ,setDrawStyle: function (style) {
+            var c = this.c ,
+                config = this.cfg ;
+
+            c.lineCap = config.cap;
+            c.lineJoin = config.join;
+            c.lineWidth = config.lineWidth;
+            c.fillStyle = config.fillStyle ;
+            c.strokeStyle = config.strokeStyle ;
+        }
+    };
+    var myC = new alexCanvas({
+            id: 'alexLine'
+        });
+    myC.render([
+        {type: 'moveTo', v: [100,100]}      
+        ,{type: 'lineTo', v: [200,300]}      
+    ]);
+
     var Dv = {
         c: null , 
 
@@ -77,9 +135,9 @@
             height: 200,
             cap: 'round',
             join: 'round',
-            lineWidth: 2,
+            lineWidth: 5,
             fillStyle: 'rgba(190, 25, 100, 0.5)'
-            ,strokeStyle: 'rgb(255,00,0)'
+            ,strokeStyle: 'rgba(180,180,180, 0.6)'
         },
         st:null,
 
@@ -88,18 +146,40 @@
             var me =this;
 
             var lastPoint = [0,0];
+            var R = 514
+                ,x = 0
+                ,y =0
+                ,theta =0
+                ,thetaStep = 0.05
+                ,xStep = 1
+                ;
             var t = 0;
             var _run = function () {
                 var aPath = [];
-                if (t++ <= 100) {
-                    newPoint = [lastPoint[0]+5, lastPoint[1]+5];
+                if (t++ <= 200) {
+                    // x = R - (xStep*R)*Math.cos(theta);
+                    // y = R + (1.5*xStep*R)*Math.sin(theta);
+                    x = R-200 - (R)*Math.cos(theta);
+                    y = 00 + (R)*Math.sin(theta);
+                    console.log(x,y) ;
+                    theta += thetaStep; 
+                    xStep += 0.05;
+                    if (theta > Math.PI*3/4) {
+                        theta = 0;
+                        if (xStep > 1.5 ) {
+                            xStep = 1; 
+                        }
+                    }
+                    
+                    lastPoint = [x,y];
+                    newPoint = [lastPoint[0]+8, lastPoint[1]+4];
 
                     aPath.push({type: 'moveTo', v: lastPoint}) ;
                     aPath.push({type: 'lineTo', v: newPoint}) ;
-                    lastPoint = newPoint;
+                    // lastPoint = newPoint;
 
                     me.render(aPath);
-                    this.st = setTimeout(_run, 100);
+                    this.st = setTimeout(_run, 50);
                 }
             };
             _run();
@@ -155,12 +235,13 @@
             this.initDraw();
         }
     }; 
-    Dv.init({
-        id: 'alexLine'
-        ,width: 414
-        ,height:667
-    });
-    Dv.renderTransition();
+
+    // Dv.init({
+        // id: 'alexLine'
+        // ,width: 414
+        // ,height:600
+    // });
+    // Dv.renderTransition();
 
 
 
