@@ -118,132 +118,59 @@ body {background-color:#000;}
             c.strokeStyle = config.strokeStyle ;
         }
     };
-    var myC = new alexCanvas({
-            id: 'alexLine'
-        });
-    myC.render([
-        {type: 'moveTo', v: [100,100]}      
-        ,{type: 'lineTo', v: [200,300]}      
-    ]);
 
-    var Dv = {
-        c: null , 
+    //custom canvas
+    var myCanvas = new alexCanvas({
+        id: 'alexLine'
+        ,width: 414
+        ,height: 600
+    });
+    myCanvas.renderAnim = function () {
+        var me =this;
 
-        config:  {
-            id:'alexCanvas',
-            width: 200,
-            height: 200,
-            cap: 'round',
-            join: 'round',
-            lineWidth: 5,
-            fillStyle: 'rgba(190, 25, 100, 0.5)'
-            ,strokeStyle: 'rgba(180,180,180, 0.6)'
-        },
-        st:null,
-
-        renderTransition: function (toPath) {
-            clearTimeout(this.st);
-            var me =this;
-
-            var lastPoint = [0,0];
-            var R = 514
-                ,x = 0
-                ,y =0
-                ,theta =0
-                ,thetaStep = 0.05
-                ,xStep = 1
-                ;
-            var t = 0;
-            var _run = function () {
-                var aPath = [];
-                if (t++ <= 200) {
-                    // x = R - (xStep*R)*Math.cos(theta);
-                    // y = R + (1.5*xStep*R)*Math.sin(theta);
-                    x = R-200 - (R)*Math.cos(theta);
-                    y = 00 + (R)*Math.sin(theta);
-                    console.log(x,y) ;
-                    theta += thetaStep; 
-                    xStep += 0.05;
-                    if (theta > Math.PI*3/4) {
-                        theta = 0;
-                        if (xStep > 1.5 ) {
-                            xStep = 1; 
-                        }
+        var lastPoint = [0,0];
+        var R = 414
+            ,x = 0
+            ,y =0
+            ,theta =0
+            ,thetaStep = 0.05
+            ,xStep = 1
+            ;
+        var t = 0;
+        var _run = function () {
+            var aPath = [];
+            if (t++ <= 200) {
+                // x = R - (xStep*R)*Math.cos(theta);
+                // y = R + (1.5*xStep*R)*Math.sin(theta);
+                x = R - (R)*Math.cos(theta);
+                y = 0 + (R)*Math.sin(theta);
+                console.log(x,y) ;
+                theta += thetaStep; 
+                xStep += 0.05;
+                if (theta > Math.PI*3/4) {
+                    theta = 0;
+                    if (xStep > 1.5 ) {
+                        xStep = 1; 
                     }
-                    
-                    lastPoint = [x,y];
-                    newPoint = [lastPoint[0]+8, lastPoint[1]+4];
-
-                    aPath.push({type: 'moveTo', v: lastPoint}) ;
-                    aPath.push({type: 'lineTo', v: newPoint}) ;
-                    // lastPoint = newPoint;
-
-                    me.render(aPath);
-                    this.st = setTimeout(_run, 50);
                 }
-            };
-            _run();
-            
-        },
+                var lGrd = me.c.createLinearGradient(0,0, 10, 2);  
+                lGrd.addColorStop(0, '#ff0000');  
+                lGrd.addColorStop(1, '#00f0ff');  
+                me.c.strokeStyle = lGrd;  
+                
+                lastPoint = [x,y];
+                newPoint = [lastPoint[0]+8, lastPoint[1]+4];
 
-        render: function (aPath) {
-            var c = this.c ,
-                me = this ;
+                aPath.push({type: 'moveTo', v: lastPoint}) ;
+                aPath.push({type: 'lineTo', v: newPoint}) ;
 
-            me.clear();
-            c.save();
-            c.beginPath();  
-
-            for (var i = 0, k = null; k = aPath[i] ; i++ ) {
-                c[k.type] && (c[k.type].apply(c, k.v || []));
+                me.render(aPath);
+                setTimeout(_run, 50);
             }
-            c.closePath();
-            c.fill();         
-            c.stroke();
-            
-            c.restore();
-        },
-
-        clear: function () {
-            this.c.clearRect(0,0, this.config.width, this.config.height);
-        },
-
-        initDraw: function (style) {
-            var c = this.c ,
-                config = this.config ;
-
-            c.lineCap = config.cap;
-            c.lineJoin = config.join;
-            c.lineWidth = config.lineWidth;
-            c.fillStyle = config.fillStyle ;
-            c.strokeStyle = config.strokeStyle ;
-        },
-
-        init: function (arg) {
-            for (var i in arg) {
-                if (arg.hasOwnProperty(i)) {
-                    this.config[i] = arg[i];
-                }
-            }
-            var D = this.config ;
-
-            var el = document.getElementById(D.id);
-            el.setAttribute('width', D.width) ;
-            el.setAttribute('height', D.height) ;
-
-            this.c = el.getContext('2d');
-            this.initDraw();
-        }
-    }; 
-
-    // Dv.init({
-        // id: 'alexLine'
-        // ,width: 414
-        // ,height:600
-    // });
-    // Dv.renderTransition();
-
-
+        };
+        _run();
+    };
+    myCanvas.renderAnim();
 
 </script>
 </body>
