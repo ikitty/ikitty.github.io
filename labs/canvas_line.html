@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>DEMO</title>
+<style type="text/css" media="screen">
+* {margin:0;padding:0;list-style:none;}
+    
+.notice {position:relative;width:500px;height:30px;border:1px solid #ccc;overflow:hidden;margin:20px auto;}
+.notice a {position:absolute;top:0px;left:0px;opacity:0;height:100%;line-height:30px;text-decoration:none;color:#39f;transition:all .3s ease-in; }
+.notice .hide {opacity:0;}
+.notice .ishow {opacity:1;}
+
+.butterfly {position:absolute;display:none;left:0px;top:0px;background-color:#f60;width:20px;height:20px;  overflow:hidden;border-radius:50%;}
+
+.btns {text-align:center;}
+.btns p {display:inline-block;margin:0px 10px;height:30px;line-height:30px;padding:0px 12px;border:1px solid #ccc;background-color:#eee;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;cursor:pointer;}
+
+.alex_line {display:block;margin:20px auto 0;width:414px;height:667px;background-color:#555;border:1px solid #000;}
+</style>
+</head>
+<body>
+
+
+<div class="btns">
+    <p id="btn">Fly~~</p>
+    <p id="btnContinue">Fly~~Continued</p>
+</div>
+
+<canvas id="alexLine" class="alex_line"></canvas>
+
+<script type="text/javascript">
+    (function () {
+        window.RAF= window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    function (cb) {
+                        window.setTimeout(cb, 1000/60);
+                    };
+    })();
+
+    var xLine = function () {
+        this.init.apply(this, arguments);
+    };  
+
+    xLine.prototype = {
+        config: {
+            name:'alex'
+            ,'age': 18
+        }
+        ,init: function (arg) {
+            //动态在this上写入的对象是实例私有的，而this.config是指向prototype中的，各个实例共享
+
+            //pre setting
+            this.isNice = 1 ;
+            this.isBeauty = 1 ;
+
+            //custom config
+            this.cfg = {};
+            for (var i in arg) {
+                if (arg.hasOwnProperty(i)) {
+                    this.cfg[i] = arg[i];
+                }
+            }
+        }
+        ,say: function () {
+            console.log(this.cfg) ;
+        }
+    };
+
+    var Dv = {
+        c: null , 
+
+        config:  {
+            id:'alexCanvas',
+            width: 200,
+            height: 200,
+            cap: 'round',
+            join: 'round',
+            lineWidth: 2,
+            fillStyle: 'rgba(190, 25, 100, 0.5)'
+            ,strokeStyle: 'rgb(255,00,0)'
+        },
+        st:null,
+
+        renderTransition: function (toPath) {
+            clearTimeout(this.st);
+            var me =this;
+
+            var lastPoint = [0,0];
+            var t = 0;
+            var _run = function () {
+                var aPath = [];
+                if (t++ <= 100) {
+                    newPoint = [lastPoint[0]+5, lastPoint[1]+5];
+
+                    aPath.push({type: 'moveTo', v: lastPoint}) ;
+                    aPath.push({type: 'lineTo', v: newPoint}) ;
+                    lastPoint = newPoint;
+
+                    me.render(aPath);
+                    this.st = setTimeout(_run, 100);
+                }
+            };
+            _run();
+            
+        },
+
+        render: function (aPath) {
+            var c = this.c ,
+                me = this ;
+
+            me.clear();
+            c.save();
+            c.beginPath();  
+
+            for (var i = 0, k = null; k = aPath[i] ; i++ ) {
+                c[k.type] && (c[k.type].apply(c, k.v || []));
+            }
+            c.closePath();
+            c.fill();         
+            c.stroke();
+            
+            c.restore();
+        },
+
+        clear: function () {
+            this.c.clearRect(0,0, this.config.width, this.config.height);
+        },
+
+        initDraw: function (style) {
+            var c = this.c ,
+                config = this.config ;
+
+            c.lineCap = config.cap;
+            c.lineJoin = config.join;
+            c.lineWidth = config.lineWidth;
+            c.fillStyle = config.fillStyle ;
+            c.strokeStyle = config.strokeStyle ;
+        },
+
+        init: function (arg) {
+            for (var i in arg) {
+                if (arg.hasOwnProperty(i)) {
+                    this.config[i] = arg[i];
+                }
+            }
+            var D = this.config ;
+
+            var el = document.getElementById(D.id);
+            el.setAttribute('width', D.width) ;
+            el.setAttribute('height', D.height) ;
+
+            this.c = el.getContext('2d');
+            this.initDraw();
+        }
+    }; 
+    Dv.init({
+        id: 'alexLine'
+        ,width: 414
+        ,height:667
+    });
+    Dv.renderTransition();
+
+
+
+</script>
+</body>
+</html>
