@@ -48,6 +48,9 @@
     var timeout;
     var fps = 50;
 
+    var bgImg = new Image();
+    document.domain = 'qq.com';
+
     function init() {
         var a = 0;
         for (var i = 0; i < n; i++) {
@@ -63,11 +66,20 @@
         starfield.height = h;
         context = starfield.getContext('2d');
         context.lineCap='round';
-        context.fillStyle = 'rgb(0,0,0)';
+        // context.fillStyle = 'rgb(0,0,0)';
         context.strokeStyle = 'rgb(255,100,0)';
+
+        bgImg.onload = function () {
+            context.drawImage(this, 0, 0);
+        }
+        bgImg.src = 'http://t7.qq.com/act/a20151109weilan/images/mobile_bg.jpg' ;
     }
 
-    var R = 200 
+    function setBg() {
+        // body...
+    }
+
+    var R = 100 
         ,theta = 0 
         ,thetaStep = 2
         ,xx=0
@@ -78,8 +90,22 @@
         src_x = target_x - x;
         src_y = target_y - y;
         // context.clearRect(0,0, w, h);
-        context.fillStyle = 'rgba(0,0,0, 0.5)';
-        context.fillRect(0, 0, w, h);
+
+        // context.fillStyle = 'rgba(0,0,0, 0.1)';
+        // context.fillRect(0, 0, w, h);
+
+        bgImg.onload  = function() {
+            context.drawImage(this, 0, 0);
+            var ImageData = context.getImageData(0,0,bgImg.width, bgImg.height);
+            for(var i=0;i<bgImg.height;i++) {
+                for(var j=0;j<bgImg.width;j++) {
+                    ImageData.data[((i*(bgImg.width*4)) + (j*4) + 3)] = 127;//opacity = 0.5 [0-255]
+                }
+            }
+            context.putImageData(ImageData,0,0);//put image data back
+        }
+        bgImg.src = 'http://t7.qq.com/act/a20151109weilan/images/mobile_bg.jpg' ;
+        
         for (var i = 0; i < n; i++) {
             test = true;
             star_x_save = star[i][3];
@@ -121,20 +147,23 @@
                 context.strokeStyle = 'rgb(255,100,0)';
                 context.stroke();
                 context.closePath();
+
+            }
+        }
                 //test
+                /*
                 context.beginPath();
-                xx = R*Math.cos(theta)+R;
-                yy = R*Math.sin(theta)+R;
+                xx = (R+10*thetaStep)*Math.cos(theta)+2*R;
+                yy = (R+10*thetaStep)*Math.sin(theta)+2*R;
 
                 theta += 0.2 ;
                 context.moveTo(xx, yy);
                 context.lineTo(xx+20, yy+10);
 
-                context.strokeStyle = 'rgb(0,0,255)';
+                context.strokeStyle = 'rgb(255,0,255)';
                 context.stroke();
                 context.closePath();
-            }
-        }
+                */
         timeout = setTimeout('anim()', fps);
     }
 
@@ -144,7 +173,7 @@
         y = Math.round(h / 2);
         z = (w + h) / 2;
         star_color_ratio = 1 / z;
-        target_x = x + 200;
+        target_x = x + 100;
         target_y = y +100;
 
         init();
