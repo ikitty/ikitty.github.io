@@ -17,12 +17,9 @@ body {background-color:#000;}
 
 <script type="text/javascript">
     (function () {
-        window.RAF= window.requestAnimationFrame ||
-                    window.webkitRequestAnimationFrame ||
-                    window.mozRequestAnimationFrame ||
-                    function (cb) {
-                        window.setTimeout(cb, 1000/60);
-                    };
+        window.RAF= window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (cb) {
+            window.setTimeout(cb, 1000/60);
+        };
     })();
 
     var xLine = function () {
@@ -65,10 +62,10 @@ body {background-color:#000;}
                 id: 'alexCanvas'
                 ,width:200
                 ,height:200
-                ,cap: 'round'
-                ,join: 'round'
+                ,lineCap: 'round'
+                ,lineJoin: 'round'
                 ,lineWidth: 3
-                ,fillStyle: 'rgba(50, 160, 255, 0.8)'
+                ,fillStyle: 'rgba(250, 0, 0, 0.8)'
                 ,strokeStyle: 'rgba(180,180,180, 0.6)'
             };
             for (var i in arg) {
@@ -89,7 +86,6 @@ body {background-color:#000;}
             var c = this.c ,
                 me = this ;
 
-            me.clear();
             c.save();
             c.beginPath();  
 
@@ -108,14 +104,15 @@ body {background-color:#000;}
         }
 
         ,setDrawStyle: function (style) {
+            style = style || {};
             var c = this.c ,
                 config = this.cfg ;
 
-            c.lineCap = config.cap;
-            c.lineJoin = config.join;
-            c.lineWidth = config.lineWidth;
-            c.fillStyle = config.fillStyle ;
-            c.strokeStyle = config.strokeStyle ;
+            var styleArr = ['lineCap', 'lineJoin', 'lineWidth', 'fillStyle', 'strokeStyle'];
+            for (var i = 0, k, le = styleArr.length ; i < le; i++ ) {
+                k = styleArr[i];
+                c[k] = style[k] || config[k] ;
+            }
         }
     };
 
@@ -125,52 +122,64 @@ body {background-color:#000;}
         ,width: 414
         ,height: 600
     });
+    myCanvas.rand = function (min, max, digit) {
+        var r = Math.random()*max + min ;
+        return digit ? Number(r.toFixed(digit)) : (r | 0) ;
+    };
     myCanvas.renderAnim = function () {
         var me =this;
 
         var lastPoint = [0,0];
-        var R = 414
+        var R = 614
             ,x = 0
             ,y =0
-            ,theta =0
-            ,thetaStep = 0.05
-            ,xStep = 1
+            ,thetaOrigin = 0.1
+            ,theta = thetaOrigin
+            ,thetaStep = 0.01
+            ,lineArr = new Array(5)
+            ,lineColor = ['rgba(200,200,200,0.7)','rgba(50,200,255,0.5)','rgba(255,115,160,0.5)','rgba(115,255,200,0.7)','rgba(200,200,200,0.7)']
             ;
         var t = 0;
         var _run = function () {
             var aPath = [];
-            if (t++ <= 200) {
-                // x = R - (xStep*R)*Math.cos(theta);
-                // y = R + (1.5*xStep*R)*Math.sin(theta);
-                x = R - (R)*Math.cos(theta);
-                y = 0 + (R)*Math.sin(theta);
-                console.log(x,y) ;
-                theta += thetaStep; 
-                xStep += 0.05;
-                if (theta > Math.PI*3/4) {
-                    theta = 0;
-                    if (xStep > 1.5 ) {
-                        xStep = 1; 
+            if (t++ <= 1000) {
+
+                me.clear();
+                for (var i = 0, k, le = lineArr.length ; i < le; i++ ) {
+                    k = lineArr[i];
+
+                    x = R - 200- (R)*Math.cos(theta);
+                    y = (-100) + (R)*Math.sin(theta);
+                    theta += me.rand(thetaStep, thetaStep+0.15, 3); 
+                    if (theta > Math.PI*2/4) {
+                        theta = thetaOrigin ;
                     }
+                    k = [x - (i*me.rand(10,30)), y + (i*me.rand(20,50))];
+                    var newPoint = [k[0]+35, k[1]+16];
+                    me.setDrawStyle({
+                        strokeStyle: lineColor[i]
+                        ,lineWidth: me.rand(1,2)
+                    });
+                    aPath.push({type: 'moveTo', v: k}) ;
+                    aPath.push({type: 'lineTo', v: newPoint}) ;
+                    me.render(aPath);
                 }
-                var lGrd = me.c.createLinearGradient(0,0, 10, 2);  
-                lGrd.addColorStop(0, '#ff0000');  
-                lGrd.addColorStop(1, '#00f0ff');  
-                me.c.strokeStyle = lGrd;  
-                
-                lastPoint = [x,y];
-                newPoint = [lastPoint[0]+8, lastPoint[1]+4];
-
-                aPath.push({type: 'moveTo', v: lastPoint}) ;
-                aPath.push({type: 'lineTo', v: newPoint}) ;
-
-                me.render(aPath);
-                setTimeout(_run, 50);
+                RAF(_run);
             }
         };
         _run();
     };
     myCanvas.renderAnim();
+
+    /*
+    myCanvas.render([
+        {'type':'moveTo', v: [50, 50]}
+        ,{'type':'lineTo', v: [100, 50]}
+        ,{'type':'lineTo', v: [100, 100]}
+        ,{'type':'moveTo', v: [150, 150]}
+        ,{'type':'lineTo', v: [200, 200]}
+    ]);
+    */
 
 </script>
 </body>
