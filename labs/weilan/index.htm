@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="gbk" />
+<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="robots" content="all" />
+<meta name="author" content="Tencent-TGideas" />
+<meta name="Copyright" content="Tencent" />
+<meta name="Keywords" content="蔚蓝海平面" />
+<meta name="Description" content="《蔚蓝海平面》是由腾讯知名工作室北极光自主研发的手游" />
+<title>蔚蓝海平面官方网站-腾讯游戏</title>
+<!--页面设计：yuanli | 页面制作:alextang | 创建时间：2015-11-16 | 团队博客：http://tgideas.qq.com/-->
+<link href="index_style.css" rel="stylesheet" type="text/css" />
+<script src="http://ossweb-img.qq.com/images/n/common/jquery.js"></script>
+</head>
+<body>
+
+<div class="pc_wrap">
+    <div class="swf_wrap">
+        <embed width="100%" height="100%" src="http://ossweb-img.qq.com/images/n/web2015/main.swf" />
+        <div class="btn_wrap">
+            <a href="http://ac.qq.com/Comic/ComicInfo/id/537646" onclick="pgvSendClick({hottag:'main.infoBtn'});" target="_blank">资讯</a>
+            <a href="http://ac.qq.com/Comic/ComicInfo/id/537646" onclick="pgvSendClick({hottag:'main.comicBtn'});" target="_blank">漫画</a>
+        </div>
+    </div>
+
+    <div id="linkArea" class="clink_wrap">
+        <div class="clink">
+            <div class="clink_item clink_item_1">
+                <a target="_blank" class="ico ico_1" href="http://bbs.g.qq.com/forum.php?mod=forumdisplay&fid=57087&ADTAG=game.web.wlhpm"><i></i></a>
+                <strong>讨论区</strong>
+                <p class="desp">调教心得交流，寂寞党福音区，休闲好去处<a target="_blank" href="http://bbs.g.qq.com/forum.php?mod=forumdisplay&fid=57087&ADTAG=game.web.wlhpm">更多</a></p>
+                <a target="_blank" class="clink_item_a" onclick="pgvSendClick({hottag:'main.bbsBtn'});" href="http://bbs.g.qq.com/forum.php?mod=forumdisplay&fid=57087&ADTAG=game.web.wlhpm"></a>
+            </div>
+            <div class="clink_item ">
+                <a href="javascript:alert('敬请期待')" class="ico ico_2"><i></i></a>
+                <strong>最新情报</strong>
+                <p class="desp">一手咨询来袭，前方高能预警，次元壁最快突破！<a href="javascript:alert('敬请期待')">更多</a></p>
+                <a target="_blank" class="clink_item_a" onclick="pgvSendClick({hottag:'main.newsBtn'});" href="javascript:alert('敬请期待')"></a>
+            </div>
+            <div class="clink_item ">
+                <a href="javascript:alert('敬请期待')" class="ico ico_3"><i></i></a>
+                <strong>创作者手札</strong>
+                <p class="desp">么么哒的创世神，主创日常大曝光，绝无剧透！<a href="javascript:alert('敬请期待')">更多</a></p>
+                <a target="_blank" class="clink_item_a" onclick="pgvSendClick({hottag:'main.newsBtn'});" href="javascript:alert('敬请期待')"></a>
+            </div>
+            <div class="clink_item clink_item_4">
+                <a target="_blank" class="ico ico_4" href="http://ac.qq.com/Comic/ComicInfo/id/537646"><i></i></a>
+                <strong>漫画在线</strong>
+                <p class="desp">白猫大大最新力作，国漫之光华美绽放！每周都有更新哟！<a target="_blank" href="http://ac.qq.com/Comic/ComicInfo/id/537646">更多</a></p>
+                <a target="_blank" class="clink_item_a" onclick="pgvSendClick({hottag:'main.comicBtn'});" href="http://ac.qq.com/Comic/ComicInfo/id/537646"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mobile_wrap">
+    <div id="firstSec" class="first_sec modAnim">
+        <canvas id="alexLine" class="alex_line"></canvas>
+
+        <p id="mobileAvatar" class="mobile_avatar avatar_anim"></p>
+        <p id="mobileAvatarFoot" class="mobile_avatar_foot foot_anim"></p>
+        <canvas id="mobileTitCanvas" class="mobile_tit_canvas"><img id="mobileTitImg" src="mobile_tit.png" /></canvas>
+    </div>  
+    <div id="secondSec" class="second_sec">
+        <ul class="sec_list">
+            <li>
+                <i class="ico_1"></i>
+                <div class="desp">
+                    <b><a onclick="pgvSendClick({hottag:'main.mobile.bbs'});" href="http://bbs.g.qq.com/forum.php?mod=forumdisplay&fid=57087&ADTAG=game.web.wlhpm">讨论区</a></b>
+                    <p>调教心得交流，寂寞党福音区，休闲好去处，<a onclick="pgvSendClick({hottag:'main.mobile.bbs'});" href="http://bbs.g.qq.com/forum.php?mod=forumdisplay&fid=57087&ADTAG=game.web.wlhpm">更多</a></p>
+                </div>
+            </li>
+            <li>
+                <i class="ico_2"></i>
+                <div class="desp">
+                    <b>最新情报</b>
+                    <p>一手咨询来袭，前方高能预警，次元壁最快突破！</p>
+                </div>
+            </li>
+            <li>
+                <i class="ico_3"></i>
+                <div class="desp">
+                    <b>创作者手札</b>
+                    <p>么么哒的创世神，主创日常大曝光，绝无剧透！</p>
+                </div>
+            </li>
+            <li>
+                <i class="ico_4"></i>
+                <div class="desp">
+                    <b><a href="http://ac.qq.com/Comic/ComicInfo/id/537646" onclick="pgvSendClick({hottag:'main.mobile.comic'});">漫画在线</a></b>
+                    <p >白猫大大最新力作，国漫之光华美绽放！每周都有更新哟！<a target="_blank" onclick="pgvSendClick({hottag:'main.mobile.comic'});" href="http://ac.qq.com/Comic/ComicInfo/id/537646">更多</a></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="http://ossweb-img.qq.com/images/js/foot.js" charset="gbk"></script>
+<script src="index_ui.js"></script>
+</body>
+</html>
