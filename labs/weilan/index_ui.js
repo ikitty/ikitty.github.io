@@ -191,7 +191,6 @@ alexCanvas.prototype = {
 var mobile = {
     init: function () {
         $$('body').css('background', 'red').height(document.documentElement.clientHeight + 100);
-        alert(document.documentElement.clientHeight);
         this.showLine();
         $$('#secondSec').css({top: (document.documentElement.clientHeight)}).show().addClass('modAnim');
 
