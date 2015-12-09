@@ -80,7 +80,8 @@ a:focus{outline:0}
 
 .modAnim {-webkit-transition: all 0.3s ease-out; transition: all 0.3s ease-out;}
 
-.mobile_wrap {display:none;width:100%;height:100%;background-color:#DDDEE2;}
+/* =====perspective will cause fucking bug===== */
+.mobile_wrap {display:none;height:100%;background-color:#DDDEE2;}
 .first_sec {position:absolute;left:0px;top:0px;width:100%;height:100%;background:url(http://ossweb-img.qq.com/images/n/web2015/mobile.jpg) center top no-repeat;background-size: cover;text-align:center;}
 .first_sec_zoomin {-webkit-transform-origin:center 100%; -webkit-transform:rotateX(10deg);opacity:0;}
 .mobile_avatar {width:69.6%;padding-top:73.4%;margin: 25% auto 0px auto;background-image:url(http://ossweb-img.qq.com/images/n/web2015/mobile_avatar.png);background-repeat:no-repeat;background-size:100%;

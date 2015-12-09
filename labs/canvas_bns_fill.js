@@ -1,122 +1,3 @@
-/**
- * T7 common js 
- *
- * @require jQuery
- * @feature tcssReport
- * @feature titleModule
- * @feature mobileDetect
- * @feature showLayer showTips
- **/
-;
-(function ($, options) {
-    var defaults = {
-        taId: 0
-        ,needShowLayer: 1
-        ,needTips:1
-        ,needTitle: 1
-    };
-    var config = $.extend({}, defaults, options);
-    if (config.needShowLayer) {
-        $.getScript("http://ossweb-img.qq.com/images/js/comm/showDialog.min.js");
-    }
-
-    //plugin
-    //todo $('*')._alex()
-    $.fn._alex = function () {
-    };
-
-    //init showTips DOM
-    if (config.needTips) {
-        var str = '<i class="sod_layer_x" onclick="showDialog.hide();" title="关闭"><i>&#215;</i></i>'
-                + '<div class="sod_layer_bd">'
-                + '<div class="sod_layer_tit">提示</div>'
-                + '<div id="layerTipsCont"></div> '
-                + '<div id="layerTipsAction" class="sod_layer_btn_wrap">'
-                + '<span onclick="showDialog.hide();" >确认</span>'
-                + '</div></div>' ;
-
-        var elTips = document.createElement('div');
-        elTips.id = 'layerTips';
-        elTips.className = 'sod_layer';
-        elTips.innerHTML = str;
-        document.body.appendChild(elTips) ;
-    }
-
-    $.extend({
-        isMobile: (/android|webos|iphone|ipod|blackberry|ieiMobile|opera mini/i.test(navigator.userAgent))
-
-        ,isInClient: !!(navigator.userAgent.indexOf('inTiejiClient') > -1)
-            
-        ,showLayer: function (opt) {
-            var def = {
-                id : null,
-                bgcolor : "#000",
-                opacity : 50,
-                onPopupCallback : function(){},
-                onCloseCallback : function(){}
-            };
-            var cfg = $.extend({}, def, opt);
-
-            typeof(showDialog)=='undefined' ? $.getScript("http://ossweb-img.qq.com/images/js/comm/showDialog.min.js", _sDialog) : _sDialog();
-            function _sDialog(){
-                showDialog.show(cfg);
-            }
-        }
-        ,showTips: function (o) {
-            if (typeof o == 'undefined') { return  ; }
-            document.getElementById('layerTipsCont').innerHTML = o.msg || '';
-            document.getElementById('layerTipsAction').innerHTML = o.action || '<span onclick="showDialog.hide();">确认</span>';
-            $.showLayer({'id': 'layerTips'});
-        }
-
-    });
-    if (config.needTitle && !$.isMobile && !$.isInClient ) {
-        $.getScript('http://ossweb-img.qq.com/images/js/title.js', function () {
-            if(typeof(ostb_int) == 'function') ostb_int();
-        });
-    }else {
-        document.body.style.paddingTop = '0px';
-    }
-
-    if ($.isMobile) {
-        //document.getElementById('footer_ied').style.display = 'none';
-    }
-
-    if ($.isInClient) {
-        document.getElementById('footer_ied').style.display = 'none';
-        var elHide = document.body.getElementsByClassName('client_hide') ;
-        for (var i = 0, k, le = elHide.length ; i < le; i++ ) {
-            k = elHide[i];
-            k.style.display = 'none';
-        }
-
-        var elDis = document.body.getElementsByClassName('client_disabled') ;
-        for (var i = 0, k, le = elDis.length ; i < le; i++ ) {
-            k = elDis[i];
-            k.setAttribute('href', 'javascript:void(0)') ;
-        }
-    }
-
-    //ping
-    function _ping_tcss_ied(){
-        $.getScript('http://pingjs.qq.com/ping_tcss_ied.js', function () {
-            if(typeof(pgvMain) == 'function') pgvMain();
-        });
-    }
-    function _tajs(){
-        $.getScript("http://tajs.qq.com/stats?sId="+ config.taId, _ping_tcss_ied);
-    }
-
-    if (config.taId) {
-        _tajs();
-    }else {
-        _ping_tcss_ied();
-    }
-
-
-    window.$$ = $ ;
-})(jQuery, {needShowLayer:0, taId:0, needTips:0, needTitle: 1 });
-
 //mobile
 (function () {
     window.RAF= window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (cb) {
@@ -188,64 +69,6 @@ alexCanvas.prototype = {
     }
 };
 
-var mobile = {
-    init: function () {
-        $$('body').height(document.documentElement.clientHeight);
-    }
-    ,showLine: function () {
-        var myCanvas = new alexCanvas({
-            id: 'alexLine'
-            ,width: document.documentElement.clientWidth
-            ,height: document.documentElement.clientHeight
-        });
-        myCanvas.rand = function (min, max, digit) {
-            var r = Math.random()*(max-min) + min ;
-            return digit ? Number(r.toFixed(digit)) : (r | 0) ;
-        };
-        myCanvas.renderAnim = function () {
-            var me =this;
-
-            var lastPoint = [0,0];
-            var R = 614
-                ,x = 0
-                ,y =0
-                ,thetaOrigin = 0
-                ,theta = thetaOrigin
-                ,thetaStep = 0.01
-                ,lineArr = new Array(5)
-                ,lineColor = ['rgba(250,100,150,0.5)','rgba(50,200,250,0.5)','rgba(50,50,50,0.1)', 'rgba(100,100,100,0.2)', 'rgba(250,250,250,0.1)']
-                ;
-            var t = 0;
-            var _run = function () {
-                var aPath = [];
-                me.clear();
-                for (var i = 0, k, le = lineArr.length ; i < le; i++ ) {
-                    k = lineArr[i];
-
-                    x = R - 200- (R)*Math.cos(theta);
-                    y = (-100) + (R)*Math.sin(theta);
-                    theta += me.rand(thetaStep, thetaStep+0.05, 3); 
-                    if (theta > Math.PI*2/4) {
-                        theta = thetaOrigin ;
-                    }
-                    k = [x - (i*me.rand(50,250)), y + (i*me.rand(20,50))];
-                    var newPoint = [k[0]+35, k[1]+14];
-                    me.setDrawStyle({
-                        strokeStyle: lineColor[me.rand(0, 4)]
-                        ,lineWidth: me.rand(1,2)
-                    });
-                    aPath = [];
-                    aPath.push({type: 'moveTo', v: k}) ;
-                    aPath.push({type: 'lineTo', v: newPoint}) ;
-                    me.render(aPath);
-                }
-                setTimeout(_run, 80);
-            };
-            _run();
-        };
-        myCanvas.renderAnim();
-    }
-};
 
 
 //start redraw
@@ -259,7 +82,7 @@ var pCanvas = new alexCanvas({
     ,width: size.w 
     ,height: size.h 
 })
-$$('#mobileTitCanvas').css({width: size.w*2/3, height: size.h*2/3 });
+// $$('#mobileTitCanvas').css({width: size.w*2/3, height: size.h*2/3 });
 
 var canvasRedraw = {
     init: function (redrawObj) {
@@ -444,18 +267,11 @@ Particle.prototype = {
     }
 };
 
-//DOMReady
-$$(function () {
-    if ($$.isMobile) {
-        mobile.init();
-
-        var img = document.getElementById("mobileTitImg");
-        if (img.complete) {
-            canvasRedraw.init(img);
-        } else {
-            img.onload = function () {
-                canvasRedraw.init(img);
-            }
-        }
+var img = document.getElementById("mobileTitImg");
+if (img.complete) {
+    canvasRedraw.init(img);
+} else {
+    img.onload = function () {
+        canvasRedraw.init(img);
     }
-});
+}
