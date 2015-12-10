@@ -7,6 +7,7 @@ var str+= '\
             ';
 /**
  * simple Tab by alex
+ * @require self jquery
  *
  * @param {object HTMLCollection} obj.hd , tab trigger elements
  * @param {object HTMLCollection} obj.bd , tab content elements
@@ -34,17 +35,17 @@ var alexTab = function (obj) {
         return  ;
     }
     //init
-    TJ(cfg.hd[cfg.def]).addClass(cfg.hdActiveCls);
-    TJ(cfg.bd[cfg.def]).addClass(cfg.bdActiveCls);
+    $$(cfg.hd[cfg.def]).addClass(cfg.hdActiveCls);
+    $$(cfg.bd[cfg.def]).addClass(cfg.bdActiveCls);
 
     for (var i = 0, k ; k = cfg.hd[i] ; i++ ) {
         k.index = i ;
         k[cfg.mode] = function () {
-            TJ(cfg.hd[cfg.def]).removeClass(cfg.hdActiveCls);
-            TJ(cfg.hd[this.index]).addClass(cfg.hdActiveCls);
+            $$(cfg.hd[cfg.def]).removeClass(cfg.hdActiveCls);
+            $$(cfg.hd[this.index]).addClass(cfg.hdActiveCls);
 
-            TJ(cfg.bd[cfg.def]).removeClass(cfg.bdActiveCls);
-            TJ(cfg.bd[this.index]).addClass(cfg.bdActiveCls);
+            $$(cfg.bd[cfg.def]).removeClass(cfg.bdActiveCls);
+            $$(cfg.bd[this.index]).addClass(cfg.bdActiveCls);
 
             cfg.callback && (typeof cfg.callback == 'function') && cfg.callback(this.index, cfg.def);
 
@@ -364,3 +365,9 @@ loadImgCustom(imgs, 'http://ossweb-img.qq.com/images/t7/act/a20141117suspense/',
 }, function () {
 
 }, 0)
+
+//random number in specify range
+var alexRand = function (min, max, digit) {
+    var r = Math.random()*(max-min) + min ;
+    return digit ? Number(r.toFixed(digit)) : (r | 0) ;
+};
