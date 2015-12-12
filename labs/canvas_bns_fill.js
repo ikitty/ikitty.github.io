@@ -1,4 +1,8 @@
 //mobile
+var alexRand = function (min, max, digit) {
+    var r = Math.random()*(max-min) + min ;
+    return digit ? Number(r.toFixed(digit)) : (r | 0) ;
+};
 (function () {
     window.RAF= window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (cb) {
         window.setTimeout(cb, 1000/60);
@@ -118,6 +122,7 @@ var canvasRedraw = {
         var imgData = pCanvas.c.getImageData(this.imgx, this.imgy, img.width, img.height);
 
         var checkAlpha = 100 ;
+
         for (var x = 0; x < img.width; x += (this.particleSize_x*1)) {
             for (var y = 0; y < img.height; y += (this.particleSize_y*1)) {
                 var i = (y * imgData.width + x) * 4;
@@ -129,10 +134,12 @@ var canvasRedraw = {
                     var color = "rgba(" + imgData.data[i] + "," + imgData.data[i + 1] + "," + imgData.data[i + 2] + "," + alpha + ")";
 
                     var x_random = x + Math.random() * 20,
-                            vx = -Math.random() * 200 + 200,
+                        vx = -Math.random() * 200 + 200,
+                        y_random = img.height/2 - Math.random() * 40 + 20;
 
-                            y_random = img.height/2 - Math.random() * 40 + 20,
-                            vy;
+                    //x_random = img.width/2  + alexRand(-20, 20);
+
+                    var vy ;
 
                     if (y_random < this.imgy + img.height / 2) {
                         vy = Math.random() * 200;
@@ -160,9 +167,9 @@ var canvasRedraw = {
     _execAnimate: function () {
         var that = this;
 
-        this.particleArray.sort(function (a, b) {
-            return a.ex - b.ex;
-        });
+        //this.particleArray.sort(function (a, b) {
+            //return a.ex - b.ex;
+        //});
 
         if (!this.isInit) {
             this.isInit = true;

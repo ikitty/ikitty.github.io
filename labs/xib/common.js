@@ -371,3 +371,22 @@ var alexRand = function (min, max, digit) {
     var r = Math.random()*(max-min) + min ;
     return digit ? Number(r.toFixed(digit)) : (r | 0) ;
 };
+
+
+//RAF
+window.RAF = (function(){
+    return  window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
+        function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+var loopAnim = function (render) {
+    (function animloop(){
+        RAF(animloop);
+        render();
+    })();
+};
+
+//loopAnim(render);
+
+
