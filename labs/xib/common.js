@@ -389,4 +389,22 @@ var loopAnim = function (render) {
 
 //loopAnim(render);
 
+//debug
+var debug = function (v) {
+    if (!document.getElementById('alexLog')) {
+        var elRet = document.createElement('div');
+        elRet.id = 'alexLog';
+        $$(elRet).css({
+            position:'absolute'
+            ,top:100
+            ,right:20
+            ,background: 'green'
+            ,color: '#fff'
+            ,padding:'2px 5px'
+            ,'text-align': 'right'
+        });
+        document.body.appendChild(elRet) ;
+    }
+    $$('#alexLog').append(  v + '<br>');
+};
 
