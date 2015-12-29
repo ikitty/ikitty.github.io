@@ -60,37 +60,30 @@ tests项目也自动添加了这个签名。所以导致真机测试的时候会
  
 ###桌面显示名称
 
-在info.plist中加 Bundle Dis
+在info.plist中加 Bundle Display Name字段
 
-###add pch file 
+###添加pch文件
 
-cmd N create a pch
-click project ,select your app , choose build settings , search prefix header
-enter pch path : $ProjectName/name.pch  (DF/tj.pch)
+Xcode6中新建项目时不会自动创建pch文件，但我们可以手动创建：cmd+ N ,create a pch file。然后点击project，选择我们的app，选择build setting，搜索 prefix header，输入pch 的path：
 
-preprocessor 不要乱改。 这个bug找了好久
+    enter pch path : $ProjectName/name.pch  (DF/tj.pch)
+
+preprocessor 不要乱改。
 
 ###发布到rdm
 
-http://rdm.wsd.com/sign.jsp 
+将导出的ipa在内网进行重签名，然后在rdm新建一个内部体验，将重签名的ipa上传发布即可。
 
-将导出的ipa进行重签名，然后在rdm新建一个内部体验，将重签名的ipa上传发布即可。
-
-### 问题
-
-接口人直接给我p12和授权文件（Appid不支持通配符，每次创建一个新的App都要重新申请）
-另外一种方式，让接口人邀请你加入开发者。估计这样会自由度大一点
 
 ###更换bundleID
-在target的packaging的product name中更新bundleid就好。
-更新后，最好重新安装证书，并且先删除就的provision文件，然后安装新的provision文件，把codeSigh下的所有选项（debug和release）都选择最新的provision文件。并重新打包
 
-更换bid之后如果build不成功，在targets中的test项目选项下，将hostAPplication选择为主项目，再试试
+在target的packaging的product name中更新bundleid就好。更新后，最好重新安装证书，并且先删除旧的provision文件，然后安装新的provision文件，把codeSigh下的所有选项（debug和release）都选择最新的provision文件。并重新打包
+
+更换bundleId之后如果build不成功，在targets中的test项目选项下，将hostAPplication选择为主项目，再试试
 
 ###Xcode7免证书
 
-打开Xcode的设置，在account中添加好自己的账户。
-然后在项目的target中，在team中选择刚添加的账户，然后点击FixIssue，再次选择自己的账户即可。
+打开Xcode的设置，在account中添加好自己的账户。然后在项目的target中，在team中选择刚添加的账户，然后点击FixIssue，再次选择自己的账户即可。
 
 ###other
 
