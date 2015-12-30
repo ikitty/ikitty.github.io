@@ -408,3 +408,25 @@ var debug = function (v) {
     $$('#alexLog').append(  v + '<br>');
 };
 
+//scroll no bounce
+var scrollNoBounce= function (id) {
+    var beginY, endY;
+    $(window).on('touchstart',  function (e) {
+        beginY = e.originalEvent.touches[0].screenY ;
+    });
+
+    $(window).on("touchmove", function (e) {
+        var elScroll = document.getElementById(id) ; 
+        if (e.target !== elScroll && !elScroll.contains(e.target)) {
+            e.preventDefault();
+        }
+        
+        endY =  e.originalEvent.touches[0].screenY;
+        if (elScroll.scrollTop === 0 && endY >= beginY) {
+            e.preventDefault();
+        }
+        if (elScroll.scrollHeight - elScroll.offsetHeight === elScroll.scrollTop && beginY >= endY) {
+            e.preventDefault();
+        }
+    });
+};
