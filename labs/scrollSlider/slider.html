@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>DEMO</title>
+<style type="text/css" media="screen">
+* {margin:0;padding:0;list-style:none;}
+
+.slider {position:relative;width:500px;height:300px;margin:40px;border:1px solid #333;overflow:hidden;}
+.slider_list {position:absolute;top:0px;left:0px;width:1500px;height:100%;transition:all .3s ease-out;}
+.slider_list  li {float:left;width:500px;height:100%;background-color:#ccc;}
+.slider_list  li:first-child {background-color:#f9f;}
+.slider_list  li:last-child {background-color:#f90;}
+
+.slider_trigger {position:absolute;bottom:10px;right:10px;}
+.slider_trigger i {float:left;width:10px;height:10px;margin-right:10px;background-color:#000;cursor:pointer;}
+.slider_trigger i.on {background-color:#fc0;}
+    
+</style>
+</head>
+<body>
+
+<div class="slider">
+    <ul id="sliderBody" class="slider_list">
+        <li>1111</li>
+        <li>2222</li>
+        <li>3333</li>
+    </ul>    
+    <div id="sliderTrigger" class="slider_trigger">
+        <i>&nbsp;</i>
+        <i>&nbsp;</i>
+        <i>&nbsp;</i>
+    </div>
+</div>
+
+<script src="slider.js"></script>
+</body>
+</html>
