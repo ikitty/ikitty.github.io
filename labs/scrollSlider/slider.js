@@ -11,6 +11,7 @@ var Slider = function (arg) {
     this.triggerId = '';
     this.elBody = null;
 
+    this.time = 3000;
     this.type = 'click';
     this.auto = 1;
     this.current = 0 ;
@@ -51,7 +52,7 @@ Slider.prototype = {
                 if (me.auto) {
                     me.play(++me.current);
                 }
-            }, 3000);
+            }, me.time);
         };
         _run();
     }
@@ -66,7 +67,7 @@ Slider.prototype = {
         for (var i = 0, k, le = this.elTrigger.length ; i < le; i++ ) {
             k = this.elTrigger[i];
             k.order = i ;
-            k.onclick = function () {
+            k['on' + me.type]= function () {
                 me.play(this.order);
             }
         }
