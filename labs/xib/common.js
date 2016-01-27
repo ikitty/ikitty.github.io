@@ -8,6 +8,7 @@ var str+= '\
 /**
  * simple Tab by alex
  * @require self jquery
+ * @version 1.0
  *
  * @param {object HTMLCollection} obj.hd , tab trigger elements
  * @param {object HTMLCollection} obj.bd , tab content elements
@@ -35,7 +36,9 @@ var alexTab = function (obj) {
         return  ;
     }
     //init
+    $$(cfg.hd).removeClass(cfg.hdActiveCls);
     $$(cfg.hd[cfg.def]).addClass(cfg.hdActiveCls);
+    $$(cfg.bd).removeClass(cfg.bdActiveCls);
     $$(cfg.bd[cfg.def]).addClass(cfg.bdActiveCls);
 
     for (var i = 0, k ; k = cfg.hd[i] ; i++ ) {
