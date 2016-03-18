@@ -1,8 +1,9 @@
 // all I did javascript common functions
 
-var str+= '\
+var str = '';
+    str += '\
             <li>\
-               <p class="mo_name">' + kk.name + '</p>\
+               <p class="mo_name">' + location.href + '</p>\
             </li>\
             ';
 /**
@@ -117,7 +118,7 @@ var simpleTemplateEngine = function(tpl, data) {
         tpl = tpl.replace(match[0], data[match[1]])
     }
     return tpl;
-}    
+};
 
 var renderEvt = function (d) {
     var tpl = document.getElementById('tplEventItem').innerHTML ;
@@ -128,7 +129,7 @@ var renderEvt = function (d) {
         activeCont += simpleTemplateEngine(tpl, k);
     }
     document.getElementById('eventActive').innerHTML = activeCont ;
-}
+};
 
 // 检测多键同时按下
 var fn  = function (e) {
@@ -189,7 +190,7 @@ Xman.prototype = {
     ,say: function () {
         console.log(this.cfg) ;
     }
-}
+};
 
 var x1 = new Xman({'name': 'x1'});
 var x2 = new Xman({'name': 'x2'});
@@ -279,6 +280,7 @@ var x2 = new Xman({'name': 'x2'});
         }
     }
 })(window, 'handleWheelAnother', 100);
+
 /**
  * @param {Object} arg1 指定注入的对象，可以填window或者其他
  * @param {String} arg2 组件名称，你写成啥，后面就调用啥，默认是handleWheel
@@ -290,7 +292,7 @@ handleWheel(function () {
     console.log('up') ;
 }, function () {
     console.log('down') ;
-})
+});
 
 /**
  * preloadImg
@@ -358,16 +360,14 @@ var loadImgCustom = function (imgs, prefix, cb, cbAll, debug) {
 };
 
 var imgs = [
-    'loading.png'
-    ,'mbg1.jpg' ,'mbg2.jpg' ,'mbg4.jpg' ,'mbg5.jpg'
-    ,'m1.png' ,'m2.png' ,'m2_role.png' ,'m3.png' ,'m4.png'
+    'loading.png' ,'m1.png' ,'m2.png' ,'m2_role.png' ,'m3.png' ,'m4.png'
 ];
 //preload
-loadImgCustom(imgs, 'http://ossweb-img.qq.com/images/t7/act/a20141117suspense/', function (n) {
-    document.getElementById('preload').style.width = n + '%';
-}, function () {
+//loadImgCustom(imgs, 'http://ossweb-img.qq.com/images/t7/act/a20141117suspense/', function (n) {
+    //document.getElementById('preload').style.width = n + '%';
+//}, function () {
 
-}, 0)
+//}, 0);
 
 //random number in specify range
 var alexRand = function (min, max, digit) {
@@ -433,3 +433,92 @@ var scrollNoBounce= function (id) {
         }
     });
 };
+
+//==================slider==============================
+var Slider = function (arg) {
+    this.sliderWidth = 500;
+    this.count = 5;
+    this.triggerId = '';
+    this.elBody = null;
+    this.autoCreateTrigger = false ;
+    this.triggerTagName = 'a' ;
+
+    this.time = 3000;
+    this.type = 'click';
+    this.auto = 1;
+    this.current = 0 ;
+    this.elTrigger = null;
+    this.timer = null; 
+    this.last = this.current;
+
+    for (var i in arg) {
+        (i in this) && (this[i] = arg[i]) ;
+    }
+    this.init();
+};
+Slider.prototype = {
+    init: function () {
+        this.createTrigger();
+
+        this.auto && this.autoPlay() ;
+        this.play(this.current);
+        //this.elTrigger[this.current].className = 'on';
+    }
+    ,play: function (order) {
+        order = order >= this.count ? 0 : order ;
+        this.elBody.style.left = -1*order*this.sliderWidth  +'px' ;
+        this.syncStatus(order);
+
+        this.elTrigger[this.last].className = '';
+        this.elTrigger[this.current].className = 'on';
+        this.last = this.current ;
+    }
+    ,syncStatus: function (order) {
+        this.current = order ;
+    }
+    ,autoPlay: function () {
+        var me = this;
+        var _run = function () {
+            me.timer = setTimeout(function () {
+                _run();
+                if (me.auto) {
+                    me.play(++me.current);
+                }
+            }, me.time);
+        };
+        _run();
+    }
+    ,pause: function () {
+        clearTimeout(this.timer);
+        this.timer = null ;
+    }
+    ,listenEvent: function () {
+        var me = this; 
+        this.elTrigger = document.getElementById(this.triggerId).getElementsByTagName(this.triggerTagName) ;
+
+        for (var i = 0, k, le = this.elTrigger.length ; i < le; i++ ) {
+            k = this.elTrigger[i];
+            k.order = i ;
+            k['on' + me.type]= function () {
+                me.play(this.order);
+            }
+        }
+
+        document.getElementById(this.triggerId).onmouseover = function () {
+            me.pause();
+        };
+        document.getElementById(this.triggerId).onmouseout = function () {
+            me.autoPlay();
+        };
+    }
+
+    ,createTrigger: function () {
+        if (this.autoCreateTrigger) {
+            var tagName = this.triggerTagName ;
+            document.getElementById(this.triggerId).innerHTML = (new Array(this.count+1)).join('<' + tagName + '></' + tagName + '>') ;
+        }
+        this.listenEvent();
+    }
+};
+
+//==================scrollNav==============================

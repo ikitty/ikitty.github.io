@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="all" />
+<meta name="author" content="Tencent-TGideas" />
+<meta name="Copyright" content="Tencent" />
+<style type="text/css" media="screen">
+* {margin:0;padding:0;list-style:none;}    
+
+.side_wrap {position:relative;height:100px;width:1000px;margin:50px auto;background-color:#ccc;}
+.side {position: absolute;left: -120px;top: 100px;width:100px;height:150px;padding:10px 10px;background-color:#262629;-webkit-transition: all 0.3s ease-out; transition: all 0.3s ease-out;color:#fff;}
+.side a {}
+</style>
+</head>
+<body>
+
+        <div class="side_wrap">
+            <div id="sideNav" class="side">
+                <p id="btnTop" class="btn_top">返回顶部</p>
+            </div>
+        </div>
+        <div class="" style="height:2500px;"> </div>
+
+<script>
+    var doScroll = function () {
+        var elTop = 100 
+            ,elParentTop = 50 
+            ;
+        //元素距离页面顶部距离
+        var solidTop = elTop + elParentTop ; 
+        //滚动条卷去的距离 , chrome49中默认强制开启平衡滚动，需要使用debounce延时scroll事件
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop ;
+
+        var el = document.getElementById('sideNav');
+        if (scrollTop > solidTop) {
+            el.style.top = (scrollTop- solidTop + elTop ) + 'px';
+        }else {
+            el.style.top = elTop  + 'px';
+        }
+    };
+
+    document.getElementById('btnTop').onclick = function () {
+        document.body.scrollTop = 0 ;
+        document.documentElement.scrollTop = 0 ;
+        doScroll();
+    };
+
+    var st ;
+    window.onscroll = function () {
+        st && clearTimeout(st);
+        st = setTimeout(function () {
+            doScroll();
+        }, 100);
+    }
+
+</script>
+
+</body>
+</html>
