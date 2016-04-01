@@ -434,6 +434,18 @@ var scrollNoBounce= function (id) {
     });
 };
 
+/**
+ * simple Slider by alex
+ * @require self jquery
+ * @version 1.0
+ *
+ * @param {Number} obj.sliderWidth 
+ * @param {Number} obj.count , the amount of slider child 
+ * @param {HTMLElement} obj.elBody , slider content DOM
+ * @param {Bool} obj.autoCreateTrigger 
+ * @param {String} obj.triggerTagName , define trigger tag name
+ * @param {Number} obj.time , animation interval time
+ **/
 //==================slider==============================
 var Slider = function (arg) {
     this.sliderWidth = 500;
