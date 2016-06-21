@@ -81,7 +81,8 @@ var BabyAdd = React.createClass({
         ref.push({
             "name": v,
             "url": 'default url'
-        })
+        });
+        this.setState({babyName: ''});
     },
     handleChange: function (e) {
         this.setState({babyName: e.target.value});
