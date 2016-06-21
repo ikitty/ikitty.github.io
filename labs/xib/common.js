@@ -533,4 +533,40 @@ Slider.prototype = {
     }
 };
 
-//==================scrollNav==============================
+/**
+ * debounce 单位时间内只触发最后一个事件
+ *
+ * @param {DOM} target : event trigger DOM
+ * @param {String} eventType
+ * @param {Fucntion} fn : event callback
+ * @param {Number} time : debounce time
+ **/
+var alexDebounce = function (obj ) {
+    var cfg = {
+        fn: function(){}
+        ,target: ''
+        ,eventType: ''
+        ,time: 100
+    };
+    for (var i in obj) {
+        obj[i] && (cfg[i] = obj[i]) ;
+    }
+
+    st = '';
+
+    if (!!window.addEventListener) {
+        cfg.target.addEventListener(cfg.eventType, function () {
+            st && clearTimeout(st);
+            st = setTimeout(function () {
+                cfg.fn();
+            }, cfg.time);
+        }, false);
+    }else {
+        cfg.target.attachEvent('on'+ cfg.eventType, function () {
+            st && clearTimeout(st);
+            st = setTimeout(function () {
+                cfg.fn();
+            }, cfg.time);
+        });
+    }
+};
