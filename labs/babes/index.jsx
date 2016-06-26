@@ -53,7 +53,7 @@ var BabyList = React.createClass({
             var k = D[i];
             str.push(
                 <li key={i} data-index={i} onClick={this.handleOpClick}>
-                    Name is : <span className="name">{k.name}</span>
+                    <span className="name">{k.name}</span>
                     <div className="btn_wrap">
                         <button className="btn btn_edit">Edit</button>
                         <button className="btn btn_del">Delete</button>
