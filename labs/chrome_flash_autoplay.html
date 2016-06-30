@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="gbk">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>chrome flash test</title>
+<style>
+</style>
+</head>
+<body>
+
+<div id="videoWrap"> </div>
+
+<script type="text/javascript">
+//get hash
+function getHash (name) {
+    var reg=new RegExp("(^|)"+name+"(?:=([^&]*))?(&|$)"),
+        ret ='';
+        val=window.location.hash.slice(1).match(reg);
+    return val? (val[2]?unescape(val[2]):""):null;
+}
+
+function injectSwf (arg) {
+    var cfg = {
+        'wrapId': 'videoCont'
+        ,'vid': ''
+        ,'w': 500
+        ,'h': 300
+        ,'auto': 0
+    };
+    for (var i in arg) {
+        arg.hasOwnProperty(i) && arg[i] && (cfg[i] = arg[i]) ;
+    }
+
+    var swf = '\
+        <object id="tenvideo_flash_player_1403119131105" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="' + cfg.w + '" height="' + cfg.h + '">\
+            <param name="Movie" value="http://static.video.qq.com/TencentPlayer.swf?vid='+ cfg.vid +'&autoplay=' + cfg.auto + '&skin=http://imgcache.qq.com/minivideo_v1/vd/res/skins/TencentPlayerMiniSkin.swf">\
+            <param name="WMode" value="transparent">\
+            <param name="Quality" value="High">\
+            <param name="Scale" value="NoScale">\
+            <param name="AllowFullScreen" value="true">\
+            <param name="AllowScriptAccess" value="always">\
+            <embed type="application/x-shockwave-flash" src="http://static.video.qq.com/TencentPlayer.swf?vid='+ cfg.vid +'&autoplay=' + cfg.auto + '&skin=http://imgcache.qq.com/minivideo_v1/vd/res/skins/TencentPlayerMiniSkin.swf" width="'+ cfg.w + '" height="'+ cfg.h +'" quality="high" wmode="transparent" allowScriptAccess="always" allowFullScreen="true">\
+        </object>\
+        ';
+    document.getElementById(cfg.wrapId).innerHTML = swf ;
+}
+
+(function () {
+    var type = getHash('solution') || 'none';
+    
+    var width , height ;
+    switch(type) {
+        case 'changeSize':
+            width = 500; height = 300;
+            break;
+        case 'changeRatio':
+            width = 515; height = 290;
+            break;
+        case 'changeScale':
+            width = 398; height = 298;
+            setTimeout(function () {
+                document.getElementById('videoWrap').style.transform = 'scale(0.9)'
+            }, 200);
+            break;
+        case 'useEmptyFlash':
+            var elEmtpy = document.createElement('div');
+            elEmtpy.setAttribute('id', 'alexEmptyFlash') ;
+            elEmtpy.style.opacity = '0'
+            document.body.appendChild(elEmtpy) ;
+            injectSwf({ 'wrapId': 'alexEmptyFlash' ,'vid': 'p0307oxaen8' ,'w': 398 , 'h': 298, 'auto': 1 });
+
+            setTimeout(function () {
+                document.body.removeChild(elEmtpy);
+                elEmtpy.innerHTML = '';
+            }, 20);
+
+            width = 350; height = 250;
+            break;
+        
+        default:
+            width = 397; height = 298;
+    }
+    injectSwf({ 'wrapId': 'videoWrap' ,'vid': 'p0307oxaen8' ,'w': width , 'h': height, 'auto': 1 });
+
+})();
+
+</script>
+</body>
+</html>
+<!--[if !IE]>|xGv00|8ab745c92daec9d2fd606a1b3b84e6df<![endif]-->
