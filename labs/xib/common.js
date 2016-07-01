@@ -412,6 +412,7 @@ var debug = function (v) {
 };
 
 //scroll no bounce
+//id可以为指定滚动容器的DOM ID
 var scrollNoBounce= function (id) {
     var beginY, endY;
     $(window).on('touchstart',  function (e) {
@@ -419,7 +420,7 @@ var scrollNoBounce= function (id) {
     });
 
     $(window).on("touchmove", function (e) {
-        var elScroll = document.getElementById(id) ; 
+        var elScroll = document.getElementById(id) || document.body ;
         if (e.target !== elScroll && !elScroll.contains(e.target)) {
             e.preventDefault();
         }
@@ -428,7 +429,9 @@ var scrollNoBounce= function (id) {
         if (elScroll.scrollTop === 0 && endY >= beginY) {
             e.preventDefault();
         }
-        if (elScroll.scrollHeight - elScroll.offsetHeight === elScroll.scrollTop && beginY >= endY) {
+
+        var elScrollViewHeight = id ? elScroll.clientHeight : document.documentElement.clientHeight ;
+        if (elScroll.scrollHeight - elScrollViewHeight === elScroll.scrollTop && beginY >= endY) {
             e.preventDefault();
         }
     });
