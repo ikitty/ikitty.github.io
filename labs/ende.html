@@ -49,9 +49,6 @@ textarea { width : 100%; max-width : 540px; }
             img.onload = function() {
                 document.querySelector('#code2').value = Decode(img);
             };
-            img.onerror = function() {
-                alert('你选择的不是图片！');
-            };
             img.src = this.result;
         };
         fr.readAsDataURL(f); 
