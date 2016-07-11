@@ -10,13 +10,17 @@ input[type="submit"] { border: 1px solid #c1c1c1; border-radius: 4px; padding: 3
 textarea { border : 1px solid #ccc; resize : none; height : 240px; padding : 5px 10px; } 
 .hide { display : none; }
 textarea { width : 100%; max-width : 540px; }
+
+@media(max-width:414px){
+    .form_ge {display:none;}
+}
 </style>
 </head>
 <body>
 <form id="form" onsubmit="return false;">
-    <div class="hide">
+    <div  class="form_ge">
         <p><textarea name="code" id="code"></textarea></p>
-        <p><input class="btn" type="submit" value="Generate!" id="generate"></p>
+        <p><input class="btn" type="submit" value="GeItDo!" id="generate"></p>
         <div id="geImg" class="hide">
             <p><img id="pic" /></p>
             <a id="download" class="btn" download="sfa.png" href="#">down</a>
