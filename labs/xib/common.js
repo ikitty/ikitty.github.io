@@ -383,9 +383,19 @@ window.RAF = (function(){
             window.setTimeout(callback, 1000 / 60);
         };
 })();
-var loopAnim = function (render) {
+window.CFA = ( function() {
+    return window.cancelAnimationFrame          ||
+        window.webkitCancelRequestAnimationFrame    ||
+        window.mozCancelRequestAnimationFrame       ||
+        window.oCancelRequestAnimationFrame     ||
+        window.msCancelRequestAnimationFrame        ||
+    //todo fix
+        clearTimeout
+} )();
+
+var loopRAF = function (render) {
     (function animloop(){
-        RAF(animloop);
+        window.rafTimer = RAF(animloop);
         render();
     })();
 };
