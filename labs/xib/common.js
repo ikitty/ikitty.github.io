@@ -320,14 +320,14 @@ var loadImg = function(src, handle_once, handle_done) {
         if (window.addEventListener) {
             img.addEventListener('load', function () {
                 i++;
-                handle_once(Math.ceil(100 * i / _len));
+                _handle_once(Math.ceil(100 * i / _len));
                 _load(i);
                 img = null;
             }, false);
         } else {
             if (img.complete) {
                 i++;
-                handle_once(Math.ceil(100 * i / _len));
+                _handle_once(Math.ceil(100 * i / _len));
                 _load(i);
                 img = null;
             }else {
@@ -335,12 +335,23 @@ var loadImg = function(src, handle_once, handle_done) {
                     if (img.readyState in {loaded: 1, complete: 1}) {
                         img.onreadystatechange = null;
                         i++;
-                        handle_once(Math.ceil(100 * i / _len));
+                        _handle_once(Math.ceil(100 * i / _len));
                         _load(i);
                         img = null;
                     }
                 };
             }
+        }
+    }
+    var totalNum = 0 ;
+    var stHandleOnce ; 
+    var _handle_once = function (n) {
+        handle_once(++totalNum);
+        if (totalNum < n && totalNum <= 100) {
+            clearTimeout(stHandleOnce);
+            stHandleOnce = setTimeout(function () {
+                _handle_once(n);
+            }, 30);
         }
     }
  
@@ -364,7 +375,7 @@ var imgs = [
 ];
 //preload
 //loadImgCustom(imgs, 'http://ossweb-img.qq.com/images/t7/act/a20141117suspense/', function (n) {
-    //document.getElementById('preload').style.width = n + '%';
+    //document.getElementById('preload').innerHTML = n ;
 //}, function () {
 
 //}, 0);
@@ -383,9 +394,19 @@ window.RAF = (function(){
             window.setTimeout(callback, 1000 / 60);
         };
 })();
-var loopAnim = function (render) {
+window.CFA = ( function() {
+    return window.cancelAnimationFrame          ||
+        window.webkitCancelRequestAnimationFrame    ||
+        window.mozCancelRequestAnimationFrame       ||
+        window.oCancelRequestAnimationFrame     ||
+        window.msCancelRequestAnimationFrame        ||
+    //todo fix
+        clearTimeout
+} )();
+
+var loopRAF = function (render) {
     (function animloop(){
-        RAF(animloop);
+        window.rafTimer = RAF(animloop);
         render();
     })();
 };
