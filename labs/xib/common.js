@@ -594,3 +594,47 @@ var alexDebounce = function (obj ) {
         });
     }
 };
+
+/* =====swipe===== */
+//require jquery or zepto
+$.fn.alexSwipe = function (fn) {
+    fn = fn || function(){};
+    var dir = 'down' ;
+    var _startX = 0 
+        ,_startY = 0 
+        ,_moveX = 0 
+        ,_moveY = 0 
+        ;
+
+    $(this).on('touchstart', function (e) {
+        var touch = e.touches[0];
+        _startX = touch.clientX;
+        _startY = touch.clientY;
+    });
+    $(this).on('touchmove', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.cancelBubble = true;
+
+        var touch = e.touches[0];
+        _moveX = touch.clientX - _startX;
+        _moveY = touch.clientY - _startY;
+    });
+    $(this).on('touchend', function (e) {
+        var absMoveY = Math.abs(_moveY) 
+            ,absMoveX = Math.abs(_moveX)
+            ,xMove = 1
+            ;
+        xMove = (absMoveX > absMoveY ? 1 : 0)
+
+        if (absMoveX > 30 && xMove){
+            dir = _moveX > 0 ? 'right' : 'left'
+            fn(dir);
+        }else if (absMoveY > 30){
+            dir = _moveY > 0 ? 'down' : 'up'
+            fn(dir);
+        }
+        _moveX = 0 ;
+        _moveY = 0 ;
+    });
+}
