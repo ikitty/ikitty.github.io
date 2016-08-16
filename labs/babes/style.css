@@ -23,11 +23,16 @@ button:focus {outline:1px solid #fc0;}
 .baby_add {padding-bottom:20px;}
 .baby_add button {margin-left:10px;}
 
+.bk_add {position:relative;padding-right:70px;padding-bottom:20px;}
+.bk_add input {width:100%;margin-bottom:5px;}
+.bk_add button {position:absolute;right:0px;top:0px;width:40px;height:65px;}
+
 /* =====core list===== */
 .baby_list li {position:relative;padding:6px 0px;border-bottom:1px dotted #ddd;width:100%;overflow:hidden;}
+.baby_list li a {text-decoration:none;color:#39f;}
 .baby_list .name {overflow:hidden;line-height:20px;padding:5px 0px 0;}
 .baby_list .btn_wrap {float:right;line-height:30px;}
 .baby_list .btn_wrap button {margin-left:10px;}
 
-.edit_area {position:absolute;left:0px;top:0px;width:100%;height:32px;padding-top:2px;background-color:#fff;zoom:1;overflow:hidden;}
+.edit_area {position:absolute;left:0px;top:0px;width:100%;height:100%;padding-top:6px;background-color:#fff;zoom:1;overflow:hidden;box-sizing:border-box;}
 .edit_area button {margin-left:10px;}
