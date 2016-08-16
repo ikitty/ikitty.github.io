@@ -35,17 +35,24 @@
     </div>
 </div>
 
+<script src="lib/react.js"></script>
+<!--<script src="lib/react-dom.js"></script>-->
+<!--<script src="lib/browser.min.js"></script>-->
+
 <script>
     var addBabel = function (url) {
         var el = document.createElement('script');
         el.type = 'text/babel';
         el.src = url;
-        document.body.appendChild(el) ;
+        el.onload = function () {
+            console.log('jsx loaded') ;
+        }
+        document.head.appendChild(el) ;
     };
+
     basket.require(
         {url: 'https://cdn.wilddog.com/js/client/current/wilddog.js',  key: 'wilddog'}
         ,{url: 'lib/jquery.min.js',  key: 'jquery'}
-        ,{url: 'lib/react.js',  key: 'react'}
         ,{url: 'lib/react-dom.js',  key: 'react-dom'}
         ,{url: 'lib/browser.min.js',  key: 'react-browser'}
     ).then(function () {
