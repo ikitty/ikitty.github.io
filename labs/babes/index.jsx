@@ -1,3 +1,4 @@
+console.log(1) ;
 var ref = new Wilddog("https://bkmk.wilddogio.com/todo");
 
 var BabyList = React.createClass({
@@ -90,8 +91,8 @@ var BabyAdd = React.createClass({
     render: function () {
         var D  = this.state ;
         var str = []; 
-        str.push(<input ref="txt" value={D.babyName} placeholder="Write ..." onChange={this.handleChange} type="text" />);
-        str.push(<button onClick={this.handleClick}>AddBaby</button>);
+        str.push(<input key="baby_add_text" ref="txt" value={D.babyName} placeholder="Write ..." onChange={this.handleChange} type="text" />);
+        str.push(<button key="baby_add_btn" onClick={this.handleClick}>AddBaby</button>);
         return (<div>{str}</div>) ;
     }
 });
@@ -192,9 +193,9 @@ var BookmarkAdd = React.createClass({
     render: function () {
         var D  = this.state ;
         var str = []; 
-        str.push(<input ref="bkTitle" value={D.bkTitle} placeholder="Write title ..." onChange={this.handleChange} type="text" />);
-        str.push(<input ref="bkUrl" value={D.bkUrl} placeholder="Write url ..." onChange={this.handleChange} type="text" />);
-        str.push(<button onClick={this.handleClick}>Add</button>);
+        str.push(<input key="bk_add_tit" ref="bkTitle" value={D.bkTitle} placeholder="Write title ..." onChange={this.handleChange} type="text" />);
+        str.push(<input key="bk_add_url" ref="bkUrl" value={D.bkUrl} placeholder="Write url ..." onChange={this.handleChange} type="text" />);
+        str.push(<button key="bk_add_btn" onClick={this.handleClick}>Add</button>);
         return (<div>{str}</div>) ;
     }
 });
@@ -249,3 +250,4 @@ $(function () {
         ,hdActiveCls: 'on'
     })
 })
+console.log(2) ;

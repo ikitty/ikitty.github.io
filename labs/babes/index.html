@@ -40,6 +40,8 @@
 <!--<script src="lib/browser.min.js"></script>-->
 
 <script>
+    document.body.style.minHeight = document.documentElement.clientHeight + 'px'; 
+
     var addBabel = function (url) {
         var el = document.createElement('script');
         el.type = 'text/babel';
@@ -47,7 +49,7 @@
         el.onload = function () {
             console.log('jsx loaded') ;
         }
-        document.head.appendChild(el) ;
+        document.body.appendChild(el) ;
     };
 
     basket.require(
@@ -56,7 +58,9 @@
         ,{url: 'lib/react-dom.js',  key: 'react-dom'}
         ,{url: 'lib/browser.min.js',  key: 'react-browser'}
     ).then(function () {
-        addBabel('index.jsx')   ;
+        console.log('then') ;
+        addBabel('index.jsx');
+        console.log('ok') ;
     });
 </script>
 </body>
