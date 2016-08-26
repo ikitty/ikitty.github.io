@@ -1,4 +1,5 @@
 "use strict";
+
 var ref = new Wilddog("https://bkmk.wilddogio.com/todo");
 
 var BabyList = React.createClass({
@@ -171,10 +172,12 @@ var BookmakrList = React.createClass({
             return;
         }
         if (target.hasClass('btn_edit')) {
-            ancestorNode.children('div.edit_area').show();
+            $('#bkEditArea').show();
 
-            var orgValue = ancestorNode.children('div.name').html();
-            ancestorNode.children('div.edit_area').children('input').val(orgValue).focus();
+            //ancestorNode.children('div.edit_area').show() ;
+
+            //var orgValue = ancestorNode.children('div.name').html() ;
+            //ancestorNode.children('div.edit_area').children('input').val(orgValue).focus();
             return;
         }
         if (target.hasClass('btn_submit')) {
@@ -292,6 +295,76 @@ var BookmarkAdd = React.createClass({
     }
 });
 ReactDOM.render(React.createElement(BookmarkAdd, null), document.getElementById('bkAdd'));
+
+//bookmark edit
+var BookmarkEdit = React.createClass({
+    displayName: "BookmarkEdit",
+
+    getInitialState: function getInitialState() {
+        return { bkTitle: '', bkUrl: '', id: '' };
+    },
+    componentDidMount: function componentDidMount() {
+        var key = $(this.refs.bkTitle).data('index');
+        var self = this;
+        refBk.child(key).on("value", function (d, error) {
+            var D = d.val();
+            if (error == null && D != null) {
+                self.replaceState({ bkTitle: D.name, bkUrl: D.url, id: key });
+            }
+        });
+    },
+    //save
+    handleClick: function handleClick(e) {
+        var target = $(e.target);
+        if (target.hasClass('btn_close')) {
+            $('#bkEditArea').hide();
+            return;
+        }
+
+        var title = this.refs.bkTitle.value;
+        var url = this.refs.bkUrl.value;
+        var key = $(this.refs.bkTitle).data('index');
+
+        console.log(title, url, key);
+
+        if (title === '' || url === '') {
+            return;
+        }
+        refBk.child(key).update({
+            "name": title,
+            "url": url
+        });
+        this.setState({ bkTitle: '', bkUrl: '', id: '' });
+    },
+    handleChange: function handleChange(e) {
+        var self = this;
+        this.setState({ bkUrl: self.refs.bkUrl.value, bkTitle: self.refs.bkTitle.value });
+    },
+    render: function render() {
+        var D = this.state;
+        var str = [];
+        var index = D.id || 'testid';
+
+        str.push(React.createElement("input", { key: "bk_add_tit", ref: "bkTitle", "data-index": index, value: D.bkTitle, onChange: this.handleChange, type: "text" }));
+        str.push(React.createElement("input", { key: "bk_add_url", ref: "bkUrl", value: D.bkUrl, onChange: this.handleChange, type: "text" }));
+        str.push(React.createElement(
+            "button",
+            { key: "bk_add_btn1", onClick: this.handleClick },
+            "Save"
+        ));
+        str.push(React.createElement(
+            "button",
+            { key: "bk_add_btn2", className: "btn_close", onClick: this.handleClick },
+            "Close"
+        ));
+        return React.createElement(
+            "div",
+            null,
+            str
+        );
+    }
+});
+ReactDOM.render(React.createElement(BookmarkEdit, null), document.getElementById('bkEditArea'));
 
 //ui
 var alexTab = function alexTab(obj) {
