@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>GPU Accelerate</title>
+<style type="text/css" media="screen">
+* {margin:0;padding:0;list-style:none;}    
+
+.anim {height:150px;background-color:#ccc;font:400 14px/30px Arial;-webkit-animation: move 1s linear infinite; animation: move 1s linear infinite;
+background:url(http://ossweb-img.qq.com/upload/adw/image/201609/1472753703833549816.jpg) left top no-repeat;background-size:cover;}
+.anim_zindex {position:relative;z-index:10;}
+.anim_wrap {width:100%; overflow:hidden;}
+
+.btns {position:absolute;z-index:100;right:10px;top:145px;height:40px;padding:10px 0px;font:400 16px/40px Arial;text-align:center;}
+.btns input {display:inline-block;margin-left:10px;border:1px solid #ccc;background-color:#f5f5f5;height:38px;padding:0px 10px;cursor:pointer;border-radius:3px;font-size:14px;}
+
+@-webkit-keyframes move {
+  0% { -webkit-transform:translateX(0px) }
+ 50% { -webkit-transform:translateX(10px) }
+100% { -webkit-transform:translateX(0px) }
+}
+@keyframes move {
+  0% { transform:translateX(0px) }
+ 50% { transform:translateX(10px) }
+100% { transform:translateX(0px) }
+}
+
+.mod_tit {height:40px;font:400 18px/40px Arial;margin:10px 10px 0;border-bottom:1px solid #ddd;color:#c00;}
+.mod_bd {padding:10px 10px;}
+.news_list li {position:relative;padding:10px 0px; height: 30px;line-height:30px; overflow: hidden;border-bottom:1px dotted #ccc ;}
+.mod_bd a {color:#39f;text-decoration:none;}
+.mod_bd .time {position:absolute;right:0px;top:10px;color:#999;}
+.news_list p {display:inline-block;}
+</style>
+</head>
+<body>
+
+<div class="btns">
+    <input type="button" id="btn" value="设置zIndex"/>
+    <input type="button" id="btnRemove" value="取消zIndex"/>
+</div>
+
+<div class="anim_wrap">
+    <h1 id="animBox" class="anim" ></h1>
+</div>
+
+<div class="mod_tit">
+    新闻标题
+</div>
+<div class="mod_bd">
+    <ul id="newsList" class="news_list">
+        <li>
+            <a href="#" class="type" target="_blank">[公告]</a>
+            <p >最新武将眩丽登场</p>
+            <span class="time">2016-09-04</span>
+        </li>
+        <li>
+            <a href="#" class="type" target="_blank">[公告]</a>
+            <p >最新武将眩丽登场</p>
+            <span class="time">2016-09-04</span>
+        </li>
+        <li>
+            <a href="#" class="type" target="_blank">[公告]</a>
+            <p >最新武将眩丽登场</p>
+            <span class="time">2016-09-04</span>
+        </li>
+        <li>
+            <a href="#" class="type" target="_blank">[公告]</a>
+            <p >最新武将眩丽登场</p>
+            <span class="time">2016-09-04</span>
+        </li>
+        <li>
+            <a href="#" class="type" target="_blank">[公告]</a>
+            <p >最新武将眩丽登场</p>
+            <span class="time">2016-09-04</span>
+        </li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+(function () {
+    //create cont
+    var str = '<li>\
+                    <a href="#" class="type" target="_blank">[公告]</a>\
+                    <p >最新武将眩丽登场</p>\
+                    <span class="time">2016-09-04</span>\
+                </li>';
+    var strHtml = Array(1000).fill(0).map(i=>str);
+    document.getElementById('newsList').innerHTML = strHtml.join('');
+
+    //trigger debug
+    var elAnim = document.getElementById('animBox');
+    document.getElementById('btn').onclick = function () {
+        elAnim.className = 'anim anim_zindex';
+    }
+    document.getElementById('btnRemove').onclick = function () {
+        elAnim.className = 'anim ';
+    }
+})();
+</script>
+</body>
+</html>
