@@ -85,6 +85,21 @@ preprocessor 不要乱改。
 
 打开Xcode的设置，在account中添加好自己的账户。然后在项目的target中，在team中选择刚添加的账户，然后点击FixIssue，再次选择自己的账户即可。
 
+##真机调试问题
+
+`could not find developer disk image` ，表示xcode自带的ios版本和系统版本不一致，需要下载对应的版本
+
+    http://my.oschina.net/u/2340880/blog/521700
+    
+##xcode7 打包ipa
+
+- Archive -- 右键生成的Archive文件 -- Show in Finder -- 右键xxx.xcarchive文件 -- 显示包内容 -- 找到真正的xxx.app -- 拖到 itunes中，成成ipa -- 右键，在Finder中显示
+
+或者：
+
+- 在导航栏选中项目，选择真机，点击editScheme，选择release模式，cleanAndBuild，在左侧导航中找到。app文件，showInFinder，将文件拖到桌面，放入到一个Payload文件夹，压缩该文件夹，并改名为ipa即可。
+- 从app到ipa的过程，也可以直接拖入到itunes，他会自动生成ipa
+
 ###other
 
 数字证书是一个经**证书授权中心数字签名**的**包含公开密钥拥有者信息以及公开密钥的文件**。最简单的证书包含一个公开密钥、名称以及证书授权中心的数字签名。 具有时效性。
