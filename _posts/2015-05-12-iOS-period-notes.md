@@ -128,7 +128,7 @@ xcode5之后，就不需要synthesize了，但是如果你用了synthesize，那
 
 ###定义变量的几种方法
 
-####1. 私有实例变量：在源文件中的interface中用大括号定义。这种变量只能在内部访问。（据测试，下载interface和implemention关键词后面效果一样）
+私有实例变量：在源文件中的interface中用大括号定义。这种变量只能在内部访问。（据测试，下载interface和implemention关键词后面效果一样）
 
 
     @interface SelfInfoTableViewController ()
@@ -143,11 +143,11 @@ xcode5之后，就不需要synthesize了，但是如果你用了synthesize，那
     @end
     //在源文件中可以直接使用（不需要self.var）
 
-####2. 在头文件中申明property (方便外部访问)，内部通过`self.var`来访问
+在头文件中申明property (方便外部访问)，内部通过`self.var`来访问
 
     @property  (nonatomic,strong) NSArray *basicInfo;
 
-###3. 在头文件中的interface关键字后面申明。（经过简单的测试貌似方案1没什么区别，有个特点是，写在头文件中，一目了然，看接口就知道这个方法用到了哪些内部变量；但写在m文件中也省去了切换文件的麻烦）
+在头文件中的interface关键字后面申明。（经过简单的测试貌似方案1没什么区别，有个特点是，写在头文件中，一目了然，看接口就知道这个方法用到了哪些内部变量；但写在m文件中也省去了切换文件的麻烦）
 
     @interface loadingView: UIView
     {
