@@ -46,6 +46,8 @@ def makePage():
         # editing the 'dirnames' list will stop os.walk() from recursing into there.
         if '.git' in dirnames:
             dirnames.remove('.git')
+        if 'node_modules' in dirnames:
+            dirnames.remove('node_modules')
 
     strHtml += '</ul>'
     f.write(htmlHd + strHtml + htmlFt)
