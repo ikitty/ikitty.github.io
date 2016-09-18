@@ -73,28 +73,19 @@
     //final solution
     var divideNumberWithComma = function (v) {
         var parts = (''+v).split('.');
-        parts[0] = Number(parts[0]).toLocaleString();
 
-        if (parts[0].indexOf(',') == -1) {
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        if (!!(1).toLocaleString) {
+            parts[0] = Number(parts[0]).toLocaleString();
+        }else {
+            // parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+$)/g, ',');
         }
-        return parts.join('.') ;
 
-        // var parts = ('' + v).split('.');
-        // var b = parts[0].length%3
-            // ,ret = ''
-            // ;
-// 
-        // ret = parts[0].slice(0, b) ;
-        // for (var i = b, le = parts[0].length ; i < le; i+=3 ) {
-            // ret += (',' + parts[0].slice(i, i+3) );
-        // }
-        // parts[0] = (b == 0 ? ret.slice(1) : ret) ;
-        // return parts.join('.');
+        return parts.join('.') ;
     };
 
     // test
-    var arr = [123456.13579, '1234567.13579', 12345678.1234579];
+    var arr = [12345678, 123456.13379, '1234567.13379', 12345678.1224579];
     var sRet = '';
     for (var i = 0, k ; k = arr[i] ; i++ ) {
         sRet += divideNumberWithComma(k) + '<br>';
