@@ -388,28 +388,23 @@ var alexRand = function (min, max, digit) {
 
 
 //RAF
+//timer = RAF(render)
+//using LoopRAF instead.
 window.RAF = (function(){
-    return  window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
-        function( callback ){
-            window.setTimeout(callback, 1000 / 60);
-        };
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {window.setTimeout(callback, 1000 / 60); };
 })();
-window.CFA = ( function() {
-    return window.cancelAnimationFrame          ||
-        window.webkitCancelRequestAnimationFrame    ||
-        window.mozCancelRequestAnimationFrame       ||
-        window.oCancelRequestAnimationFrame     ||
-        window.msCancelRequestAnimationFrame        ||
-    //todo fix
-        clearTimeout
-} )();
 
-var loopRAF = function (render) {
-    (function animloop(){
-        window.rafTimer = RAF(animloop);
-        render();
+//CAF(render)
+window.CAF = ( function() {
+    return window.cancelAnimationFrame || window.webkitCancelRequestAnimationFrame || window.mozCancelRequestAnimationFrame || window.oCancelRequestAnimationFrame || window.msCancelRequestAnimationFrame        || clearTimeout ;
+} )();
+//LoopRAF(render)
+window.LoopRAF = function (render) {
+    (function _loop(){
+        render.timer = RAF(_loop); render();
     })();
 };
+
 
 //loopAnim(render);
 
