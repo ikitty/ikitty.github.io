@@ -395,9 +395,10 @@ window.RAF = (function(){
 })();
 
 //CAF(render)
-window.CAF = ( function() {
-    return window.cancelAnimationFrame || window.webkitCancelRequestAnimationFrame || window.mozCancelRequestAnimationFrame || window.oCancelRequestAnimationFrame || window.msCancelRequestAnimationFrame        || clearTimeout ;
-} )();
+window.CAF = function(render) {
+    var _caf = window.cancelAnimationFrame || window.webkitCancelRequestAnimationFrame || window.mozCancelRequestAnimationFrame || window.oCancelRequestAnimationFrame || window.msCancelRequestAnimationFrame        || clearTimeout ;
+    _caf(render._timer);
+};
 //LoopRAF(render)
 window.LoopRAF = function (render) {
     (function _loop(){
