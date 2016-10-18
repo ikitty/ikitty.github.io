@@ -634,3 +634,15 @@ $.fn.alexSwipe = function (fn) {
         _moveY = 0 ;
     });
 }
+
+/* =====System Copy ===== */
+$('#btnCopyLink').on('click', function () {
+    var elTxt = document.getElementById('txtLink');
+    elTxt.select();
+    //如果在没有select内容的情况下，直接测试copy命令，会返回false。
+    if (document.execCommand('copy')) {
+        $$.showTips({msg: '复制成功'}) ;
+    }else {
+        $$.showTips({msg: '请手动复制链接'}) ;
+    }
+})
