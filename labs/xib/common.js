@@ -18,6 +18,7 @@ var str = '';
  * @param {Number} obj.def , default item index
  * @param {String} obj.mode , trigger type, 'click' or 'mouseover'
  **/
+//todo using jq insteed
 var alexTab = function (obj) {
     var cfg = {
         hd: null
@@ -295,90 +296,98 @@ handleWheel(function () {
 });
 
 /**
- * preloadImg
+ * preload image
  *
  **/
+(function (win) {
+    var elTemp = document.createDocumentFragment() ;
+    var _loadImg = function(src, handle_once, handle_done ,isInsert) {
+        var _len = src.length ;
+        var _load = function( i ) {
+            if (i >= _len) {
+                handle_done();
+                document.body.appendChild(elTemp) ;
+                return  ;   
+            }
+            var img = new Image();
+            img.src = src[i];
+
+            //insert to Page
+            if (isInsert) {
+                var pageImg = document.createElement('img');
+                pageImg.src = src[i];
+                pageImg.style.display = 'none'; 
+                elTemp.appendChild(pageImg) ;
+            }
+
+            if (window.addEventListener) {
+                img.addEventListener('load', function () {
+                    i++;
+                    _handle_once(Math.ceil(100 * i / _len));
+                    _load(i);
+                    img = null;
+                }, false);
+            } else {
+                if (img.complete) {
+                    i++;
+                    _handle_once(Math.ceil(100 * i / _len));
+                    _load(i);
+                    img = null;
+                }else {
+                    img.onreadystatechange = function() {
+                        if (img.readyState in {loaded: 1, complete: 1}) {
+                            img.onreadystatechange = null;
+                            i++;
+                            _handle_once(Math.ceil(100 * i / _len));
+                            _load(i);
+                            img = null;
+                        }
+                    };
+                }
+            }
+        }
+        var totalNum = 0 ;
+        var stHandleOnce ; 
+        var _handle_once = function (n) {
+            handle_once(++totalNum);
+            if (totalNum < n && totalNum <= 100) {
+                clearTimeout(stHandleOnce);
+                stHandleOnce = setTimeout(function () {
+                    _handle_once(n);
+                }, 30);
+            }
+        }
+     
+        _load(0);
+    };
+
+    var loadImg= function (imgs, prefix, cb, cbAll, isInsert, localPrefix) {
+        isInsert = isInsert || 0 ;
+        prefix = localPrefix || prefix;
+        for (var i = 0, k = null; k = imgs[i] ; i++ ) {
+            imgs[i] = prefix + k;
+        }
+        _loadImg(imgs, function (n) {
+            cb(n);
+        }, function () {
+            cbAll();
+        }, isInsert);
+    };
+    win.loadImg = loadImg;
+})(window);
+
+//preload using
+var imgs = [ 'loading.png' ,'m1.png' ,'m2.png' ,'m2_role.png' ,'m3.png' ,'m4.png' ];
+//loadImg(imgs, 'http://game.gtimg.cn/images/hbp/balls/', function (n) { }, function () {
+    //anim();
+//}, 1,  'images/balls/');
+
 //CSS
     //.preload_wrap {width:800px;height:30px;position:absolute;top:30px;left:50%;margin-left:-400px;border:2px solid #000;background-color:#fff;}
     //.preload_wrap p {height:100%;background-color:#f60;width:1%;}
     //
 //DOM
     //<div class="preload_wrap"> <p class="preload" id="preload"></p> </div>
-
-// require common loadImg
-var loadImg = function(src, handle_once, handle_done) {
-    var _len = src.length ;
-    var _load = function( i ) {
-        if (i >= _len) {
-            handle_done();
-            return  ;   
-        }
-        
-        var img = new Image();
-        img.src = src[i];
-
-        if (window.addEventListener) {
-            img.addEventListener('load', function () {
-                i++;
-                _handle_once(Math.ceil(100 * i / _len));
-                _load(i);
-                img = null;
-            }, false);
-        } else {
-            if (img.complete) {
-                i++;
-                _handle_once(Math.ceil(100 * i / _len));
-                _load(i);
-                img = null;
-            }else {
-                img.onreadystatechange = function() {
-                    if (img.readyState in {loaded: 1, complete: 1}) {
-                        img.onreadystatechange = null;
-                        i++;
-                        _handle_once(Math.ceil(100 * i / _len));
-                        _load(i);
-                        img = null;
-                    }
-                };
-            }
-        }
-    }
-    var totalNum = 0 ;
-    var stHandleOnce ; 
-    var _handle_once = function (n) {
-        handle_once(++totalNum);
-        if (totalNum < n && totalNum <= 100) {
-            clearTimeout(stHandleOnce);
-            stHandleOnce = setTimeout(function () {
-                _handle_once(n);
-            }, 30);
-        }
-    }
- 
-    _load(0);
-};
-
-var loadImgCustom = function (imgs, prefix, cb, cbAll, debug) {
-    prefix = !!debug ? 'images/' : prefix;
-    for (var i = 0, k = null; k = imgs[i] ; i++ ) {
-        imgs[i] = prefix + k;
-    }
-    loadImg(imgs, function (n) {
-        cb(n);
-    }, function () {
-        cbAll();
-    });
-};
-
-var imgs = [
-    'loading.png' ,'m1.png' ,'m2.png' ,'m2_role.png' ,'m3.png' ,'m4.png'
-];
-//preload
-//loadImgCustom(imgs, 'http://ossweb-img.qq.com/images/t7/act/a20141117suspense/', function (n) {
-    //document.getElementById('preload').innerHTML = n ;
-//}, function () {
-
-//}, 0);
 
 //random number in specify range
 var alexRand = function (min, max, digit) {
@@ -387,27 +396,28 @@ var alexRand = function (min, max, digit) {
 };
 
 
-//RAF
-//timer = RAF(render)
-//using LoopRAF instead.
-window.RAF = (function(){
-    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {window.setTimeout(callback, 1000 / 60); };
-})();
-
-//CAF(render)
-window.CAF = function(render) {
-    var _caf = window.cancelAnimationFrame || window.webkitCancelRequestAnimationFrame || window.mozCancelRequestAnimationFrame || window.oCancelRequestAnimationFrame || window.msCancelRequestAnimationFrame        || clearTimeout ;
-    _caf(render._timer);
-};
-//LoopRAF(render)
-window.LoopRAF = function (render) {
-    (function _loop(){
-        render.timer = RAF(_loop); render();
+/**
+ * RAF
+ * @usingRAF RAF(render) ; or LoopRAF(anim)
+ * @cancelRAF CAF(render)
+ *
+ **/
+(function (win) {
+    win.RAF = (function(){
+        return win.requestAnimationFrame || win.webkitRequestAnimationFrame || win.mozRequestAnimationFrame || win.oRequestAnimationFrame || win.msRequestAnimationFrame || function (callback) {win.setTimeout(callback, 1000 / 60); };
     })();
-};
+    win.CAF = function(render) {
+        var _caf = win.cancelAnimationFrame || win.webkitCancelRequestAnimationFrame || win.mozCancelRequestAnimationFrame || win.oCancelRequestAnimationFrame || win.msCancelRequestAnimationFrame        || clearTimeout ;
+        _caf(render._timer);
+    };
+    win.LoopRAF = function (render) {
+        (function _loop(){
+            render();
+            render._timer = RAF(_loop); 
+        })();
+    };
+})(window);
 
-
-//loopAnim(render);
 
 //debug
 var debug = function (v) {
@@ -467,6 +477,7 @@ var scrollNoBounce= function (id) {
  * @param {Number} obj.time , animation interval time
  **/
 //==================slider==============================
+//todo opt args
 var Slider = function (arg) {
     this.sliderWidth = 500;
     this.count = 5;
