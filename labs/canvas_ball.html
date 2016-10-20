@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="gbk" />
+<title>canvas ball move up</title>
+<style type="text/css" media="screen">
+* {margin:0;padding:0;list-style:none;}
+.bg {position:relative;float:left;width:500px;height:500px;background-color:#966ECF;}
+.bg canvas {position:absolute;left:0px;top:0px;display:block;width:500px;height:500px;}
+.bg .phone {position:absolute;left:50%;margin-left:-150px;bottom:0px;width:300px;height:100px;background-color:#111;}
+
+.canvas_collision {float:left;margin-left:20px;width:500px;height:500px;background-color:#39f;}
+</style>
+</head>
+<body>
+
+<div class="bg">
+    <div class="phone"> </div>
+    <canvas id="canvasBall"></canvas>
+</div>
+
+<canvas id="canvasCollision" class="canvas_collision"></canvas>
+<script src="canvas_ball.js"></script>
+</body>
+</html>
