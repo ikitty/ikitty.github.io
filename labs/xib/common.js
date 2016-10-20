@@ -389,7 +389,7 @@ var imgs = [ 'loading.png' ,'m1.png' ,'m2.png' ,'m2_role.png' ,'m3.png' ,'m4.png
 //DOM
     //<div class="preload_wrap"> <p class="preload" id="preload"></p> </div>
 
-//random number in specify range
+//random number in specify range and Precision
 var alexRand = function (min, max, digit) {
     var r = Math.random()*(max-min) + min ;
     return digit ? Number(r.toFixed(digit)) : (r | 0) ;
@@ -657,3 +657,31 @@ $('#btnCopyLink').on('click', function () {
         $$.showTips({msg: '请手动复制链接'}) ;
     }
 })
+
+
+/**
+ * pageVisibleChange
+ *
+ * @example pageVisibleChange((hidden)=> {console.log(hidden)})
+ **/
+(function (win) {
+    var hidden, visibilityChange; 
+    if (typeof document.hidden !== "undefined") { 
+        hidden = "hidden";
+        visibilityChange = "visibilitychange";
+    } else if (typeof document.webkitHidden !== "undefined") {
+        hidden = "webkitHidden";
+        visibilityChange = "webkitvisibilitychange";
+    } else if (typeof document.msHidden !== "undefined") {
+        hidden = "msHidden";
+        visibilityChange = "msvisibilitychange";
+    }
+
+    var pageVisibleChange = function (cb) {
+        if (document.addEventListener && typeof document[hidden] !== "undefined") {
+            document.addEventListener(visibilityChange, function () { cb(document[hidden]); }, false);
+        }
+    };
+
+    win.pageVisibleChange = pageVisibleChange;
+})(window);
