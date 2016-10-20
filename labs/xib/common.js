@@ -295,6 +295,23 @@ handleWheel(function () {
     console.log('down') ;
 });
 
+// deprecated code for IE
+//if (img.complete) {
+    //i++;
+    //_handle_once(Math.ceil(100 * i / _len));
+    //_load(i);
+    //img = null;
+//}else {
+    //img.onreadystatechange = function() {
+        //if (img.readyState in {loaded: 1, complete: 1}) {
+            //img.onreadystatechange = null;
+            //i++;
+            //_handle_once(Math.ceil(100 * i / _len));
+            //_load(i);
+            //img = null;
+        //}
+    //};
+//}
 /**
  * preload image
  *
@@ -328,30 +345,16 @@ handleWheel(function () {
                     img = null;
                 }, false);
             } else {
-                if (img.complete) {
-                    i++;
-                    _handle_once(Math.ceil(100 * i / _len));
-                    _load(i);
-                    img = null;
-                }else {
-                    img.onreadystatechange = function() {
-                        if (img.readyState in {loaded: 1, complete: 1}) {
-                            img.onreadystatechange = null;
-                            i++;
-                            _handle_once(Math.ceil(100 * i / _len));
-                            _load(i);
-                            img = null;
-                        }
-                    };
-                }
+                handle_done();
+                return  ;
             }
         }
         var totalNum = 0 ;
         var stHandleOnce ; 
         var _handle_once = function (n) {
+            clearTimeout(stHandleOnce);
             handle_once(++totalNum);
             if (totalNum < n && totalNum <= 100) {
-                clearTimeout(stHandleOnce);
                 stHandleOnce = setTimeout(function () {
                     _handle_once(n);
                 }, 30);
