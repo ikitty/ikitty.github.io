@@ -312,83 +312,90 @@ handleWheel(function () {
         //}
     //};
 //}
+
 /**
  * preload image
- *
+ * only support addEventListener
+ * support insert img to page for cache , even return these img for canvas 
  **/
 (function (win) {
     var elTemp = document.createDocumentFragment() ;
-    var _loadImg = function(src, handle_once, handle_done ,isInsert) {
+    var imgArr= []
+    var _loadImg = function(src, handle_once, handle_done ,isInsert, retImg) {
         var _len = src.length ;
         var _load = function( i ) {
             if (i >= _len) {
-                handle_done();
+                retImg['msg'] = imgArr;
                 document.body.appendChild(elTemp) ;
-                return  ;   
+                handle_done();
+                return ;   
             }
             var img = new Image();
             img.src = src[i];
 
-            //insert to Page
-            if (isInsert) {
-                var pageImg = document.createElement('img');
-                pageImg.src = src[i];
-                pageImg.style.display = 'none'; 
-                elTemp.appendChild(pageImg) ;
-            }
-
             if (window.addEventListener) {
                 img.addEventListener('load', function () {
+                    isInsert && insertPage(i);
                     i++;
                     _handle_once(Math.ceil(100 * i / _len));
                     _load(i);
                     img = null;
                 }, false);
             } else {
-                handle_done();
-                return  ;
+                handle_done(); return  ;
             }
         }
+
+        var insertPage = function (i) {
+            var pageImg = document.createElement('img');
+            pageImg.src = src[i];
+            pageImg.style.display = 'none'; 
+            elTemp.appendChild(pageImg) ;
+            imgArr.push(pageImg);
+        };
+
         var totalNum = 0 ;
         var stHandleOnce ; 
+        //used for hold last process
+        var lastN = 0 ;
         var _handle_once = function (n) {
-            clearTimeout(stHandleOnce);
-            handle_once(++totalNum);
-            if (totalNum < n && totalNum <= 100) {
-                stHandleOnce = setTimeout(function () {
-                    _handle_once(n);
-                }, 30);
+            stHandleOnce && clearTimeout(stHandleOnce);
+            //如果有新的进度,立即将当前进度切换为上一次的最终进度,并记录当前进度
+            if (lastN !== n) {
+                totalNum = lastN ;
+                lastN = n ;
             }
+
+            (function run() {
+                if (totalNum < n && totalNum < 100) {
+                    handle_once(++totalNum);
+                    stHandleOnce = setTimeout(function () {
+                        run();
+                    }, 20);
+                }
+            })();
         }
-     
         _load(0);
     };
 
-    var loadImg= function (imgs, prefix, cb, cbAll, isInsert, localPrefix) {
-        isInsert = isInsert || 0 ;
-        prefix = localPrefix || prefix;
-        for (var i = 0, k = null; k = imgs[i] ; i++ ) {
-            imgs[i] = prefix + k;
-        }
-        _loadImg(imgs, function (n) {
-            cb(n);
-        }, function () {
-            cbAll();
-        }, isInsert);
+    var loadImg= function (imgs, prefix, cb, cbAll, isInsert, retImg) {
+        for (var i = 0, k = null; k = imgs[i] ; i++ ) { imgs[i] = prefix + k; }
+        _loadImg(imgs, function (n) { cb(n); }, function () { cbAll(); }, isInsert || 0, retImg);
     };
     win.loadImg = loadImg;
 })(window);
 
 //preload using
-var imgs = [ 'loading.png' ,'m1.png' ,'m2.png' ,'m2_role.png' ,'m3.png' ,'m4.png' ];
-//loadImg(imgs, 'http://game.gtimg.cn/images/hbp/balls/', function (n) { }, function () {
-    //anim();
-//}, 1,  'images/balls/');
+//var imgs = [ 'loading.png' ,'m1.png' ,'m2.png' ,'m2_role.png' ,'m3.png' ,'m4.png' ];
+//var gtimgPrefix = 'images/' ;
+//var imgsObj = {};
+//loadImg(imgs, gtimgPrefix , function (n) { console.log(n) ; }, function () { 
+    //console.log('down all', imgsObj.msg) ;
+//}, 1, imgsObj  );
 
 //CSS
     //.preload_wrap {width:800px;height:30px;position:absolute;top:30px;left:50%;margin-left:-400px;border:2px solid #000;background-color:#fff;}
     //.preload_wrap p {height:100%;background-color:#f60;width:1%;}
-    //
 //DOM
     //<div class="preload_wrap"> <p class="preload" id="preload"></p> </div>
 
