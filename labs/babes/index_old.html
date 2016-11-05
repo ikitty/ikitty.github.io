@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="apple-touch-icon" href="/static/babes_touch.png" />
+<title>13a13es</title>
+<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+<script src="http://ikitty.github.io/static/basket.full.min.js"></script>
+</head>
+<body>
+
+<nav id="mainTabHd">
+    <p class="on">Todo</p>
+    <p >Bookmark</p>
+</nav>
+
+<div id="mainTabBd" class="main main_tab_bd">
+    <div class="tab_item active">
+        <div class="tit">Add: </div>
+        <div id="babyAdd" class="baby_add"> </div>
+
+        <div class="tit">List: </div>
+        <div id="babyList" class="baby_list"> </div>
+    </div>
+
+    <div class="tab_item ">
+        <div class="tit">Add: </div>
+        <div id="bkAdd" class="bk_add"> </div>
+
+        <div class="tit">List: </div>
+        <div id="bkList" class="baby_list"> </div>
+
+        <div id="bkEditArea" class="bk_edit_area"> </div>
+    </div>
+</div>
+
+<script src="lib/react.js"></script>
+<script>
+    document.body.style.minHeight = document.documentElement.clientHeight + 'px'; 
+
+    var addBabel = function (url) {
+        var el = document.createElement('script');
+        el.src = url;
+        document.body.appendChild(el) ;
+    };
+
+    basket.require(
+        {url: 'https://cdn.wilddog.com/js/client/current/wilddog.js',  key: 'wilddog'}
+        ,{url: 'lib/jquery.min.js',  key: 'jquery'}
+        ,{url: 'lib/react-dom.js',  key: 'react-dom'}
+    ).then(function () {
+        addBabel('index.js');
+    });
+</script>
+</body>
+</html>
