@@ -488,6 +488,7 @@ var scrollNoBounce= function (id) {
  **/
 //==================slider==============================
 //todo opt args
+//todo add touch support
 var Slider = function (arg) {
     this.sliderWidth = 500;
     this.count = 5;

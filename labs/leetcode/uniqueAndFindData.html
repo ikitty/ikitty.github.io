@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="robots" content="all" />
+<title>
+uniquee and Query data from multiple Obj
+</title>
+</head>
+<body>
+
+<script>
+//show
+let testArr = [1,2,2,3,3,4] ;
+let unique = (orgArr) => orgArr.filter( (item,index,arr)=> arr.indexOf(item)===index ) ;
+console.log( unique( testArr) ) ;
+
+let originUnique = (orgArr) => {
+    var _obj = {};
+    var _ret = [] ;
+    for (var i = 0, len = orgArr.length; i < len; i++) {
+        if (!_obj.hasOwnProperty(orgArr[i])) {
+            _ret.push(orgArr[i])   ;
+            _obj[orgArr[i]] = '';
+        }
+    };
+    _obj = {} ;
+    return _ret ;
+}
+console.log(originUnique(testArr)) ;
+
+let D = [
+    {
+        id:100
+        ,name: 'A'
+        ,children: [
+        {
+            id:110
+            ,name: 'Aa'
+        },
+        {
+            id:120
+            ,name: 'Ab'
+            ,children: [
+                {
+                    id:121
+                    ,name: 'Aba'
+                },
+                {
+                    id:122
+                    ,name: 'Abb'
+                }
+            ]
+        }
+        ]
+    },
+    {
+        id:200
+        ,name: 'B'
+        ,children: [
+        {
+            id:210
+            ,name: 'Ba'
+        },
+        {
+            id:220
+            ,name: 'Bb'
+        }
+        ]
+    },
+]    
+
+let getDataById = (orgData, id=0) => {
+    let _ret = {} ;
+    let _getData = (data) => {
+        for(let item of data) {
+            if (item.id === id) {
+                _ret = item ;
+                break;
+            }
+            item['children'] && _getData(item['children']);
+            if (_ret.id) { break; }
+        }
+    }
+    _getData(orgData);
+    return _ret  ;
+}
+console.log( getDataById(D, 122) ) ;
+
+    /*
+let cache = {} ;
+let getDataById = (orgData, id=0) => {
+    let _ret = {} ;
+    let _found = false;
+    cache['key' + id] = [];
+
+    let _getData = (data, pos = null) => {
+        console.log(pos) ;
+        pos && cache['key'+id].push(pos);
+        for (var i = 0, len = data.length; i < len; i++) {
+            if (data[i].id === id) {
+                _ret = data[i];
+                _found = true ;
+                console.log(i,'x') ;
+                cache['key'+id].push(i);
+                break;
+            }
+            data[i]['children'] && _getData(data[i]['children'], i);
+
+            if (_found) { 
+                break;
+            }else {
+                cache['key' + id] = [];
+            }
+        };
+    }
+    if (!_found) {
+        cache['key' + id] = [];
+    }
+    _getData(orgData);
+    return _ret  ;
+}
+*/
+
+</script>
+
+</body>
+</html>
