@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="robots" content="all" />
+<title> TreeMenu by Recursive </title>
+</head>
+<body>
+
+<h2> TreeMenu by Recursive </h2>
+<div id="ret">
+    
+</div>
+
+<script>
+let D = [
+    { name: 'a', id: 1 } ,
+    {
+        name: 'B',
+        id: [
+            {name: 'b1', id: 2},
+            {name: 'b2', id: 3},
+            {name: 'C', id: [
+                {name: 'c1', id: 4},
+                {name: 'c2', id: 5}
+                
+            ] }
+        ]
+    },
+    { name: 'd', id: 6 } ,
+]    
+
+let renderData = (orgData ) => {
+    let _ret = '' ;
+    let _getData = (data) => {
+        _ret += `<ul>`
+        for(let item of data) {
+            if (item.id.length !== undefined) {
+                _ret += `<li>${item.name}`
+                _getData(item.id)
+                _ret += '</li>'
+            }else {
+                _ret += `<li>${item.name}-${item.id}</li>`
+            }
+        }
+        _ret += `</ul>`
+    }
+    _getData(orgData);
+    return _ret  ;
+}
+var strHTML = renderData(D)
+document.getElementById('ret').innerHTML = `${strHTML}`;
+
+</script>
+
+</body>
+</html>
