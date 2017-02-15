@@ -39,11 +39,11 @@ let renderData = (orgData ) => {
         _ret += `<ul>`
         for(let item of data) {
             if (item.id.length !== undefined) {
-                _ret += `<li>${item.name}`
+                _ret += `<li><span>${item.name}</span>`
                 _getData(item.id)
                 _ret += '</li>'
             }else {
-                _ret += `<li>${item.name}-${item.id}</li>`
+                _ret += `<li><span data-id=${item.id}>${item.name}</span></li>`
             }
         }
         _ret += `</ul>`
@@ -53,6 +53,22 @@ let renderData = (orgData ) => {
 }
 var strHTML = renderData(D)
 document.getElementById('ret').innerHTML = `${strHTML}`;
+
+
+let getData = (v ) => {
+    let _ret = [] ;
+    let _getData = (data) => {
+        for(let item of data.childNodes) {
+            if (item.getElementsByTagName('ul').length > 0) {
+                _ret.push({name: item.getElementsByTagName('span')[0].innerHTML, id: _getData(item.getElementsByTagName('ul')[0])})
+            }else {
+                _ret.push({name: item.getElementsByTagName('span')[0].innerHTML, id: 1})
+            }
+        }
+    }
+    _getData(v);
+    return _ret  ;
+}
 
 </script>
 
