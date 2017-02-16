@@ -9,11 +9,15 @@
 <title>Untitled</title>
 <style type="text/css" media="screen">
     * {margin:0;padding:0;list-style:none;}
-    .mobile {margin:0 auto;padding:20px 0px ;background-color:#f5f5f5;text-align:center;}
-    input {margin:10px 0px;height:30px;border-radius:3px;border:1px solid #ccc;}
-    input[type='text'] {display:inline-block;width:200px;padding-left:5px;}
+    .mobile {margin:0 auto;padding:20px 0px ;height:100vh;background-color:#f5fcff;text-align:center;}
+    input {box-sizing:border-box;margin:10px 0px;padding:0px 5px;height:30px;border-radius:3px;border:1px solid #ccc;}
+    input[type='text'] {display:inline-block;width:200px;}
     input[type='button'] {display:inline-block;width:200px;height:30px;font:400 14px/30px Arial;background-color:#f5f5f5;}
-    input:focus {outline:none;border-color:#999;}
+    input:focus {outline:none;border-color:#39f;}
+    .ret {border-style:dashed;background:transparent;}
+    .btns {width:200px;margin:0 auto;overflow:hidden;}
+    .btns input { width:98px;}
+    
 </style>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="md5.js"></script>
@@ -22,21 +26,21 @@
 <div class="mobile" id="mobile">
     <input type="text" id="s" value="x" autocomplete="off"/><br />
     <input type="text" id="d" value="dm" autocomplete="off"/><br />
-    <input type="text" id="k" style="display:none;" value="#enx" autocomplete="off"/><br />
-    <input type="button" id="btn" value="Wild Child"/><br />
 
-    <input type="text" id="r" value="" autocomplete="off"/><br />
-    <input type="button" id="btnGet" value="get"/>
+    <div class="btns">
+        <input type="button" id="btn" value="Let us go"/>
+        <input type="button" id="btnGet" value="Get"/>
+    </div>
+    <input type="text" id="r" class="ret" value="" autocomplete="off"/><br />
 </div>
 
 <script type="text/javascript">
-var copyBtn = document.querySelector('#btnGet');
-copyBtn.addEventListener('click', function () {
-  var urlField = document.querySelector('#r');
-  urlField.select();
-   
-  document.execCommand('copy');
-}, false);
+    var copyBtn = document.querySelector('#btnGet');
+    copyBtn.addEventListener('click', function () {
+        var urlField = document.querySelector('#r');
+        urlField.select();
+        document.execCommand('copy');
+    }, false);
     
 
     function encrypt(password, key){
@@ -60,11 +64,10 @@ copyBtn.addEventListener('click', function () {
         }
     }
     $(function () {
-        $('#mobile').css('height', document.documentElement.clientHeight);
+        var stKey = '#enx'
         $('#btn').click(function () {
-            //doKey
             var domain = $('#d').val().split('');
-            var scramble = $('#k').val().split('');
+            var scramble = stKey.split('');
             domain.splice(1,0, scramble[0], scramble[1]);
             domain.splice(4,0, scramble[2], scramble[3]);
             var value = domain.reverse().join('');
