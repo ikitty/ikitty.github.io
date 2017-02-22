@@ -38,7 +38,7 @@ let renderData = (orgData ) => {
     let _getData = (data) => {
         _ret += `<ul>`
         for(let item of data) {
-            if (item.id.length !== undefined) {
+            if (Object.prototype.toString(item.id) == '[object Array]') {
                 _ret += `<li><span>${item.name}</span>`
                 _getData(item.id)
                 _ret += '</li>'
