@@ -57,18 +57,40 @@ document.getElementById('ret').innerHTML = `${strHTML}`;
 
 let getData = (v ) => {
     let _ret = [] ;
-    let _getData = (data) => {
+    let _getData = (data, ret) => {
         for(let item of data.childNodes) {
             if (item.getElementsByTagName('ul').length > 0) {
-                _ret.push({name: item.getElementsByTagName('span')[0].innerHTML, id: _getData(item.getElementsByTagName('ul')[0])})
+                var d = {name: item.getElementsByTagName('span')[0].innerHTML, id: []}
+                _getData(item.getElementsByTagName('ul')[0], d.id)
+                ret.push(d)
             }else {
-                _ret.push({name: item.getElementsByTagName('span')[0].innerHTML, id: 1})
+                ret.push({name: item.getElementsByTagName('span')[0].innerHTML, id: item.getElementsByTagName('span')[0].getAttribute('data-id')})
             }
         }
     }
-    _getData(v);
+    // _getData(v, _ret);
+
+    //another
+    let _getDataAnother = (data) => {
+        var ret = []
+        for(let item of data.childNodes) {
+            if (item.getElementsByTagName('ul').length > 0) {
+                ret.push({name: item.getElementsByTagName('span')[0].innerHTML, id: _getDataAnother(item.getElementsByTagName('ul')[0] ) })
+            }else {
+                ret.push({name: item.getElementsByTagName('span')[0].innerHTML, id: item.getElementsByTagName('span')[0].getAttribute('data-id')})
+            }
+        }
+        return ret ;
+    }
+    var x = _getDataAnother(v );
+    console.log(x) ;
+
+    console.dir(_ret) ;
     return _ret  ;
 }
+setTimeout(function () {
+    getData(document.getElementById('ret').getElementsByTagName('ul')[0])
+}, 1000);
 
 </script>
 
