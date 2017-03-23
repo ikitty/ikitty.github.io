@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="robots" content="all" />
+<title> TreeMenu by Recursive </title>
+</head>
+<body>
+
+<h2> TreeMenu by Recursive </h2>
+<div id="ret">
+    
+</div>
+
+<script>
+var V = function () {
+    this.init.apply(this, arguments)
+};
+V.prototype = {
+    init: function (arg) {
+        this.cfg = {}
+        for (var i in arg) { this.cfg[i]= arg[i] }
+        var self = this
+        window.say = ()=>{
+            console.log(this.cfg.name) ;
+        }
+        //两个实例都会返回beta，因为第二个全局函数被覆盖了
+        setTimeout(function () {
+            say()
+        }, 1000);
+    }
+}
+var v1 = new V({name: 'alpha'})
+var v2 = new V({name: 'beta'})
+
+function sleep (time) {
+    return new Promise(function (resolve, reject) {
+        if (time<500) {
+            setTimeout(function () {
+                reject('not enough')
+            }, 500);
+        }else {
+            setTimeout(resolve, time);
+        }
+    })
+}
+async function A (argument) {
+    console.log('start') ;
+    try {
+        var ret = await Promise.all([sleep(50), sleep(600)])
+        console.log('await OK') ;
+        // await sleep(1000)
+        // await sleep(50)
+    }catch (e){
+        console.log('err', e) ;
+    }
+    console.log('end') ;
+}
+A()
+</script>
+
+</body>
+</html>
