@@ -97,7 +97,6 @@ function getHash (name) {
 //set hash
 function setHash (name, val) {
     var hash = window.location.hash.slice(1);
-    //如果hash为空，依然会split包含一个空值的数组
     hash = hash.split('&');
     for (var i = 0, k = null; k = hash[i] ; i++ ) {
         if (k.indexOf(name+'=') == 0 ) {
@@ -139,9 +138,7 @@ var fn  = function (e) {
         tcDebug.run('shift +  A');
     }
 } ;
-document.onkeyup  = function (e) {
-    fn(e)
-};
+document.onkeyup  = function (e) { fn(e) };
 
 
 //各种进制的转换
@@ -154,52 +151,68 @@ document.onkeyup  = function (e) {
 // parseInt(a, b) 
 
 
+/**
+ * create class and extend using prototype
+ *
+ **/
+//如果直接使用 child.prototype = parent.prototype ,那么重设prt.const的时候会影响parent的prt.const
+//所有这里使用一个空函数作为中转
+function extendClass (child, parent) {
+    var F = function () { }
+    F.prototype = parent.prototype
+    child.prototype = new F()
+    //上面prt指向的是F的实例，所以这里修改的constructor也不会影响F和parent的prt
+    child.prototype.constructor = child
+    child.uber = parent.prototype
+    return child ;
+}
+var Base = function  () { this.name ='def'  }
+Base.prototype.sayHi = function () { console.log('hi', this.name) ; }
+
+var Child = function (name) { this.name = name || 'nothing' }
+extendClass(Child, Base)
+var c = new Child('wahah')
+c.sayHi()
+
+
+
 //创建通用类
 var Class = {
     create: function () {
-        return function () {
-            this.init.apply(this, arguments);
-        } ;
+        return function () { this.init.apply(this, arguments); } ;
     }
 } ;
-
 // var Xman = Class.create();
+
 var Xman = function () {
     this.init.apply(this, arguments);
 };  
 
 Xman.prototype = {
-    config: {
-        name:'alex'
-        ,'age': 18
-    }
-    ,init: function (arg) {
-        //动态在this上写入的对象是实例私有的，而this.config是指向prototype中的，各个实例共享
-
-        //pre setting
-        this.isNice = 1 ;
-        this.isBeauty = 1 ;
-
-        //custom config
-        this.cfg = {};
+    init: function (arg) {
+        this.cfg = {
+            name: 'alex'
+        };
         for (var i in arg) {
-            if (arg.hasOwnProperty(i)) {
-                this.cfg[i] = arg[i];
-            }
+            if (arg.hasOwnProperty(i)) { this.cfg[i] = arg[i]; }
         }
     }
     ,say: function () {
-        console.log(this.cfg) ;
+        console.log(this.cfg.name) ;
     }
 };
 
 var x1 = new Xman({'name': 'x1'});
 var x2 = new Xman({'name': 'x2'});
-// x1.say();
-// x2.say();
-// x1.say();
+x1.say();
+x2.say();
 
-//handle mousewheel
+/**
+ * @description handle mousewheel
+ * @param {Object} arg1 指定注入的对象，可以填window或者其他
+ * @param {String} arg2 组件名称，你写成啥，后面就调用啥，默认是handleWheel
+ * @param {Number} arg3 时间系统，组件中模拟了underscore的throttle特性，以避免事件的频繁触发,据统计，100ms是很合适的
+ **/
 //debounce 只处理一段时间内的最后一个事件
 (function (w, modName,time) {
     var st
@@ -281,12 +294,6 @@ var x2 = new Xman({'name': 'x2'});
         }
     }
 })(window, 'handleWheelAnother', 100);
-
-/**
- * @param {Object} arg1 指定注入的对象，可以填window或者其他
- * @param {String} arg2 组件名称，你写成啥，后面就调用啥，默认是handleWheel
- * @param {Number} arg3 时间系统，组件中模拟了underscore的throttle特性，以避免事件的频繁触发,据统计，100ms是很合适的
- **/
 
 //test
 handleWheel(function () {
@@ -667,7 +674,7 @@ $('#btnCopyLink').on('click', function () {
     }else {
         $$.showTips({msg: '请手动复制链接'}) ;
     }
-})
+});
 
 
 /**
