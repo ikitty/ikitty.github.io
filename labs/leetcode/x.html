@@ -36,6 +36,59 @@ V.prototype = {
 var v1 = new V({name: 'alpha'})
 var v2 = new V({name: 'beta'})
 
+var LazyMan = function () {
+    this.init.apply(this, arguments)
+};
+LazyMan.prototype = {
+    init: function (name) {
+
+        var self = this
+        var fn = function () {
+            console.log(name) ;
+            self.task.next()
+        }
+        this.task.push(fn)
+        setTimeout(function () {
+            self.task.next()
+        }, 0);
+    },
+    task: (function () {
+        var q = []
+        function push (fn) {
+            q.push(fn)
+        }
+        function next () {
+            var fn = q.shift()
+            fn && fn()
+        }
+        return {push,  next} ;
+    })(),
+    eat: function (food) {
+        var self = this
+        this.task.push(function () {
+            console.log(`Eat ${food}`) ;
+            self.task.next()
+        })
+        return this ;
+    },
+    sleep: function (t) {
+        var self = this
+        this.task.push(async function () {
+
+            console.log('sleep') ;
+            await sleep(t)
+            console.log('wake', t) ;
+            self.task.next()
+        })
+        return this ;
+    }
+}
+function L (name) {
+    return new LazyMan(name) ;
+}
+L('boby').sleep(2000).eat('b')
+// L('boby').sleep(2000).eat('Food')
+
 function sleep (time) {
     return new Promise(function (resolve, reject) {
         if (time<500) {
@@ -48,7 +101,6 @@ function sleep (time) {
     })
 }
 async function A (argument) {
-    console.log('start') ;
     try {
         var ret = await Promise.all([sleep(50), sleep(600)])
         console.log('await OK') ;
@@ -57,7 +109,6 @@ async function A (argument) {
     }catch (e){
         console.log('err', e) ;
     }
-    console.log('end') ;
 }
 A()
 </script>
