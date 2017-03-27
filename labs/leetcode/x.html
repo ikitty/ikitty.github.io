@@ -111,25 +111,34 @@ async function A (argument) {
 }
 // A()
 
+(function fnTest (argument) {
+    var a = 1;
+    a=2
+    a=3
+
+    a++
+
+    console.log(a) ;
+})();
+
 var count = 0
 function divideSearch (arr, key , start, end) {
     if (count++>5) { return -999 ; }
 
     start = start || 0
-    //todo use breakpoint
-        // console.log(end) ;
-    if (!end) {
-        end = arr.length -1
-    }
+    end = end || (arr.length - 1)
     //上面这个写法有误，下面的才是正确的
     // if (undefined === end) { end = arr.length -1 }
-    //bp跟踪变量简直弱鸡
+    //bp跟踪变量的正确用法
+    //F8断点暂停和继续 此时，看到的变量都是到断点位置时计算出来的，所以第一次以为是数据错误了
+    //要正确追踪变量，应该用单步进入F11
     var mid = Math.floor((start + end) /2)
     var mid_v = arr[mid]
     if (key === mid_v) {
         return mid ;
     }
-    if (start >= end) {
+    if (start == end) {
+        console.log('not found') ;
         return -1 ;
     }
     if (key > mid_v ) {
