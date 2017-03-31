@@ -16,6 +16,59 @@
 </div>
 
 <script>
+var Bus = (function () {
+    //{evtName:{cb:[fn, ...], emitted: 0, arg: ...arg}}
+    var events = {}
+    function on (evtName, cb , now) {
+        if (!events[evtName]) {
+            events[evtName] = {cb: [], emitted: 0}
+        }
+        events[evtName].cb.push(cb)
+
+        var event = events[evtName]
+        if (event.emitted && now) {
+            emit.apply(null, [evtName, ...event.arg])
+        }
+    }
+    function emit(evtName, ...arg) {
+        if (!events[evtName]) {
+            events[evtName] = {cb: [], emitted: 1, arg: arg}
+        }
+        var cb = events[evtName].cb
+        for (var i = 0, k ; k = cb[i] ; i++ ) {
+            if (typeof k == 'function') {
+                k.apply(null, arg)
+            }
+        }
+    }
+    function off(evtName, cbName) {
+        var evt = events[evtName]
+        if (!evt) { return  ; }
+
+        //remove all
+        if (!cbName) {
+            delete events[evtName]
+            return  ;
+        }
+
+        for (var i = 0, k ; k = evt.cb[i] ; i++ ) {
+            if (k.name == cbName) {
+                evt.cb.splice(i,1)
+                break;
+            }
+        }
+    }
+
+    return { on, off, emit } ;
+})();
+Bus.on('x', function a(a) {
+    console.log(a) ;
+})
+Bus.on('x', function b(b) {
+    console.log('x') ;
+})
+Bus.off('x', 'b' )
+
 var V = function () {
     this.init.apply(this, arguments)
 };
