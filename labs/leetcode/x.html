@@ -6,225 +6,30 @@
 <meta name="renderer" content="webkit" />
 <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="robots" content="all" />
-<title> TreeMenu by Recursive </title>
+<style type="text/css" media="screen">
+    .sort {display:flex;width:500px;height:300px;border:1px solid #000;padding:0px 2px;
+    
+        justify-content: center; /*水平, 如果内容自动填充满，则可以无视这个*/
+        align-items: flex-end; /*vertical*/
+    }
+    .sort p {height:10px;margin:0px 2px;background-color:#39f;
+        flex:1; /*占位 几分 免除设置width*/
+    }
+</style>
+<title>JS Draft</title>
 </head>
 <body>
+    <h2 >js draft</h2>
+    <ul>
+        <li>- pubsub </li>
+        <li>- prototype</li>
+        <li>- sort: quick, bubble</li>
+        <li>- search value by divide</li>
+    </ul>
 
-<h2> TreeMenu by Recursive </h2>
-<div id="ret">
-    
-</div>
+    <div id="sortShow" class="sort">
+    </div>
 
-<script>
-var Bus = (function () {
-    //{evtName:{cb:[fn, ...], emitted: 0, arg: ...arg}}
-    var events = {}
-    function on (evtName, cb , now) {
-        if (!events[evtName]) {
-            events[evtName] = {cb: [], emitted: 0}
-        }
-        events[evtName].cb.push(cb)
-
-        var event = events[evtName]
-        if (event.emitted && now) {
-            emit.apply(null, [evtName, ...event.arg])
-        }
-    }
-    function emit(evtName, ...arg) {
-        if (!events[evtName]) {
-            events[evtName] = {cb: [], emitted: 1, arg: arg}
-        }
-        var cb = events[evtName].cb
-        for (var i = 0, k ; k = cb[i] ; i++ ) {
-            if (typeof k == 'function') {
-                k.apply(null, arg)
-            }
-        }
-    }
-    function off(evtName, cbName) {
-        var evt = events[evtName]
-        if (!evt) { return  ; }
-
-        //remove all
-        if (!cbName) {
-            delete events[evtName]
-            return  ;
-        }
-
-        for (var i = 0, k ; k = evt.cb[i] ; i++ ) {
-            if (k.name == cbName) {
-                evt.cb.splice(i,1)
-                break;
-            }
-        }
-    }
-
-    return { on, off, emit } ;
-})();
-Bus.on('x', function a(a) {
-    console.log(a) ;
-})
-Bus.on('x', function b(b) {
-    console.log('x') ;
-})
-Bus.off('x', 'b' )
-
-var V = function () {
-    this.init.apply(this, arguments)
-};
-V.prototype = {
-    init: function (arg) {
-        this.cfg = {}
-        for (var i in arg) { this.cfg[i]= arg[i] }
-        var self = this
-        window.say = ()=>{
-            console.log(this.cfg.name) ;
-        }
-        //两个实例都会返回beta，因为第二个全局函数被覆盖了
-        setTimeout(function () {
-            say()
-        }, 1000);
-    }
-}
-// var v1 = new V({name: 'alpha'})
-// var v2 = new V({name: 'beta'})
-
-var LazyMan = function () {
-    this.init.apply(this, arguments)
-};
-LazyMan.prototype = {
-    init: function (name) {
-
-        var self = this
-        var fn = function () {
-            console.log(name) ;
-            self.task.next()
-        }
-        this.task.push(fn)
-        setTimeout(function () {
-            self.task.next()
-        }, 0);
-    },
-    task: (function () {
-        var q = []
-        function push (fn) {
-            q.push(fn)
-        }
-        function next () {
-            var fn = q.shift()
-            fn && fn()
-        }
-        return {push,  next} ;
-    })(),
-    eat: function (food) {
-        var self = this
-        this.task.push(function () {
-            console.log(`Eat ${food}`) ;
-            self.task.next()
-        })
-        return this ;
-    },
-    sleep: function (t) {
-        var self = this
-        this.task.push(async function () {
-
-            console.log('sleep') ;
-            await sleep(t)
-            console.log('wake', t) ;
-            self.task.next()
-        })
-        return this ;
-    }
-}
-function L (name) {
-    return new LazyMan(name) ;
-}
-// L('boby').sleep(2000).eat('b')
-
-function sleep (time) {
-    return new Promise(function (resolve, reject) {
-        if (time<500) {
-            setTimeout(function () {
-                reject('not enough')
-            }, 500);
-        }else {
-            setTimeout(resolve, time);
-        }
-    })
-}
-async function A (argument) {
-    try {
-        var ret = await Promise.all([sleep(50), sleep(600)])
-        console.log('await OK') ;
-        // await sleep(1000)
-        // await sleep(50)
-    }catch (e){
-        console.log('err', e) ;
-    }
-}
-// A()
-
-(function fnTest (argument) {
-    var a = 1;
-    a=2
-    a=3
-
-    a++
-
-    console.log(a) ;
-})();
-
-var count = 0
-function divideSearch (arr, key , start, end) {
-    if (count++>5) { return -999 ; }
-
-    start = start || 0
-    end = end || (arr.length - 1)
-    //上面这个写法有误，下面的才是正确的
-    // if (undefined === end) { end = arr.length -1 }
-    //bp跟踪变量的正确用法
-    //F8断点暂停和继续 此时，看到的变量都是到断点位置时计算出来的，所以第一次以为是数据错误了
-    //要正确追踪变量，应该用单步进入F11
-    var mid = Math.floor((start + end) /2)
-    var mid_v = arr[mid]
-    if (key === mid_v) {
-        return mid ;
-    }
-    if (start == end) {
-        console.log('not found') ;
-        return -1 ;
-    }
-    if (key > mid_v ) {
-        start = mid + 1
-        return divideSearch(arr,key , start , end) ;
-    }else {
-        end = mid - 1
-        return divideSearch(arr,key , start , end) ;
-    }
-}
-var testArr = [-11, 11, 22,33,44,55,77,99]
-console.log(divideSearch(testArr, 1)) ;
-
-
-//quickSort
-function quickSort (arr) {
-    if (arr.length <= 1) {
-        return arr ;
-    }
-    var mid = Math.floor((arr.length-1)/2)
-    var mid_v = arr.splice(mid, 1)[0]
-    var left = [] , right = [];
-    for (var i = 0; i < arr.length; i++) {
-        if (arr[i] < mid_v) {
-            left.push(arr[i])
-        }else {
-            right.push(arr[i])
-        }
-    };
-    return quickSort(left).concat(mid_v, quickSort(right)) ;
-}
-console.log(quickSort([3,1,5,0,-1,9,2])) ;
-</script>
-
+<script src="x.js"></script>
 </body>
 </html>
