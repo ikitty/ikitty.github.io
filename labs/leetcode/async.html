@@ -31,6 +31,15 @@
         }) ;
     }
 
+    //promise catch
+    (function () {
+        return  ;
+        var p = Promise.resolve('done')
+        p.then(v=>{console.log(v) ; })
+        .then(v=>{console.log(v) ;y})
+        .catch(err=>{console.log('Err,', err) ;})
+    })();
+
     //循环中await也是串行
     (async function (argument) {
         return  ;
@@ -43,7 +52,6 @@
     //串行,前面出错后，后面的代码不会执行
 
     (async function (argument) {
-        return  ;
         var a = await timer()
         console.log(a) ;
         var b = await timer(2000)
