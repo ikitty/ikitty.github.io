@@ -32,29 +32,31 @@
     }
 
     //DEMO presentation
-    //race for timeout
+    //1.promise race for timeout
     var fakeFetch = function () {
-        var rndTime = (1 + Math.random()*(8-1)).toFixed(3) * 1000;
+        var rndTime = (1 + Math.random()*(6-1)).toFixed(3) * 1000;
+        console.log(rndTime) ;
         return new Promise(res=>{
             setTimeout(()=>{
-                res(`done after ${rndTime} ms`)
+                res(`Fetch done after ${rndTime} ms`)
             }, rndTime);
         }) ;
     }
     var timeout = async function  (time) {
         return new Promise((res,rej)=>{
             setTimeout(()=>{
-                rej(new Error('timeout'))
+                rej(new Error('Test error: timeout'))
             }, time);  
         }) ;
     }
-    var P = Promise.race([fakeFetch(), timeout(4000)])
+
+    var P = Promise.race([fakeFetch(), timeout(3000)])
     P.then(v=>{console.log(v) })
     .catch(err=>{console.log(err) ;})
 
 
 
-    //gene hw
+    //2.gene hw
     var gen = function * (argument) {
         yield 'hello'
         yield 'world'
@@ -62,9 +64,9 @@
     }
     var g = gen();
 
-    //async
+    //3.async
     (async ()=>{
-     return  ;
+         return  ;
         await sleep(1000)
         console.log('after 1000ms') ;
         await sleep(2000)
@@ -84,7 +86,7 @@
         .catch(err=>{console.log('Err,', err) ;})
     })();
 
-    //循环中await也是串行
+    //循环中await也是串行，但是forEach是并发
     (async function (argument) {
         return  ;
         for (var i = 0; i < 10; i++) {
@@ -96,6 +98,7 @@
     //串行,前面出错后，后面的代码不会执行
 
     (async function (argument) {
+        return  ;
         // var a = await timer()
         var a = await timer().catch(err=>{console.log(err) ;})
         console.log(a) ;
@@ -105,6 +108,7 @@
 
     //all 并发
     (async function (argument) {
+        return  ;
         //一个reject，立即reject
         var p = [timer(1000), timer()]
         var ret = await Promise.all(p)
