@@ -211,7 +211,7 @@ async function bubbleSort (arr, cb) {
         for (var j = 0; j < len -1 - i; j++ ) {
             if (arr[j] > arr[j+1]) {
                 [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
-                await sleep(100) ;
+                await sleep(50) ;
                 (typeof cb === 'function') && cb(j, j+1);
             }
         }
@@ -248,18 +248,45 @@ function doBubbleSort() {
     })
     console.log(ret) ;
 }
-doBubbleSort();
+// doBubbleSort();
 
 //sendBeacon 
 var report = function (url, data) {
-    var finalUrl = url + data 
-    var nsb = window.navigator.sendBeacon
-    if (!!nsb) {
-        nsb(url)   
-    }else {
-        //send img load
-        var img = new Image()
-        img.src = finalUrl 
-        //send xhr sync
+    for (var i in data) {
+        data.hasOwnProperty(i) && (url += ('&' + i + '=' + data[i]) )
     }
+
+    if (!!window.navigator.sendBeacon) {
+        var transfer_url = 'http://alex.qq.com:3000/to_tcss/' + url.split('?')[1] + '&url=null&arg=bySendBeacon'
+        window.navigator.sendBeacon(transfer_url)
+
+    }else {
+        //set crossOrigin
+        if (!!window.XMLHttpRequest) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', url, false); 
+            xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+            xhr.onreadystatechange = function(event){    
+                if(xhr.readyState == 2){
+                    xhr.abort()
+                }
+            };
+            xhr.send();
+        }else {
+            (new Image()).src = url
+        }
+    }
+}
+function reportTcss (hottag) {
+    var host = location.hostname;
+    //todo remove
+    host = 'hbp.qq.com'
+    var url = 'http://pinghot.qq.com/pingd?dm='+host+'.hot&hotx=9999&hoty=9999&rand='  + Math.ceil(Math.random()*1e5)
+    report(url, {hottag: hottag})
+}
+reportTcss('main.pc.testBeacon.bynsb_2138')
+
+window.onunload = function () {
+    reportTcss('main.pic.testBeacon.unload')
+    console.log('unloaded');
 }
