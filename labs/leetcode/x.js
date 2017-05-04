@@ -249,3 +249,17 @@ function doBubbleSort() {
     console.log(ret) ;
 }
 doBubbleSort();
+
+//sendBeacon 
+var report = function (url, data) {
+    var finalUrl = url + data 
+    var nsb = window.navigator.sendBeacon
+    if (!!nsb) {
+        nsb(url)   
+    }else {
+        //send img load
+        var img = new Image()
+        img.src = finalUrl 
+        //send xhr sync
+    }
+}
