@@ -257,36 +257,35 @@ var report = function (url, data) {
     }
 
     if (!!window.navigator.sendBeacon) {
-        var transfer_url = 'http://alex.qq.com:3000/to_tcss/' + url.split('?')[1] + '&url=null&arg=bySendBeacon'
+        var transfer_cgi = 'http://apps.game.qq.com/qiuqiu/act/a20170505tcss/index.php'
+        var transfer_url = transfer_cgi + '?' + url.split('?')[1] + '&url=null&arg=bySendBeacon'
         window.navigator.sendBeacon(transfer_url)
 
     }else {
-        //set crossOrigin
         if (!!window.XMLHttpRequest) {
+            url += '&url=/&arg=byXhr'
             var xhr = new XMLHttpRequest();
-            xhr.open('get', url, false); 
-            xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-            xhr.onreadystatechange = function(event){    
-                if(xhr.readyState == 2){
-                    xhr.abort()
-                }
-            };
-            xhr.send();
+            try {
+                xhr.open('get', url, false); 
+                xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+                xhr.onreadystatechange = function(event){    
+                    if(xhr.readyState == 2){ xhr.abort() }
+                };
+                xhr.send();
+            }catch (e){}
         }else {
+            url += '&url=/&arg=byImg'
             (new Image()).src = url
         }
     }
 }
 function reportTcss (hottag) {
     var host = location.hostname;
-    //todo remove
     host = 'hbp.qq.com'
     var url = 'http://pinghot.qq.com/pingd?dm='+host+'.hot&hotx=9999&hoty=9999&rand='  + Math.ceil(Math.random()*1e5)
     report(url, {hottag: hottag})
 }
-reportTcss('main.pc.testBeacon.bynsb_2138')
 
 window.onunload = function () {
     reportTcss('main.pic.testBeacon.unload')
-    console.log('unloaded');
 }
