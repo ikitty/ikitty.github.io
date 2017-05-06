@@ -286,6 +286,6 @@ function reportTcss (hottag) {
     report(url, {hottag: hottag})
 }
 
-window.onunload = function () {
-    reportTcss('main.pic.testBeacon.unload')
+window.onbeforeunload = function () {
+    reportTcss('main.pc.sendBeacon.beforeunload')
 }
