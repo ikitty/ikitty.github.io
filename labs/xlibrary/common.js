@@ -484,9 +484,9 @@ var scrollNoBounce= function (id) {
 /**
  * simple Slider by alex
  * @require self jquery
+ * @require self jquery ext : alexSwipe
  * @version 1.0
  *
- * @param {Number} obj.sliderWidth 
  * @param {Number} obj.count , the amount of slider child 
  * @param {HTMLElement} obj.elBody , slider content DOM
  * @param {Bool} obj.autoCreateTrigger 
@@ -495,14 +495,10 @@ var scrollNoBounce= function (id) {
  **/
 //==================slider==============================
 //todo opt args
-//todo add touch support
 var Slider = function (arg) {
-    this.sliderWidth = 500;
     this.count = 5;
     this.triggerId = '';
     this.elBody = null;
-    this.autoCreateTrigger = false ;
-    this.triggerTagName = 'a' ;
 
     this.time = 3000;
     this.type = 'click';
@@ -520,30 +516,30 @@ var Slider = function (arg) {
 Slider.prototype = {
     init: function () {
         this.createTrigger();
-
+        this.doClick();
         this.auto && this.autoPlay() ;
-        this.play(this.current);
-        //this.elTrigger[this.current].className = 'on';
+
+        this.elTrigger[this.current].className = 'on';
+        this.handleTouch();
     }
     ,play: function (order) {
-        order = order >= this.count ? 0 : order ;
-        this.elBody.style.left = -1*order*this.sliderWidth  +'px' ;
-        this.syncStatus(order);
+        if (order>=this.count || order <0) {
+            order = 0 ;
+        }
+        this.elBody.style.left = -100*order +'%' ;
+        this.current = order ;
 
         this.elTrigger[this.last].className = '';
         this.elTrigger[this.current].className = 'on';
         this.last = this.current ;
     }
-    ,syncStatus: function (order) {
-        this.current = order ;
-    }
     ,autoPlay: function () {
         var me = this;
         var _run = function () {
             me.timer = setTimeout(function () {
-                _run();
                 if (me.auto) {
                     me.play(++me.current);
+                    _run();
                 }
             }, me.time);
         };
@@ -553,9 +549,9 @@ Slider.prototype = {
         clearTimeout(this.timer);
         this.timer = null ;
     }
-    ,listenEvent: function () {
+    ,doClick: function () {
         var me = this; 
-        this.elTrigger = document.getElementById(this.triggerId).getElementsByTagName(this.triggerTagName) ;
+        this.elTrigger = document.getElementById(this.triggerId).getElementsByTagName('i') ;
 
         for (var i = 0, k, le = this.elTrigger.length ; i < le; i++ ) {
             k = this.elTrigger[i];
@@ -564,7 +560,12 @@ Slider.prototype = {
                 me.play(this.order);
             }
         }
+    }
 
+    ,createTrigger: function () {
+        document.getElementById(this.triggerId).innerHTML = (new Array(this.count+1)).join('<i></i>') ;
+
+        var me = this;
         document.getElementById(this.triggerId).onmouseover = function () {
             me.pause();
         };
@@ -572,14 +573,29 @@ Slider.prototype = {
             me.autoPlay();
         };
     }
-
-    ,createTrigger: function () {
-        if (this.autoCreateTrigger) {
-            var tagName = this.triggerTagName ;
-            document.getElementById(this.triggerId).innerHTML = (new Array(this.count+1)).join('<' + tagName + '></' + tagName + '>') ;
-        }
-        this.listenEvent();
+    ,handleTouch: function (dir) {
+        var me = this ;
+        $(this.elBody).parent().alexSwipe(function (dir) {
+            if (dir === 'left') {
+                me.next();
+            }else if (dir === 'right'){
+                me.prev();
+            }
+        })
     }
+    ,prev: function () {
+        this.pause();
+        this.current--;
+        this.play(this.current);
+        this.autoPlay();
+    }
+    ,next: function () {
+        this.pause();
+        this.current++;
+        this.play(this.current);
+        this.autoPlay();
+    }
+    
 };
 
 /**
@@ -637,9 +653,8 @@ $.fn.alexSwipe = function (fn) {
         _startY = touch.clientY;
     });
     $(this).on('touchmove', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.cancelBubble = true;
+        //e.preventDefault();
+        //e.stopPropagation();
 
         var touch = e.touches[0];
         _moveX = touch.clientX - _startX;
