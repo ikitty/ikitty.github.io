@@ -7,6 +7,7 @@
 <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="robots" content="all" />
 <style type="text/css" media="screen">
+    * {margin:0;padding:0;list-style:none;}
     .sort {display:flex;width:500px;height:300px;border:1px solid #000;padding:0px 2px;
     
         justify-content: center; /*水平, 如果内容自动填充满，则可以无视这个*/
@@ -15,10 +16,43 @@
     .sort p {height:10px;margin:0px 2px;background-color:#39f;
         flex:1; /*占位 几分 免除设置width*/
     }
+
+    .card_show {width:720px;height:200px;}
+    .card_show li {float:left;width:100px;height:100%;margin-right:5px;overflow:hidden;-webkit-transition: all 0.3s ease-out; transition: all 0.3s ease-out;}
+    .card_show li div {height:100%;width:400px;zoom:1; overflow:hidden;}
+
+    .card_show li p {float:left;height:100%;}
+    .card_show li.active {width:400px;}
+    .card_show li .hd {width:100px;background-color:#39f;}
+    .card_show li .bd {width:300px;background-color:#93f;}
 </style>
+<script src="http://ikitty.github.io/static/jq.js"></script>
 <title>JS Draft</title>
 </head>
 <body>
+    <ul id="cardShow" class="card_show">
+        <li class="active">
+            <div class="card_item">
+                <p class="hd">info</p><p class="bd">info</p>
+            </div>
+        </li>
+        <li>
+            <div class="card_item">
+                <p class="hd">info</p><p class="bd">info</p>
+            </div>
+        </li>
+        <li>
+            <div class="card_item">
+                <p class="hd">info</p><p class="bd">info</p>
+            </div>
+        </li>
+        <li>
+            <div class="card_item">
+                <p class="hd">info</p><p class="bd">info</p>
+            </div>
+        </li>
+    </ul>
+
     <h2 >js draft</h2>
     <ul>
         <li>- pubsub </li>
@@ -35,5 +69,18 @@
     <a href="http://www.baidu.com" onclick="reportTcss('main.pc.sendBeacon.jumpPage')">go other page</a>
 
 <script src="x.js"></script>
+<script>
+function cardShow () {
+    var lastIndex = 0 ;
+    var el = $('#cardShow li')
+    el.bind('mouseover', function () {
+        console.log('hover') ;
+        $(el.get(lastIndex)).removeClass('active')
+        $(this).addClass('active')
+        lastIndex = $(this).index()
+    })
+}    
+cardShow();
+</script>
 </body>
 </html>
