@@ -488,18 +488,18 @@ var scrollNoBounce= function (id) {
  * @version 1.0
  *
  * @param {Number} obj.count , the amount of slider child 
- * @param {HTMLElement} obj.elBody , slider content DOM
  * @param {Bool} obj.autoCreateTrigger 
  * @param {String} obj.triggerTagName , define trigger tag name
  * @param {Number} obj.time , animation interval time
  **/
 //==================slider==============================
-//todo opt args
 var Slider = function (arg) {
     this.count = 5;
     this.triggerId = '';
-    this.elBody = null;
-
+    this.contId = '';
+    
+    this.$elBody = null; 
+    this.touch = 0 ;
     this.time = 3000;
     this.type = 'click';
     this.auto = 1;
@@ -515,18 +515,22 @@ var Slider = function (arg) {
 };
 Slider.prototype = {
     init: function () {
+        if (!this.contId) {
+            return  ;
+        }
+        this.$elBody = $('#' + this.contId)
         this.createTrigger();
         this.doClick();
         this.auto && this.autoPlay() ;
 
         this.elTrigger[this.current].className = 'on';
-        this.handleTouch();
+        this.touch && this.handleTouch();
     }
     ,play: function (order) {
         if (order>=this.count || order <0) {
             order = 0 ;
         }
-        this.elBody.style.left = -100*order +'%' ;
+        this.$elBody.css('left', -100*order +'%' )
         this.current = order ;
 
         this.elTrigger[this.last].className = '';
@@ -566,16 +570,14 @@ Slider.prototype = {
         document.getElementById(this.triggerId).innerHTML = (new Array(this.count+1)).join('<i></i>') ;
 
         var me = this;
-        document.getElementById(this.triggerId).onmouseover = function () {
-            me.pause();
-        };
-        document.getElementById(this.triggerId).onmouseout = function () {
-            me.autoPlay();
-        };
+        //disable feature on mobile
+        if (this.touch) { return  ; }
+        document.getElementById(this.triggerId).onmouseover = function () { me.pause(); };
+        document.getElementById(this.triggerId).onmouseout = function () { me.autoPlay(); };
     }
     ,handleTouch: function (dir) {
         var me = this ;
-        $(this.elBody).parent().alexSwipe(function (dir) {
+        this.$elBody.alexSwipe(function (dir) {
             if (dir === 'left') {
                 me.next();
             }else if (dir === 'right'){
@@ -595,8 +597,15 @@ Slider.prototype = {
         this.play(this.current);
         this.autoPlay();
     }
-    
 };
+//var mainSlider = new Slider({
+    //triggerId: 'sliderBtn'
+    //,contId: 'sliderList'
+    //,count: 3
+    //,time: 2500
+    //,type: 'click'
+    //,touch: 1
+//});
 
 /**
  * debounce 单位时间内只触发最后一个事件
@@ -648,7 +657,7 @@ $.fn.alexSwipe = function (fn) {
         ;
 
     $(this).on('touchstart', function (e) {
-        var touch = e.touches[0];
+        var touch = (e.touches || e.originalEvent.touches)[0] 
         _startX = touch.clientX;
         _startY = touch.clientY;
     });
@@ -656,7 +665,7 @@ $.fn.alexSwipe = function (fn) {
         //e.preventDefault();
         //e.stopPropagation();
 
-        var touch = e.touches[0];
+        var touch = (e.touches || e.originalEvent.touches)[0] 
         _moveX = touch.clientX - _startX;
         _moveY = touch.clientY - _startY;
     });
