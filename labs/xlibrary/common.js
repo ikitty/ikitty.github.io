@@ -727,3 +727,44 @@ $('#btnCopyLink').on('click', function () {
 
     win.pageVisibleChange = pageVisibleChange;
 })(window);
+
+//injectTCVideo
+// var v1 = new injectVideo({vid: 'q0507tpxnr5', id: 'vd1' })
+// var v2 = new injectVideo({vid: 'i0023dlxwnb', id: 'vd2' })
+var injectVideo = function (obj) {
+    this.retVideo = ''
+    this.config = {
+        boxId: '',
+        vid: '',
+        autoplay: false,
+        callback: function () { }
+    }
+    for (var i in obj) { this.config[i] = obj[i] }
+    this.init()
+};
+injectVideo.prototype = {
+    init: function () {
+        var self = this
+        window['insertMv_'+ this.config.vid ] = function (D) {
+            var retVi = D.vl.vi[0]
+            var prefix = retVi.ul.ui[0].url ,
+                name = retVi.fn,
+                vkey = retVi.fvkey;
+            var src = prefix + name + '?vkey=' + vkey
+
+            var elVideo = document.createElement('video')
+            elVideo.setAttribute('src',  src) ;
+            self.config.autoplay && elVideo.setAttribute('autoplay', true) ;
+            document.getElementById(self.config.id).appendChild(elVideo) ;
+
+            self.retVideo = elVideo
+            self.config.callback && self.config.callback() 
+        }
+        this.setVideo()
+    },
+    setVideo: function () {
+        var url='http://vv.video.qq.com/getinfo?vids='+this.config.vid+'&platform=1&charge=0&otype=json&defaultfmt=fhd&sb=0&nocache=0&callback=insertMv_' + this.config.vid;
+        $.getScript(url)
+    }
+}
+        
