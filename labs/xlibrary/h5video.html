@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="gbk">
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>h5 video</title>
+<style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+    .compatibleStyle { backface-visibility:hidden; -webkit-backface-visibility:hidden;	-moz-backface-visibility:hidden; -ms-backface-visibility:hidden; -webkit-perspective: 0; -webkit-transform: translate3d(0,0,0); visibility:visible; }
+</style>
+</head>
+<body>
+<script type="text/javascript" src="http://ossweb-img.qq.com/images/js/mmdPlugin/mmd-plugin.min.1.0.2.js"></script>
+<script type="text/javascript" src="http://ossweb-img.qq.com/images/js/mmdVideoPlayer/mmd.videoplayer.min.1.0.1.js"></script>
+
+<div view-mode="h" view-rotation="auto" view-scale="noborder" view-width="1334" view-height="750" view-align="" >
+    <div style="position: absolute;">
+        <video id="video" style="display: none;"></video>
+    </div>
+    <div id="loading" class="compatibleStyle" > Loading...  </div>
+    <div id="end" class="compatibleStyle" style="position:absolute;display:none;"> end </div>
+
+    <button id="startPlay" class="compatibleStyle" style="position: absolute; width: 130px; height: 60px; background-color: rgb(255, 255, 255); display: none; bottom: 30%; left: 602px;">Play</button>
+    <button id="toEnd" class="compatibleStyle" style="position: absolute; width: 130px; height: 60px; background-color: rgb(255, 255, 255); display: none; bottom: 10%; right: 15%;" onclick="isLoop=false;document.getElementById('toEnd').style.display='none';">SkipLoop</button>
+</div>
+
+<script>
+var src='http://videohy.tc.qq.com/vcloud1022.tc.qq.com/1022_7fe8d8b3fc7842c6b0c2ce2630e8e30a.f0.mp4?vkey=3B0C039DCD8086E3325EEC259E6657C4D6F67B9F147A88E137790CA61119E819ECE39B476ACDF24FC3D5148975E3A74B459234C54319AB227A69B3CC7A68A0CA0DEFB58B3CFA08F4F5088B65B27DB0B06B9BB1C07C78C770&sha=0&ocid=334110636';
+var isLoop=true;//视频循环点,用来卡住是否循环;
+var videoPlayer=new MMD.VideoPlayer({
+        videoElement:document.getElementById('video'),
+        src:src,
+        loop:false,
+        muted:false,
+        poster:'',
+        timesParam:[
+            {name:'firstPoint',time:11.48}
+        ],
+        onTimes:function(name){
+            console.log(name)
+            switch (name) {
+                case 'firstPoint':
+                    if(isLoop) {
+                        console.log('repeat mode') ;
+                        videoPlayer.currentTimeAndPlay=6.44;
+                        document.getElementById('toEnd').style.display='block';
+                    } else {
+                        console.log('switch to normal mode') ;
+                    }
+                    break;
+            }
+        },
+        onStart:function(){
+            document.getElementById('loading').style.display='none';
+            console.log('video start');
+        },
+        onEnd:function(){
+            document.getElementById('end').style.display='block';
+            console.log('video end');
+        }
+    }
+);
+
+var btn=document.getElementById('startPlay');
+if(videoPlayer.isVideoCanAutoPlay) {
+    videoPlayer.play();
+} else {
+    btn.style.display='block';
+    btn.addEventListener('click',function(e)
+    {
+        btn.style.display='none';
+        videoPlayer.play();
+    });
+}
+
+</script>
+</body>
+</html>
