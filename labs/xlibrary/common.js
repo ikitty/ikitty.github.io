@@ -487,22 +487,17 @@ var scrollNoBounce= function (id) {
  * @require self jquery ext : alexSwipe
  * @version 1.0
  *
- * @param {Number} obj.count , the amount of slider child 
- * @param {Bool} obj.autoCreateTrigger 
- * @param {String} obj.triggerTagName , define trigger tag name
- * @param {Number} obj.time , animation interval time
  **/
 //==================slider==============================
 var Slider = function (arg) {
-    this.count = 5;
     this.triggerId = '';
     this.contId = '';
-    
-    this.$elBody = null; 
-    this.touch = 0 ;
     this.time = 3000;
     this.type = 'click';
+    this.touch = 0 ;
+    
     this.auto = 1;
+    this.$elBody = null; 
     this.current = 0 ;
     this.elTrigger = null;
     this.timer = null; 
@@ -515,10 +510,13 @@ var Slider = function (arg) {
 };
 Slider.prototype = {
     init: function () {
-        if (!this.contId) {
+        if (!this.contId || !this.triggerId) {
             return  ;
         }
         this.$elBody = $('#' + this.contId)
+        this.count = this.$elBody.children().length 
+
+        this.$elBody.css('width', 100*this.count + '%')
         this.createTrigger();
         this.doClick();
         this.auto && this.autoPlay() ;
@@ -601,7 +599,6 @@ Slider.prototype = {
 //var mainSlider = new Slider({
     //triggerId: 'sliderBtn'
     //,contId: 'sliderList'
-    //,count: 3
     //,time: 2500
     //,type: 'click'
     //,touch: 1
