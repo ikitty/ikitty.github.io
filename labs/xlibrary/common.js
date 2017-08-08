@@ -495,6 +495,9 @@ var Slider = function (arg) {
     this.time = 3000;
     this.type = 'click';
     this.touch = 0 ;
+    this.makeTrig = 1;
+    this.prevId = '';
+    this.nextId = '';
     
     this.auto = 1;
     this.$elBody = null; 
@@ -510,19 +513,21 @@ var Slider = function (arg) {
 };
 Slider.prototype = {
     init: function () {
-        if (!this.contId || !this.triggerId) {
-            return  ;
-        }
+        if (!this.contId || !this.triggerId) { return  ; }
         this.$elBody = $('#' + this.contId)
+        this.$elBody.css('width', 100*this.count + '%')
         this.count = this.$elBody.children().length 
 
-        this.$elBody.css('width', 100*this.count + '%')
-        this.createTrigger();
+        this.makeTrig && this.createTrigger();
         this.doClick();
-        this.auto && this.autoPlay() ;
-
         this.elTrigger[this.current].className = 'on';
+
+        this.auto && this.autoPlay() ;
         this.touch && this.handleTouch();
+
+        var self = this;
+        $('#'+this.prevId).on('touchstart', function () { self.prev() })
+        $('#'+this.nextId).on('touchstart', function () { self.next() })
     }
     ,play: function (order) {
         if (order>=this.count || order <0) {
@@ -568,6 +573,7 @@ Slider.prototype = {
         document.getElementById(this.triggerId).innerHTML = (new Array(this.count+1)).join('<i></i>') ;
 
         var me = this;
+        //todo should move to doClick
         //disable feature on mobile
         if (this.touch) { return  ; }
         document.getElementById(this.triggerId).onmouseover = function () { me.pause(); };
@@ -765,3 +771,42 @@ injectVideo.prototype = {
     }
 }
         
+//fullScreen player
+function fullScreenPlayer(trigId, vid){
+    var elVideo = document.createElement('section')
+    var elVideoClose = document.createElement('i')
+    elVideoClose.innerText = '×'
+    $('body').append(elVideo)
+    $('body').append(elVideoClose)
+    $(elVideo).attr('id', 'fsVideo');
+    $(elVideoClose).attr('id', 'fsVideoClose');
+
+    $(elVideo).css({width:'100%',height:'100%',position:'fixed',top:0,left:0,zIndex:9999,background:'#000',display:'none'});
+    $(elVideoClose).css({font:'700 24px/32px Arial',width:'32px', height:'32px',color:'#aaa',textAlign:'center', position:'fixed',top:'2%',right:'2%',zIndex:9999,display:'none'});
+
+    var video = new tvp.VideoInfo();
+    video.setVid(vid);
+    var player =new tvp.Player();
+    player.create({
+        width:"100%",
+        height:"100%",
+        video:video,
+        modId: 'fsVideo',
+        onfullscreen:function(f){if(!f){$("#fsVideo, #fsVideoClose").hide()}},
+        isHtml5UseAirPlay:true,
+        isHtml5UseFakeFullScreen:true,
+        autoplay:false
+    });
+    $('#'+trigId).on('touchstart',function(){
+        player.play();
+        $("#fsVideo,#fsVideoClose").show();
+    });
+    $("#fsVideoClose").on('touchstart',function(){
+        player.pause();
+        setTimeout(function(){$("#fsVideo,#fsVideoClose").hide()}, 300);
+    });
+}
+//using
+$.getScript('http://imgcache.gtimg.cn/tencentvideo_v1/tvp/js/tvp.player_v2_zepto.js', function(){
+    fullScreenPlayer('btnPlay','w0526qhtaat');
+});
