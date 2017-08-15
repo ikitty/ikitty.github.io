@@ -14,23 +14,26 @@ uniquee and Query data from multiple Obj
 
 <script>
 //show
-let testArr = [1,2,2,3,3,4] ;
+let testArr = [1,3,3,2,2,4, '2', '3'] ;
+//keep order and type
 let unique = (orgArr) => orgArr.filter( (item,index,arr)=> arr.indexOf(item)===index ) ;
-console.log( unique( testArr) ) ;
+console.log( 'es6 unique: ', unique( testArr) ) ;
 
 let originUnique = (orgArr) => {
-    var _obj = {};
-    var _ret = [] ;
+    var obj = {}, ret = [] ;
+
+    //效率ok，复杂度O(n),空间换时间
     for (var i = 0, len = orgArr.length; i < len; i++) {
-        if (!_obj.hasOwnProperty(orgArr[i])) {
-            _ret.push(orgArr[i])   ;
-            _obj[orgArr[i]] = '';
+        k = orgArr[i];
+        if (!obj[k+'::' + typeof k]) {
+            ret.push(k);
+            obj[k+'::' + typeof k] = 1; 
         }
     };
-    _obj = {} ;
-    return _ret ;
+    return ret ;
 }
-console.log(originUnique(testArr)) ;
+console.log('common unique: ',originUnique(testArr)) ;
+
 
 let D = [
     {
