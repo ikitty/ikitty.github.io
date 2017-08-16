@@ -810,3 +810,66 @@ function fullScreenPlayer(trigId, vid){
 $.getScript('http://imgcache.gtimg.cn/tencentvideo_v1/tvp/js/tvp.player_v2_zepto.js', function(){
     fullScreenPlayer('btnPlay','w0526qhtaat');
 });
+
+//qq链接转码所需字段
+//<meta itemprop="name" content="四海八荒第一美人评选"/>
+//<meta itemprop="image" content="http://ossweb-img.qq.com/images/chanpin/xycq/cp/a20170804beautym/share.png" />
+//<meta name="description" itemprop="description" content="洪荒世界美人多 参赛送花疯抢惊喜壕礼" />
+
+//share
+//<script src="//open.mobile.qq.com/sdk/qqapi.https.js"></script>
+(function () {
+    var shareData = {
+        title: '四海八荒第一美人评选',
+        desc: '洪荒世界美人多 参赛送花疯抢惊喜壕礼',
+        img: 'http://ossweb-img.qq.com/images/chanpin/xycq/cp/a20170804beautym/share.png',
+        link: location.href,
+        actName: 'a20170804beautym'
+    };
+    //wx
+    function onBridgeReady() {
+        var mainTitle= shareData.title,
+            mainDesc= shareData.desc,
+            mainURL=shareData.link,
+            mainImgUrl= shareData.img;
+
+        //转发朋友圈
+        WeixinJSBridge.on("menu:share:timeline", function(e) {
+            var data = {
+                img_url:mainImgUrl,
+                img_width: "120",
+                img_height: "120",
+                link: mainURL,
+                desc: mainDesc,
+                title: mainTitle
+            };
+            WeixinJSBridge.invoke("shareTimeline", data, function(res) { WeixinJSBridge.log(res.err_msg) });
+        });
+        //分享给朋友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            WeixinJSBridge.invoke("sendAppMessage", {
+                img_url: mainImgUrl,
+                img_width: "120",
+                img_height: "120",
+                link: mainURL,
+                desc: mainDesc,
+                title: mainTitle
+            }, function(res) { WeixinJSBridge.log(res.err_msg) });
+        });
+    };
+    document.addEventListener('WeixinJSBridgeReady', function() { onBridgeReady(); });
+
+    //qq
+    try {
+        mqq.ui.setOnShareHandler(function(type){
+            mqq.ui.shareMessage({
+                share_url: shareData.link,
+                title: shareData.title,
+                desc: shareData.desc,
+                image_url:shareData.img,
+                share_type:type
+            },
+            function(retCode){pgvSendClick({hottag:shareData.actName+'.qq.'+retCode});})
+        });
+    }catch (e){}
+})()
