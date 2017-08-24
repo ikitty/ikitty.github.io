@@ -11,11 +11,15 @@ category: frontend
 
 常见的几种场景：
 
+
 ###普通merge
+
 
 在Github网站上可以点击自动合并即可，这种情况只适用于无冲突的纯添加代码。
 
+
 ###有新的request，而本地又更新了
+
 
 首先在Github网站上点击自动合并，然后在本地提交代码（`git ci . -m 'commit msg'`)，然后使用`git pull`命令来merge。
 
@@ -110,3 +114,20 @@ update：我在上一步ci的时候秀逗了，在ci的时候附加上msg就可�
 ###小结
 
 最近在和别人协作的时候，发现有些人总喜欢直接在主干上直接修改代码，而且很久才提交一次代码，merge他的request的时候冲突不断。这样真不是一个好习惯。所以还是建议保持master干净，自己新开分支进行修改，定期从upstream更新，保证和原始代码同步。
+
+
+##另外一种快速merge的思路(stash)
+
+使用`stash`(存储），思路是先把当前的工作状态存储到堆栈，然后将最新的master拉取回来，然后再把自己的工作状态覆盖上去。简单明了，不会有merge的过程，就像你自己修改了一个新版本提交上去。
+
+    //save current status
+    git stash
+
+    git pull
+
+    //git stash apply 将当前堆栈的最新状态覆盖到主干，使用pop参数不仅会覆盖，还会删除当前堆栈的stash记录
+    git stash pop
+
+[more](https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%82%A8%E8%97%8F%EF%BC%88Stashing%EF%BC%89)
+
+
