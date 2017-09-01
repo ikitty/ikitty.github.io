@@ -1,11 +1,10 @@
 // all I did javascript common functions
 
-var str = '';
-    str += '\
-            <li>\
-               <p class="mo_name">' + location.href + '</p>\
-            </li>\
-            ';
+var strDOM = '\
+        <div id="alexDebug" class="alex_debug hide">\
+            test infor
+        </div>\
+        ';
 /**
  * simple Tab by alex
  * @require self jquery
