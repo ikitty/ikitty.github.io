@@ -112,6 +112,16 @@ branch:
     //推送本地的branch_x到remote的master分支
     git push origin branch_x:master
 
+merge: 
+
+    //拉取master到本地branch
+    git pull origin master
+
+    //会自动merge,如果有冲突，解决之后
+    git add 
+    git ci -im 'msg'  //注意这里的i指定
+    git push origin branch_x:master
+
 
 fetch
 
