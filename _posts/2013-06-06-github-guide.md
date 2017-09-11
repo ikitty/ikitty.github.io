@@ -103,11 +103,15 @@ branch:
     git checkbox master
     git merge myBranch
 
-    //remote-branch 为空时，默认推送到远程和本地同名的分支，
-    //一般是本地分支和远程分支都是master，
-    //所以常规push操作是 git push origin master
-    //如果local-branch为空，则会尝试删除远程分支
-    git push <remote> <local-branch>:<remoet-branch>
+    git push origin master
+    //remote-branch 为空时，默认推送到远程和本地同名的分支(master)，
+
+    //推送分支到remote的branch_x分支
+    git push origin branch_x
+
+    //推送本地的branch_x到remote的master分支
+    git push origin branch_x:master
+
 
 fetch
 
