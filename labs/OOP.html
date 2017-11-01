@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>OOP</title>
+</head>
+<body>
+
+
+<script>
+    var Person = function (name) {
+        this.name = name
+    };
+    Person.prototype.sayHi = function () {
+        console.log('hi , i am ' + this.name) ;
+    }
+    var alex = new Person('alex')
+    // alex.sayHi();
+
+    var Player = function (name, kind) {
+        Person.call(this, name)
+        this.kind = kind
+    };
+    //extend
+    //es5时代需要使用其他方式hack
+    Player.prototype = Object.create(Person.prototype )
+    Player.constructor = Player ;
+
+    //override
+    Player.prototype.sayHi = function () {
+        console.log('I am ' + this.name , ', I like ' + this.kind) ;
+    }
+    Player.prototype.sayBye = function () {
+        console.log('bye, human') ;
+    }
+    var player1 = new Player('black', 'basketball')
+    player1.sayHi();
+    player1.sayBye();
+
+
+    //demo
+    var FsPlayer = function (trigId) {
+        this.trigId = trigId 
+    };
+    FsPlayer.prototype = {
+        init: function () {
+            this.createShadow();
+            this.createLayer();
+            
+        },
+        createShadow: function () {
+            
+        },
+        createLayer: function () {
+            
+        },
+        showLayer: function () {
+            
+        },
+        hideLayer: function () {
+            
+        },
+        bindEvent: function () {
+            
+        }
+    }
+</script>
+</body>
+</html>
