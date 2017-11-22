@@ -9,11 +9,11 @@ category: frontend
 
 
 
-##将MongoDB注册为系统服务
+## 将MongoDB注册为系统服务
 
 mongoDB的服务器默认是要通过命令行启动的，每次启动mongoDB都要敲一次命令，确实麻烦，所以通过下面的方法将mongoDB注册为系统服务常驻。
 
-###windows系统
+### windows系统
 
 在mongodb的安装目录下新建一个配置文件`serve.cfg`，内容如下：
 
@@ -34,7 +34,7 @@ mongoDB的服务器默认是要通过命令行启动的，每次启动mongoDB都
 然后执行bin目录中的`mongo`程序就可以连接数据库进行测试了。
     
 
-###Mac系统
+### Mac系统
 
 创建配置文件`serve.cfg`
 
@@ -90,7 +90,7 @@ mongoDB的服务器默认是要通过命令行启动的，每次启动mongoDB都
 如果要是用mongoDB开发中小应用，使用命令行终究不方便。这里推荐一个软件“**nosql manager for mongodb**”，可用于mongoDB的可视化管理，GUI非常人性化，其操作就不多描述了。
 
 
-##安全
+## 安全
 
 默认的mongoDB是没有设置访问权限的。我们可以自己创建用户进行权限设置。
     
@@ -118,7 +118,7 @@ mongoDB的服务器默认是要通过命令行启动的，每次启动mongoDB都
 
 
 
-##Node.js常驻
+## Node.js常驻
 
 使用pm2，配置好pm2_config.js ,内容：
 
@@ -139,7 +139,7 @@ pm2的日志默认在`~/.pm2/logs/`, 常用命令：
     //启动或重启服务
     pm2 start / restart serverName
 
-##设置反向代理
+## 设置反向代理
 
 vh文件路径: `/data/websites/vhosts`
 
@@ -181,7 +181,7 @@ vh文件路径: `/data/websites/vhosts`
     
     
 
-##其他常见问题
+## 其他常见问题
 
 - 先登录虚拟机，然后使用scrt登录。（或者使用samba服务用文件管理器操作）
 - scrt使用mongodb shell 无法删除字符。解决方法：`会话选项 - 终端 - 仿真 - 终端 - 选择 linux`
