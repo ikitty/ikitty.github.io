@@ -872,3 +872,6 @@ $.getScript('http://imgcache.gtimg.cn/tencentvideo_v1/tvp/js/tvp.player_v2_zepto
         });
     }catch (e){}
 })()
+
+// v console
+//<script src="https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/2.5.1/vconsole.min.js"></script>
