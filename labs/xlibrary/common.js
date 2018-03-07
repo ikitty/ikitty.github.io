@@ -1,4 +1,5 @@
 // all I did javascript common functions
+// update at 2018
 
 var strDOM = '\
         <div id="alexDebug" class="alex_debug hide">\
