@@ -211,14 +211,14 @@ async function bubbleSort (arr, cb) {
         for (var j = 0; j < len -1 - i; j++ ) {
             if (arr[j] > arr[j+1]) {
                 [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
-                await sleep(50) ;
+                await sleep(200) ;
                 (typeof cb === 'function') && cb(j, j+1);
             }
         }
     }
     return arr ;
 }
-// console.log('bubble sort,', bubbleSort(testSortArr)) ;
+//console.log('bubble sort,', bbret) ;
 
 var alexRand = function (min, max, digit) {
     var r = Math.random()*(max-min) + min ;
@@ -246,6 +246,6 @@ function doBubbleSort() {
     var ret = bubbleSort(rmdData, function (i,j) {
         swapEl(i,j)
     })
-    console.log(ret) ;
+    console.log('bubble sort', ret) ;
 }
 doBubbleSort();
