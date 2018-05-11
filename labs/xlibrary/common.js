@@ -814,7 +814,7 @@ $.getScript('http://imgcache.gtimg.cn/tencentvideo_v1/tvp/js/tvp.player_v2_zepto
 //qq链接转码所需字段
 //<meta itemprop="name" content="四海八荒第一美人评选"/>
 //<meta itemprop="image" content="http://ossweb-img.qq.com/images/chanpin/xycq/cp/a20170804beautym/share.png" />
-//<meta name="description" itemprop="description" content="洪荒世界美人多 参赛送花疯抢惊喜壕礼" />
+//<meta itemprop="description" content="洪荒世界美人多 参赛送花疯抢惊喜壕礼" />
 
 //share
 //<script src="//open.mobile.qq.com/sdk/qqapi.https.js"></script>
