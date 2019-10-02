@@ -22,8 +22,20 @@
     ret.mg = ua.match(regMG);
     ret.e = regE.exec(ua);
     ret.eg = regEG.exec(ua);
-
     console.log('ua', ua) ;
+    console.log(ret) ;
+
+    //1. search
+    var retSearch1 = ua.indexOf('Chrome')
+    var retSearch2 = ua.search(/\d/gi)
+    console.log(retSearch1) ;
+    console.log(retSearch2) ;
+
+    //2. replace
+
+    //3. match
+
+
 
     // match
     // 如果没有g标志，返回的是null或包含第一个匹配项和子表达式的数组; 返回index和input,index为匹配项的第一个位置
@@ -34,7 +46,6 @@
     // 循环执行的时候需要重置reg的lastIndex
         // chunker.exec("");
         // m = chunker.exec(soFar);
-    console.log(ret) ;
 
     
 </script>
