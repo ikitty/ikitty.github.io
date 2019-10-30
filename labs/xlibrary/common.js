@@ -7,59 +7,6 @@ var strDOM = '\
         </div>\
         ';
 /**
- * simple Tab by alex
- * @require self jquery
- * @version 1.0
- *
- * @param {object HTMLCollection} obj.hd , tab trigger elements
- * @param {object HTMLCollection} obj.bd , tab content elements
- * @param {String} obj.hdActiveCls , tab trigger active className
- * @param {String} obj.bdActiveCls , tab content active className
- * @param {Number} obj.def , default item index
- * @param {String} obj.mode , trigger type, 'click' or 'mouseover'
- **/
-//todo using jq insteed
-var alexTab = function (obj) {
-    var cfg = {
-        hd: null
-        ,bd: null
-        ,hdActiveCls: 'active' 
-        ,bdActiveCls: 'active' 
-        ,def: 0
-        ,mode: 'click'
-        ,callback: 0
-    };
-    for (var i in obj) {
-        obj[i] && (cfg[i] = obj[i]) ;
-    }
-    cfg.mode = 'on' + cfg.mode;
-
-    if (!cfg.hd || !cfg.bd) {
-        return  ;
-    }
-    //init
-    $$(cfg.hd).removeClass(cfg.hdActiveCls);
-    $$(cfg.hd[cfg.def]).addClass(cfg.hdActiveCls);
-    $$(cfg.bd).removeClass(cfg.bdActiveCls);
-    $$(cfg.bd[cfg.def]).addClass(cfg.bdActiveCls);
-
-    for (var i = 0, k ; k = cfg.hd[i] ; i++ ) {
-        k.index = i ;
-        k[cfg.mode] = function () {
-            $$(cfg.hd[cfg.def]).removeClass(cfg.hdActiveCls);
-            $$(cfg.hd[this.index]).addClass(cfg.hdActiveCls);
-
-            $$(cfg.bd[cfg.def]).removeClass(cfg.bdActiveCls);
-            $$(cfg.bd[this.index]).addClass(cfg.bdActiveCls);
-
-            cfg.callback && (typeof cfg.callback == 'function') && cfg.callback(this.index, cfg.def);
-
-            cfg.def = this.index;
-        }
-    }
-};
-
-/**
  * detect zoom
  *
  **/
@@ -609,44 +556,6 @@ Slider.prototype = {
     //,type: 'click'
     //,touch: 1
 //});
-
-/**
- * debounce 单位时间内只触发最后一个事件
- *
- * @param {DOM} target : event trigger DOM
- * @param {String} eventType
- * @param {Fucntion} fn : event callback
- * @param {Number} time : debounce time
- **/
-var alexDebounce = function (obj ) {
-    var cfg = {
-        fn: function(){}
-        ,target: ''
-        ,eventType: ''
-        ,time: 100
-    };
-    for (var i in obj) {
-        obj[i] && (cfg[i] = obj[i]) ;
-    }
-
-    st = '';
-
-    if (!!window.addEventListener) {
-        cfg.target.addEventListener(cfg.eventType, function () {
-            st && clearTimeout(st);
-            st = setTimeout(function () {
-                cfg.fn();
-            }, cfg.time);
-        }, false);
-    }else {
-        cfg.target.attachEvent('on'+ cfg.eventType, function () {
-            st && clearTimeout(st);
-            st = setTimeout(function () {
-                cfg.fn();
-            }, cfg.time);
-        });
-    }
-};
 
 /* =====swipe===== */
 //require jquery or zepto
