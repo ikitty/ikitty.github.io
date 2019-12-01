@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"
+    />
+    <title>mse demo</title>
+    <style>
+        video {
+            border: 1px solid #f30;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>webm</h3>
+    <video controls id="videoWebm"></video>
+</body>
+
+<script type="text/javascript">
+    //load webm
+    (function(){
+        var videoMp4 = document.querySelector('#videoWebm');
+        var videoUrl = './1.webm';
+
+        var mediaSource;
+        if (window.MediaSource) {
+            mediaSource = new MediaSource();
+            videoMp4.src = URL.createObjectURL(mediaSource);
+            mediaSource.addEventListener('sourceopen', sourceOpen);
+        } else {
+            alert('safari doesnot support MSE~~')
+            console.log("The Media Source Extensions API is not supported.")
+        }
+
+        function sourceOpen(e) {
+            var mime = 'video/webm; codecs="vorbis, vp8"';
+            var sourceBuffer = mediaSource.addSourceBuffer(mime);
+
+            fetchBuffer(videoUrl, buffer => {
+                sourceBuffer.addEventListener('updateend', function (e) {
+                    // videoMp4.play().then(function () {
+                    // }).catch(function (err) {
+                    //     console.log('err', err);
+                    // });
+                });
+                sourceBuffer.appendBuffer(buffer)
+            })
+        }
+
+        function fetchBuffer(url, callback) {
+            var xhr = new XMLHttpRequest;
+            xhr.open('get', url);
+            xhr.responseType = 'arraybuffer';
+            xhr.onload = function (res) {
+                callback(xhr.response);
+            };
+            xhr.send();
+        }
+    })();
+
+</script>
+
+</html>
