@@ -33,11 +33,11 @@ function detectZoom (){
     return ratio;
 };
 
-//get hash
-function getHash (name) {
-    var reg=new RegExp("(^|)"+name+"(?:=([^&]*))?(&|$)"),
+//get url arg
+function getUrlArg (name, type) {
+    var reg=new RegExp("(^|&)"+name+"(?:=([^&]*))?(&|$)"),
         ret ='';
-        val=window.location.hash.slice(1).match(reg);
+        val=window.location[type || 'search'].slice(1).match(reg);
     return val? (val[2]?unescape(val[2]):""):null;
 }
 

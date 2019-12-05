@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>pager</title>
+<style type="text/css" media="screen">
+    * {margin:0;padding:0;list-style:none;}
+    body {padding:20px;}
+    li {float:left;width:50px;height:50px;background-color:#eee;margin:10px;list-style:none;} 
+    .pager {clear:both;text-align:center;}
+    .pager p {display:inline-block;}
+</style>
+</head>
+<body>
+
+    <ul id="box">
+
+    </ul>
+    <div class="pager">
+        <p data-pager="prev" >上一页</p>
+        <p data-pager="next" >下一页</p>
+    </div>
+
+<script type="text/javascript" src="http://ossweb-img.qq.com/images/t7/common/jquery.js"></script>
+<script type="text/javascript">
+var renderPage = function (start, size) {
+    var ret = ''
+    var len = start + size 
+    for (var i = start; i < len ; i++ ) {
+        ret += ( '<li>' + i + '</li>')
+    }
+    $('#box').html(ret)
+}
+var pager = {
+    curPage: 1,
+    size: 10,
+    total: 1,
+    init: function (obj) {
+        this.size = obj.size
+        this.total = Math.ceil(obj.count / this.size)
+        this.last = obj.count % this.size
+        this.doPage()
+
+        renderPage(1, this.size)
+    },
+    doPage: function () {
+        var self = this
+        $('p[data-pager]').on('click', function () {
+            var v = $(this).data('pager')
+            if (v === 'prev') {
+                self.curPage--
+            }else {
+                self.curPage++
+            }
+            if (self.curPage < 1) {
+                self.curPage = 1
+                return  ;
+            }
+            if (self.curPage > self.total) {
+                self.curPage = self.total
+                return ;
+            }
+
+            var size = self.size
+            if (self.curPage === self.total) {
+                size = self.last
+            }
+
+            renderPage((self.curPage - 1)*self.size + 1 , size)
+        })
+        
+    }
+} 
+pager.init({count: 25, size: 8})
+</script>
+</body>
+</html>
