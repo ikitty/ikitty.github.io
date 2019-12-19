@@ -785,3 +785,113 @@ $.getScript('http://imgcache.gtimg.cn/tencentvideo_v1/tvp/js/tvp.player_v2_zepto
 
 // v console
 //<script src="https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/2.5.1/vconsole.min.js"></script>
+
+// =============================
+// ========List Class show =====
+// =============================
+<script type="text/template" id="tplVlog">
+    <li>
+        <a class="va_lk" data-vid="{{vid}}" href="javascript:;"><img src="{{imgPrefix}}{{img}}" /></a>
+        <p class="va_tit">{{title}}</p>
+    </li>
+</script>
+<script type="text/template" id="tplTongren">
+    <li>
+        <a class="va_lk" href="javascript:;"><img src="{{imgPrefix}}{{img}}" /></a>
+        <p class="va_tit">{{title}}</p>
+    </li>
+</script>
+
+var simpleTemplateEngine = function(tpl, data) {
+    var re = /{{([^}]+)}}/g;
+    while(match = re.exec(tpl)) {
+        tpl = tpl.replace(match[0], data[match[1]])
+    }
+    return tpl;
+};
+function firstUp(str) {
+    return str.replace(/^\S/g, function(s){return s.toUpperCase();});
+}
+
+var vaData = {};
+vaData.wallpaper = Array(30)
+vaData.video= [
+    { title:'御心而行，自由探索', img: 'video7.jpg', vid: 'p0632f2nexa'},
+    { title:'超凡世界，大有可观', img: 'video8.jpg', vid: 'x0632i7n1gi'}
+]
+vaData.tongren= [
+    { title:'敬请期待', img: 'tr1.jpg'}
+];
+
+// list Class
+var listShow = function (obj) {
+    var count = obj.D[obj.type].length
+    this.type = obj.type
+    this.size = obj.size
+    this.total = Math.ceil(count / this.size)
+    this.last = count % this.size
+    this.curPage = 1
+    this.$pager = obj.$pager
+    this.init()
+}
+listShow.prototype = {
+    init: function () {
+        var size = this.curPage == this.total ? this.last : this.size
+        this.renderList(0, size)
+        this.doPage()
+        this.renderPager()
+    },
+
+    renderList: function (start, size) {
+        var imgPrefix = '//game.gtimg.cn/images/xylz/web201808/media/';
+        var tpl = document.getElementById('tpl' + firstUp(this.type)).innerHTML ;
+        var len = start + size 
+        var D = (vaData[this.type] || []).slice(start, len)
+        // console.log(this.type, start, size, D) ;
+        var ret = ''
+        for (var i = start, ii = 0; i < len ; i++ ) {
+            var tmp = D[ii++] || {}
+            var tmpData = {imgPrefix: imgPrefix, id: (i+1), title: tmp.title, img: tmp.img, vid: tmp.vid}
+            ret += simpleTemplateEngine(tpl, tmpData);
+        }
+        document.getElementById(this.type + 'List').innerHTML = ret 
+        
+    },
+    doPage: function () {
+        var self = this
+        this.$pager.on('click', function () {
+            var v = $(this).index()
+            if (v === 0) {
+                self.curPage--
+            }else {
+                self.curPage++
+            }
+            if (self.curPage < 1) {
+                self.curPage = 1
+                return  ;
+            }
+            if (self.curPage > self.total) {
+                self.curPage = self.total
+                return ;
+            }
+
+            var size = self.size
+            if (self.curPage === self.total) {
+                size = self.last
+            }
+            self.renderList((self.curPage - 1)*self.size , size)
+            self.renderPager()
+        })
+    },
+    renderPager: function () {
+        this.$pager.show()
+        if (this.curPage === 1) {
+            this.$pager.eq(0).hide()
+        }
+        if (this.curPage === this.total) {
+            this.$pager.eq(1).hide()
+        }
+    }
+}
+new listShow({D: vaData, type: 'wallpaper', size: 9 , $pager: $('a[data-wlpager]')})
+new listShow({D: vaData, type: 'tongren', size: 9 , $pager: $('a[data-trpager]')})
