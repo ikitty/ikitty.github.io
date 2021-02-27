@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>DEMO</title>
+<script type="text/javascript" src="lib.js"></script>
+<style>
+    * {margin:0;padding:0;list-style:none;}
+    .show {padding:20px;}
+    input {padding:5px 10px;}
+</style>
+</head>
+<body>
+    <div class="show">
+        <input type="text" value="sth to copy" id="iptUrl" autocomplete="off"/>
+        <input type="button" id="btnCopy" value="Copy"/>
+        <input type="button" id="btnFresh" value="FreshValue"/>
+        <br />
+        <br />
+        <textarea id="ret" rows="10" cols="30"></textarea>
+    </div>
+
+<script type="text/javascript">
+    // define fn
+    var doCopy = function (elInput) {
+        // var elTemp=document.getElementById("biao1");
+        // elTemp.select(); 
+        // document.execCommand("Copy"); 
+        var range = document.createRange()
+        range.selectNode(elInput)
+        var selection = window.getSelection()
+        if (selection.rangeCount > 0) {
+            selection.removeAllRanges()
+        }
+        selection.addRange(range)
+        document.execCommand('copy')
+        console.log('copy OK') ;
+        document.getElementById('ret').value = 'copy ok'
+    }
+
+    // call
+    var elTxt = document.getElementById('iptUrl')
+    var elBtn = document.getElementById('btnCopy')
+    elBtn.addEventListener('click', function () {
+        doCopy(elTxt)
+    }, false) ;
+
+    // fresh value
+    document.getElementById('btnFresh').addEventListener('click', function () {
+        elTxt.value = Math.random()* 1e8|0
+        document.getElementById('ret').value = 'freshed ok'
+    } , false) ;
+
+</script>
+</body>
+</html>
