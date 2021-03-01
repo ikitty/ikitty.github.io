@@ -25,8 +25,12 @@
         <br />
         <br />
         <textarea id="ret" rows="10" cols="30"></textarea>
+        <br />
+        <input type="text" value="usingClipBoardjs" id="iptUrl2" autocomplete="off"/>
+        <input type="button" id="btnCopyWithLib" value="Copy"  data-clipboard-target="#iptUrl2"/>
     </div>
 
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
 <script type="text/javascript">
     // define fn
     var doCopy = function (elInput) {
@@ -41,21 +45,29 @@
         }
         selection.addRange(range)
         document.execCommand('copy')
-        console.log('copy OK') ;
-        document.getElementById('ret').value = 'copied ok!'
     }
 
     // call
     var elTxt = document.getElementById('iptUrl')
     var elBtn = document.getElementById('btnCopy')
     elBtn.addEventListener('click', function () {
-        doCopy(elTxt)
+        try {
+            doCopy(elTxt)
+            alert('copy OK');
+        }catch (e){
+            alert('copy fail');
+        }
     }, false) ;
 
     // fresh value
     document.getElementById('btnFresh').addEventListener('click', function () {
         elTxt.value = Math.random()* 1e8|0
+        document.getElementById('iptUrl2').value = Math.random()* 1e8|0
     } , false) ;
+
+    // ===== clipboard
+    new ClipboardJS('#btnCopyWithLib')
+
 
 </script>
 </body>
