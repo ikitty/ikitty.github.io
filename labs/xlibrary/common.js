@@ -1,5 +1,12 @@
 // all I did javascript common functions
 // update at 2018
+// update at 2021-0617
+
+// check is mobile
+var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
+
+
+var isPC = !isMobile
 
 var strDOM = '\
         <div id="alexDebug" class="alex_debug hide">\
@@ -895,3 +902,33 @@ listShow.prototype = {
 }
 new listShow({D: vaData, type: 'wallpaper', size: 9 , $pager: $('a[data-wlpager]')})
 new listShow({D: vaData, type: 'tongren', size: 9 , $pager: $('a[data-trpager]')})
+
+
+var Ax = {}
+// debounce 
+Ax.debounce = (fn, delay = 300)=>{
+    var st 
+    return function(opt){
+        st && clearTimeout(st)
+        var arg = arguments
+        st = setTimeout(()=>{
+            fn.apply(this, arg)
+        }, delay)
+    }
+}
+// use: dbFn = Ax.debounce(fn, 100) ; w.onx = ()=>{ dbFn(args) }
+
+// throttle
+Ax.throttle = (fn, delay = 300)=>{
+    var canRun = true
+    return function(opt){
+        if (!canRun) {
+            return
+        }
+        canRun = false
+        setTimeout(()=>{
+            canRun = true
+        }, delay)
+        fn.apply(this, arguments)
+    }
+}
