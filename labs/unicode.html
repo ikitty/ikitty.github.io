@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>Unicode transfer</title>
+<style type="text/css" media="screen">
+    * {margin:0px; padding:0px;list-style:none;} 
+    input {padding:2px 5px;font-size:18px;}
+    .box {border:1px solid #aaa;margin:20px;padding:10px;overflow:hidden;}
+    .box .hd {display: block;color:#f60;padding: 5px 0 10px ;font: 400 20px/30px Arial;}
+    #number {font-size:20px;}
+    #number input {margin:5px;font-family:'courier-new'}
+
+    .row {margin:10px;padding:5px;clear:both;overflow:hidden;}
+    .row input {float:left;width:200px;margin:0px 10px;}
+    .row .char {font-size:50px;}
+    .fl {float:left;width:100px;font-size:14px;height:30px;line-height:30px;}
+    .code {font-family: 'source code pro';}
+</style>
+</head>
+<body>
+
+<div id="number" class="box">
+    <strong class="hd">进制转换</strong>
+    10:<input id="numberDecimal" type="text" value="255" />
+    0x:<input id="numberHex" type="text" value="FF" />
+    0b:<input id="numberBin" type="text" value="11111111" />
+</div>
+<div id="unicodeBox" class="trans box">
+    <div class="row">
+        <span class="fl">char style</span> <input id="uniChar" type="text" class="char" value="" />
+    </div>
+    <div class="row">
+        <!--<span class="fl">codepoint-dec</span> <input id="uniDec" type="text" value="21704" />-->
+        <span class="fl">codepoint-dec</span> <input id="uniDec" type="text" value="128512" />
+        <span class="fl">codepoint-hex</span> <input id="uniHex" type="text" value="" />
+    </div>
+    <div class="row">
+        <span class="fl">utf-8</span> <input id="uniUtf8" type="text" value="" />
+        <span class="fl">utf-16</span> <input id="uniUtf16" type="text" value="" />
+    </div>
+    <div class="row">
+        <span class="fl">html entity</span> <input id="uniHtmlDec" type="text" value="" />
+        <span class="fl">html entity hex</span> <input id="uniHtmlHex" type="text" value="" />
+        <span class="fl">JS unicode</span> <input id="uniJsUnicode" type="text" value="" />
+    </div>
+    <div class="row">
+        <span class="fl">escape</span> <input id="uniEscape" type="text" value="" />
+        <span class="fl">encodeURI</span> <input id="uniEncodeURI" type="text" value="" />
+        <span class="fl">JS length</span> <input id="uniJsLen" type="text" value="" readonly/>
+    </div>
+</div>
+<div class="box">
+    <h3 class="hd">utf-8 rule</h3>
+    <ul class="code">
+        <li>U+00000000 – U+0000007F:    0xxxxxxx</li>
+        <li>U+00000080 – U+000007FF:    110xxxxx 10xxxxxx</li>
+        <li>U+00000800 – U+0000FFFF:    1110xxxx 10xxxxxx 10xxxxxx</li>
+        <li>U+00010000 – U+001FFFFF:    11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</li>
+        <li>U+00200000 – U+03FFFFFF:    111110xx 10xxxxxx 10xxxxxx 10xxxxxx  10xxxxxx</li>
+    </ul>
+
+    <h3 class="hd">utf-16 rule</h3>
+    <div class="code">
+        1. U+0000~U+FFFF(基本平面)，双字节，直接返回16位的codePoint， <br>
+        2. U+10000~U+10FFFF(辅助平面)，四字节： <br>
+        2.1 获取codePoint，减去0x10000，转为二进制，从低向高，以10位为界分割。 <br>
+        2.2 高10位加上0xD800，得到前导代理 <br>
+        2.3 低10位加上0xDC00，得到后尾代理 <br>
+    </div>
+
+    <h3 class="hd">FYI tool</h3>
+    <p ><a href="https://www.ifreesite.com/unicode/" target="_blank">https://www.ifreesite.com/unicode/</a></p>
+</div>
+    
+<script type="text/javascript" src="https://game.gtimg.cn/images/js//quwan/jquery.172.js"></script>
+<script type="text/javascript">
+    var number = document.getElementById('number')
+    const txtDe = $('#numberDecimal')
+    const txtHex = $('#numberHex')
+    const txtBin = $('#numberBin')
+    $('#number').on('keyup', (e)=>{
+        const targetId = $(e.target).attr('id')
+        if (targetId === 'numberDecimal') {
+            const v = parseInt($(e.target).val(), 10)
+            txtHex.val(v.toString(16))
+            txtBin.val(v.toString(2))
+        }
+        if (targetId === 'numberHex') {
+            const v = parseInt($(e.target).val(), 16)
+            txtDe.val(v)
+            txtBin.val(v.toString(2))
+        }
+        if (targetId === 'numberBin') {
+            const v = parseInt($(e.target).val(), 2)
+            txtDe.val(v)
+            txtHex.val(v.toString(16))
+        }
+    })
+
+    // unicode transfer
+    $('#unicodeBox').on('keyup', (e)=>{
+        const code = e.keyCode 
+        const enterTabArr = [13]
+        if (!enterTabArr.includes(code)) { return }
+
+        const v = $(e.target).val()
+        const targetId = $(e.target).attr('id')
+        // console.log(v, targetId) ;
+
+        // dec
+        if (targetId === 'uniDec') {
+            transferUni(parseInt(v, 10))
+        }
+        if (targetId === 'uniHex') {
+            transferUni(parseInt(v, 16))
+        }
+    })
+
+    function transferUni(decValue) {
+        $('#uniDec').val(decValue)
+        const hexValue = decValue.toString(16)
+        $('#uniHex').val(hexValue)
+
+        // char 
+        const char = String.fromCodePoint(decValue)
+        $('#uniChar').val(char)
+
+        $('#uniUtf8').val(encodeURI(char).replace(/%/g, ' '))
+
+        // u-16
+        let utf16Ret = hexValue
+        if (decValue > 0x10000) {
+            const binValue = (decValue - 0x10000).toString(2)
+            leadBin = binValue.substring(0, binValue.length - 10)
+            trailBin = binValue.substring(binValue.length - 10)
+            leadBin = (parseInt(leadBin, 2) + 0xD800).toString(16).toUpperCase()
+            trailBin = (parseInt(trailBin, 2) + 0xDC00).toString(16).toUpperCase()
+            utf16Ret = `${leadBin} ${trailBin}`
+        }
+        $('#uniUtf16').val(utf16Ret)
+
+        $('#uniHtmlDec').val(`&#${decValue};`)
+        $('#uniHtmlHex').val(`&#x${hexValue};`)
+        $('#uniJsUnicode').val(`\\u{${hexValue}}`)
+
+        $('#uniEscape').val(`${escape(char)}`)
+        $('#uniEncodeURI').val(`${encodeURI(char)}`)
+        $('#uniJsLen').val(char.length)
+    }
+
+    $(()=>{
+        transferUni(parseInt($('#uniDec').val(), 10))
+    })
+
+</script>
+</body>
+</html>
